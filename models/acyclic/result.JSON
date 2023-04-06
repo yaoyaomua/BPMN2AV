@@ -1,0 +1,37 @@
+{
+  "gateways": [],
+  "flows": [
+    {
+      "tgt": "a91bc1d8-c682-4800-8ec3-218704fb3b79",
+      "src": "ce52ddf5-7975-4a2c-bc07-ab4753a77dfa",
+      "label": ""
+    },
+    {
+      "tgt": "feb6f1a8-62c2-46ff-9a7e-e4a005f56cbc",
+      "src": "039cabaf-8750-4d5c-ac50-d3e2937092f2",
+      "label": ""
+    },
+    {
+      "tgt": "039cabaf-8750-4d5c-ac50-d3e2937092f2",
+      "src": "a91bc1d8-c682-4800-8ec3-218704fb3b79",
+      "label": ""
+    }
+  ],
+  "name": "",
+  "tasks": [
+    {
+      "id": "ce52ddf5-7975-4a2c-bc07-ab4753a77dfa"
+    },
+    {
+      "id": "039cabaf-8750-4d5c-ac50-d3e2937092f2",
+      "label": "B"
+    },
+    {
+      "id": "feb6f1a8-62c2-46ff-9a7e-e4a005f56cbc"
+    },
+    {
+      "id": "a91bc1d8-c682-4800-8ec3-218704fb3b79",
+      "label": "A"
+    }
+  ]
+}
