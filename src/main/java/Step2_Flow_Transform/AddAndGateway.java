@@ -159,13 +159,13 @@ public class AddAndGateway {
                 // Get the BPMN diagram instance
                 BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
                 // Create a new shape for the gateway
-                BpmnShape gatewayShape = createBpmnShape(modelInstance,parallelGateway.getId(),preTaskX+(preTaskWidth/2),preTaskY-100,50.0,50.0);
+                BpmnShape gatewayShape = CreatBPMNShape.createBPMNShape(modelInstance,parallelGateway.getId(),preTaskX+(preTaskWidth/2),preTaskY-100,50.0,50.0);
                 // Add the shape to the BPMN diagram
                 plane.addChildElement(gatewayShape);
 
                 for (SequenceFlow newFlow : newSequenceFlow)
                 {
-                    BpmnEdge edge = createBpmnEdge(modelInstance, newFlow, 100.0, 100.0, 200.0, 200.0);
+                    BpmnEdge edge =  CreatBPMNEdge.createBPMNEdge(modelInstance, newFlow, 100.0, 100.0, 200.0, 200.0);
                     // Get the BPMN diagram and add the edge to it
                     plane.addChildElement(edge);
                 }
