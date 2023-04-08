@@ -5,6 +5,8 @@ import Step4_Well_Structure.MyDataObject;
 import de.hpi.bpt.process.Task;
 import ee.ut.bpstruct2.Restructurer;
 import ee.ut.bpstruct2.util.BPMN2Reader;
+import org.camunda.bpm.model.bpmn.Bpmn;
+import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.json.JSONObject;
 import org.junit.Test;
 import de.hpi.bpt.process.Process;
@@ -20,9 +22,11 @@ public class userTest {
 
     @Test
     public void test1() throws Exception {
-        Process process = BPMN2Reader.parse(new File("models/diagram.bpmn"));
+        File file = new File("models/diagram.bpmn");
+        Process process = BPMN2Reader.parse(file);
 //        DataObjectStore.store(new File("models/acyclic/model9214.bpmn"));
-        Map<String, MyDataObject> datamap = DataObjectStore.store(new File("models/diagram.bpmn"));
+        BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
+        Map<String, MyDataObject> datamap = DataObjectStore.storeinname(modelInstance);
         process.setName("process7817");
         Restructurer str = new Restructurer(process);
         if (str.perform()) {
@@ -49,6 +53,8 @@ public class userTest {
 
     @Test
     public void test2() throws Exception{
-        DataObjectStore.store(new File("models/diagram.bpmn"));
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram.bpmn"));
+        DataObjectStore.storeinname(bpmnModelInstance);
+
     }
 }
