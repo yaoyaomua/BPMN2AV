@@ -13,15 +13,10 @@ public class CreatBPMNShape {
         bounds.setHeight(height);
         bounds.setX(x);
         bounds.setY(y);
-        //BpmnLabel bpmnLabel = modelInstance.newInstance(BpmnLabel.class);
-
-        //ModelElementInstance diagramElement = modelInstance.getModelElementsByType(BpmnDiagram.class).iterator().next();
         BpmnShape shape = modelInstance.getModelElementsByType(BpmnShape.class).iterator().next();
         shape.setId(elementId + "_di");
         shape.setBpmnElement(modelInstance.getModelElementById(elementId));
         shape.setBounds(bounds);
-        //shape.setBpmnLabel(bpmnLabel);
-        //diagramElement.addChildElement(shape);
         return shape;
     }
 }
