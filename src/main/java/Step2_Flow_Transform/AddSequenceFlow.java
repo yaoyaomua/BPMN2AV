@@ -40,6 +40,7 @@ public class AddSequenceFlow {
                 StartEvent startevent = modelInstance.getModelElementById(messageflow.getTarget().getId());
                 Task task = modelInstance.newInstance(Task.class);
                 task.setName("Start"+i);
+                task.setId(startevent.getId());
                 startevent.replaceWithElement(task);
                 messageflow.setTarget(task);
                 //newBounds.setX(task.getDiagramElement().getBounds().getX());
@@ -52,6 +53,7 @@ public class AddSequenceFlow {
                 IntermediateThrowEvent intermediateThrowEvent = modelInstance.getModelElementById(messageflow.getSource().getId());
                 Task task = modelInstance.newInstance(Task.class);
                 task.setName("End"+i);
+                task.setId(intermediateThrowEvent.getId());
                 intermediateThrowEvent.replaceWithElement(task);
                 messageflow.setSource(task);
                 //newBounds.setX(task.getDiagramElement().getBounds().getX());

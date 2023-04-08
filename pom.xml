@@ -48,6 +48,12 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.0.2</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
 
 </project>
