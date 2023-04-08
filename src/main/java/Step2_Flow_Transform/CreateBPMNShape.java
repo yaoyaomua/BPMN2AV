@@ -6,8 +6,8 @@ import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 import org.camunda.bpm.model.bpmn.instance.dc.Bounds;
 
 
-public class CreatBPMNShape {
-    public static BpmnShape createBPMNShape(BpmnModelInstance modelInstance, String elementId, Double x, Double y, Double width, Double height) {
+public class CreateBPMNShape {
+    public static BpmnShape create(BpmnModelInstance modelInstance, String elementId, Double x, Double y, Double width, Double height) {
         Bounds bounds = modelInstance.newInstance(Bounds.class);
         bounds.setWidth(width);
         bounds.setHeight(height);

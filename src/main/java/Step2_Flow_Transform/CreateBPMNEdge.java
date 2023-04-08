@@ -6,9 +6,9 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
-public class CreatBPMNEdge {
+public class CreateBPMNEdge {
     
-    public static BpmnEdge createBPMNEdge(BpmnModelInstance modelInstance, SequenceFlow sequenceflow, Double x1, Double y1, Double x2, Double y2) {
+    public static BpmnEdge create(BpmnModelInstance modelInstance, SequenceFlow sequenceflow, Double x1, Double y1, Double x2, Double y2) {
        //ModelElementInstance diagramElement = modelInstance.getModelElementsByType(BpmnDiagram.class).iterator().next();
         BaseElement sourceElement = modelInstance.getModelElementById(sequenceflow.getSource().getId());
         BaseElement targetElement = modelInstance.getModelElementById(sequenceflow.getTarget().getId());

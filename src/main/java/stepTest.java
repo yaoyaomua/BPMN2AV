@@ -36,7 +36,7 @@ public class stepTest {
             // Covert Message Flow to Sequence Flow
             AddSequenceFlow.add(modelInstance,messageflows);
             // Add And-GateWay
-            //AddAndGateway.add(modelInstance);
+            AddAndGateway.add(modelInstance);
             
             // Store bpmn file
             File outputFile = new File("Data/mergedModelInstance.bpmn");

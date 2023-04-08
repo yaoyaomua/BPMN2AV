@@ -1,6 +1,6 @@
 package Step3_Delete_Element;
 
-import Step2_Flow_Transform.CreatBPMNEdge;
+import Step2_Flow_Transform.CreateBPMNEdge;
 import com.sun.jdi.DoubleType;
 import com.sun.jdi.VMOutOfMemoryException;
 import com.sun.jersey.core.spi.scanning.uri.BundleSchemeScanner;
