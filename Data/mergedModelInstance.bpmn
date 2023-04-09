@@ -2,79 +2,56 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exporter="Camunda Modeler" exporterVersion="4.12.0" expressionLanguage="http://www.w3.org/1999/XPath" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
     
   
-  
   <process id="mergedProcess" name="Merged Process">
     <task completionQuantity="1" id="Activity_0fnkitc" isForCompensation="false" name="activity1" startQuantity="1">
             
       <incoming>Flow_1bbpdr4</incoming>
             
-      <outgoing>Flow_1dhn9zm</outgoing>
+      <outgoing>Flow_1eoojrj</outgoing>
           
     </task>
-    <task completionQuantity="1" id="Activity_1xlkkrd" isForCompensation="false" name="activity2" startQuantity="1">
-            
-      <incoming>Flow_1dhn9zm</incoming>
-            
-    
-    </task>
-    <task completionQuantity="1" id="Activity_1arh4j6" isForCompensation="false" name="actvivity3" startQuantity="1">
-            
-      <incoming>Flow_11bo8a3</incoming>
-            
-      <outgoing>Flow_0pq2o7a</outgoing>
-          
-    </task>
-    <task completionQuantity="1" id="Activity_0p9dxxp" isForCompensation="false" startQuantity="1">
-            
+    <task completionQuantity="1" id="Activity_0t5zybe" isForCompensation="false" name="activity2" startQuantity="1">
       
-      <outgoing>Flow_0oyw596</outgoing>
-          
+      
+    </task>
+    <task completionQuantity="1" id="Activity_1txq31x" isForCompensation="false" name="activity3" startQuantity="1">
+      
+      
     </task>
     <startEvent id="Event_00ce2f8" isInterrupting="true" parallelMultiple="false">
             
       <outgoing>Flow_1bbpdr4</outgoing>
           
     </startEvent>
-    <startEvent id="Event_1g2wnck" isInterrupting="true" parallelMultiple="false">
-            
-      <outgoing>Flow_11bo8a3</outgoing>
-          
-    </startEvent>
-    <intermediateThrowEvent id="Event_1cueerh">
+    <intermediateThrowEvent id="Event_0wv6t4c">
+      
       
     </intermediateThrowEvent>
-    <intermediateThrowEvent id="Event_18bm3cy">
+    <parallelGateway gatewayDirection="Unspecified" id="Gateway_0y0bq1l">
             
-      <incoming>Flow_0oyw596</incoming>
-          
-    </intermediateThrowEvent>
-    <parallelGateway gatewayDirection="Unspecified" id="Gateway_01fbovc">
+      <incoming>Flow_1eoojrj</incoming>
             
-      <incoming>Flow_0pq2o7a</incoming>
-            
+      
     
     </parallelGateway>
     <sequenceFlow id="Flow_1bbpdr4" sourceRef="Event_00ce2f8" targetRef="Activity_0fnkitc"/>
-    <sequenceFlow id="Flow_1dhn9zm" sourceRef="Activity_0fnkitc" targetRef="Activity_1xlkkrd"/>
-    <sequenceFlow id="Flow_11bo8a3" sourceRef="Event_1g2wnck" targetRef="Activity_1arh4j6"/>
-    <sequenceFlow id="Flow_0pq2o7a" sourceRef="Activity_1arh4j6" targetRef="Gateway_01fbovc"/>
-    <sequenceFlow id="Flow_0oyw596" sourceRef="Activity_0p9dxxp" targetRef="Event_18bm3cy"/>
+    <sequenceFlow id="Flow_1eoojrj" sourceRef="Activity_0fnkitc" targetRef="Gateway_0y0bq1l"/>
+    <parallelGateway id="myParallelGateway_1">
+      <outgoing>SequenceFlow_1</outgoing>
+      <outgoing>new_Flow_003mxpx</outgoing>
+      <outgoing>new_Flow_1bnooth</outgoing>
+    </parallelGateway>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="myParallelGateway_1" targetRef="Event_0wv6t4c"/>
+    <sequenceFlow id="new_Flow_003mxpx" sourceRef="Activity_1txq31x" targetRef="myParallelGateway_1"/>
+    <sequenceFlow id="new_Flow_1bnooth" sourceRef="Activity_0t5zybe" targetRef="myParallelGateway_1"/>
     <parallelGateway id="myParallelGateway_6">
-      <outgoing>SequenceFlow_6</outgoing>
-      <outgoing>new_Flow_1he1h6w</outgoing>
-      <outgoing>new_Flow_04ctm0b</outgoing>
+      <incoming>New_SequenceFlow_6</incoming>
+      <outgoing>New_SequenceFlow_7</outgoing>
+      <outgoing>New_SequenceFlow_8</outgoing>
     </parallelGateway>
-    <sequenceFlow id="SequenceFlow_6" sourceRef="myParallelGateway_6" targetRef="Activity_0p9dxxp"/>
-    <sequenceFlow id="new_Flow_1he1h6w" sourceRef="Gateway_01fbovc" targetRef="myParallelGateway_6"/>
-    <sequenceFlow id="new_Flow_04ctm0b" sourceRef="Activity_1xlkkrd" targetRef="myParallelGateway_6"/>
-    <parallelGateway id="myParallelGateway_11">
-      <incoming>New_SequenceFlow_11</incoming>
-      <outgoing>New_SequenceFlow_12</outgoing>
-      <outgoing>New_SequenceFlow_13</outgoing>
-    </parallelGateway>
-    <sequenceFlow id="New_SequenceFlow_12" sourceRef="myParallelGateway_11" targetRef="Event_1cueerh"/>
-    <sequenceFlow id="New_SequenceFlow_13" sourceRef="myParallelGateway_11" targetRef="Activity_0p9dxxp"/>
-    <sequenceFlow id="New_SequenceFlow_11" sourceRef="Activity_1xlkkrd" targetRef="myParallelGateway_11"/>
+    <sequenceFlow id="New_SequenceFlow_7" sourceRef="myParallelGateway_6" targetRef="Activity_0t5zybe"/>
+    <sequenceFlow id="New_SequenceFlow_8" sourceRef="myParallelGateway_6" targetRef="Activity_1txq31x"/>
+    <sequenceFlow id="New_SequenceFlow_6" sourceRef="Gateway_0y0bq1l" targetRef="myParallelGateway_6"/>
   </process>
     
   <bpmndi:BPMNDiagram id="BpmnDiagram_1">
@@ -90,19 +67,49 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge id="Flow_06e8mro_di">
-                
-        <omgdi:waypoint x="640" y="270"/>
-                
-        <omgdi:waypoint x="802" y="270"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_1dhn9zm" id="Flow_1dhn9zm_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_1eoojrj" id="Flow_1eoojrj_di">
                 
         <omgdi:waypoint x="380" y="270"/>
                 
+        <omgdi:waypoint x="435" y="270"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge id="Flow_0oc8akv_di">
+                
+        <omgdi:waypoint x="485" y="270"/>
+                
         <omgdi:waypoint x="540" y="270"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge id="Flow_1uextuj_di">
+                
+        <omgdi:waypoint x="460" y="295"/>
+                
+        <omgdi:waypoint x="460" y="380"/>
+                
+        <omgdi:waypoint x="540" y="380"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge id="Flow_003mxpx_di">
+                
+        <omgdi:waypoint x="640" y="380"/>
+                
+        <omgdi:waypoint x="712" y="380"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge id="Flow_1bnooth_di">
+                
+        <omgdi:waypoint x="640" y="270"/>
+                
+        <omgdi:waypoint x="671" y="270"/>
+                
+        <omgdi:waypoint x="671" y="380"/>
+                
+        <omgdi:waypoint x="712" y="380"/>
               
       </bpmndi:BPMNEdge>
             
@@ -113,126 +120,62 @@
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape bpmnElement="Activity_1xlkkrd" id="Activity_1xlkkrd_di">
+      <bpmndi:BPMNShape bpmnElement="Gateway_0y0bq1l" id="Gateway_1vjn71o_di">
+                
+        <omgdc:Bounds height="50" width="50" x="435" y="245"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Activity_0t5zybe" id="Activity_0t5zybe_di">
                 
         <omgdc:Bounds height="80" width="100" x="540" y="230"/>
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape bpmnElement="Event_1cueerh" id="Event_1cueerh_di">
+      <bpmndi:BPMNShape bpmnElement="Activity_1txq31x" id="Activity_1txq31x_di">
                 
-        <omgdc:Bounds height="36" width="36" x="802" y="252"/>
+        <omgdc:Bounds height="80" width="100" x="540" y="340"/>
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape id="Participant_0ulkudz_di" isHorizontal="true">
+      <bpmndi:BPMNShape bpmnElement="Event_0wv6t4c" id="Event_0wv6t4c_di">
                 
-        <omgdc:Bounds height="250" width="718" x="150" y="610"/>
+        <omgdc:Bounds height="36" width="36" x="712" y="362"/>
               
       </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_11bo8a3" id="Flow_11bo8a3_di">
+      <bpmndi:BPMNShape bpmnElement="myParallelGateway_1" id="myParallelGateway_1_di" isHorizontal="true">
                 
-        <omgdi:waypoint x="258" y="730"/>
-                
-        <omgdi:waypoint x="310" y="730"/>
+        <omgdc:Bounds height="50.0" width="50.0" x="712.0" y="262.0"/>
               
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="SequenceFlow_1_di" sourceElement="myParallelGateway_1_di" targetElement="Event_0wv6t4c_di">
+        <omgdi:waypoint x="732.0" y="287.0"/>
+        <omgdi:waypoint x="712.0" y="362.0"/>
       </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_0pq2o7a" id="Flow_0pq2o7a_di">
-                
-        <omgdi:waypoint x="410" y="730"/>
-                
-        <omgdi:waypoint x="465" y="730"/>
-              
+      <bpmndi:BPMNEdge bpmnElement="new_Flow_003mxpx" id="new_Flow_003mxpx_di" sourceElement="Activity_1txq31x_di" targetElement="myParallelGateway_1_di">
+        <omgdi:waypoint x="540.0" y="340.0"/>
+        <omgdi:waypoint x="722.0" y="262.0"/>
       </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge id="Flow_1he1h6w_di">
-                
-        <omgdi:waypoint x="515" y="730"/>
-                
-        <omgdi:waypoint x="580" y="730"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_0oyw596" id="Flow_0oyw596_di">
-                
-        <omgdi:waypoint x="680" y="730"/>
-                
-        <omgdi:waypoint x="732" y="730"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNShape bpmnElement="Event_1g2wnck" id="Event_1g2wnck_di">
-                
-        <omgdc:Bounds height="36" width="36" x="222" y="712"/>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNShape bpmnElement="Activity_1arh4j6" id="Activity_1arh4j6_di">
-                
-        <omgdc:Bounds height="80" width="100" x="310" y="690"/>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNShape bpmnElement="Gateway_01fbovc" id="Gateway_1a9cetw_di">
-                
-        <omgdc:Bounds height="50" width="50" x="465" y="705"/>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNShape bpmnElement="Event_18bm3cy" id="Event_18bm3cy_di">
-                
-        <omgdc:Bounds height="36" width="36" x="732" y="712"/>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNShape bpmnElement="Activity_0p9dxxp" id="Activity_0p9dxxp_di">
-                
-        <omgdc:Bounds height="80" width="100" x="580" y="690"/>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNEdge id="Flow_04ctm0b_di">
-                
-        <omgdi:waypoint x="590" y="310"/>
-                
-        <omgdi:waypoint x="590" y="690"/>
-              
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape bpmnElement="myParallelGateway_6" id="myParallelGateway_6_di" isHorizontal="true">
-                
-        <omgdc:Bounds height="50.0" width="50.0" x="580.0" y="590.0"/>
-              
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_6" id="SequenceFlow_6_di" sourceElement="myParallelGateway_6_di" targetElement="Activity_0p9dxxp_di">
-        <omgdi:waypoint x="600.0" y="615.0"/>
-        <omgdi:waypoint x="580.0" y="690.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="new_Flow_1he1h6w" id="new_Flow_1he1h6w_di" sourceElement="Gateway_1a9cetw_di" targetElement="myParallelGateway_6_di">
-        <omgdi:waypoint x="465.0" y="705.0"/>
-        <omgdi:waypoint x="590.0" y="590.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="new_Flow_04ctm0b" id="new_Flow_04ctm0b_di" sourceElement="Activity_1xlkkrd_di" targetElement="myParallelGateway_6_di">
+      <bpmndi:BPMNEdge bpmnElement="new_Flow_1bnooth" id="new_Flow_1bnooth_di" sourceElement="Activity_0t5zybe_di" targetElement="myParallelGateway_1_di">
         <omgdi:waypoint x="540.0" y="230.0"/>
-        <omgdi:waypoint x="590.0" y="590.0"/>
+        <omgdi:waypoint x="722.0" y="262.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape bpmnElement="myParallelGateway_11" id="myParallelGateway_11_di">
+      <bpmndi:BPMNShape bpmnElement="myParallelGateway_6" id="myParallelGateway_6_di">
                 
-        <omgdc:Bounds height="50.0" width="50.0" x="540.0" y="130.0"/>
+        <omgdc:Bounds height="50.0" width="50.0" x="435.0" y="145.0"/>
               
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="New_SequenceFlow_11" id="New_SequenceFlow_11_di" sourceElement="Activity_1xlkkrd_di" targetElement="myParallelGateway_11_di">
-        <omgdi:waypoint x="540.0" y="240.0"/>
-        <omgdi:waypoint x="540.0" y="155.0"/>
+      <bpmndi:BPMNEdge bpmnElement="New_SequenceFlow_6" id="New_SequenceFlow_6_di" sourceElement="Gateway_1vjn71o_di" targetElement="myParallelGateway_6_di">
+        <omgdi:waypoint x="435.0" y="255.0"/>
+        <omgdi:waypoint x="435.0" y="170.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="New_SequenceFlow_12" id="New_SequenceFlow_12_di" sourceElement="myParallelGateway_11_di" targetElement="Event_1cueerh_di">
-        <omgdi:waypoint x="540.0" y="155.0"/>
-        <omgdi:waypoint x="802.0" y="252.0"/>
+      <bpmndi:BPMNEdge bpmnElement="New_SequenceFlow_7" id="New_SequenceFlow_7_di" sourceElement="myParallelGateway_6_di" targetElement="Activity_0t5zybe_di">
+        <omgdi:waypoint x="435.0" y="170.0"/>
+        <omgdi:waypoint x="540.0" y="230.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="New_SequenceFlow_13" id="New_SequenceFlow_13_di" sourceElement="myParallelGateway_11_di" targetElement="Activity_0p9dxxp_di">
-        <omgdi:waypoint x="540.0" y="155.0"/>
-        <omgdi:waypoint x="580.0" y="690.0"/>
+      <bpmndi:BPMNEdge bpmnElement="New_SequenceFlow_8" id="New_SequenceFlow_8_di" sourceElement="myParallelGateway_6_di" targetElement="Activity_1txq31x_di">
+        <omgdi:waypoint x="435.0" y="170.0"/>
+        <omgdi:waypoint x="540.0" y="340.0"/>
       </bpmndi:BPMNEdge>
           
     </bpmndi:BPMNPlane>

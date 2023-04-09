@@ -135,8 +135,8 @@ public class AddAndGateway {
                 // Add the shape to the BPMN diagram
                 plane.addChildElement(gatewayShape);
                 //gateway
-                
-                BpmnShape parallelGatewayShape = modelInstance.getModelElementById(parallelGateway.getId()+"_di");
+                BaseElement gatewayElement = modelInstance.getModelElementById(parallelGateway.getId());
+                BpmnShape parallelGatewayShape = modelInstance.getModelElementById(gatewayElement.getDiagramElement().getId());
                 Double gatewayX = parallelGatewayShape.getBounds().getX();
                 Double gatewayY = parallelGatewayShape.getBounds().getY();
                 Double gatewayWidth = parallelGatewayShape.getBounds().getWidth();
@@ -225,7 +225,8 @@ public class AddAndGateway {
                 }
                 //Get the position and bound of activities and gateway
                 //preactivity:key
-                BpmnShape preTaskShape = modelInstance.getModelElementById(key+"_di");
+                BaseElement preTask = modelInstance.getModelElementById(key);
+                BpmnShape preTaskShape = modelInstance.getModelElementById(preTask.getDiagramElement().getId());
                 Double preTaskX = preTaskShape.getBounds().getX();
                 Double preTaskY = preTaskShape.getBounds().getY();
                 Double preTaskWidth = preTaskShape.getBounds().getWidth();
