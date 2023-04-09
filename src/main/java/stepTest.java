@@ -11,6 +11,7 @@ import Step1_Delete_Pool.DeletePool;
 import Step1_Delete_Pool.MergeProcess;
 import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
+import Step3_Delete_Element.*;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -37,6 +38,8 @@ public class stepTest {
             AddSequenceFlow.add(modelInstance,messageflows);
             // Add And-GateWay
             AddAndGateway.add(modelInstance);
+            // Delete Repeat Flow
+            DeleteRepeatFlow.delete(modelInstance);
             
             // Store bpmn file
             File outputFile = new File("Data/mergedModelInstance.bpmn");
