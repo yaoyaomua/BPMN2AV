@@ -9,7 +9,6 @@ import java.util.Map;
 
 import Step3_Delete_Element.Generate7ID;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.ParallelGateway;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
@@ -128,13 +127,11 @@ public class AddAndGateway {
                 //remove origin outgoing flow
                 for (SequenceFlow incomingFlow : entry.getValue()) {
                     modelInstance.getModelElementById(key).removeChildElement(incomingFlow);
-                    modelInstance.getModelElementById(incomingFlow.getId()).getParentElement().removeChildElement(incomingFlow);
                 }
                 
                 //Get the position and bound of activities and gateway
                 //preactivity:key
-                BaseElement nextElement = modelInstance.getModelElementById(key);
-                BpmnShape nextElementShape = modelInstance.getModelElementById(nextElement.getDiagramElement().getId());
+                BpmnShape nextElementShape = modelInstance.getModelElementById(key+"_di");
                 Double nextElementX = nextElementShape.getBounds().getX();
                 Double nextElementY = nextElementShape.getBounds().getY();
                 Double nextElementWidth = nextElementShape.getBounds().getWidth();
@@ -156,8 +153,7 @@ public class AddAndGateway {
                 int flag = 0;
                 for (SequenceFlow newFlow : newSequenceFlow)
                 {
-                    BaseElement preElement = modelInstance.getModelElementById(newFlow.getSource().getId());
-                    BpmnShape preElementShape = modelInstance.getModelElementById(preElement.getDiagramElement().getId());
+                    BpmnShape preElementShape = modelInstance.getModelElementById(newFlow.getSource().getId()+"_di");
                     Double preElementX = preElementShape.getBounds().getX();
                     Double preElementY = preElementShape.getBounds().getY();
                     Double preElementWidth = preElementShape.getBounds().getWidth();
@@ -180,7 +176,7 @@ public class AddAndGateway {
                 
          
             }
-            //parallelGatewayId++;
+
         }
         
         //Source_map:Add gateway and sequenceflow
@@ -206,6 +202,7 @@ public class AddAndGateway {
                 }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
                 incomingFlow.setId("Flow_"+newID);
                 //parallelGatewayId++;
+
                 incomingFlow.setSource(modelInstance.getModelElementById(key));
                 incomingFlow.setTarget(parallelGateway);
                 //process.addChildElement(incomingFlow);
@@ -226,6 +223,7 @@ public class AddAndGateway {
                     }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
                     newOutgoingFlow.setId("Flow_"+newID);
                     //parallelGatewayId++;
+
                     newOutgoingFlow.setSource(parallelGateway);
                     newOutgoingFlow.setTarget(outgoingFlow.getTarget());
                     process.addChildElement(newOutgoingFlow);
@@ -239,10 +237,7 @@ public class AddAndGateway {
                 }
                 //remove origin outgoing flow
                 for (SequenceFlow outgoingFlow : entry.getValue()) {
-                    if(modelInstance.getModelElementById(outgoingFlow.getId()) != null) {
-                        modelInstance.getModelElementById(key).removeChildElement(outgoingFlow);
-                        modelInstance.getModelElementById(outgoingFlow.getId()).getParentElement().removeChildElement(outgoingFlow);
-                    }
+                    modelInstance.getModelElementById(key).removeChildElement(outgoingFlow);
                 }
                 //Get the position and bound of activities and gateway
                 //preactivity:key
@@ -262,8 +257,7 @@ public class AddAndGateway {
                 //gateway
                 //BpmnShape parallelGatewayShape = modelInstance.getModelElementsByType(BpmnShape.class).iterator().next();
                 //parallelGatewayShape.setBpmnElement(parallelGateway);
-                BaseElement parallelGatewayElement = modelInstance.getModelElementById(parallelGateway.getId());
-                BpmnShape parallelGatewayShape = modelInstance.getModelElementById(parallelGatewayElement.getDiagramElement().getId());
+                BpmnShape parallelGatewayShape = modelInstance.getModelElementById(parallelGateway.getId()+"_di");
                 Double gatewayX = parallelGatewayShape.getBounds().getX();
                 Double gatewayY = parallelGatewayShape.getBounds().getY();
                 Double gatewayWidth = parallelGatewayShape.getBounds().getWidth();
@@ -271,8 +265,7 @@ public class AddAndGateway {
                 int flag = 0;
                 for (SequenceFlow newFlow : newSequenceFlow2)
                 {
-                    BaseElement nextTask = modelInstance.getModelElementById(newFlow.getTarget().getId());
-                    BpmnShape nextTaskShape = modelInstance.getModelElementById(nextTask.getDiagramElement().getId());
+                    BpmnShape nextTaskShape = modelInstance.getModelElementById(newFlow.getTarget().getId()+"_di");
                     Double nextTaskX = nextTaskShape.getBounds().getX();
                     Double nextTaskY = nextTaskShape.getBounds().getY();
                     Double nextTaskWidth = nextTaskShape.getBounds().getWidth();
@@ -294,7 +287,6 @@ public class AddAndGateway {
                 
          
             }
-            //parallelGatewayId++;
         }
         
     }
