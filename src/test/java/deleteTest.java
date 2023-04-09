@@ -10,7 +10,7 @@ public class deleteTest {
     @Test
     public void test4(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram3.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram4.bpmn"));
             DeleteElement.delete(bpmnModelInstance);
             File outputFile = new File("models/output1.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);

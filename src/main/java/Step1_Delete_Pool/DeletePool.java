@@ -1,6 +1,5 @@
 package Step1_Delete_Pool;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.Collaboration;
