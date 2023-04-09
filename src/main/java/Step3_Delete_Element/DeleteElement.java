@@ -1,10 +1,7 @@
 package Step3_Delete_Element;
 
 
-import com.sun.jdi.DoubleType;
-import com.sun.jdi.VMOutOfMemoryException;
-import com.sun.jersey.core.spi.scanning.uri.BundleSchemeScanner;
-import de.hpi.bpt.process.petri.test.SoundUnfoldingTest;
+
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.impl.instance.Incoming;
 import org.camunda.bpm.model.bpmn.impl.instance.Outgoing;
