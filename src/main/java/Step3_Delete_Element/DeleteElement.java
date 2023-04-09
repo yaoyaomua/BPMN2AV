@@ -1,13 +1,6 @@
 package Step3_Delete_Element;
 
-import Step2_Flow_Transform.CreatBPMNEdge;
-import com.sun.jdi.DoubleType;
-import com.sun.jdi.VMOutOfMemoryException;
-import com.sun.jersey.core.spi.scanning.uri.BundleSchemeScanner;
-import de.hpi.bpt.process.petri.test.SoundUnfoldingTest;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.impl.instance.Incoming;
-import org.camunda.bpm.model.bpmn.impl.instance.Outgoing;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
