@@ -3,7 +3,9 @@
     
   
   <process id="mergedProcess" name="Merged Process">
+    <task completionQuantity="1" id="Task_1hcentk" isForCompensation="false" name="activity1" startQuantity="1">
             
+      <incoming>SequenceFlow_0h21x7r</incoming>
             
 <<<<<<< HEAD
       <outgoing>Flow_1eoojrj</outgoing>
@@ -52,6 +54,44 @@
     <sequenceFlow id="Flow_7de42tw" sourceRef="Activity_1txq31x" targetRef="myParallelGateway_gj8b7dr"/>
     <sequenceFlow id="Flow_n9nfio7" sourceRef="Activity_0t5zybe" targetRef="myParallelGateway_gj8b7dr"/>
 =======
+      <outgoing>Flow_1n0cdut</outgoing>
+          
+    </task>
+    <task completionQuantity="1" id="Activity_1f376f9" isForCompensation="false" name="activity2" startQuantity="1">
+            
+      <incoming>Flow_1xjkj5d</incoming>
+            
+    
+    </task>
+    <task id="StartEvent_1y45yut" name="Start1">
+      <outgoing>SequenceFlow_0h21x7r</outgoing>
+    </task>
+    <startEvent id="Event_04m3h1y" isInterrupting="true" name="StartEvent3" parallelMultiple="false">
+            
+      <outgoing>Flow_1xjkj5d</outgoing>
+          
+    </startEvent>
+    <intermediateThrowEvent id="Event_1e4sj8f">
+            
+      <incoming>Flow_1n0cdut</incoming>
+          
+    </intermediateThrowEvent>
+    <intermediateThrowEvent id="Event_0ht2qts">
+      
+    </intermediateThrowEvent>
+    <sequenceFlow id="Flow_1n0cdut" sourceRef="Task_1hcentk" targetRef="Event_1e4sj8f"/>
+    <sequenceFlow id="SequenceFlow_0h21x7r" sourceRef="StartEvent_1y45yut" targetRef="Task_1hcentk"/>
+    <sequenceFlow id="Flow_1xjkj5d" sourceRef="Event_04m3h1y" targetRef="Activity_1f376f9"/>
+    <sequenceFlow id="Flow_0rrsw1f" sourceRef="Activity_1f376f9" targetRef="Event_0ht2qts"/>
+    <sequenceFlow id="Flow_1wu06ee" sourceRef="Activity_1f376f9" targetRef="StartEvent_1y45yut"/>
+    <parallelGateway id="myParallelGateway_0">
+      <incoming>SequenceFlow_0</incoming>
+      <outgoing>new_Flow_0rrsw1f</outgoing>
+      <outgoing>new_Flow_1wu06ee</outgoing>
+    </parallelGateway>
+    <sequenceFlow id="new_Flow_0rrsw1f" sourceRef="myParallelGateway_0" targetRef="Event_0ht2qts"/>
+    <sequenceFlow id="new_Flow_1wu06ee" sourceRef="myParallelGateway_0" targetRef="StartEvent_1y45yut"/>
+    <sequenceFlow id="SequenceFlow_0" sourceRef="Activity_1f376f9" targetRef="myParallelGateway_0"/>
 >>>>>>> parent of 77a4104 (debug addgateway and add DeleteRepeatFlow)
   </process>
     
@@ -60,8 +100,11 @@
     <bpmndi:BPMNPlane id="BpmnPlane_1">
             
       
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0h21x7r" id="SequenceFlow_0h21x7r_di">
                 
+        <omgdi:waypoint x="238" y="180"/>
                 
+        <omgdi:waypoint x="290" y="180"/>
               
       </bpmndi:BPMNEdge>
             
@@ -132,8 +175,30 @@
             
       <bpmndi:BPMNShape bpmnElement="Activity_0t5zybe" id="Activity_0t5zybe_di">
 =======
+      <bpmndi:BPMNEdge bpmnElement="Flow_1n0cdut" id="Flow_1n0cdut_di">
                 
+        <omgdi:waypoint x="390" y="180"/>
+                
+        <omgdi:waypoint x="442" y="180"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1y45yut" id="StartEvent_1y45yut_di">
+                
+        <omgdc:Bounds height="36" width="36" x="202" y="162"/>
+                
+        <bpmndi:BPMNLabel>
+                    
+          <omgdc:Bounds height="14" width="52" x="194" y="138"/>
+                  
+        </bpmndi:BPMNLabel>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Task_1hcentk" id="Task_1hcentk_di">
 >>>>>>> parent of 77a4104 (debug addgateway and add DeleteRepeatFlow)
+                
+        <omgdc:Bounds height="80" width="100" x="290" y="140"/>
               
       </bpmndi:BPMNShape>
             
@@ -153,6 +218,23 @@
                 
         <omgdc:Bounds height="50.0" width="50.0" x="712.0" y="262.0"/>
 =======
+      <bpmndi:BPMNShape bpmnElement="Event_1e4sj8f" id="Event_1e4sj8f_di">
+                
+        <omgdc:Bounds height="36" width="36" x="442" y="162"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape id="Participant_0bqkvqd_di" isHorizontal="true">
+                
+        <omgdc:Bounds height="250" width="600" x="140" y="400"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge id="Flow_0rrsw1f_di">
+                
+        <omgdi:waypoint x="400" y="540"/>
+                
+        <omgdi:waypoint x="442" y="540"/>
 >>>>>>> parent of 77a4104 (debug addgateway and add DeleteRepeatFlow)
               
       </bpmndi:BPMNShape>
@@ -169,6 +251,66 @@
         <omgdi:waypoint x="540.0" y="230.0"/>
         <omgdi:waypoint x="722.0" y="262.0"/>
 =======
+            
+      <bpmndi:BPMNEdge bpmnElement="Flow_1xjkj5d" id="Flow_1xjkj5d_di">
+                
+        <omgdi:waypoint x="248" y="540"/>
+                
+        <omgdi:waypoint x="300" y="540"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="Activity_1f376f9" id="Activity_1f376f9_di">
+                
+        <omgdc:Bounds height="80" width="100" x="300" y="500"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Event_0ht2qts" id="Event_0ht2qts_di">
+                
+        <omgdc:Bounds height="36" width="36" x="442" y="522"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Event_04m3h1y" id="Event_04m3h1y_di">
+                
+        <omgdc:Bounds height="36" width="36" x="212" y="522"/>
+                
+        <bpmndi:BPMNLabel>
+                    
+          <omgdc:Bounds height="14" width="58" x="201" y="565"/>
+                  
+        </bpmndi:BPMNLabel>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge id="Flow_1wu06ee_di">
+                
+        <omgdi:waypoint x="350" y="500"/>
+                
+        <omgdi:waypoint x="350" y="360"/>
+                
+        <omgdi:waypoint x="220" y="360"/>
+                
+        <omgdi:waypoint x="220" y="200"/>
+              
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="myParallelGateway_0" id="myParallelGateway_0_di" isHorizontal="true">
+                
+        <omgdc:Bounds height="50.0" width="50.0" x="300.0" y="400.0"/>
+              
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_0" id="SequenceFlow_0_di" sourceElement="Activity_1f376f9_di" targetElement="myParallelGateway_0_di">
+        <omgdi:waypoint x="300.0" y="510.0"/>
+        <omgdi:waypoint x="300.0" y="425.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="new_Flow_0rrsw1f" id="new_Flow_0rrsw1f_di" sourceElement="myParallelGateway_0_di" targetElement="Event_0ht2qts_di">
+        <omgdi:waypoint x="300.0" y="425.0"/>
+        <omgdi:waypoint x="442.0" y="522.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="new_Flow_1wu06ee" id="new_Flow_1wu06ee_di" sourceElement="myParallelGateway_0_di" targetElement="StartEvent_1y45yut_di">
+        <omgdi:waypoint x="300.0" y="425.0"/>
+        <omgdi:waypoint x="202.0" y="162.0"/>
 >>>>>>> parent of 77a4104 (debug addgateway and add DeleteRepeatFlow)
       </bpmndi:BPMNEdge>
           
