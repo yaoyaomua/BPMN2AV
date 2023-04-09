@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import Step3_Delete_Element.Generate7ID;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.ParallelGateway;
@@ -22,7 +24,8 @@ public class AddAndGateway {
         //Create two hash map
         Map<String, Collection<SequenceFlow>> Target_map = new HashMap<>();
         Map<String, Collection<SequenceFlow>> Source_map = new HashMap<>();
-        int parallelGatewayId = 0;
+        //int parallelGatewayId = 0;
+        String newID;
         
         
         //Traversal All Sequence Flow
@@ -79,17 +82,23 @@ public class AddAndGateway {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
             //Check if the activiy have more than one outcoming sequence flow
-            if(value.size()>1)
+            if(value.size()>1&&(!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("parallelGateway")))
             {
                 List<SequenceFlow> newSequenceFlow = new ArrayList<SequenceFlow>();
                 //add an empty parallel gateway
                 ParallelGateway parallelGateway = modelInstance.newInstance(ParallelGateway.class);
-                parallelGateway.setId("myParallelGateway_"+parallelGatewayId);
+                do {
+                    newID = Generate7ID.generate();
+                }while(modelInstance.getModelElementById("myParallelGateway_"+newID)!=null);
+                parallelGateway.setId("myParallelGateway_"+newID);
                 process.addChildElement(parallelGateway);
                 
                 //add an sequence flow between activity and paralle gateway(gateway incoming)
                 SequenceFlow outGoing = modelInstance.newInstance(SequenceFlow.class);
-                outGoing.setId("SequenceFlow_"+parallelGatewayId);
+                do {
+                    newID = Generate7ID.generate();
+                }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
+                outGoing.setId("Flow"+newID);
                 outGoing.setTarget(modelInstance.getModelElementById(key));
                 outGoing.setSource(parallelGateway);
                 modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(outGoing);
@@ -101,7 +110,10 @@ public class AddAndGateway {
                 //add sequence flows between parallel gateway and activity(gateway outcoming)
                 for (SequenceFlow incomingFlow : entry.getValue()) {
                     SequenceFlow newIncmoingFlow = modelInstance.newInstance(SequenceFlow.class);
-                    newIncmoingFlow.setId("new_" + incomingFlow.getId());
+                    do {
+                        newID = Generate7ID.generate();
+                    }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
+                    newIncmoingFlow.setId("Flow_"+newID);
                     newIncmoingFlow.setTarget(parallelGateway);
                     newIncmoingFlow.setSource(incomingFlow.getSource());
                     process.addChildElement(newIncmoingFlow);
@@ -168,7 +180,7 @@ public class AddAndGateway {
                 
          
             }
-            parallelGatewayId++;
+            //parallelGatewayId++;
         }
         
         //Source_map:Add gateway and sequenceflow
@@ -176,18 +188,24 @@ public class AddAndGateway {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
             //Check if the activiy have more than one outcoming sequence flow
-            if(value.size()>1)
+            if(value.size()>1&&(!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("parallelGateway")))
             {
                 List<SequenceFlow> newSequenceFlow2 = new ArrayList<SequenceFlow>();
                 //add an empty parallel gateway
                 ParallelGateway parallelGateway = modelInstance.newInstance(ParallelGateway.class);
-                parallelGateway.setId("myParallelGateway_"+parallelGatewayId);
+                do {
+                    newID = Generate7ID.generate();
+                }while(modelInstance.getModelElementById("myParallelGateway_"+newID)!=null);
+                parallelGateway.setId("myParallelGateway_"+newID);
                 process.addChildElement(parallelGateway);
                 
                 //add an sequence flow between activity and paralle gateway(gateway incoming)
                 SequenceFlow incomingFlow = modelInstance.newInstance(SequenceFlow.class);
-                incomingFlow.setId("New_SequenceFlow_"+parallelGatewayId);
-                parallelGatewayId++;
+                do {
+                    newID = Generate7ID.generate();
+                }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
+                incomingFlow.setId("Flow_"+newID);
+                //parallelGatewayId++;
                 incomingFlow.setSource(modelInstance.getModelElementById(key));
                 incomingFlow.setTarget(parallelGateway);
                 //process.addChildElement(incomingFlow);
@@ -203,8 +221,11 @@ public class AddAndGateway {
                 //add sequence flows between parallel gateway and activity(gateway outcoming)
                 for (SequenceFlow outgoingFlow : entry.getValue()) {
                     SequenceFlow newOutgoingFlow = modelInstance.newInstance(SequenceFlow.class);
-                    newOutgoingFlow.setId("New_SequenceFlow_"+parallelGatewayId);
-                    parallelGatewayId++;
+                    do {
+                        newID = Generate7ID.generate();
+                    }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
+                    newOutgoingFlow.setId("Flow_"+newID);
+                    //parallelGatewayId++;
                     newOutgoingFlow.setSource(parallelGateway);
                     newOutgoingFlow.setTarget(outgoingFlow.getTarget());
                     process.addChildElement(newOutgoingFlow);
@@ -273,7 +294,7 @@ public class AddAndGateway {
                 
          
             }
-            parallelGatewayId++;
+            //parallelGatewayId++;
         }
         
     }
