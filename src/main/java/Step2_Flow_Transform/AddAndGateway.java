@@ -9,10 +9,8 @@ import java.util.Map;
 
 import Step3_Delete_Element.Generate7ID;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.BaseElement;
-import org.camunda.bpm.model.bpmn.instance.ParallelGateway;
+import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
@@ -81,7 +79,7 @@ public class AddAndGateway {
         for (Map.Entry<String, Collection<SequenceFlow>> entry : Target_map.entrySet()) {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
-            //Check if the activiy have more than one outcoming sequence flow
+            //Check if the activiy have more than one incoming sequence flow
             if(value.size()>1&&(!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("parallelGateway"))&&
                     (!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("exclusiveGateway")))
             {
@@ -105,7 +103,12 @@ public class AddAndGateway {
                 modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(outGoing);
                 //Add to list
                 newSequenceFlow.add(outGoing);
-                //set incoming of the parallel gateway
+                //set incoming of the preelement
+                //Activity targetActivity = modelInstance.getModelElementById(key);
+                //targetActivity.getIncoming().add(outGoing);
+                AddIncomingOrOutcoming.AddIncomingToElement(modelInstance,key,outGoing);
+
+                //set outgoing of the parallel gateway
                 parallelGateway.getOutgoing().add(outGoing);
 
                 //add sequence flows between parallel gateway and activity(gateway outcoming)
@@ -123,8 +126,13 @@ public class AddAndGateway {
 
                     //Add to List
                     newSequenceFlow.add(newIncmoingFlow);
-                    //set outcoming of the parallel gateway
-                    parallelGateway.getOutgoing().add(newIncmoingFlow);
+
+                    //set outgoing of the preelement
+                    AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance, incomingFlow.getSource().getId(), newIncmoingFlow);
+
+
+                    //set incoming of the parallel gateway
+                    parallelGateway.getIncoming().add(newIncmoingFlow);
                 }
                 //remove origin outgoing flow
                 for (SequenceFlow incomingFlow : entry.getValue()) {
@@ -205,7 +213,6 @@ public class AddAndGateway {
                     newID = Generate7ID.generate();
                 }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
                 newincomingFlow.setId("Flow_"+newID);
-                //parallelGatewayId++;
                 newincomingFlow.setSource(modelInstance.getModelElementById(key));
                 newincomingFlow.setTarget(parallelGateway);
                 //process.addChildElement(incomingFlow);
@@ -215,6 +222,10 @@ public class AddAndGateway {
                 //Add to list
                 newSequenceFlow2.add(newincomingFlow);
 
+                //set sourcecoming of the preelement
+                //Activity sourceActivity = modelInstance.getModelElementById(key);
+                //sourceActivity.getOutgoing().add(newincomingFlow);
+                AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance,key,newincomingFlow);
                 //set incoming of the parallel gateway
                 parallelGateway.getIncoming().add(newincomingFlow);
 
@@ -234,6 +245,11 @@ public class AddAndGateway {
 
                     //Add to List
                     newSequenceFlow2.add(newOutgoingFlow);
+
+                    //set incoming of the preelement
+                    //Activity incomingActivity = modelInstance.getModelElementById(outgoingFlow.getTarget().getId());
+                    //incomingActivity.getIncoming().add(newOutgoingFlow);
+                    AddIncomingOrOutcoming.AddIncomingToElement(modelInstance,outgoingFlow.getTarget().getId(),newOutgoingFlow);
                     //set outcoming of the parallel gateway
                     parallelGateway.getOutgoing().add(newOutgoingFlow);
                 }
