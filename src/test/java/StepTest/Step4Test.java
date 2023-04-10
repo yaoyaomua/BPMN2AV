@@ -1,24 +1,22 @@
-import Step4_Well_Structure.BPMN2Reader2;
+package StepTest;
+
 import Step4_Well_Structure.DataObjectAddToJSON;
 import Step4_Well_Structure.DataObjectStore;
 import Step4_Well_Structure.MyDataObject;
-import de.hpi.bpt.process.Task;
+import de.hpi.bpt.process.Process;
 import ee.ut.bpstruct2.Restructurer;
 import ee.ut.bpstruct2.util.BPMN2Reader;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.json.JSONObject;
 import org.junit.Test;
-import de.hpi.bpt.process.Process;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Map;
 
-public class userTest {
-
+public class Step4Test {
 
     @Test
     public void test1() throws Exception {
