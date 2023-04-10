@@ -25,7 +25,7 @@ public class stepTest {
     public static void main(String[] args) {
         try {
             //Read bpmn file
-            String filePath = "Data/diagram.xml";
+            String filePath = "Data/diagramnew.bpmn";
             BpmnModelInstance modelInstance;
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
@@ -39,7 +39,7 @@ public class stepTest {
             // Add And-GateWay
             AddAndGateway.add(modelInstance);
             // Delete Repeat Flow
-            DeleteRepeatFlow.delete(modelInstance);
+            //DeleteRepeatFlow.delete(modelInstance);
             
             // Store bpmn file
             File outputFile = new File("Data/mergedModelInstance.bpmn");
