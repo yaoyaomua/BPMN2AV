@@ -132,8 +132,10 @@ public class AddAndGateway {
                     modelInstance.getModelElementById(incomingFlow.getId()).getParentElement().removeChildElement(incomingFlow);
                 }
 
+
                 //Get the position and bound of activities and gateway
                 //preactivity:key
+
                 BaseElement nextElement = modelInstance.getModelElementById(key);
                 BpmnShape nextElementShape = modelInstance.getModelElementById(nextElement.getDiagramElement().getId());
                 Double nextElementX = nextElementShape.getBounds().getX();
@@ -141,12 +143,9 @@ public class AddAndGateway {
                 Double nextElementWidth = nextElementShape.getBounds().getWidth();
                 Double nextElementHeight = nextElementShape.getBounds().getHeight();
                 //Add graphic information
-                // Get the BPMN diagram instance
-                BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
                 // Create a new shape for the gateway
-                BpmnShape gatewayShape = CreateBPMNShape.create(modelInstance,parallelGateway.getId(),nextElementX,nextElementY-100,50.0,50.0);
-                // Add the shape to the BPMN diagram
-                plane.addChildElement(gatewayShape);
+                CreateBPMNShape.create(modelInstance,parallelGateway.getId(),nextElementX,nextElementY-100,50.0,50.0);
+
                 //gateway
                 BaseElement gatewayElement = modelInstance.getModelElementById(parallelGateway.getId());
                 BpmnShape parallelGatewayShape = modelInstance.getModelElementById(gatewayElement.getDiagramElement().getId());
@@ -155,6 +154,7 @@ public class AddAndGateway {
                 Double gatewayWidth = parallelGatewayShape.getBounds().getWidth();
                 Double gatewayHeight = parallelGatewayShape.getBounds().getHeight();
                 int flag = 0;
+
                 for (SequenceFlow newFlow : newSequenceFlow)
                 {
                     BaseElement preElement = modelInstance.getModelElementById(newFlow.getSource().getId());
@@ -171,20 +171,18 @@ public class AddAndGateway {
                     }
                     else
                     {
-                        CreateBPMNEdge.create(modelInstance, newFlow, preElementX, preElementY,gatewayX+10, gatewayY);
+                        CreateBPMNEdge.create(modelInstance, newFlow, preElementX+preElementWidth/2, preElementY+preElementHeight/2,gatewayX+10, gatewayY);
                     }
 
                     flag ++;
 
 
                 }
-
-
             }
-            //parallelGatewayId++;
         }
 
         //Source_map:Add gateway and sequenceflow
+
         for (Map.Entry<String, Collection<SequenceFlow>> entry : Source_map.entrySet()) {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
@@ -202,23 +200,23 @@ public class AddAndGateway {
                 process.addChildElement(parallelGateway);
 
                 //add an sequence flow between activity and paralle gateway(gateway incoming)
-                SequenceFlow incomingFlow = modelInstance.newInstance(SequenceFlow.class);
+                SequenceFlow newincomingFlow = modelInstance.newInstance(SequenceFlow.class);
                 do {
                     newID = Generate7ID.generate();
                 }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
-                incomingFlow.setId("Flow_"+newID);
+                newincomingFlow.setId("Flow_"+newID);
                 //parallelGatewayId++;
-                incomingFlow.setSource(modelInstance.getModelElementById(key));
-                incomingFlow.setTarget(parallelGateway);
+                newincomingFlow.setSource(modelInstance.getModelElementById(key));
+                newincomingFlow.setTarget(parallelGateway);
                 //process.addChildElement(incomingFlow);
 
-                modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(incomingFlow);
+                modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(newincomingFlow);
 
                 //Add to list
-                newSequenceFlow2.add(incomingFlow);
+                newSequenceFlow2.add(newincomingFlow);
 
                 //set incoming of the parallel gateway
-                parallelGateway.getIncoming().add(incomingFlow);
+                parallelGateway.getIncoming().add(newincomingFlow);
 
                 //add sequence flows between parallel gateway and activity(gateway outcoming)
                 for (SequenceFlow outgoingFlow : entry.getValue()) {
@@ -232,7 +230,7 @@ public class AddAndGateway {
                     newOutgoingFlow.setTarget(outgoingFlow.getTarget());
                     process.addChildElement(newOutgoingFlow);
 
-                    modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(incomingFlow);
+                    modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(newincomingFlow);
 
                     //Add to List
                     newSequenceFlow2.add(newOutgoingFlow);
@@ -296,8 +294,10 @@ public class AddAndGateway {
 
 
             }
-            //parallelGatewayId++;
         }
 
+
     }
+
+
 }
