@@ -29,7 +29,7 @@ public class AddAndGateway {
         //Traversal All Sequence Flow
         for (SequenceFlow flow : process.getChildElementsByType(SequenceFlow.class)) {
             Collection<SequenceFlow> target_collection = new ArrayList<>();
-            Collection<SequenceFlow> source_collection = new ArrayList<>();
+            //Collection<SequenceFlow> source_collection = new ArrayList<>();
             //Target Map
             //if key exists
             if(Target_map.containsKey(flow.getAttributeValue("targetRef")))
@@ -43,37 +43,15 @@ public class AddAndGateway {
                 target_collection.add(flow);
                 Target_map.put(flow.getAttributeValue("targetRef"), target_collection);
             }
-
-            //Source_Map
-            if(Source_map.containsKey(flow.getAttributeValue("sourceRef")))
-            {
-                source_collection = Source_map.get(flow.getAttributeValue("sourceRef"));
-                source_collection.add(flow);
-                Source_map.put(flow.getAttributeValue("sourceRef"), source_collection);
-            }
-            else
-            {
-                source_collection.add(flow);
-                Source_map.put(flow.getAttributeValue("sourceRef"), source_collection);
-            }
-
         }
         //iterate Target Map and Source Map
         //Target Map: activity income sequence flow
-        //Source Map: activity outcome sequence flow
         System.out.println("Target Map");
         for (Map.Entry<String, Collection<SequenceFlow>> entry : Target_map.entrySet()) {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
             System.out.println(key + " : " + value.size());
         }
-        System.out.println("Source Map");
-        for (Map.Entry<String, Collection<SequenceFlow>> entry : Source_map.entrySet()) {
-            String key = entry.getKey();
-            Collection<SequenceFlow> value = entry.getValue();
-            System.out.println(key + " : " + value.size());
-        }
-
 
         //Target_map:Add gateway and sequenceflow
         for (Map.Entry<String, Collection<SequenceFlow>> entry : Target_map.entrySet()) {
@@ -104,8 +82,6 @@ public class AddAndGateway {
                 //Add to list
                 newSequenceFlow.add(outGoing);
                 //set incoming of the preelement
-                //Activity targetActivity = modelInstance.getModelElementById(key);
-                //targetActivity.getIncoming().add(outGoing);
                 AddIncomingOrOutcoming.AddIncomingToElement(modelInstance,key,outGoing);
 
                 //set outgoing of the parallel gateway
@@ -129,8 +105,6 @@ public class AddAndGateway {
 
                     //set outgoing of the preelement
                     AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance, incomingFlow.getSource().getId(), newIncmoingFlow);
-
-
                     //set incoming of the parallel gateway
                     parallelGateway.getIncoming().add(newIncmoingFlow);
                 }
@@ -187,6 +161,29 @@ public class AddAndGateway {
 
                 }
             }
+        }
+
+        //
+        for (SequenceFlow flow : process.getChildElementsByType(SequenceFlow.class)) {
+            Collection<SequenceFlow> source_collection = new ArrayList<>();
+            if(Source_map.containsKey(flow.getAttributeValue("sourceRef")))
+            {
+                source_collection = Source_map.get(flow.getAttributeValue("sourceRef"));
+                source_collection.add(flow);
+                Source_map.put(flow.getAttributeValue("sourceRef"), source_collection);
+            }
+            else
+            {
+                source_collection.add(flow);
+                Source_map.put(flow.getAttributeValue("sourceRef"), source_collection);
+            }
+
+        }
+        System.out.println("Source Map");
+        for (Map.Entry<String, Collection<SequenceFlow>> entry : Source_map.entrySet()) {
+            String key = entry.getKey();
+            Collection<SequenceFlow> value = entry.getValue();
+            System.out.println(key + " : " + value.size());
         }
 
         //Source_map:Add gateway and sequenceflow

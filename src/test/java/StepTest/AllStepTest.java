@@ -58,7 +58,7 @@ public class AllStepTest {
             //step 3 delete elements
             System.out.println("*************************");
             System.out.println("step 3");
-            //DeleteElement.delete(modelInstance);
+            DeleteElement.delete(modelInstance);
             //delete one incoming and one outgoing flow
             Delete121Gateway.delete(modelInstance);
             // Delete Repeat Flow
@@ -73,8 +73,8 @@ public class AllStepTest {
             System.out.println("*************************");
             System.out.println("step 4");
             File file = new File("models/processModel.bpmn");
-            Process process = BPMN2Reader.parse(file);
-            BpmnModelInstance modelInstance1 = Bpmn.readModelFromFile(file);
+            Process process = BPMN2Reader.parse(step3output);
+            BpmnModelInstance modelInstance1 = Bpmn.readModelFromFile(step3output);
             Map<String, MyDataObject> datamap = DataObjectStore.storeinname(modelInstance1);
             process.setName("process2json");
             Restructurer str = new Restructurer(process);
