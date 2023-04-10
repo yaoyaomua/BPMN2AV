@@ -20,7 +20,7 @@ public class deleteGatewayTest {
     @Test
     public void gatewayTest2(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram5.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (7).bpmn"));
             Delete121Gateway.delete(bpmnModelInstance);
             File outputFile = new File("models/output1.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);

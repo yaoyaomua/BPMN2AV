@@ -26,17 +26,17 @@ public class DeleteElement {
     public static void delete(BpmnModelInstance modelInstance){
 
         List<NoAssociationTask> tasksToDelete = new ArrayList<>();
-        List<String> starts = new ArrayList<>();
-        List<String> ends = new ArrayList<>();
+//        List<String> starts = new ArrayList<>();
+//        List<String> ends = new ArrayList<>();
 
 
         //mark start event and end event
-        for (StartEvent startEvent: modelInstance.getModelElementsByType(StartEvent.class)){
-            starts.add(startEvent.getId());
-        }
-        for (EndEvent endEvent: modelInstance.getModelElementsByType(EndEvent.class)){
-            ends.add(endEvent.getId());
-        }
+//        for (StartEvent startEvent: modelInstance.getModelElementsByType(StartEvent.class)){
+//            starts.add(startEvent.getId());
+//        }
+//        for (EndEvent endEvent: modelInstance.getModelElementsByType(EndEvent.class)){
+//            ends.add(endEvent.getId());
+//        }
 
         //mark irrelevant elements by check the Associations of the task
         for(Task task: modelInstance.getModelElementsByType(Task.class)){
@@ -128,8 +128,11 @@ public class DeleteElement {
                     modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(src2tgt);
 
                     //add outgoing
-                    if( starts.contains(src)){
+                    if(modelInstance.getModelElementById(src) instanceof StartEvent){
                         StartEvent srcAc = modelInstance.getModelElementById(src);
+                        srcAc.getOutgoing().add(src2tgt);
+                    }else if (modelInstance.getModelElementById(src) instanceof Gateway){
+                        Gateway srcAc = modelInstance.getModelElementById(src);
                         srcAc.getOutgoing().add(src2tgt);
                     }else {
                         Task srcAc = modelInstance.getModelElementById(src);
@@ -137,8 +140,11 @@ public class DeleteElement {
                     }
 
                     //add incoming
-                    if ( ends.contains(tgt)){
+                    if ( modelInstance.getModelElementById(tgt) instanceof EndEvent){
                         EndEvent tgtAc = modelInstance.getModelElementById(tgt);
+                        tgtAc.getIncoming().add(src2tgt);
+                    }else if (modelInstance.getModelElementById(tgt) instanceof  Gateway){
+                        Gateway tgtAc = modelInstance.getModelElementById(tgt);
                         tgtAc.getIncoming().add(src2tgt);
                     }else {
                         Task tgtAc = modelInstance.getModelElementById(tgt);
