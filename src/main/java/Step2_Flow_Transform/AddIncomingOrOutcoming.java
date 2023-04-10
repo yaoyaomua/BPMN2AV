@@ -13,23 +13,23 @@ public class AddIncomingOrOutcoming {
         {
             case "exclusiveGateway":
                 Gateway sourceAGateway = modelInstance.getModelElementById(elementId);
-                sourceAGateway.getOutgoing().add(newOutgoingFlow);
+                sourceAGateway.getIncoming().add(newOutgoingFlow);
                 break;
             case "parallelGateway":
                 Gateway sourceparallelGateway = modelInstance.getModelElementById(elementId);
-                sourceparallelGateway.getOutgoing().add(newOutgoingFlow);
+                sourceparallelGateway.getIncoming().add(newOutgoingFlow);
                 break;
             case "task":
                 Task sourceTask = modelInstance.getModelElementById(elementId);
-                sourceTask.getOutgoing().add(newOutgoingFlow);
+                sourceTask.getIncoming().add(newOutgoingFlow);
                 break;
             case "startEvent":
                 StartEvent sourcestartEvent = modelInstance.getModelElementById(elementId);
-                sourcestartEvent.getOutgoing().add(newOutgoingFlow);
+                sourcestartEvent.getIncoming().add(newOutgoingFlow);
                 break;
             case "endEvent":
                 EndEvent sourceendEvent = modelInstance.getModelElementById(elementId);
-                sourceendEvent.getOutgoing().add(newOutgoingFlow);
+                sourceendEvent.getIncoming().add(newOutgoingFlow);
                 break;
             default:
                 System.out.println("Type error!");
