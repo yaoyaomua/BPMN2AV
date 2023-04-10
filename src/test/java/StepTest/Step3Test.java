@@ -1,3 +1,5 @@
+package StepTest;
+
 import Step3_Delete_Element.Delete121Gateway;
 import Step3_Delete_Element.DeleteElement;
 import org.camunda.bpm.model.bpmn.Bpmn;
@@ -7,7 +9,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-public class deleteGatewayTest {
+public class Step3Test {
 
     @Test
     public void gatewaytest1(){
@@ -20,8 +22,20 @@ public class deleteGatewayTest {
     @Test
     public void gatewayTest2(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (7).bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/output1.bpmn"));
             Delete121Gateway.delete(bpmnModelInstance);
+            File outputFile = new File("models/output1.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test4(){
+        try {
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (9).bpmn"));
+            DeleteElement.delete(bpmnModelInstance);
             File outputFile = new File("models/output1.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
