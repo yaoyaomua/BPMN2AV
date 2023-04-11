@@ -20,7 +20,7 @@ public class Step4Test {
 
     @Test
     public void test1() throws Exception {
-        File file = new File("models/diagram.bpmn");
+        File file = new File("models/diagram (12).bpmn");
         Process process = BPMN2Reader.parse(file);
 //        DataObjectStore.store(new File("models/acyclic/model9214.bpmn"));
         BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);

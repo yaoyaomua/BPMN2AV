@@ -17,7 +17,7 @@ public class DataObjectStore {
 
     }
     public static Map<String,MyDataObject> storeinname(BpmnModelInstance modelInstance){
-//        BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
+//      BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
         Map<String,MyDataObject> n2do = new HashMap<>();
         Map<String,MyDataObject> id2do = new HashMap<>();
 
@@ -68,6 +68,16 @@ public class DataObjectStore {
 //                String targetReference = dataOutputAssociation.getAttributeValue("targetRef");
 //                System.out.println("1111111111111111111" + dataOutputAssociation.getTextContent());
 
+            }
+        }
+
+        //store state
+        for (Association association: modelInstance.getModelElementsByType(Association.class)){
+            String src = association.getSource().getId();
+            if (id2do.containsKey(src)){
+                id2do.get(src).setAssociationID(association.getId());
+                id2do.get(src).setTextID(association.getTarget().getId());
+                id2do.get(src).setText(association.getTarget().getTextContent());
             }
         }
 //        System.out.println(n2do);
@@ -127,6 +137,17 @@ public class DataObjectStore {
 
             }
         }
+
+        //store state
+        for (Association association: modelInstance.getModelElementsByType(Association.class)){
+            String src = association.getSource().getId();
+            if (id2do.containsKey(src)){
+                id2do.get(src).setAssociationID(association.getId());
+                id2do.get(src).setTextID(association.getTarget().getId());
+                id2do.get(src).setText(association.getTarget().getTextContent());
+            }
+        }
+
 
         return id2do;
     }

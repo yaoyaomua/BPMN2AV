@@ -6,6 +6,36 @@ public class MyDataObject{
     private String doName;
     private String sourceRef;
     private String targetRef;
+    private String associationID;
+    private String textID;
+
+    public String getTextID() {
+        return textID;
+    }
+
+    public void setTextID(String textID) {
+        this.textID = textID;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    private String text;
+
+    public String getAssociationID() {
+        return associationID;
+    }
+
+    public void setAssociationID(String associationID) {
+        this.associationID = associationID;
+    }
+
+
 
     public MyDataObject(String doID, String dorefID, String doName) {
         this.doID = doID;

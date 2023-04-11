@@ -18,6 +18,8 @@ public class DataObjectAddToJSON {
                 jData.put("refid", myDataObjectEntry.getValue().getDorefID());
                 jData.put("src", myDataObjectEntry.getValue().getSourceRef());
                 jData.put("tgt", myDataObjectEntry.getValue().getTargetRef());
+                System.out.println(myDataObjectEntry.getValue().getText());
+                jData.put("state",myDataObjectEntry.getValue().getText());
                 System.out.println(jData);
                 data_objects.put(jData);
             }
