@@ -97,69 +97,18 @@
     <bpmn:sequenceFlow id="Flow_11ryvvc" sourceRef="Gateway_0a7ptd8" targetRef="Event_0jszom8"/>
   </process>
     
-  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
         
-    <bpmndi:BPMNPlane id="BpmnPlane_1">
-
+    <bpmndi:BPMNPlane id="BPMNPlane_1">
+            
       <bpmndi:BPMNShape id="Participant_12l1mze_di" isHorizontal="true">
                 
         <dc:Bounds height="250" width="1014" x="156" y="62"/>
                 
-        <omgdi:waypoint x="280" y="270"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_1eoojrj" id="Flow_1eoojrj_di">
-                
-        <omgdi:waypoint x="380" y="270"/>
-                
-        <omgdi:waypoint x="435" y="270"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_0oc8akv" id="Flow_0oc8akv_di">
-                
-        <omgdi:waypoint x="485" y="270"/>
-                
-        <omgdi:waypoint x="540" y="270"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_1uextuj" id="Flow_1uextuj_di">
-                
-        <omgdi:waypoint x="460" y="295"/>
-                
-        <omgdi:waypoint x="460" y="380"/>
-                
-        <omgdi:waypoint x="540" y="380"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_003mxpx" id="Flow_003mxpx_di">
-                
-        <omgdi:waypoint x="640" y="380"/>
-                
-        <omgdi:waypoint x="712" y="380"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_1bnooth" id="Flow_1bnooth_di">
-                
-        <omgdi:waypoint x="640" y="270"/>
-                
-        <omgdi:waypoint x="671" y="270"/>
-                
-        <omgdi:waypoint x="671" y="380"/>
-                
-        <omgdi:waypoint x="712" y="380"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNShape bpmnElement="Event_00ce2f8" id="Event_00ce2f8_di">
-                
-        <omgdc:Bounds height="36" width="36" x="192" y="252"/>
+        <bpmndi:BPMNLabel/>
               
       </bpmndi:BPMNShape>
+            
       <bpmndi:BPMNShape bpmnElement="StartEvent_0hzesop" id="_BPMNShape_StartEvent_2">
                 
         <dc:Bounds height="36" width="36" x="222" y="162"/>
@@ -368,4 +317,4 @@
       
   </bpmndi:BPMNDiagram>
   
-</definitions>
+</bpmn:definitions>
