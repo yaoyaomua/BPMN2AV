@@ -8,6 +8,7 @@ import Step3_Delete_Element.DeleteRepeatFlow;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.MessageFlow;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,11 +16,11 @@ import java.io.InputStream;
 import java.util.Collection;
 
 public class Step2Test {
-
+    @Test
     public void addTest(){
         try {
             //Read bpmn file
-            String filePath = "Data/diagramnew.bpmn";
+            String filePath = "models/Steps/step1.bpmn";
             BpmnModelInstance modelInstance;
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
@@ -35,7 +36,7 @@ public class Step2Test {
             // Delete Repeat Flow
             //DeleteRepeatFlow.delete(modelInstance);
             // Store bpmn file
-            File outputFile = new File("Data/mergedModelInstance.bpmn");
+            File outputFile = new File("models/Steps/step2result.bpmn");
             Bpmn.writeModelToFile(outputFile, modelInstance);
             // Delete empty lines
         } catch (Exception e) {

@@ -2,6 +2,7 @@ package StepTest;
 
 import Step3_Delete_Element.Delete121Gateway;
 import Step3_Delete_Element.DeleteElement;
+import Step3_Delete_Element.DeleteRepeatFlow;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
@@ -32,11 +33,35 @@ public class Step3Test {
     }
 
     @Test
-    public void test4(){
+    public void deleteElementTest4(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (9).bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3.bpmn"));
             DeleteElement.delete(bpmnModelInstance);
-            File outputFile = new File("models/output1.bpmn");
+            File outputFile = new File("models/Steps/step3result.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void delete121GatewayTest(){
+        try {
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3result.bpmn"));
+            Delete121Gateway.delete(bpmnModelInstance);
+            File outputFile = new File("models/Steps/step3_121_result.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void deleteRepeatedFlows(){
+        try {
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_repeated_flows.bpmn"));
+            DeleteRepeatFlow.delete(bpmnModelInstance);
+            File outputFile = new File("models/Steps/step3_repeated_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
             e.printStackTrace();
