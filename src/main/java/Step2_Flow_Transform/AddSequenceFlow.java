@@ -32,9 +32,6 @@ public class AddSequenceFlow {
             System.out.println("message flow targetRef: " + messageflow.getTarget().getId());
             //whether include start event or end event
             //set the width and height of the new activity
-            //Bounds newBounds = modelInstance.newInstance(Bounds.class);
-            //newBounds.setWidth(100.0);
-            //7newBounds.setHeight(80.0);
             if(messageflow.getTarget().getElementType().getTypeName().equals("startEvent"))
             {
                 StartEvent startevent = modelInstance.getModelElementById(messageflow.getTarget().getId());
@@ -43,9 +40,6 @@ public class AddSequenceFlow {
                 task.setId(startevent.getId());
                 startevent.replaceWithElement(task);
                 messageflow.setTarget(task);
-                //newBounds.setX(task.getDiagramElement().getBounds().getX());
-                //newBounds.setY(task.getDiagramElement().getBounds().getY());
-                //task.getDiagramElement().setBounds(newBounds);
             }
             if(messageflow.getSource().getElementType().getTypeName().equals("intermediateThrowEvent"))
             {
@@ -56,17 +50,12 @@ public class AddSequenceFlow {
                 task.setId(intermediateThrowEvent.getId());
                 intermediateThrowEvent.replaceWithElement(task);
                 messageflow.setSource(task);
-                //newBounds.setX(task.getDiagramElement().getBounds().getX());
-                //newBounds.setY(task.getDiagramElement().getBounds().getY());
-                //task.getDiagramElement().setBounds(newBounds);
             }
             // Create a new sequence flow element
             SequenceFlow sequenceFlow = modelInstance.newInstance(SequenceFlow.class);
             sequenceFlow.setId(messageflow.getId());
-            //sequenceFlow.setName("New Sequence Flow");
             sequenceFlow.setSource(modelInstance.getModelElementById(messageflow.getSource().getId()));
             sequenceFlow.setTarget(modelInstance.getModelElementById(messageflow.getTarget().getId()));
-            //sequenceFlow.builder();
             // Add the sequence flow element to the model instance
             modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(sequenceFlow);
             // Add bpmnelement to bpmnEdge
