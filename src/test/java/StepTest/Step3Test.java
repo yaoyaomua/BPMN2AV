@@ -34,14 +34,14 @@ public class Step3Test {
 
     @Test
     public void deleteElementTest4(){
-        try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3.bpmn"));
-            DeleteElement.delete(bpmnModelInstance);
-            File outputFile = new File("models/Steps/step3result.bpmn");
-            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (15).bpmn"));
+//            DeleteElement.delete(bpmnModelInstance);
+//            File outputFile = new File("models/result.bpmn");
+//            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+//        }catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Test

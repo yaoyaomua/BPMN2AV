@@ -59,7 +59,7 @@ public class AllStepTest {
             System.out.println("*************************");
             System.out.println("step 3");
             //DeleteElement.delete(modelInstance);
-            DeleteElement.delete(modelInstance);
+//            DeleteElement.delete(modelInstance);
             //delete one incoming and one outgoing flow
             Delete121Gateway.delete(modelInstance);
             // Delete Repeat Flow
