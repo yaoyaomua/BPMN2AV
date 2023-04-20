@@ -1,5 +1,6 @@
-package Step3_Delete_Element;
+package Step4_Well_Structure;
 
+import Step3_Delete_Element.Generate7ID;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;

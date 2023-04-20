@@ -2,9 +2,6 @@ package StepTest;
 
 import Step1_Delete_Pool.DeletePool;
 import Step1_Delete_Pool.MergeProcess;
-import Step2_Flow_Transform.AddAndGateway;
-import Step2_Flow_Transform.AddSequenceFlow;
-import Step3_Delete_Element.DeleteRepeatFlow;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.MessageFlow;

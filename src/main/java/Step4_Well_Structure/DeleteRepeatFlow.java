@@ -1,4 +1,4 @@
-package Step3_Delete_Element;
+package Step4_Well_Structure;
 
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;

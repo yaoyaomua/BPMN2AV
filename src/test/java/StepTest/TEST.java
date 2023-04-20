@@ -1,6 +1,7 @@
 package StepTest;
 
 import Step3_Delete_Element.DataTextState;
+import Step3_Delete_Element.DeleteDataObject;
 import Step3_Delete_Element.DeleteElement;
 import Step3_Delete_Element.DeleteEvent;
 import org.camunda.bpm.model.bpmn.Bpmn;
@@ -39,7 +40,7 @@ public class TEST {
 
         System.out.println("***************start get text state******************");
         String artifact = "DATA1";
-        HashMap<String,Boolean> textState = DataTextState.getText(bpmnModelInstance);
+        HashMap<String,String> textState = DataTextState.getText(bpmnModelInstance);
         System.out.println(textState.toString());
         System.out.println("***************start delete activity******************");
 
@@ -67,6 +68,29 @@ public class TEST {
     public void test3(){
         BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (27).bpmn"));
         DeleteEvent.delete(bpmnModelInstance);
+        try {
+            File outputFile = new File("models/result.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test4(){
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (29).bpmn"));
+        for (BoundaryEvent event : bpmnModelInstance.getModelElementsByType(BoundaryEvent.class)){
+            System.out.println(event.getId());
+        }
+    }
+
+    @Test
+    public void test5(){
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (31).bpmn"));
+        HashMap<String,String> textData = DataTextState.getText(bpmnModelInstance);
+        HashSet<String> set = DataTextState.getAssociatedDataObject(bpmnModelInstance,"DATA1");
+        System.out.println(set.toString());
+        DeleteDataObject.delete(bpmnModelInstance,set,textData);
         try {
             File outputFile = new File("models/result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);

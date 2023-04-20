@@ -1,8 +1,7 @@
 package StepTest;
 
-import Step3_Delete_Element.Delete121Gateway;
-import Step3_Delete_Element.DeleteElement;
-import Step3_Delete_Element.DeleteRepeatFlow;
+import Step4_Well_Structure.Delete121Gateway;
+import Step4_Well_Structure.DeleteRepeatFlow;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.Gateway;
