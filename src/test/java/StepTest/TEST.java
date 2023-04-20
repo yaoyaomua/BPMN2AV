@@ -1,9 +1,6 @@
 package StepTest;
 
-import Step3_Delete_Element.DataTextState;
-import Step3_Delete_Element.DeleteDataObject;
-import Step3_Delete_Element.DeleteElement;
-import Step3_Delete_Element.DeleteEvent;
+import Step3_Delete_Element.*;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
@@ -91,6 +88,30 @@ public class TEST {
         HashSet<String> set = DataTextState.getAssociatedDataObject(bpmnModelInstance,"DATA1");
         System.out.println(set.toString());
         DeleteDataObject.delete(bpmnModelInstance,set,textData);
+        try {
+            File outputFile = new File("models/result.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test6(){
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_add_super_start.bpmn"));
+        AddSuperStartEndEvent.addStart(bpmnModelInstance);
+        try {
+            File outputFile = new File("models/AddStartResult.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test7(){
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (34).bpmn"));
+        AddSuperStartEndEvent.addEnd(bpmnModelInstance);
         try {
             File outputFile = new File("models/result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
