@@ -21,7 +21,8 @@ public class Step1Test {
     public void DeletePoolMergeProcessTest(){
         try {
             //Read bpmn file
-            String filePath = "models/Steps/step1.bpmn";
+            //String filePath = "models/Steps/step1.bpmn";
+            String filePath = "models/subprocesstest.bpmn";
             BpmnModelInstance modelInstance;
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
@@ -38,7 +39,8 @@ public class Step1Test {
 //            DeleteRepeatFlow.delete(modelInstance);
 
             // Store bpmn file
-            File outputFile = new File("models/Steps/step1result.bpmn");
+            //File outputFile = new File("models/Steps/step1result.bpmn");
+            File outputFile = new File("models/subprocesstestResult.bpmn");
             Bpmn.writeModelToFile(outputFile, modelInstance);
             // Delete empty lines
         } catch (Exception e) {

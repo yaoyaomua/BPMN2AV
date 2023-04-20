@@ -27,8 +27,8 @@ public class DeletePool {
                 Collaboration collaboration_element = (Collaboration) element;
                 collaborationToDelete = collaboration_element;
             }
-
         }
+
         // delete pool
         if (collaborationToDelete != null) {
             collaborationToDelete.getParentElement().removeChildElement(collaborationToDelete);

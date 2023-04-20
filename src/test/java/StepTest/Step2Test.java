@@ -20,7 +20,8 @@ public class Step2Test {
     public void addTest(){
         try {
             //Read bpmn file
-            String filePath = "models/Steps/step1.bpmn";
+            //String filePath = "models/Steps/step1.bpmn";
+            String filePath = "models/subprocesstest.bpmn";
             BpmnModelInstance modelInstance;
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
@@ -32,11 +33,11 @@ public class Step2Test {
             // Covert Message Flow to Sequence Flow
             AddSequenceFlow.add(modelInstance,messageflows);
             // Add And-GateWay
-            AddAndGateway.add(modelInstance);
+            //AddAndGateway.add(modelInstance);
             // Delete Repeat Flow
             //DeleteRepeatFlow.delete(modelInstance);
             // Store bpmn file
-            File outputFile = new File("models/Steps/step2result.bpmn");
+            File outputFile = new File("models/subprocesstestStep2Result.bpmn");
             Bpmn.writeModelToFile(outputFile, modelInstance);
             // Delete empty lines
         } catch (Exception e) {
