@@ -4,11 +4,7 @@ import Step1_Delete_Pool.DeletePool;
 import Step1_Delete_Pool.MergeProcess;
 import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
-import Step4_Well_Structure.Delete121Gateway;
-import Step4_Well_Structure.DeleteRepeatFlow;
-import Step4_Well_Structure.DataObjectAddToJSON;
-import Step4_Well_Structure.DataObjectStore;
-import Step4_Well_Structure.MyDataObject;
+import Step4_Well_Structure.*;
 import de.hpi.bpt.process.Process;
 import ee.ut.bpstruct2.Restructurer;
 import ee.ut.bpstruct2.util.BPMN2Reader;
@@ -63,7 +59,8 @@ public class AllStepTest {
             Delete121Gateway.delete(modelInstance);
             // Delete Repeat Flow
             DeleteRepeatFlow.delete(modelInstance);
-
+            // Delete empty subprocess
+            DeleteEmptySubprocess.delete(modelInstance);
             //after 3 steps, we could get a process model
             //output process model
             File step3output= new File("models/step3output.bpmn");

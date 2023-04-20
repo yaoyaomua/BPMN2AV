@@ -32,7 +32,9 @@ public class Step2Test {
             // Covert Message Flow to Sequence Flow
             AddSequenceFlow.add(modelInstance,messageflows);
             // Add And-GateWay
-            //AddAndGateway.add(modelInstance);
+            AddAndGateway.add(modelInstance);
+            // Delete empty subprocess
+            //DeleteEmptySubprocess.delete(modelInstance);
             // Delete Repeat Flow
             //DeleteRepeatFlow.delete(modelInstance);
             // Store bpmn file
