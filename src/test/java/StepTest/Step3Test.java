@@ -1,5 +1,7 @@
 package StepTest;
 
+import Step3_Delete_Element.DeleteElement;
+import Step3_Delete_Element.DeleteEvent;
 import Step4_Well_Structure.DeleteEmptySubprocess;
 import Step4_Well_Structure.Delete121Gateway;
 import Step4_Well_Structure.DeleteRepeatFlow;
@@ -74,6 +76,18 @@ public class Step3Test {
             BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_empty_subprocess.bpmn"));
             DeleteEmptySubprocess.delete(bpmnModelInstance);
             File outputFile = new File("models/Steps/step3_empty_subprocess_result.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void deleteBoundaryEvent(){
+        try {
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_delete_boudary_event.bpmn"));
+            DeleteElement.delete(bpmnModelInstance,"truck");
+            File outputFile = new File("models/Steps/step3_delete_boudary_event_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
             e.printStackTrace();
