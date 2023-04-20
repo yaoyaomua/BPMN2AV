@@ -70,13 +70,7 @@ public class DeleteElement {
 
         }
 
-        // Boundary Event
-        /*
-        System.out.println("number of task to delete before processing the boundary event:" + tasksToDelete.size());
-        tasksToDelete = DeleteBoundaryEvent.delete(modelInstance,tasksToDelete);
-*/
-
-        System.out.println("number of task to delete:" + tasksToDelete.size());
+        System.out.println("number of taske to delete:" + tasksToDelete.size());
 //        System.out.println(modelInstance.getModelElementById("Activity_1mvshxv").getElementType().getTypeName());
 
         for (NoAssociationTask todelete : tasksToDelete){

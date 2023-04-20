@@ -1,7 +1,6 @@
 package StepTest;
 
-import Step3_Delete_Element.DeleteElement;
-import Step3_Delete_Element.DeleteEvent;
+import Step3_Delete_Element.AddSuperStartEndEvent;
 import Step4_Well_Structure.DeleteEmptySubprocess;
 import Step4_Well_Structure.Delete121Gateway;
 import Step4_Well_Structure.DeleteRepeatFlow;
@@ -83,11 +82,23 @@ public class Step3Test {
     }
 
     @Test
-    public void deleteBoundaryEvent(){
+    public void AddSuperStart(){
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_add_super_start.bpmn"));
+        AddSuperStartEndEvent.addStart(bpmnModelInstance);
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_delete_boudary_event.bpmn"));
-            DeleteElement.delete(bpmnModelInstance,"truck");
-            File outputFile = new File("models/Steps/step3_delete_boudary_event_result.bpmn");
+            File outputFile = new File("models/AddStartResult.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void AddSuperEnd(){
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_add_super_end.bpmn"));
+        AddSuperStartEndEvent.addEnd(bpmnModelInstance);
+        try {
+            File outputFile = new File("models/AddEndResult.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
             e.printStackTrace();
