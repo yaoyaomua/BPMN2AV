@@ -18,23 +18,25 @@ public class DeletePool {
         Definitions definitions = modelInstance.getDefinitions();
         //Collaboration
         Collaboration collaboration = modelInstance.getModelElementsByType(Collaboration.class).iterator().next();
-        //Get all messageflow
-        Collection<MessageFlow> messageflows = collaboration.getMessageFlows();
+        if(collaboration != null) {
+            //Get all messageflow
+            Collection<MessageFlow> messageflows = collaboration.getMessageFlows();
 
-        Collaboration collaborationToDelete = null;
-        for (ModelElementInstance element : definitions.getRootElements()) {
-            if (element instanceof Collaboration) {
-                Collaboration collaboration_element = (Collaboration) element;
-                collaborationToDelete = collaboration_element;
+            Collaboration collaborationToDelete = null;
+            for (ModelElementInstance element : definitions.getRootElements()) {
+                if (element instanceof Collaboration) {
+                    Collaboration collaboration_element = (Collaboration) element;
+                    collaborationToDelete = collaboration_element;
+                }
             }
+
+            // delete pool
+            if (collaborationToDelete != null) {
+                collaborationToDelete.getParentElement().removeChildElement(collaborationToDelete);
+            }
+            return messageflows;
         }
 
-        // delete pool
-        if (collaborationToDelete != null) {
-            collaborationToDelete.getParentElement().removeChildElement(collaborationToDelete);
-        }
-
-        return messageflows;
-
+        return  null;
     }
 }

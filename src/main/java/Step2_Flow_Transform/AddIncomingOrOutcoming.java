@@ -11,6 +11,10 @@ public class AddIncomingOrOutcoming {
         System.out.println("incoming:"+elementType);
         switch (elementType)
         {
+            case "inclusiveGateway":
+                Gateway sourceinclusiveGateway = modelInstance.getModelElementById(elementId);
+                sourceinclusiveGateway.getIncoming().add(newOutgoingFlow);
+                break;
             case "exclusiveGateway":
                 Gateway sourceAGateway = modelInstance.getModelElementById(elementId);
                 sourceAGateway.getIncoming().add(newOutgoingFlow);
@@ -30,6 +34,10 @@ public class AddIncomingOrOutcoming {
             case "endEvent":
                 EndEvent sourceendEvent = modelInstance.getModelElementById(elementId);
                 sourceendEvent.getIncoming().add(newOutgoingFlow);
+                break;
+            case "subProcess":
+                SubProcess sourcesubProcess = modelInstance.getModelElementById(elementId);
+                sourcesubProcess.getIncoming().add(newOutgoingFlow);
                 break;
             default:
                 System.out.println("Type error!");
@@ -63,6 +71,10 @@ public class AddIncomingOrOutcoming {
             case "endEvent":
                 EndEvent sourceendEvent = modelInstance.getModelElementById(elementId);
                 sourceendEvent.getOutgoing().add(newIncmoingFlow);
+                break;
+            case "subProcess":
+                SubProcess sourcesubprocess = modelInstance.getModelElementById(elementId);
+                sourcesubprocess.getOutgoing().add(newIncmoingFlow);
                 break;
             default:
                 System.out.println("Type error!");
