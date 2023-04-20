@@ -41,6 +41,7 @@ public class DeleteEvent {
                 System.out.println("need delete : " + event.getId());
             }
         }
+
         for (IntermediateCatchEvent event : modelInstance.getModelElementsByType(IntermediateCatchEvent.class)){
             System.out.println(event.getId());
             if(event.getDataOutputAssociations().isEmpty()) {
