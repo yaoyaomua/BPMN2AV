@@ -48,6 +48,10 @@ public class AddIncomingOrOutcoming {
         System.out.println("outgoing:"+elementType);
         switch (elementType)
         {
+            case "inclusiveGateway":
+                Gateway sourceInclusiveGateway = modelInstance.getModelElementById(elementId);
+                sourceInclusiveGateway.getOutgoing().add(newIncmoingFlow);
+                break;
             case "exclusiveGateway":
                 Gateway sourceAGateway = modelInstance.getModelElementById(elementId);
                 sourceAGateway.getOutgoing().add(newIncmoingFlow);
