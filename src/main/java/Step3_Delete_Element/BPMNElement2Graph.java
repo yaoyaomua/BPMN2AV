@@ -15,10 +15,14 @@ public class BPMNElement2Graph {
     public static HashMap<String,String> map(BpmnModelInstance modelInstance){
         HashMap<String,String> element2graph = new HashMap<>();
         for(BpmnShape shape : modelInstance.getModelElementsByType(BpmnShape.class)){
-            element2graph.put(shape.getBpmnElement().getId(),shape.getId());
+            if (shape.getBpmnElement() != null) {
+                element2graph.put(shape.getBpmnElement().getId(), shape.getId());
+            }
         }
         for (BpmnEdge edge : modelInstance.getModelElementsByType(BpmnEdge.class)){
-            element2graph.put(edge.getBpmnElement().getId(),edge.getId());
+            if (edge.getBpmnElement() != null) {
+                element2graph.put(edge.getBpmnElement().getId(), edge.getId());
+            }
         }
         return element2graph;
     }

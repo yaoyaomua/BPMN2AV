@@ -17,7 +17,6 @@ public class DeleteElement {
     }
 
     public static void delete(BpmnModelInstance modelInstance, String artifact){
-
         HashMap<String,String> element2graph = BPMNElement2Graph.map(modelInstance);
         System.out.println(element2graph.toString());
 
@@ -72,7 +71,14 @@ public class DeleteElement {
         // Boundary Event
 /*
         System.out.println("number of task to delete before processing the boundary event:" + tasksToDelete.size());
-        tasksToDelete = DeleteBoundaryEvent.delete(modelInstance,tasksToDelete);
+        ElementToDelete elementstodelete;
+        elementstodelete = DeleteBoundaryEvent.delete(modelInstance,tasksToDelete);
+        tasksToDelete = elementstodelete.getTaskstodelete();
+        BpmnModelInstance newmodelInstance;
+        newmodelInstance = elementstodelete.getModelInstance();
+        System.out.println(modelInstance.toString());
+        element2graph = BPMNElement2Graph.map(newmodelInstance);
+        System.out.println(element2graph.toString());
 */
         System.out.println("number of taske to delete:" + tasksToDelete.size());
 //        System.out.println(modelInstance.getModelElementById("Activity_1mvshxv").getElementType().getTypeName());

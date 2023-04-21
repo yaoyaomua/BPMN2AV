@@ -15,14 +15,54 @@ import java.util.List;
 import java.util.*;
 
 public class DeleteBoundaryEvent {
-        public static List<NoAssociationTask> delete (BpmnModelInstance modelInstance, List<NoAssociationTask> tasksToDelete){
-            // Boundary blocking events <ActivityId,<EventIds>>
-            Map<String, Collection<BoundaryEvent>> blockingEvents = new HashMap<>();
-            // Boundary non-blocking events <ActivityId,<EventIds>>
-            Map<String, Collection<BoundaryEvent>> nonBlockingEvents = new HashMap<>();
+        public static void delete (BpmnModelInstance modelInstance, String artifact){
+            HashMap<String,String> element2graph = BPMNElement2Graph.map(modelInstance);
+            System.out.println(element2graph.toString());
+
+            List<NoAssociationTask> tasksToDelete = new ArrayList<>();
+//        for (Data)
+            //mark irrelevant elements by check the Associations of the task
+            for(Task task: modelInstance.getModelElementsByType(Task.class)){
+                Collection<DataInputAssociation> inputDataAssociations = task.getDataInputAssociations();
+//            System.out.println(inputDataAssociations.isEmpty());
+                Collection<DataOutputAssociation> outputDataAssociations = task.getDataOutputAssociations();
+                boolean isIrr = true;
+                for (DataInputAssociation input : inputDataAssociations){
+                    Collection<ItemAwareElement> sources = input.getSources();
+                    for (ItemAwareElement itemAwareElement : sources){
+                        DataObjectReference dataObjectReference = modelInstance.getModelElementById(itemAwareElement.getId());
+                        String dataName = dataObjectReference.getName();
+                        //check the data is the artifact or not?
+                        if (dataName.equals(artifact)){
+                            System.out.println(dataName.equals(artifact));
+                            isIrr = false;
+                        }
+                    }
+                }
+
+                for (DataOutputAssociation output : outputDataAssociations){
+                    String dataId = output.getTarget().getId();
+                    DataObjectReference dataObjectReference = modelInstance.getModelElementById(dataId);
+                    String dataName = dataObjectReference.getName();
+                    //check the data is the artifact or not?
+                    if (dataName.equals(artifact)){
+                        System.out.println(dataName.equals(artifact));
+                        isIrr = false;
+                    }
+                }
+
+                if (isIrr){
+                    NoAssociationTask nut = new NoAssociationTask(task.getId(),task);
+                    tasksToDelete.add(nut);
+                }
+                System.out.println("activity name: " + task.getName());
+                System.out.println("activity need delete? : " + isIrr);
+
+            }
+
             //
             List<NoAssociationTask> newDeleteList = new ArrayList<>();
-            Process process = modelInstance.getModelElementById("mergedProcess");
+            Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
             String newID;
             // Get all boundary events in process
             Collection<BoundaryEvent> allBoundaryEvents = modelInstance.getModelElementsByType(BoundaryEvent.class);
@@ -51,7 +91,7 @@ public class DeleteBoundaryEvent {
                             for (SequenceFlow taskIncoming : taskIncomings) {
                                 taskIncoming.setTarget(exclusiveGateway);
                                 //set outgoing of the pre element
-                                AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance, task.getId(), taskIncoming);
+                                AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance, taskIncoming.getSource().getId(), taskIncoming);
                                 //set incoming of the parallel gateway
                                 exclusiveGateway.getIncoming().add(taskIncoming);
                             }
@@ -74,6 +114,7 @@ public class DeleteBoundaryEvent {
                             //remove origin outgoing flow
                             for (SequenceFlow outgoingFlow : outgoingFlows) {
                                 if (modelInstance.getModelElementById(outgoingFlow.getId()) != null) {
+                                    modelInstance.getModelElementById(outgoingFlow.getDiagramElement().getId()).getParentElement().removeChildElement(modelInstance.getModelElementById(outgoingFlow.getDiagramElement().getId()));
                                     modelInstance.getModelElementById(outgoingFlow.getSource().getId()).removeChildElement(outgoingFlow);
                                     modelInstance.getModelElementById(outgoingFlow.getId()).getParentElement().removeChildElement(outgoingFlow);
                                 }
@@ -137,7 +178,7 @@ public class DeleteBoundaryEvent {
                             for (SequenceFlow taskIncoming : taskIncomings) {
                                 taskIncoming.setTarget(inclusiveGateway);
                                 //set outgoing of the pre element
-                                AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance, task.getId(), taskIncoming);
+                                AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance, taskIncoming.getSource().getId(), taskIncoming);
                                 //set incoming of the parallel gateway
                                 inclusiveGateway.getIncoming().add(taskIncoming);
                             }
@@ -160,6 +201,7 @@ public class DeleteBoundaryEvent {
                             //remove origin outgoing flow
                             for (SequenceFlow outgoingFlow : outgoingFlows) {
                                 if (modelInstance.getModelElementById(outgoingFlow.getId()) != null) {
+                                    modelInstance.getModelElementById(outgoingFlow.getDiagramElement().getId()).getParentElement().removeChildElement(modelInstance.getModelElementById(outgoingFlow.getDiagramElement().getId()));
                                     modelInstance.getModelElementById(outgoingFlow.getSource().getId()).removeChildElement(outgoingFlow);
                                     modelInstance.getModelElementById(outgoingFlow.getId()).getParentElement().removeChildElement(outgoingFlow);
                                 }
@@ -199,17 +241,19 @@ public class DeleteBoundaryEvent {
                                 CreateBPMNEdge.create(modelInstance, newFlow, gatewayX, gatewayY + gatewayHeight / 2, nextTaskX, nextTaskY);
                             }
                             //delete element
-                            boundaryEvent.getParentElement().removeChildElement(boundaryEvent);
+                            modelInstance.getModelElementById(task.getDiagramElement().getId()).getParentElement().removeChildElement(modelInstance.getModelElementById(task.getDiagramElement().getId()));
+                            modelInstance.getModelElementById(boundaryEvent.getDiagramElement().getId()).getParentElement().removeChildElement(modelInstance.getModelElementById(boundaryEvent.getDiagramElement().getId()));
                             task.getParentElement().removeChildElement(task);
+                            boundaryEvent.getParentElement().removeChildElement(boundaryEvent);
+
+
 
 
                         }
-                    } else {
-                        newDeleteList.add(taskToDelete);
                     }
 
                 }
             }
-            return newDeleteList;
+
         }
 }
