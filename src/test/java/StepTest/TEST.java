@@ -16,7 +16,7 @@ public class TEST {
 
     @Test
     public void test1(){
-        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (19).bpmn"));
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (41).bpmn"));
 //        for (DataState state:bpmnModelInstance.getModelElementsByType(DataState.class)) {
 //            System.out.println(state.getId());
 //        }
