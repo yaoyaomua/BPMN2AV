@@ -66,5 +66,11 @@ public class DeleteDataObject {
                 textDiagram.getParentElement().removeChildElement(textDiagram);
             }
         }
+
+        for (BpmnEdge edge : modelInstance.getModelElementsByType(BpmnEdge.class)){
+            if (edge.getBpmnElement() == null){
+                edge.getParentElement().removeChildElement(edge);
+            }
+        }
     }
 }
