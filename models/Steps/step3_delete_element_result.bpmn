@@ -15,14 +15,14 @@
             
     
     
-    <bpmn:sequenceFlow id="Flow_14t61zx" sourceRef="Event_1mxulqz" targetRef="myExclusiveGateway_osfvjws"/>
+    <bpmn:sequenceFlow id="Flow_14t61zx" sourceRef="Event_1mxulqz" targetRef="myExclusiveGateway_tmqcfjl"/>
             
     
         
     
     
     <bpmn:endEvent id="Event_09zku2w">
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_vfc16rb</incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_8nr826z</incoming>
                   
       
           
@@ -122,7 +122,7 @@
       <bpmn:incoming>Flow_0nre2r1</bpmn:incoming>
                   
       
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_v1ks3zt</incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_f9t5vtr</incoming>
                   
       
       <bpmn:outgoing>Flow_1aiatlo</bpmn:outgoing>
@@ -132,18 +132,18 @@
             
     
     
-    <exclusiveGateway xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" gatewayDirection="Unspecified" id="myExclusiveGateway_osfvjws">
+    <exclusiveGateway xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" gatewayDirection="Unspecified" id="myExclusiveGateway_tmqcfjl">
             
       <incoming>Flow_14t61zx</incoming>
             
-      <outgoing>Flow_v1ks3zt</outgoing>
-      <outgoing>Flow_vfc16rb</outgoing>
+      <outgoing>Flow_f9t5vtr</outgoing>
+      <outgoing>Flow_8nr826z</outgoing>
             
     
     </exclusiveGateway>
         
-    <sequenceFlow xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Flow_v1ks3zt" sourceRef="myExclusiveGateway_osfvjws" targetRef="Gateway_034rvav"/>
-    <sequenceFlow id="Flow_vfc16rb" sourceRef="myExclusiveGateway_osfvjws" targetRef="Event_09zku2w" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Flow_f9t5vtr" sourceRef="myExclusiveGateway_tmqcfjl" targetRef="Gateway_034rvav"/>
+    <sequenceFlow id="Flow_8nr826z" sourceRef="myExclusiveGateway_tmqcfjl" targetRef="Event_09zku2w" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
         
       
   
@@ -344,20 +344,20 @@
       
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNShape bpmnElement="myExclusiveGateway_osfvjws" id="myExclusiveGateway_osfvjws_di">
+      <bpmndi:BPMNShape bpmnElement="myExclusiveGateway_tmqcfjl" id="myExclusiveGateway_tmqcfjl_di">
                 
         <dc:Bounds height="50.0" width="50.0" x="240.0" y="80.0"/>
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_v1ks3zt" id="Flow_v1ks3zt_di" sourceElement="myExclusiveGateway_osfvjws_di" targetElement="Gateway_13vsk73_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_f9t5vtr" id="Flow_f9t5vtr_di" sourceElement="myExclusiveGateway_tmqcfjl_di" targetElement="Gateway_13vsk73_di">
                 
         <di:waypoint x="240.0" y="105.0"/>
                 
         <di:waypoint x="245.0" y="225.0"/>
               
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow_vfc16rb" id="Flow_vfc16rb_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_8nr826z" id="Flow_8nr826z_di">
         <di:waypoint x="265.0" y="105.0"/>
         <di:waypoint x="562.0" y="120.0"/>
       </bpmndi:BPMNEdge>
