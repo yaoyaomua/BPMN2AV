@@ -62,29 +62,31 @@ public class Delete121Gateway {
                 System.out.println(tgt);
 
                 //update incoming and outgoing
+                newFlow.getTarget().getIncoming().add(newFlow);
+                newFlow.getSource().getOutgoing().add(newFlow);
                 //add outgoing
-                if(modelInstance.getModelElementById(src) instanceof StartEvent){
-                    StartEvent srcAc = modelInstance.getModelElementById(src);
-                    srcAc.getOutgoing().add(newFlow);
-                }else if (modelInstance.getModelElementById(src) instanceof Gateway){
-                    Gateway srcAc = modelInstance.getModelElementById(src);
-                    srcAc.getOutgoing().add(newFlow);
-                }else {
-                    Task srcAc = modelInstance.getModelElementById(src);
-                    srcAc.getOutgoing().add(newFlow);
-                }
-
-                //add incoming
-                if ( modelInstance.getModelElementById(tgt) instanceof EndEvent){
-                    EndEvent tgtAc = modelInstance.getModelElementById(tgt);
-                    tgtAc.getIncoming().add(newFlow);
-                }else if (modelInstance.getModelElementById(tgt) instanceof  Gateway){
-                    Gateway tgtAc = modelInstance.getModelElementById(tgt);
-                    tgtAc.getIncoming().add(newFlow);
-                }else {
-                    Task tgtAc = modelInstance.getModelElementById(tgt);
-                    tgtAc.getIncoming().add(newFlow);
-                }
+//                if(modelInstance.getModelElementById(src) instanceof StartEvent){
+//                    StartEvent srcAc = modelInstance.getModelElementById(src);
+//                    srcAc.getOutgoing().add(newFlow);
+//                }else if (modelInstance.getModelElementById(src) instanceof Gateway){
+//                    Gateway srcAc = modelInstance.getModelElementById(src);
+//                    srcAc.getOutgoing().add(newFlow);
+//                }else {
+//                    Task srcAc = modelInstance.getModelElementById(src);
+//                    srcAc.getOutgoing().add(newFlow);
+//                }
+//
+//                //add incoming
+//                if ( modelInstance.getModelElementById(tgt) instanceof EndEvent){
+//                    EndEvent tgtAc = modelInstance.getModelElementById(tgt);
+//                    tgtAc.getIncoming().add(newFlow);
+//                }else if (modelInstance.getModelElementById(tgt) instanceof  Gateway){
+//                    Gateway tgtAc = modelInstance.getModelElementById(tgt);
+//                    tgtAc.getIncoming().add(newFlow);
+//                }else {
+//                    Task tgtAc = modelInstance.getModelElementById(tgt);
+//                    tgtAc.getIncoming().add(newFlow);
+//                }
 
 
 

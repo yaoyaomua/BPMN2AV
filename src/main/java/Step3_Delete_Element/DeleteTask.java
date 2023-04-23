@@ -5,14 +5,15 @@ import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
+import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 import org.camunda.bpm.model.bpmn.instance.dc.Bounds;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 
 import java.util.*;
 
-public class DeleteElement {
+public class DeleteTask {
 
-    public DeleteElement(){
+    public DeleteTask(){
 
     }
 
@@ -21,6 +22,12 @@ public class DeleteElement {
         System.out.println(element2graph.toString());
 
         List<NoAssociationTask> tasksToDelete = new ArrayList<>();
+
+        //get attached boundary event task lis
+        List<String> boundedTask = new ArrayList<>();
+        for (BoundaryEvent event : modelInstance.getModelElementsByType(BoundaryEvent.class)){
+            boundedTask.add(event.getAttachedTo().getId());
+        }
 //        for (Data)
         //mark irrelevant elements by check the Associations of the task
         for(Task task: modelInstance.getModelElementsByType(Task.class)){
@@ -58,6 +65,11 @@ public class DeleteElement {
                     System.out.println(dataName.equals(artifact));
                     isIrr = false;
                 }
+            }
+
+            //check weather the task has a boundary event or not
+            if (boundedTask.contains(task.getId())){
+                isIrr = false;
             }
 
             if (isIrr){
@@ -156,31 +168,41 @@ public class DeleteElement {
                     src2tgt.setSource(modelInstance.getModelElementById(src));
                     modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(src2tgt);
 
+                    //add incoming and outgoing
+                    src2tgt.getTarget().getIncoming().add(src2tgt);
+                    src2tgt.getSource().getOutgoing().add(src2tgt);
+//                    newFlow.getTarget().getIncoming().add(newFlow);
+//                    newFlow.getSource().getOutgoing().add(newFlow);
+
                     //add outgoing
-                    if(modelInstance.getModelElementById(src) instanceof Event){
-                        Event srcAc = modelInstance.getModelElementById(src);
-                        srcAc.getOutgoing().add(src2tgt);
-                    }else if (modelInstance.getModelElementById(src) instanceof Gateway){
-                        Gateway srcAc = modelInstance.getModelElementById(src);
-                        srcAc.getOutgoing().add(src2tgt);
-                    }else {
-                        Task srcAc = modelInstance.getModelElementById(src);
-                        srcAc.getOutgoing().add(src2tgt);
-                    }
+//                    if(modelInstance.getModelElementById(src) instanceof Event){
+//                        Event srcAc = modelInstance.getModelElementById(src);
+//                        srcAc.getOutgoing().add(src2tgt);
+//                    }else if (modelInstance.getModelElementById(src) instanceof Gateway){
+//                        Gateway srcAc = modelInstance.getModelElementById(src);
+//                        srcAc.getOutgoing().add(src2tgt);
+//                    }else if (modelInstance.getModelElementById(src) instanceof SubProcess){
+//                        SubProcess srcAc = modelInstance.getModelElementById(src);
+//                        srcAc.getOutgoing().add(src2tgt);
+//                    }if (modelInstance.getModelElementById(src) instanceof SubProcess){
+//                        Task srcAc = modelInstance.getModelElementById(src);
+//                        srcAc.getOutgoing().add(src2tgt);
+//                    }
 
                     //add incoming
-                    if ( modelInstance.getModelElementById(tgt) instanceof Event){
-                        Event tgtAc = modelInstance.getModelElementById(tgt);
-                        tgtAc.getIncoming().add(src2tgt);
-                    }else if (modelInstance.getModelElementById(tgt) instanceof  Gateway){
-                        Gateway tgtAc = modelInstance.getModelElementById(tgt);
-                        tgtAc.getIncoming().add(src2tgt);
-                    }else {
-                        Task tgtAc = modelInstance.getModelElementById(tgt);
-                        tgtAc.getIncoming().add(src2tgt);
-                    }
-
-
+//                    if ( modelInstance.getModelElementById(tgt) instanceof Event){
+//                        Event tgtAc = modelInstance.getModelElementById(tgt);
+//                        tgtAc.getIncoming().add(src2tgt);
+//                    }else if (modelInstance.getModelElementById(tgt) instanceof  Gateway){
+//                        Gateway tgtAc = modelInstance.getModelElementById(tgt);
+//                        tgtAc.getIncoming().add(src2tgt);
+//                    }else if (modelInstance.getModelElementById(tgt) instanceof SubProcess){
+//                        SubProcess tgtAc = modelInstance.getModelElementById(tgt);
+//                        tgtAc.getIncoming().add(src2tgt);
+//                    }else {
+//                        Task tgtAc = modelInstance.getModelElementById(tgt);
+//                        tgtAc.getIncoming().add(src2tgt);
+//                    }
                     System.out.println("after add sequence flow in bpmn: " + modelInstance.getModelElementsByType(SequenceFlow.class).size());;
 
                     System.out.println("start add sequence flow in graph...");
@@ -214,6 +236,24 @@ public class DeleteElement {
             System.out.println(sequenceFlow.getId());
             System.out.println(sequenceFlow.getSource().getId());
             System.out.println(sequenceFlow.getTarget().getId());
+        }
+
+        for (Association association : modelInstance.getModelElementsByType(Association.class)){
+            if (association.getSource() == null){
+                association.getParentElement().removeChildElement(association);
+            }
+        }
+
+        for (BpmnShape bpmnShape : modelInstance.getModelElementsByType(BpmnShape.class)){
+            if (bpmnShape.getBpmnElement() == null){
+                bpmnShape.getParentElement().removeChildElement(bpmnShape);
+            }
+        }
+
+        for (BpmnEdge bpmnEdge : modelInstance.getModelElementsByType(BpmnEdge.class)){
+            if (bpmnEdge.getBpmnElement() == null){
+                bpmnEdge.getParentElement().removeChildElement(bpmnEdge);
+            }
         }
 
     }

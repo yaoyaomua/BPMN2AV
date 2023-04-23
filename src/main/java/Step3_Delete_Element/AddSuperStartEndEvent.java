@@ -27,6 +27,7 @@ public class AddSuperStartEndEvent {
         Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
 
         for (Event event : modelInstance.getModelElementsByType(Event.class)){
+            if (event.getParentElement() instanceof SubProcess) continue;
             if (event instanceof BoundaryEvent) continue;
             if (event.getIncoming() == null || event.getIncoming().isEmpty()){
                 if (event instanceof StartEvent){
@@ -37,11 +38,13 @@ public class AddSuperStartEndEvent {
             }
         }
         for (Task task : modelInstance.getModelElementsByType(Task.class)){
+            if (task.getParentElement() instanceof SubProcess) continue;
             if (task.getIncoming() == null || task.getIncoming().isEmpty()){
                 NoInputActivity.add(task.getId());
             }
         }
         for (Gateway gateway : modelInstance.getModelElementsByType(Gateway.class)){
+            if (gateway.getParentElement() instanceof  SubProcess) continue;
             if (gateway.getIncoming() == null || gateway.getIncoming().isEmpty()){
                 NoInputGateway.add(gateway.getId());
             }
@@ -257,6 +260,7 @@ public class AddSuperStartEndEvent {
         Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
 
         for (Event event : modelInstance.getModelElementsByType(Event.class)){
+            if (event.getParentElement() instanceof SubProcess) continue;
             if (event instanceof BoundaryEvent) continue;
             if (event.getOutgoing()== null || event.getOutgoing().isEmpty()){
                 if (event instanceof EndEvent){
@@ -267,11 +271,13 @@ public class AddSuperStartEndEvent {
             }
         }
         for (Task task : modelInstance.getModelElementsByType(Task.class)){
+            if (task.getParentElement() instanceof SubProcess) continue;
             if (task.getOutgoing() == null || task.getOutgoing().isEmpty()){
                 NoOutputActivity.add(task.getId());
             }
         }
         for (Gateway gateway : modelInstance.getModelElementsByType(Gateway.class)){
+            if (gateway.getParentElement() instanceof SubProcess) continue;
             if (gateway.getOutgoing() == null || gateway.getOutgoing().isEmpty()){
                 NoOutputGateway.add(gateway.getId());
             }

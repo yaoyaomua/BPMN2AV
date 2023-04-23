@@ -1,14 +1,14 @@
 package StepTest;
 
 import Step3_Delete_Element.AddSuperStartEndEvent;
-import Step3_Delete_Element.DeleteElement;
+import Step3_Delete_Element.DeleteTask;
 import Step3_Delete_Element.DeleteBoundaryEvent;
+import Step3_Delete_Element.DeleteEvent;
 import Step4_Well_Structure.DeleteEmptySubprocess;
 import Step4_Well_Structure.Delete121Gateway;
 import Step4_Well_Structure.DeleteRepeatFlow;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.junit.Test;
 
 import java.io.File;
@@ -16,19 +16,11 @@ import java.io.File;
 public class Step3Test {
 
     @Test
-    public void gatewaytest1(){
-        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram5.bpmn"));
-        for (Gateway gateway: bpmnModelInstance.getModelElementsByType(Gateway.class)){
-            System.out.println(gateway.getId());
-        }
-    }
-
-    @Test
-    public void gatewayTest2(){
+    public void deleteElementTest(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/output1.bpmn"));
-            Delete121Gateway.delete(bpmnModelInstance);
-            File outputFile = new File("models/output1.bpmn");
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3.bpmn"));
+            DeleteTask.delete(bpmnModelInstance, "DATA1");
+            File outputFile = new File("models/Steps/step3_delete_Task_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
             e.printStackTrace();
@@ -36,15 +28,15 @@ public class Step3Test {
     }
 
     @Test
-    public void deleteElementTest4(){
-//        try {
-//            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (15).bpmn"));
-//            DeleteElement.delete(bpmnModelInstance);
-//            File outputFile = new File("models/result.bpmn");
-//            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public void deleteEventTest(){
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (46).bpmn"));
+        DeleteEvent.delete(bpmnModelInstance, "DATA1");
+        try {
+            File outputFile = new File("models/Steps/step3_delete_Event_result.bpmn");
+            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -121,7 +113,7 @@ public class Step3Test {
     public void deleteElement(){
         try {
             BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_delete_boundary_event_result.bpmn"));
-            DeleteElement.delete(bpmnModelInstance,"DATA1");
+            DeleteTask.delete(bpmnModelInstance,"DATA1");
             File outputFile = new File("models/Steps/step3_delete_element_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {

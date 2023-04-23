@@ -12,7 +12,7 @@
     <bpmn:task completionQuantity="1" id="Activity_0xaueyz" isForCompensation="false" name="A" startQuantity="1">
             
       <bpmn:incoming>Flow_16zuchs</bpmn:incoming>
-      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_spqv66d</outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_hiy86lk</outgoing>
             
       
       <bpmn:dataOutputAssociation id="DataOutputAssociation_07jwoyr">
@@ -28,12 +28,12 @@
     
     
     <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="Gateway_0yikvo8">
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_spqv66d</incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_hiy86lk</incoming>
             
       
       
-      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_0gy7nia</outgoing>
-      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_geghhwm</outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_he7bw1a</outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_xov04fv</outgoing>
           
     </bpmn:exclusiveGateway>
         
@@ -45,8 +45,8 @@
     <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="Gateway_0459p6o">
             
       
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_0gy7nia</incoming>
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_geghhwm</incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_he7bw1a</incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_xov04fv</incoming>
             
       <bpmn:outgoing>Flow_00ky79f</bpmn:outgoing>
           
@@ -99,9 +99,9 @@
     </bpmn:parallelGateway>
         
     <bpmn:sequenceFlow id="Flow_0n4pqng" sourceRef="Gateway_1y9gb24" targetRef="Event_0j7kodw"/>
-    <sequenceFlow id="Flow_spqv66d" sourceRef="Activity_0xaueyz" targetRef="Gateway_0yikvo8" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <sequenceFlow id="Flow_0gy7nia" sourceRef="Gateway_0yikvo8" targetRef="Gateway_0459p6o" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <sequenceFlow id="Flow_geghhwm" sourceRef="Gateway_0yikvo8" targetRef="Gateway_0459p6o" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flow_hiy86lk" sourceRef="Activity_0xaueyz" targetRef="Gateway_0yikvo8" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flow_he7bw1a" sourceRef="Gateway_0yikvo8" targetRef="Gateway_0459p6o" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flow_xov04fv" sourceRef="Gateway_0yikvo8" targetRef="Gateway_0459p6o" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
       
   </bpmn:process>
     
@@ -198,25 +198,11 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge id="DataOutputAssociation_1tofrha_di">
-                
-        <di:waypoint x="513" y="370"/>
-                
-        <di:waypoint x="610" y="535"/>
-              
-      </bpmndi:BPMNEdge>
-            
       
       
       
-      <bpmndi:BPMNEdge id="DataInputAssociation_1o7u7oj_di">
-                
-        <di:waypoint x="638" y="550"/>
-                
-        <di:waypoint x="765" y="479"/>
-              
-      </bpmndi:BPMNEdge>
-            
+      
+      
       
       
       
@@ -251,15 +237,15 @@
         <di:waypoint x="1392" y="330"/>
               
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow_spqv66d" id="Flow_spqv66d_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_hiy86lk" id="Flow_hiy86lk_di">
         <di:waypoint x="310.0" y="330.0"/>
         <di:waypoint x="625.0" y="330.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow_0gy7nia" id="Flow_0gy7nia_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_he7bw1a" id="Flow_he7bw1a_di">
         <di:waypoint x="650.0" y="330.0"/>
         <di:waypoint x="945.0" y="330.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow_geghhwm" id="Flow_geghhwm_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_xov04fv" id="Flow_xov04fv_di">
         <di:waypoint x="650.0" y="330.0"/>
         <di:waypoint x="945.0" y="330.0"/>
       </bpmndi:BPMNEdge>

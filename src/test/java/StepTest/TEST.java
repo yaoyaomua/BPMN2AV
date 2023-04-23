@@ -4,11 +4,9 @@ import Step3_Delete_Element.*;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -41,7 +39,7 @@ public class TEST {
         System.out.println(textState.toString());
         System.out.println("***************start delete activity******************");
 
-        DeleteElement.delete(bpmnModelInstance,artifact);
+        DeleteTask.delete(bpmnModelInstance,artifact);
         try {
             File outputFile = new File("models/result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
@@ -63,8 +61,8 @@ public class TEST {
 
     @Test
     public void test3(){
-        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (27).bpmn"));
-        DeleteEvent.delete(bpmnModelInstance);
+        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (48).bpmn"));
+        DeleteEvent.delete(bpmnModelInstance,"DATA1");
         try {
             File outputFile = new File("models/result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
@@ -96,27 +94,8 @@ public class TEST {
         }
     }
 
-    @Test
-    public void test6(){
-        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_add_super_start.bpmn"));
-        AddSuperStartEndEvent.addStart(bpmnModelInstance);
-        try {
-            File outputFile = new File("models/AddStartResult.bpmn");
-            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test
-    public void test7(){
-        BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (34).bpmn"));
-        AddSuperStartEndEvent.addEnd(bpmnModelInstance);
-        try {
-            File outputFile = new File("models/result.bpmn");
-            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void test8(){
     }
 }

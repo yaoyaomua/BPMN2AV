@@ -47,12 +47,10 @@
             
       <bpmn:outgoing>Flow_085dccs</bpmn:outgoing>
             
-      <bpmn:outgoing>Flow_wwijpur</bpmn:outgoing>
-            
+      
       <bpmn:outgoing>Flow_0h16qil</bpmn:outgoing>
             
-      <bpmn:outgoing>Flow_19rlt3t</bpmn:outgoing>
-          
+    
     </bpmn:exclusiveGateway>
         
     <bpmn:sequenceFlow id="Flow_1hkzjm5" sourceRef="Activity_1wbxkwy" targetRef="Gateway_0yikvo8"/>
@@ -81,12 +79,10 @@
             
       <bpmn:incoming>Flow_0wzm3h7</bpmn:incoming>
             
-      <bpmn:incoming>Flow_wwijpur</bpmn:incoming>
-            
+      
       <bpmn:incoming>Flow_0h16qil</bpmn:incoming>
             
-      <bpmn:incoming>Flow_19rlt3t</bpmn:incoming>
-            
+      
       <bpmn:outgoing>Flow_00ky79f</bpmn:outgoing>
           
     </bpmn:exclusiveGateway>
@@ -127,14 +123,12 @@
         
     <bpmn:dataObject id="DataObject_10lico7" isCollection="false"/>
         
-    <sequenceFlow xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Flow_wwijpur" sourceRef="Gateway_0yikvo8" targetRef="Gateway_0459p6o"/>
-        
+    
     <sequenceFlow xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Flow_fjr7i45" sourceRef="Activity_0ccwju2" targetRef="Event_0j7kodw"/>
         
     <bpmn:sequenceFlow id="Flow_0h16qil" sourceRef="Gateway_0yikvo8" targetRef="Gateway_0459p6o"/>
         
-    <bpmn:sequenceFlow id="Flow_19rlt3t" sourceRef="Gateway_0yikvo8" targetRef="Gateway_0459p6o"/>
-      
+  
   </bpmn:process>
     
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -305,7 +299,7 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_wwijpur" id="Flow_wwijpur_di">
+      <bpmndi:BPMNEdge id="Flow_wwijpur_di">
                 
         <di:waypoint x="675" y="330"/>
                 
@@ -333,7 +327,7 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_19rlt3t" id="Flow_19rlt3t_di">
+      <bpmndi:BPMNEdge id="Flow_19rlt3t_di">
                 
         <di:waypoint x="650" y="305"/>
                 
