@@ -4,6 +4,7 @@ import Step1_Delete_Pool.DeletePool;
 import Step1_Delete_Pool.MergeProcess;
 import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
+import Step3_Delete_Element.DeleteEmptySubprocess;
 import Step4_Well_Structure.*;
 import de.hpi.bpt.process.Process;
 import ee.ut.bpstruct2.Restructurer;
