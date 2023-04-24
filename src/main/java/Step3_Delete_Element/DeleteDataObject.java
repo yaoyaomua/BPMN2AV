@@ -15,11 +15,15 @@ public class DeleteDataObject {
     public DeleteDataObject() {
     }
 
-    public static void delete(BpmnModelInstance modelInstance, HashSet<String> datas, HashMap<String,String> textData){
+    public static void delete(BpmnModelInstance modelInstance, String artifact){
+
+        HashSet<String> datas = DataTextState.getAssociatedDataObject(modelInstance,artifact);
+
+        HashMap<String,String> textData = DataTextState.getText(modelInstance);
 
         List<String> toDelete = new ArrayList<>();
-        List<String> tgtToDelete = new ArrayList<>();
-        List<String> srcToDelete = new ArrayList<>();
+//        List<String> tgtToDelete = new ArrayList<>();
+//        List<String> srcToDelete = new ArrayList<>();
 
         for (DataObjectReference dataObjectReference : modelInstance.getModelElementsByType(DataObjectReference.class)){
             if (!datas.contains(dataObjectReference.getId())){

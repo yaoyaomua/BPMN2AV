@@ -228,14 +228,16 @@ public class DeleteTask {
             modelInstance.getModelElementById(task.getId()+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(task.getId()+"_di"));
             element2graph.remove(task.getId());
         }
-        System.out.println("end delete");
+        System.out.println("**************end delete******************");
+        System.out.println("tASK LIST: ");
         for (Task task: modelInstance.getModelElementsByType(Task.class)){
-            System.out.println(task.getId());
+            System.out.println(task.getName());
         }
+        System.out.println("FLOW LIST: ");
         for (SequenceFlow sequenceFlow : modelInstance.getModelElementsByType(SequenceFlow.class)){
             System.out.println(sequenceFlow.getId());
-            System.out.println(sequenceFlow.getSource().getId());
-            System.out.println(sequenceFlow.getTarget().getId());
+            System.out.println("sourceRef: "+sequenceFlow.getSource().getId());
+            System.out.println("targetRef: "+sequenceFlow.getTarget().getId());
         }
 
         for (Association association : modelInstance.getModelElementsByType(Association.class)){

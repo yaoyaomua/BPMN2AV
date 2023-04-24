@@ -1,4 +1,4 @@
-package Step4_Well_Structure;
+package Step3_Delete_Element;
 
 import de.hpi.bpt.process.epc.IProcessInterface;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
