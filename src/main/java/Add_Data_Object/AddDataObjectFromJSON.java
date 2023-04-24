@@ -137,14 +137,11 @@ public class AddDataObjectFromJSON {
         //Add diagramElement to BPMN
 
         // Get the BPMN diagram instance
-        BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
         // ######## Diagram: DataReference ########
         Collection<DataObjectReference> count_dataObjectReference = modelInstance.getModelElementsByType(DataObjectReference.class);
-        BpmnShape dataReferenceShape = CreateBPMNShape.create(modelInstance,dataObjectReference.getId(),100.0+count_dataObjectReference.size()*200,40.0,36.0,50.0);
-        plane.addChildElement(dataReferenceShape);
+        CreateBPMNShape.create(modelInstance,dataObjectReference.getId(),100.0+count_dataObjectReference.size()*200,40.0,36.0,50.0);
         // ######## Diagram: TextAnnotation ########
-        BpmnShape textAnnotationShape = CreateBPMNShape.create(modelInstance,textAnnotation.getId(),100.0+count_dataObjectReference.size()*200,0.0,100.0,30.0);
-        plane.addChildElement(dataReferenceShape);
+        CreateBPMNShape.create(modelInstance,textAnnotation.getId(),100.0+count_dataObjectReference.size()*200,0.0,100.0,30.0);
         // ######## Diagram: Association ########
         CreateBPMNEdge.create(modelInstance, association, 100.0+count_dataObjectReference.size()*200, 40.0, 100.0+count_dataObjectReference.size()*200, 0.0);
         // ######## Diagram: Output&&Input Association ########
