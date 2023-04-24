@@ -1,0 +1,45 @@
+{
+  "DataObjects": [
+    {
+      "artifact": "Container",
+      "state": "opened, unhooked",
+      "sourceRef": [],
+      "targetRef": [
+        {
+          "name": "Fill in container"
+        }
+      ]
+    },
+    {
+      "artifact": "Container",
+      "state": "closed,unhooked",
+      "sourceRef": [
+        {
+          "name": "Fill in container"
+        }
+      ],
+      "targetRef": [
+        {
+          "name": "Attach container"
+        }
+      ]
+    },
+    {
+      "artifact": "Container",
+      "state": "closed,hooked",
+      "sourceRef": [
+        {
+          "name": "Attach container"
+        }
+      ],
+      "targetRef": [
+        {
+          "name": "Take a break"
+        },
+        {
+          "name": "Travel on highway"
+        }
+      ]
+    }
+  ]
+}
