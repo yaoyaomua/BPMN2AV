@@ -254,6 +254,7 @@ public class AddSuperStartEndEvent {
             ac.setId(acpre.getId());
             acpre.replaceWithElement(ac);
 
+
             acpre.getDiagramElement().setBpmnElement(ac);
 
             //add flow between andgateway and event

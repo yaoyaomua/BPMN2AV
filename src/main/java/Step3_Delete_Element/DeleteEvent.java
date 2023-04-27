@@ -1,5 +1,6 @@
 package Step3_Delete_Element;
 
+import Step2_Flow_Transform.AddIncomingOrOutcoming;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
@@ -36,10 +37,12 @@ public class DeleteEvent {
                     if (dataState.get(dataId) == null){
                         if (data.getName().equals(artifact)){
                             StartEventToDelete.add(event.getId());
+                            System.out.println("need delete : " + event.getId());
                         }
                     }else {
                         if (!data.getName().equals(artifact)){
                             StartEventToDelete.add(event.getId());
+                            System.out.println("need delete : " + event.getId());
                         }
                     }
                 }
@@ -57,11 +60,11 @@ public class DeleteEvent {
                         DataObjectReference data = modelInstance.getModelElementById(dataId);
                         if (dataState.get(dataId) == null){
                             if (data.getName().equals(artifact)){
-                                StartEventToDelete.add(event.getId());
+                                EndEventToDelete.add(event.getId());
                             }
                         }else {
                             if (!data.getName().equals(artifact)){
-                                StartEventToDelete.add(event.getId());
+                                EndEventToDelete.add(event.getId());
                             }
                         }
                     }
@@ -125,29 +128,6 @@ public class DeleteEvent {
         HashMap<String,String> element2graph = BPMNElement2Graph.map(modelInstance);
         System.out.println(element2graph.toString());
 //        System.out.println(modelInstance.getModelElementsByType(SequenceFlow.class).toString());
-        System.out.println("******delete start event******");
-        for (String id : StartEventToDelete){
-            System.out.println(id);
-            Event event = modelInstance.getModelElementById(id);
-            for (SequenceFlow sequenceFlow : event.getOutgoing()){
-//                sequenceFlow.getDiagramElement().getParentElement().removeChildElement(sequenceFlow.getDiagramElement());
-                sequenceFlow.getParentElement().removeChildElement(sequenceFlow);
-            }
-//            event.getDiagramElement().getParentElement().removeChildElement(event.getDiagramElement());
-            event.getParentElement().removeChildElement(event);
-        }
-
-        System.out.println("*********delete end event*******");
-        for (String id : EndEventToDelete){
-            System.out.println(id);
-            Event event = modelInstance.getModelElementById(id);
-            for (SequenceFlow sequenceFlow : event.getIncoming()){
-//                sequenceFlow.getDiagramElement().getParentElement().removeChildElement(sequenceFlow.getDiagramElement());
-                sequenceFlow.getParentElement().removeChildElement(sequenceFlow);
-            }
-//            event.getDiagramElement().getParentElement().removeChildElement(event.getDiagramElement());
-            event.getParentElement().removeChildElement(event);
-        }
 
         System.out.println("***********delete mid event********");
         for (String id : MidEventToDelete){
@@ -157,8 +137,15 @@ public class DeleteEvent {
                 System.out.println("flow size greater than 1, please add gateway first");
                 return;
             }
+
             SequenceFlow sourceFlow = event.getIncoming().iterator().next();
             SequenceFlow targetFlow = event.getOutgoing().iterator().next();
+//            if (sourceFlow.getSource() == null || targetFlow.getTarget() == null){
+////                System.out.println("i am here!!!!!!!!!!!!");
+//                sourceFlow.getParentElement().removeChildElement(sourceFlow);
+//                targetFlow.getParentElement().removeChildElement(targetFlow);
+//                event.getParentElement().removeChildElement(event);
+//            }
             //add new flow for deleting the event
             SequenceFlow newFlow = modelInstance.newInstance(SequenceFlow.class);
             String newFlowID;
@@ -168,14 +155,26 @@ public class DeleteEvent {
             newFlow.setId("Flow_" + newFlowID);
             System.out.println("new flow id: " + newFlow.getId());
 
-            newFlow.setSource(sourceFlow.getSource());
-            newFlow.setTarget(targetFlow.getTarget());
+            if (sourceFlow.getSource() != null){
+                newFlow.setSource(sourceFlow.getSource());
+            }else {
+                System.out.println("No Source!!");
+            }
+
+            if (targetFlow.getTarget() != null){
+                newFlow.setTarget(targetFlow.getTarget());
+            }else {
+                System.out.println("No Target!!");
+            }
+
 
             modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(newFlow);
 
             //update incoming and outgoing
-            newFlow.getTarget().getIncoming().add(newFlow);
-            newFlow.getSource().getOutgoing().add(newFlow);
+//            newFlow.getTarget().getIncoming().add(newFlow);
+//            newFlow.getSource().getOutgoing().add(newFlow);
+            AddIncomingOrOutcoming.AddIncomingToElement(modelInstance,newFlow.getTarget().getId(),newFlow);
+            AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance,newFlow.getSource().getId(),newFlow);
 
             //add graph
             BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
@@ -198,11 +197,38 @@ public class DeleteEvent {
             sourceFlow.getParentElement().removeChildElement(sourceFlow);
             targetFlow.getParentElement().removeChildElement(targetFlow);
 
+            System.out.println("new flow target: " + newFlow.getTarget());
+
 //            System.out.println(element2graph.get(src));
 //            System.out.println(element2graph.get(tgt));
 //            modelInstance.getModelElementById(sourceFlow.getId()+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(sourceFlow.getId()+"_di"));
 //            modelInstance.getModelElementById(targetFlow.getId()+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(targetFlow.getId()+"_di"));
 
+        }
+
+        System.out.println("******delete start event******");
+        for (String id : StartEventToDelete){
+            System.out.println(id);
+            Event event = modelInstance.getModelElementById(id);
+            for (SequenceFlow sequenceFlow : event.getOutgoing()){
+//                sequenceFlow.getDiagramElement().getParentElement().removeChildElement(sequenceFlow.getDiagramElement());
+                sequenceFlow.getParentElement().removeChildElement(sequenceFlow);
+            }
+//            event.getDiagramElement().getParentElement().removeChildElement(event.getDiagramElement());
+            event.getParentElement().removeChildElement(event);
+        }
+
+        System.out.println("*********delete end event*******");
+        for (String id : EndEventToDelete){
+            System.out.println(id);
+            Event event = modelInstance.getModelElementById(id);
+            for (SequenceFlow sequenceFlow : event.getIncoming()){
+//                sequenceFlow.getDiagramElement().getParentElement().removeChildElement(sequenceFlow.getDiagramElement());
+                System.out.println("delete old flow: " + sequenceFlow.getId());
+                sequenceFlow.getParentElement().removeChildElement(sequenceFlow);
+            }
+//            event.getDiagramElement().getParentElement().removeChildElement(event.getDiagramElement());
+            event.getParentElement().removeChildElement(event);
         }
 
         for (Association association : modelInstance.getModelElementsByType(Association.class)){
