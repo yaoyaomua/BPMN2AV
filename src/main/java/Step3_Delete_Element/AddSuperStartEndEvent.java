@@ -244,14 +244,23 @@ public class AddSuperStartEndEvent {
         int count = 0;
         for (String startID : startEvent){
             StartEvent acpre = modelInstance.getModelElementById(startID);
-            IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
+            IntermediateCatchEvent ac = modelInstance.newInstance(IntermediateCatchEvent.class);
             if (acpre.getName() != null){
-                ac.setName(acpre.getName()+"_change");
+                ac.setName(acpre.getName()+"_changed");
             }else {
                 ac.setName("StartEvent_"+count);
                 count ++;
             }
             ac.setId(acpre.getId());
+            for (EventDefinition eventDefinition : acpre.getEventDefinitions()){
+                ac.getEventDefinitions().add(eventDefinition);
+            }
+            for (DataOutputAssociation dataOutputAssociation : acpre.getDataOutputAssociations()){
+                ac.getDataOutputAssociations().add(dataOutputAssociation);
+            }
+            for (Property property : acpre.getProperties()){
+                ac.getProperties().add(property);
+            }
             acpre.replaceWithElement(ac);
 
 
@@ -514,7 +523,7 @@ public class AddSuperStartEndEvent {
         int count = 0;
         for (String endID : endEvent){
             EndEvent acpre = modelInstance.getModelElementById(endID);
-            IntermediateCatchEvent ac = modelInstance.newInstance(IntermediateCatchEvent.class);
+            IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
             if (acpre.getName() != null){
                 ac.setName(acpre.getName()+"_change");
             }else {
@@ -522,6 +531,15 @@ public class AddSuperStartEndEvent {
                 count ++;
             }
             ac.setId(acpre.getId());
+            for (EventDefinition eventDefinition : acpre.getEventDefinitions()){
+                ac.getEventDefinitions().add(eventDefinition);
+            }
+            for (DataInputAssociation dataInputAssociation: acpre.getDataInputAssociations()){
+                ac.getDataInputAssociations().add(dataInputAssociation);
+            }
+            for (Property property : acpre.getProperties()){
+                ac.getProperties().add(property);
+            }
             acpre.replaceWithElement(ac);
 
             acpre.getDiagramElement().setBpmnElement(ac);

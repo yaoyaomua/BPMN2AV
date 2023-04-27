@@ -4,6 +4,8 @@ import java.util.Collection;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.BaseElement;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
+
 public class MergeProcess {
 
     public static void merge(BpmnModelInstance modelInstance) {
@@ -32,5 +34,13 @@ public class MergeProcess {
                 }
             }
         });
+
+        modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next().setBpmnElement(mergedProcess);
+
+//        for (BpmnPlane bpmnPlane : modelInstance.getModelElementsByType(BpmnPlane.class)){
+//            if (bpmnPlane.getBpmnElement() == null){
+//                bpmnPlane.getParentElement().removeChildElement(bpmnPlane);
+//            }
+//        }
     }
 }

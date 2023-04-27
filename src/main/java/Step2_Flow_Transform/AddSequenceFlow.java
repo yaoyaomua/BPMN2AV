@@ -36,22 +36,40 @@ public class AddSequenceFlow {
             //set the width and height of the new activity
             if((messageflow.getTarget().getElementType().getTypeName().equals("startEvent") && !(messageflow.getTarget().getParentElement().getElementType().getTypeName().equals("subProcess"))))
             {
-                StartEvent startevent = modelInstance.getModelElementById(messageflow.getTarget().getId());
-                Task task = modelInstance.newInstance(Task.class);
-                task.setName("Start"+i);
-                task.setId(startevent.getId());
-                startevent.replaceWithElement(task);
-                messageflow.setTarget(task);
+                StartEvent acpre = modelInstance.getModelElementById(messageflow.getTarget().getId());
+                IntermediateCatchEvent ac = modelInstance.newInstance(IntermediateCatchEvent.class);
+                ac.setName("Start"+i);
+                ac.setId(acpre.getId());
+                for (EventDefinition eventDefinition : acpre.getEventDefinitions()){
+                    ac.getEventDefinitions().add(eventDefinition);
+                }
+                for (DataOutputAssociation dataOutputAssociation : acpre.getDataOutputAssociations()){
+                    ac.getDataOutputAssociations().add(dataOutputAssociation);
+                }
+                for (Property property : acpre.getProperties()){
+                    ac.getProperties().add(property);
+                }
+                acpre.replaceWithElement(ac);
+                messageflow.setTarget(ac);
             }
             if(messageflow.getSource().getElementType().getTypeName().equals("endEvent") && !(messageflow.getSource().getParentElement().getElementType().getTypeName().equals("subProcess")))
             {
                 System.out.println("This is end event!");
-                EndEvent endEvent = modelInstance.getModelElementById(messageflow.getSource().getId());
-                Task task = modelInstance.newInstance(Task.class);
-                task.setName("End"+i);
-                task.setId(endEvent.getId());
-                endEvent.replaceWithElement(task);
-                messageflow.setSource(task);
+                EndEvent acpre = modelInstance.getModelElementById(messageflow.getSource().getId());
+                IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
+                ac.setName("End"+i);
+                ac.setId(acpre.getId());
+                for (EventDefinition eventDefinition : acpre.getEventDefinitions()){
+                    ac.getEventDefinitions().add(eventDefinition);
+                }
+                for (DataInputAssociation dataInputAssociation: acpre.getDataInputAssociations()){
+                    ac.getDataInputAssociations().add(dataInputAssociation);
+                }
+                for (Property property : acpre.getProperties()){
+                    ac.getProperties().add(property);
+                }
+                acpre.replaceWithElement(ac);
+                messageflow.setSource(ac);
             }
             // Create a new sequence flow element
             SequenceFlow sequenceFlow = modelInstance.newInstance(SequenceFlow.class);
