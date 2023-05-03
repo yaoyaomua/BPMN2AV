@@ -18,8 +18,7 @@ public class Step1Test {
     public void DeletePoolMergeProcessTest(){
         try {
             //Read bpmn file
-            //String filePath = "models/Steps/step1.bpmn";
-            String filePath = "models/subprocesstest.bpmn";
+            String filePath = "models/Steps/bookdiagram.bpmn";
             BpmnModelInstance modelInstance;
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);

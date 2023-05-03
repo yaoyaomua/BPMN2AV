@@ -10,6 +10,7 @@ import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class DeleteEvent {
@@ -17,7 +18,7 @@ public class DeleteEvent {
     public DeleteEvent() {
     }
 
-    public static void delete(BpmnModelInstance modelInstance, String artifact){
+    public static void delete(BpmnModelInstance modelInstance, String artifact, HashSet<String> addedEvent){
         List<String> StartEventToDelete = new ArrayList<>();
         List<String> EndEventToDelete = new ArrayList<>();
         List<String> MidEventToDelete = new ArrayList<>();
@@ -26,6 +27,7 @@ public class DeleteEvent {
 
         for (StartEvent event : modelInstance.getModelElementsByType(StartEvent.class)){
             System.out.println(event.getId());
+            if (addedEvent.contains(event.getId())) continue;
             if (event.getDataOutputAssociations().isEmpty()){
                 StartEventToDelete.add(event.getId());
                 System.out.println("need delete : " + event.getId());
@@ -50,6 +52,7 @@ public class DeleteEvent {
         }
         for (EndEvent event : modelInstance.getModelElementsByType(EndEvent.class)){
             System.out.println(event.getId());
+            if (addedEvent.contains(event.getId())) continue;
             if (event.getDataInputAssociations().isEmpty()){
                 EndEventToDelete.add(event.getId());
                 System.out.println("need delete : " + event.getId());
@@ -73,6 +76,7 @@ public class DeleteEvent {
         }
 
         for (IntermediateThrowEvent event : modelInstance.getModelElementsByType(IntermediateThrowEvent.class)){
+            if (addedEvent.contains(event.getId())) continue;
             System.out.println(event.getId());
             if(event.getDataInputAssociations().isEmpty()){
                 MidEventToDelete.add(event.getId());
@@ -98,6 +102,7 @@ public class DeleteEvent {
 
 
         for (IntermediateCatchEvent event : modelInstance.getModelElementsByType(IntermediateCatchEvent.class)){
+            if (addedEvent.contains(event.getId())) continue;
             System.out.println(event.getId());
             if(event.getDataOutputAssociations().isEmpty()) {
                 MidEventToDelete.add(event.getId());

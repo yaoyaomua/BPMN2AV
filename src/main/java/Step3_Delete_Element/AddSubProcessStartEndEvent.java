@@ -8,26 +8,35 @@ import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 import org.camunda.bpm.model.bpmn.instance.dc.Bounds;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 
+import java.util.HashSet;
+
 public class AddSubProcessStartEndEvent {
 
 
     public AddSubProcessStartEndEvent() {
     }
 
-    public static void add(BpmnModelInstance modelInstance){
+    public static HashSet<String> add(BpmnModelInstance modelInstance){
+        HashSet<String> added = new HashSet<>();
         for (SubProcess subProcess : modelInstance.getModelElementsByType(SubProcess.class)){
-            addForSub(modelInstance,subProcess);
+            for (String s : addForSub(modelInstance,subProcess)){
+                added.add(s);
+            }
+
         }
+        return added;
     }
 
-    public static void addForSub(BpmnModelInstance modelInstance,SubProcess subProcess){
+    public static HashSet<String> addForSub(BpmnModelInstance modelInstance, SubProcess subProcess){
+        HashSet<String> added = new HashSet<>();
         BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
-        if (subProcess.getChildElementsByType(StartEvent.class).size() == 0){
+        if (true){
             //creat new start event and set the attribute for it
             StartEvent processStart = modelInstance.newInstance(StartEvent.class);
             processStart.setId(GenerateID.getID("StartEvent_",modelInstance));
             processStart.setName("SubProcessStart:"+ subProcess.getName());
             subProcess.addChildElement(processStart);
+            added.add(processStart.getId());
             //creat shape for start event
             BpmnShape processStartShape = modelInstance.newInstance(BpmnShape.class);
             processStartShape.setBpmnElement(processStart);
@@ -55,6 +64,36 @@ public class AddSubProcessStartEndEvent {
 
 //            String NoInputElement = null;
             Bounds acBounds = null;
+
+            for (StartEvent acpre : subProcess.getChildElementsByType(StartEvent.class)){
+                if (acpre.getId().equals(processStart.getId())) continue;
+                System.out.println("Start event id: " + acpre.getId());
+                IntermediateCatchEvent ac = modelInstance.newInstance(IntermediateCatchEvent.class);
+                if (acpre.getName() != null){
+                    ac.setName(acpre.getName()+"_changed");
+                }else {
+                    ac.setName("StartEvent_sub");
+                }
+                ac.setId(acpre.getId());
+                for (EventDefinition eventDefinition : acpre.getEventDefinitions()){
+                    ac.getEventDefinitions().add(eventDefinition);
+                }
+                for (DataOutputAssociation dataOutputAssociation : acpre.getDataOutputAssociations()){
+                    ac.getDataOutputAssociations().add(dataOutputAssociation);
+                }
+                for (Property property : acpre.getProperties()){
+                    ac.getProperties().add(property);
+                }
+                acpre.replaceWithElement(ac);
+                if (ac.getIncoming() == null || ac.getIncoming().isEmpty()){
+                    System.out.println("******this element need add start!****");
+                    startFlow.setTarget(ac);
+                    ac.getIncoming().add(startFlow);
+                    BpmnShape acShape = ac.getDiagramElement();
+                    acBounds = acShape.getBounds();
+                }
+            }
+
             for (Event ac : subProcess.getChildElementsByType(Event.class)){
                 System.out.println("event id: " + ac.getId());
                 if (ac.getParentElement() != subProcess) continue;
@@ -106,7 +145,7 @@ public class AddSubProcessStartEndEvent {
 //            System.out.println(startFlow.getTarget().getId());
             if (acBounds == null){
                 System.out.println("this bpmn model does not have element that has no incoming flow");
-                return;
+                return null;
             }
 
 //            startFlow.setTarget(modelInstance.getModelElementById(NoInputElement);
@@ -131,11 +170,10 @@ public class AddSubProcessStartEndEvent {
         System.out.println("**********add start end**************");
 
 
-        if (subProcess.getChildElementsByType(EndEvent.class).size() == 0){
+        if (true){
             //creat new flow between new start and no input element
             SequenceFlow endFlow = modelInstance.newInstance(SequenceFlow.class);
             endFlow.setId(GenerateID.getID("Flow_",modelInstance));
-
 
             subProcess.addChildElement(endFlow);
             //update incoming and outgoing
@@ -144,6 +182,36 @@ public class AddSubProcessStartEndEvent {
 
 //            String NoInputElement = null;
             Bounds acBounds = null;
+
+            for (EndEvent acpre : subProcess.getChildElementsByType(EndEvent.class)){
+//                if (acpre.getId().equals(.getId())) continue;
+                System.out.println("End event id: " + acpre.getId());
+                IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
+                if (acpre.getName() != null){
+                    ac.setName(acpre.getName()+"_changed");
+                }else {
+                    ac.setName("EndEvent_sub");
+                }
+                ac.setId(acpre.getId());
+                for (EventDefinition eventDefinition : acpre.getEventDefinitions()) {
+                    ac.getEventDefinitions().add(eventDefinition);
+                }
+                for (DataInputAssociation dataInputAssociation : acpre.getDataInputAssociations()) {
+                    ac.getDataInputAssociations().add(dataInputAssociation);
+                }
+                for (Property property : acpre.getProperties()) {
+                    ac.getProperties().add(property);
+                }
+                acpre.replaceWithElement(ac);
+                if (ac.getOutgoing() == null || ac.getOutgoing().isEmpty()){
+                    System.out.println("******this element need add end!****");
+                    endFlow.setSource(ac);
+                    ac.getOutgoing().add(endFlow);
+                    BpmnShape acShape = ac.getDiagramElement();
+                    acBounds = acShape.getBounds();
+                }
+            }
+
             for (Event ac : subProcess.getChildElementsByType(Event.class)){
                 System.out.println("event id: " + ac.getId());
                 if (ac.getParentElement() != subProcess) continue;
@@ -195,7 +263,7 @@ public class AddSubProcessStartEndEvent {
 //            System.out.println(endFlow.getTarget().getId());
             if (acBounds == null){
                 System.out.println("this bpmn model does not have element that has no incoming flow");
-                return;
+                return null;
             }
 
             //creat new start event and set the attribute for it
@@ -203,6 +271,8 @@ public class AddSubProcessStartEndEvent {
             processEnd.setId(GenerateID.getID("EndEvent_",modelInstance));
             processEnd.setName("SubProcessEnd:"+ subProcess.getName());
             subProcess.addChildElement(processEnd);
+
+            added.add(processEnd.getId());
             //creat shape for start event
             BpmnShape processEndShape = modelInstance.newInstance(BpmnShape.class);
             processEndShape.setBpmnElement(processEnd);
@@ -239,5 +309,6 @@ public class AddSubProcessStartEndEvent {
         }
 
         System.out.println("**********add end end**************");
+        return added;
     }
 }

@@ -15,14 +15,10 @@ public class TEST {
     @Test
     public void test1(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/step3_add_sub_start_end.bpmn"));
-            for (Event event: bpmnModelInstance.getModelElementsByType(Event.class)){
-                System.out.println(event.getId());
-            }
-            System.out.println("**********start add************");
-            AddSubProcessStartEndEvent.add(bpmnModelInstance);
-            AddSuperStartEndEvent.addStart(bpmnModelInstance);
-            AddSuperStartEndEvent.addEnd(bpmnModelInstance);
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/output.bpmn"));
+
+            DeleteEvent.delete(bpmnModelInstance,"Truck",new HashSet<>());
+
             File outputFile = new File("models/result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
 

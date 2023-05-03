@@ -19,8 +19,8 @@ public class Step2Test {
     public void addTest(){
         try {
             //Read bpmn file
-            //String filePath = "models/Steps/step1.bpmn";
-            String filePath = "models/subprocesstest.bpmn";
+            String filePath = "models/Steps/bookdiagram.bpmn";
+//            String filePath = "models/subprocesstest.bpmn";
             BpmnModelInstance modelInstance;
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);

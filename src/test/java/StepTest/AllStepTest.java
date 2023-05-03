@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import java.io.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -46,6 +47,7 @@ public class AllStepTest {
             System.out.println("************************************");
             System.out.println("merge process start:");
             MergeProcess.merge(modelInstance);
+
 //            File step1output = new File("models/step1output.bpmn");
 //            Bpmn.writeModelToFile(step1output, modelInstance);
 
@@ -61,10 +63,17 @@ public class AllStepTest {
 //            File step2output = new File("models/step2output.bpmn");
 //            Bpmn.writeModelToFile(step2output, modelInstance);
 
+            System.out.println("*************************");
+            System.out.println("add super start and end event start:");
+            HashSet<String> addedEvent = RecordEvent.record(modelInstance);
+
             //step 3 delete elements
             System.out.println("*************************");
             System.out.println("delete boundary event start:");
             DeleteBoundaryEvent.delete(modelInstance,artifact);
+
+            File step2output = new File("models/step2output.bpmn");
+            Bpmn.writeModelToFile(step2output, modelInstance);
 
             System.out.println("*************************");
             System.out.println("delete Task start:");
@@ -73,7 +82,7 @@ public class AllStepTest {
 
             System.out.println("*************************");
             System.out.println("delete event start:");
-            DeleteEvent.delete(modelInstance,artifact);
+            DeleteEvent.delete(modelInstance,artifact, addedEvent);
 
 
             System.out.println("*************************");
@@ -107,14 +116,11 @@ public class AllStepTest {
 //                System.out.println(sequenceFlow.getTarget().getId());
 //                System.out.println(sequenceFlow.getTarget().getName());
 //            }
-            File midoutput= new File("models/output1.bpmn");
-            Bpmn.writeModelToFile(midoutput, modelInstance);
+//            File midoutput= new File("models/output1.bpmn");
+//            Bpmn.writeModelToFile(midoutput, modelInstance);
 
 
-            System.out.println("*************************");
-            System.out.println("add super start and end event start:");
-            AddSuperStartEndEvent.addStart(modelInstance);
-            AddSuperStartEndEvent.addEnd(modelInstance);
+
 
 
             File step3output= new File("models/output.bpmn");

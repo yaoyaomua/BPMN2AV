@@ -51,7 +51,7 @@ public class Step3Test {
     @Test
     public void deleteEventTest(){
         BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (46).bpmn"));
-        DeleteEvent.delete(bpmnModelInstance, "DATA1");
+//        DeleteEvent.delete(bpmnModelInstance, "DATA1");
         try {
             File outputFile = new File("models/Steps/step3_delete_Event_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
