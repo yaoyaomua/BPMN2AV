@@ -1,5 +1,6 @@
 package StepTest;
 
+import Step1_Delete_Pool.AddExclusiveGatewayForEndEvent;
 import Step3_Delete_Element.*;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
@@ -15,9 +16,9 @@ public class TEST {
     @Test
     public void test1(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/output.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/bookdiagram.bpmn"));
 
-            DeleteEvent.delete(bpmnModelInstance,"Truck",new HashSet<>());
+            AddExclusiveGatewayForEndEvent.add(bpmnModelInstance);
 
             File outputFile = new File("models/result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);

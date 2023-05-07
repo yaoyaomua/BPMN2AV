@@ -1,5 +1,6 @@
 package StepTest;
 
+import Step1_Delete_Pool.AddExclusiveGatewayForEndEvent;
 import Step1_Delete_Pool.DeletePool;
 import Step1_Delete_Pool.MergeProcess;
 import Step2_Flow_Transform.AddAndGateway;
@@ -42,6 +43,7 @@ public class AllStepTest {
             //step 1 delete pool and store message flows
             System.out.println("************************************");
             System.out.println("delete pool start:");
+            AddExclusiveGatewayForEndEvent.add(modelInstance);
             messageflows = DeletePool.delete(modelInstance);
             // Delete all process tags and keep only the first one
             System.out.println("************************************");
@@ -63,17 +65,18 @@ public class AllStepTest {
 //            File step2output = new File("models/step2output.bpmn");
 //            Bpmn.writeModelToFile(step2output, modelInstance);
 
+            //step 3 handle events
             System.out.println("*************************");
-            System.out.println("add super start and end event start:");
+            System.out.println("add start and end event start:");
             HashSet<String> addedEvent = RecordEvent.record(modelInstance);
 
-            //step 3 delete elements
+            //step 4 delete elements
             System.out.println("*************************");
             System.out.println("delete boundary event start:");
             DeleteBoundaryEvent.delete(modelInstance,artifact);
 
-            File step2output = new File("models/step2output.bpmn");
-            Bpmn.writeModelToFile(step2output, modelInstance);
+//            File step2output = new File("models/step2output.bpmn");
+//            Bpmn.writeModelToFile(step2output, modelInstance);
 
             System.out.println("*************************");
             System.out.println("delete Task start:");

@@ -1,5 +1,7 @@
 package Step3_Delete_Element;
 
+import Step2_Flow_Transform.CreateBPMNEdge;
+import Step2_Flow_Transform.CreateBPMNShape;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
@@ -345,28 +347,14 @@ public class AddSuperStartEndEvent {
         System.out.println(NoOutputGateway.toString());
         System.out.println(endEvent.toString());
 
-
-//        if (NoOutputEvent.size() == 0 && NoOutputActivity.size() == 0 && NoOutputGateway.size() == 0 && NoOutputSub.size() == 0 && endEvent.size() == 1) {
-//            return null;
-//        }
-        //creat new start event and set the attribute for it
+        //creat new end event and set the attribute for it
         EndEvent processEnd = modelInstance.newInstance(EndEvent.class);
         processEnd.setId(GenerateID.getID("EndEvent_", modelInstance));
         processEnd.setName("ProcessEnd");
         process.addChildElement(processEnd);
         addEndEvent = processEnd.getId();
-        //creat shape for start event
-        BpmnShape processEndShape = modelInstance.newInstance(BpmnShape.class);
-        processEndShape.setBpmnElement(processEnd);
-        processEndShape.setId(processEnd.getId() + "_di");
-
-        Bounds processEndBounds = modelInstance.newInstance(Bounds.class);
-        processEndShape.setBounds(processEndBounds);
-        //set the location of the start event shape
-        processEndBounds.setX(1000);
-        processEndBounds.setY(10);
-        processEndBounds.setHeight(36);
-        processEndBounds.setWidth(36);
+        //creat shape for end event
+        BpmnShape processEndShape = CreateBPMNShape.create(modelInstance,processEnd.getId(), 1000.0, 10.0, 36.0, 36.0);
         plane.addChildElement(processEndShape);
 
         //creat new and gateway
@@ -376,18 +364,8 @@ public class AddSuperStartEndEvent {
         process.addChildElement(parallelGateway);
 
         //creat shape for gateway
-        BpmnShape parallerGatewayShape = modelInstance.newInstance(BpmnShape.class);
-        parallerGatewayShape.setBpmnElement(parallelGateway);
-        parallerGatewayShape.setId(parallelGateway.getId() + "_di");
-        Bounds parallerGatewayBounds = modelInstance.newInstance(Bounds.class);
-        parallerGatewayShape.setBounds(parallerGatewayBounds);
-        //set the and gateway location
-        parallerGatewayBounds.setX(1000);
-        parallerGatewayBounds.setY(100);
-        parallerGatewayBounds.setWidth(50);
-        parallerGatewayBounds.setHeight(50);
+        BpmnShape parallerGatewayShape = CreateBPMNShape.create(modelInstance, parallelGateway.getId(), 1000.0,100.0,50.0,50.0);
         plane.addChildElement(parallerGatewayShape);
-
 
         //creat a flow between gateway and process start event
         SequenceFlow endFlow = modelInstance.newInstance(SequenceFlow.class);
@@ -560,18 +538,20 @@ public class AddSuperStartEndEvent {
             parallelGateway.getIncoming().add(acFlow);
             ac.getOutgoing().add(acFlow);
             //creat flow edge
-            BpmnEdge gateway2ac = modelInstance.newInstance(BpmnEdge.class);
-            gateway2ac.setBpmnElement(acFlow);
-            gateway2ac.setId(acFlow.getId() + "_di");
-            Waypoint acWaypoint1 = modelInstance.newInstance(Waypoint.class);
-            Waypoint acWaypoint2 = modelInstance.newInstance(Waypoint.class);
+
             Bounds acBounds = ac.getDiagramElement().getBounds();
-            acWaypoint1.setX(1025);
-            acWaypoint1.setY(125);
-            acWaypoint2.setX(acBounds.getX() + acBounds.getHeight() / 2);
-            acWaypoint2.setY(acBounds.getY() + acBounds.getWidth() / 2);
-            gateway2ac.getWaypoints().add(acWaypoint2);
-            gateway2ac.getWaypoints().add(acWaypoint1);
+            BpmnEdge gateway2ac = CreateBPMNEdge.create(modelInstance,acFlow,acBounds.getX() + acBounds.getHeight() / 2,acBounds.getY() + acBounds.getWidth() / 2,1025.0,125.0);
+//            gateway2ac.setBpmnElement(acFlow);
+//            gateway2ac.setId(acFlow.getId() + "_di");
+//            Waypoint acWaypoint1 = modelInstance.newInstance(Waypoint.class);
+//            Waypoint acWaypoint2 = modelInstance.newInstance(Waypoint.class);
+//
+//            acWaypoint1.setX(1025);
+//            acWaypoint1.setY(125);
+//            acWaypoint2.setX(acBounds.getX() + acBounds.getHeight() / 2);
+//            acWaypoint2.setY(acBounds.getY() + acBounds.getWidth() / 2);
+//            gateway2ac.getWaypoints().add(acWaypoint2);
+//            gateway2ac.getWaypoints().add(acWaypoint1);
             plane.addChildElement(gateway2ac);
         }
         return addEndEvent;

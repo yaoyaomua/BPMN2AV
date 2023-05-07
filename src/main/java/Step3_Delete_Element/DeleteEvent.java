@@ -172,8 +172,8 @@ public class DeleteEvent {
                 System.out.println("No Target!!");
             }
 
-
-            modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(newFlow);
+            event.getParentElement().addChildElement(newFlow);
+//            modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(newFlow);
 
             //update incoming and outgoing
 //            newFlow.getTarget().getIncoming().add(newFlow);
@@ -187,8 +187,8 @@ public class DeleteEvent {
             plane.addChildElement(edge);
 
             //delete flows and event
-            System.out.println("delete event graph: " + id + "_di");
-            event.getDiagramElement().getParentElement().removeChildElement(event.getDiagramElement());
+//            System.out.println("delete event graph: " + id + "_di");
+//            event.getDiagramElement().getParentElement().removeChildElement(event.getDiagramElement());
             System.out.println("delete event: " + id);
             event.getParentElement().removeChildElement(event);
 
@@ -197,8 +197,8 @@ public class DeleteEvent {
             System.out.println("delete flow: " + targetFlow.getId());
             String src = sourceFlow.getId();
             String tgt = targetFlow.getId();
-            sourceFlow.getDiagramElement().getParentElement().removeChildElement(sourceFlow.getDiagramElement());
-            targetFlow.getDiagramElement().getParentElement().removeChildElement(targetFlow.getDiagramElement());
+//            sourceFlow.getDiagramElement().getParentElement().removeChildElement(sourceFlow.getDiagramElement());
+//            targetFlow.getDiagramElement().getParentElement().removeChildElement(targetFlow.getDiagramElement());
             sourceFlow.getParentElement().removeChildElement(sourceFlow);
             targetFlow.getParentElement().removeChildElement(targetFlow);
 
