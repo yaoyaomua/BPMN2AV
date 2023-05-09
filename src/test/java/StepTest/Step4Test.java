@@ -1,8 +1,8 @@
 package StepTest;
 
-import Step4_Well_Structure.DataObjectAddToJSON;
-import Step4_Well_Structure.DataObjectStore;
-import Step4_Well_Structure.MyDataObject;
+import Step4_Well_Structure.*;
+import Step4_Well_Structure.BPStruct.BPMNReader;
+import Step4_Well_Structure.BPStruct.JSON2BPMN;
 import de.hpi.bpt.process.*;
 import de.hpi.bpt.process.Process;
 import ee.ut.bpstruct2.Restructurer;
@@ -27,8 +27,15 @@ public class Step4Test {
 
     @Test
     public void test1() throws Exception {
-        File file = new File("models/acyclic/model7822.bpmn");
-        Process process = BPMN2Reader.parse(file);
+//        File file = new File("models/acyclic/model7818.bpmn");
+        File file = new File("models/diagram (81).bpmn");
+        BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
+        DeleteParalleGatewaySequenceFlow.delete(modelInstance);
+        File stepoutput= new File("models/delete.bpmn");
+        Bpmn.writeModelToFile(stepoutput, modelInstance);
+
+        Delete121Gateway.delete(modelInstance);
+        Process process = BPMNReader.parse(modelInstance);
 //        DataObjectStore.store(new File("models/acyclic/model9214.bpmn"));
 //        BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
 //        Map<String, MyDataObject> datamap = DataObjectStore.storeinname(modelInstance);
@@ -38,22 +45,22 @@ public class Step4Test {
             try {
                 String filename = "models/acyclic/result1.JSON";
                 PrintStream out = new PrintStream(filename);
-
-//                System.out.println(str.proc.getTasks());
-//                for (Task task:str.proc.getTasks()){
-//                    System.out.println(task.getId());
-//                    System.out.println(task.getName());
-//                }
                 JSONObject json = de.hpi.bpt.process.serialize.Process2JSON.convert(str.proc);
-//                DataObjectAddToJSON.addDataObject(json,datamap);
                 out.print(json);
                 out.close();
-            } catch (FileNotFoundException var5) {
-                var5.printStackTrace();
+
+                JSON2BPMN.store(modelInstance,str.proc);
+                File step3output= new File("models/bpstruct1.bpmn");
+                Bpmn.writeModelToFile(step3output, modelInstance);
+
+//                DataObjectAddToJSON.addDataObject(json,datamap);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             System.out.println("Model cannot be restructured");
         }
+
     }
 
 //    public static Process parse(File file) throws JDOMException, IOException {

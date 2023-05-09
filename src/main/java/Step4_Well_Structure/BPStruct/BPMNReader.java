@@ -58,7 +58,7 @@ public class BPMNReader {
         //add gateway
         for (org.camunda.bpm.model.bpmn.instance.Gateway BpmnGateway : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.Gateway.class)){
             if (BpmnGateway.getParentElement() instanceof SubProcess) continue;
-            if (BpmnGateway instanceof ExclusiveGateway || BpmnGateway instanceof EventBasedGateway){
+            if (BpmnGateway instanceof ExclusiveGateway){
                 Gateway gateway = new Gateway(GatewayType.XOR, BpmnGateway.getName());
                 gateway.setId(BpmnGateway.getId());
                 nodes.put(gateway.getId(), gateway);
@@ -68,6 +68,14 @@ public class BPMNReader {
                 nodes.put(gateway.getId(), gateway);
             } else if (BpmnGateway instanceof InclusiveGateway) {
                 Gateway gateway = new Gateway(GatewayType.OR, BpmnGateway.getName());
+                gateway.setId(BpmnGateway.getId());
+                nodes.put(gateway.getId(), gateway);
+            } else if (BpmnGateway instanceof EventBasedGateway) {
+                Gateway gateway = new Gateway(GatewayType.EVENT, BpmnGateway.getName());
+                gateway.setId(BpmnGateway.getId());
+                nodes.put(gateway.getId(), gateway);
+            } else if (BpmnGateway instanceof ComplexGateway) {
+                Gateway gateway = new Gateway(GatewayType.CGT, BpmnGateway.getName());
                 gateway.setId(BpmnGateway.getId());
                 nodes.put(gateway.getId(), gateway);
             } else {
@@ -99,8 +107,8 @@ public class BPMNReader {
 
             ControlFlow flow = process.addControlFlow(src,tgt);
             String label = "";
-            if (sequenceFlow.getConditionExpression() != null){
-                label = sequenceFlow.getConditionExpression().getTextContent();
+            if (sequenceFlow.getName() != null){
+                label = sequenceFlow.getName();
             }
             flow.setLabel(label);
             System.out.println("add flow success!");

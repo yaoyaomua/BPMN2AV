@@ -1,0 +1,63 @@
+{
+  "gateways": [
+    {
+      "id": "a2b61940-5aab-4a61-939b-0f69648d17ba",
+      "type": "AND"
+    },
+    {
+      "id": "56a1db4b-0dbd-4836-aa53-f883ce1842ae",
+      "type": "AND"
+    }
+  ],
+  "flows": [
+    {
+      "tgt": "e9aafa82-2eca-4a5d-8b19-5a0d86310910",
+      "src": "56a1db4b-0dbd-4836-aa53-f883ce1842ae",
+      "label": ""
+    },
+    {
+      "tgt": "a2b61940-5aab-4a61-939b-0f69648d17ba",
+      "src": "e9aafa82-2eca-4a5d-8b19-5a0d86310910",
+      "label": ""
+    },
+    {
+      "tgt": "ee82e3e6-949b-4188-9c00-9dacf1b64c02",
+      "src": "a2b61940-5aab-4a61-939b-0f69648d17ba",
+      "label": ""
+    },
+    {
+      "tgt": "56a1db4b-0dbd-4836-aa53-f883ce1842ae",
+      "src": "7cd4aa31-378a-4a1f-ab98-8d71dcb3a6ad",
+      "label": ""
+    },
+    {
+      "tgt": "a2b61940-5aab-4a61-939b-0f69648d17ba",
+      "src": "704be7c4-1d95-42e8-9be3-92253df683c5",
+      "label": ""
+    },
+    {
+      "tgt": "704be7c4-1d95-42e8-9be3-92253df683c5",
+      "src": "56a1db4b-0dbd-4836-aa53-f883ce1842ae",
+      "label": ""
+    }
+  ],
+  "name": "",
+  "tasks": [
+    {
+      "id": "7cd4aa31-378a-4a1f-ab98-8d71dcb3a6ad",
+      "label": "ProcessStart"
+    },
+    {
+      "id": "ee82e3e6-949b-4188-9c00-9dacf1b64c02",
+      "label": "ProcessEnd"
+    },
+    {
+      "id": "704be7c4-1d95-42e8-9be3-92253df683c5",
+      "label": "Drive to manufacturer"
+    },
+    {
+      "id": "e9aafa82-2eca-4a5d-8b19-5a0d86310910",
+      "label": "Manufacturer portion started_changed"
+    }
+  ]
+}

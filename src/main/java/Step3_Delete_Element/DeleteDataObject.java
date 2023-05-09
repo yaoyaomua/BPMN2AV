@@ -22,8 +22,6 @@ public class DeleteDataObject {
         HashMap<String,String> textData = DataTextState.getText(modelInstance);
 
         List<String> toDelete = new ArrayList<>();
-//        List<String> tgtToDelete = new ArrayList<>();
-//        List<String> srcToDelete = new ArrayList<>();
 
         for (DataObjectReference dataObjectReference : modelInstance.getModelElementsByType(DataObjectReference.class)){
             if (!datas.contains(dataObjectReference.getId())){

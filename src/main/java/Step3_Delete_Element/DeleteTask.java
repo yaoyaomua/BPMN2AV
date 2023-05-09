@@ -1,5 +1,7 @@
 package Step3_Delete_Element;
 
+import Step2_Flow_Transform.CreateBPMNEdge;
+import Step2_Flow_Transform.GetBounds;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
@@ -18,30 +20,23 @@ public class DeleteTask {
     }
 
     public static void delete(BpmnModelInstance modelInstance, String artifact){
-        HashMap<String,String> element2graph = BPMNElement2Graph.map(modelInstance);
-        System.out.println(element2graph.toString());
+//        HashMap<String,String> element2graph = BPMNElement2Graph.map(modelInstance);
+//        System.out.println(element2graph.toString());
 
         List<NoAssociationTask> tasksToDelete = new ArrayList<>();
+        BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
 
-        //get attached boundary event task lis
+        //get attached boundary event task list
         List<String> boundedTask = new ArrayList<>();
         for (BoundaryEvent event : modelInstance.getModelElementsByType(BoundaryEvent.class)){
             boundedTask.add(event.getAttachedTo().getId());
         }
-//        for (Data)
+
         //mark irrelevant elements by check the Associations of the task
         for(Task task: modelInstance.getModelElementsByType(Task.class)){
             Collection<DataInputAssociation> inputDataAssociations = task.getDataInputAssociations();
-//            System.out.println(inputDataAssociations.isEmpty());
             Collection<DataOutputAssociation> outputDataAssociations = task.getDataOutputAssociations();
             boolean isIrr = true;
-//            System.out.println(outputDataAssociations.isEmpty());
-            //if the task do not have input or out put data association, then we mark it in the list
-//            if (inputDataAssociations.isEmpty() && outputDataAssociations.isEmpty()){
-////                System.out.println("add irrelevant task");
-//                isIrr = true;
-////                System.out.println("task to delete : " + nut.getId());
-//            }
             for (DataInputAssociation input : inputDataAssociations){
                 Collection<ItemAwareElement> sources = input.getSources();
                 for (ItemAwareElement itemAwareElement : sources){
@@ -49,7 +44,8 @@ public class DeleteTask {
                     String dataName = dataObjectReference.getName();
                     //check the data is the artifact or not?
                     if (dataName.equals(artifact)){
-                        System.out.println(dataName.equals(artifact));
+//                        System.out.println(dataName.equals(artifact));
+                        //this means the task is relevant to the artifact, so that we need to mark it as relevant
                         isIrr = false;
                     }
                 }
@@ -62,7 +58,7 @@ public class DeleteTask {
                 String dataName = dataObjectReference.getName();
                 //check the data is the artifact or not?
                 if (dataName.equals(artifact)){
-                    System.out.println(dataName.equals(artifact));
+//                    System.out.println(dataName.equals(artifact));
                     isIrr = false;
                 }
             }
@@ -76,168 +72,99 @@ public class DeleteTask {
                 NoAssociationTask nut = new NoAssociationTask(task.getId(),task);
                 tasksToDelete.add(nut);
             }
-            System.out.println("activity name: " + task.getName());
-            System.out.println("activity need delete? : " + isIrr);
+            System.out.println("activity name ' " + task.getName() + " ' need delete? : " + isIrr);
 
         }
-        // Boundary Event
-/*
-        System.out.println("number of task to delete before processing the boundary event:" + tasksToDelete.size());
-        ElementToDelete elementstodelete;
-        elementstodelete = DeleteBoundaryEvent.delete(modelInstance,tasksToDelete);
-        tasksToDelete = elementstodelete.getTaskstodelete();
-        BpmnModelInstance newmodelInstance;
-        newmodelInstance = elementstodelete.getModelInstance();
-        System.out.println(modelInstance.toString());
-        element2graph = BPMNElement2Graph.map(newmodelInstance);
-        System.out.println(element2graph.toString());
-*/
+
         System.out.println("number of taske to delete:" + tasksToDelete.size());
-//        System.out.println(modelInstance.getModelElementById("Activity_1mvshxv").getElementType().getTypeName());
+        System.out.println();
 
         for (NoAssociationTask todelete : tasksToDelete){
             System.out.println("**********************************");
-            System.out.println("to delete the activity:" + todelete.getId());
-            System.out.println("incong size:" + todelete.getTask().getIncoming().size());
-            System.out.println("outgoing size:" + todelete.getTask().getOutgoing().size());
+            System.out.println("start delete the activity:" + todelete.getId() + " name is: " + todelete.getTask().getName());
+//            System.out.println("incong size:" + todelete.getTask().getIncoming().size());
+//            System.out.println("outgoing size:" + todelete.getTask().getOutgoing().size());
 
-            System.out.println("start delete");
             //create two list to store the source tasks and target tasks
             List<String> sources = new ArrayList<>();
             List<String> targets = new ArrayList<>();
             List<String> toDeleteFlow = new ArrayList<>();
 
-
             //add source task id into sources list
             for (SequenceFlow incoming : todelete.getTask().getIncoming()){
-//                if (incoming.getTarget().getId() == todelete.getTask().getId()){
-                    System.out.println("sources id:" + incoming.getSource().getId());
-//                System.out.println("source type" + incoming.getSource());
+//                    System.out.println("sources id:" + incoming.getSource().getId());
                     sources.add(incoming.getSource().getId());
-//                    sources.add(incoming.getTextContent());
                     toDeleteFlow.add(incoming.getId());
-//                }
             }
 
             //add target task id into targets list
             for (SequenceFlow outgoing : todelete.getTask().getOutgoing()){
-//                if (outgoing.getSource().getId() == todelete.getTask().getId()){
-                    System.out.println("targets id:" + outgoing.getTarget().getId());
-//                    targets.add(outgoing.getTextContent());
+//                    System.out.println("targets id:" + outgoing.getTarget().getId());
                     targets.add(outgoing.getTarget().getId());
                     toDeleteFlow.add(outgoing.getId());
-//                }
             }
-            System.out.println("before delete sequence flow: "+ modelInstance.getModelElementsByType(SequenceFlow.class).size());
+            System.out.println("before delete sequence flow number: "+ modelInstance.getModelElementsByType(SequenceFlow.class).size());
 
             for (String id : toDeleteFlow){
                 //delete flow in bpmn
                 modelInstance.getModelElementById(id).getParentElement().removeChildElement(modelInstance.getModelElementById(id));
                 //delete flow in graph
-                modelInstance.getModelElementById(id+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(id+"_di"));
+                //update: we delete flow and shape in graph together in the end part
+//                modelInstance.getModelElementById(id+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(id+"_di"));
                 //update hashmap for element to graph
-                element2graph.remove(id);
+                //we don't need the hashmap anymore
+//                element2graph.remove(id);
             }
             System.out.println("after delete sequence flows:  " + modelInstance.getModelElementsByType(SequenceFlow.class).size());
-
-            System.out.println("sourcr list :" + sources.size());
-            System.out.println("target list :" + targets.size());
-
-//            System.out.println(modelInstance.getModelElementById("Activity_1mvshxv").getElementType().getTypeName());
+//            System.out.println("sourcr list :" + sources.size());
+//            System.out.println("target list :" + targets.size());
 
             //connect source and target one to one
             for (String src : sources){
                 for (String tgt : targets){
-//                    System.out.println(modelInstance.getModelElementById("Activity_1mvshxv").getElementType().getTypeName());
                     SequenceFlow src2tgt = modelInstance.newInstance(SequenceFlow.class);
-//                    System.out.println(modelInstance.getModelElementById("Activity_1mvshxv").getElementType().getTypeName());
-                    String src2tgtID;
-                    do {
-                         src2tgtID = Generate7ID.generate();
-                    }while ( modelInstance.getModelElementById("Flow_" + src2tgtID) != null);
-                    src2tgt.setId("Flow_" + src2tgtID);
-
-                    System.out.println("set new flow id:"+src2tgt.getId());
-                    System.out.println("set sourceRef and targetRef");
-                    System.out.println(src);
-                    System.out.println(tgt);
+                    src2tgt.setId(GenerateID.getID("Flow_",modelInstance));
+                    System.out.println("creat new flow: id: " + src2tgt.getId());
 
                     src2tgt.setTarget(modelInstance.getModelElementById(tgt));
-//                    System.out.println("setTarget " + modelInstance.getModelElementById(src));
-//                    System.out.println("afterset Target:" + src2tgt.getTarget().getId());
                     src2tgt.setSource(modelInstance.getModelElementById(src));
-                    modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(src2tgt);
+                    System.out.println("set sourceRef and targetRef: " + src + " " + tgt);
+
+                    //change this part is because we could add the new flow the the same process of the remove one
+                    todelete.getTask().getParentElement().addChildElement(src2tgt);
+//                    modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(src2tgt);
 
                     //add incoming and outgoing
                     src2tgt.getTarget().getIncoming().add(src2tgt);
                     src2tgt.getSource().getOutgoing().add(src2tgt);
-//                    newFlow.getTarget().getIncoming().add(newFlow);
-//                    newFlow.getSource().getOutgoing().add(newFlow);
 
-                    //add outgoing
-//                    if(modelInstance.getModelElementById(src) instanceof Event){
-//                        Event srcAc = modelInstance.getModelElementById(src);
-//                        srcAc.getOutgoing().add(src2tgt);
-//                    }else if (modelInstance.getModelElementById(src) instanceof Gateway){
-//                        Gateway srcAc = modelInstance.getModelElementById(src);
-//                        srcAc.getOutgoing().add(src2tgt);
-//                    }else if (modelInstance.getModelElementById(src) instanceof SubProcess){
-//                        SubProcess srcAc = modelInstance.getModelElementById(src);
-//                        srcAc.getOutgoing().add(src2tgt);
-//                    }if (modelInstance.getModelElementById(src) instanceof SubProcess){
-//                        Task srcAc = modelInstance.getModelElementById(src);
-//                        srcAc.getOutgoing().add(src2tgt);
-//                    }
-
-                    //add incoming
-//                    if ( modelInstance.getModelElementById(tgt) instanceof Event){
-//                        Event tgtAc = modelInstance.getModelElementById(tgt);
-//                        tgtAc.getIncoming().add(src2tgt);
-//                    }else if (modelInstance.getModelElementById(tgt) instanceof  Gateway){
-//                        Gateway tgtAc = modelInstance.getModelElementById(tgt);
-//                        tgtAc.getIncoming().add(src2tgt);
-//                    }else if (modelInstance.getModelElementById(tgt) instanceof SubProcess){
-//                        SubProcess tgtAc = modelInstance.getModelElementById(tgt);
-//                        tgtAc.getIncoming().add(src2tgt);
-//                    }else {
-//                        Task tgtAc = modelInstance.getModelElementById(tgt);
-//                        tgtAc.getIncoming().add(src2tgt);
-//                    }
-                    System.out.println("after add sequence flow in bpmn: " + modelInstance.getModelElementsByType(SequenceFlow.class).size());;
-
-                    System.out.println("start add sequence flow in graph...");
-
+//                    System.out.println("after add sequence flow in bpmn: " + modelInstance.getModelElementsByType(SequenceFlow.class).size());;
+//                    System.out.println("start add sequence flow in graph...");
                     // Get the BPMN diagram instance
-                    BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
+                    Bounds bounds1 = GetBounds.get(modelInstance,src2tgt.getSource().getId());
+                    Bounds bounds2 = GetBounds.get(modelInstance,src2tgt.getTarget().getId());
 
                     System.out.println(src2tgt.getAttributeValue("targetRef"));
-
-                    BpmnEdge edge = createEdgeForNewSequenceFlow(modelInstance, src2tgt, src, tgt, element2graph);
+                    BpmnEdge edge = CreateBPMNEdge.create(modelInstance,src2tgt,
+                            bounds1.getX() + bounds1.getWidth()/2, bounds1.getY() + bounds1.getHeight()/2,
+                            bounds2.getX() + bounds2.getWidth()/2, bounds2.getY() + bounds2.getHeight()/2);
 
                     plane.addChildElement(edge);
 
-                    element2graph.put(src2tgt.getId(),edge.getId());
                 }
             }
         }
 
-
-        //删除task
+        //delete task
         for (NoAssociationTask task : tasksToDelete){
             modelInstance.getModelElementById(task.getId()).getParentElement().removeChildElement(modelInstance.getModelElementById(task.getId()));
-            modelInstance.getModelElementById(task.getId()+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(task.getId()+"_di"));
-            element2graph.remove(task.getId());
         }
+
+
         System.out.println("**************end delete******************");
         System.out.println("tASK LIST: ");
         for (Task task: modelInstance.getModelElementsByType(Task.class)){
             System.out.println(task.getName());
-        }
-        System.out.println("FLOW LIST: ");
-        for (SequenceFlow sequenceFlow : modelInstance.getModelElementsByType(SequenceFlow.class)){
-            System.out.println(sequenceFlow.getId());
-            System.out.println("sourceRef: "+sequenceFlow.getSource().getId());
-            System.out.println("targetRef: "+sequenceFlow.getTarget().getId());
         }
 
         for (Association association : modelInstance.getModelElementsByType(Association.class)){
@@ -260,32 +187,4 @@ public class DeleteTask {
 
     }
 
-
-    public static BpmnEdge createEdgeForNewSequenceFlow(BpmnModelInstance modelInstance, SequenceFlow sequenceflow, String src, String tgt, HashMap<String,String> element2graph){
-        BpmnEdge edge = modelInstance.newInstance(BpmnEdge.class);
-//        BpmnEdge edge = modelInstance.getModelElementsByType(BpmnEdge.class).iterator().next();
-//        edge.setId(sequenceflow.getId() + "_di");
-//        edge.setBpmnElement(modelInstance.getModelElementById(sequenceflow.getId()));
-
-        Waypoint waypoint1 = modelInstance.newInstance(Waypoint.class);
-        Bounds bound1 = modelInstance.getModelElementById(element2graph.get(src)).getChildElementsByType(Bounds.class).iterator().next();
-        waypoint1.setX(bound1.getX()+bound1.getWidth()/2);
-        waypoint1.setY(bound1.getY()+bound1.getHeight()/2);
-
-        Waypoint waypoint2 = modelInstance.newInstance(Waypoint.class);
-        Bounds bound2 = modelInstance.getModelElementById(element2graph.get(tgt)).getChildElementsByType(Bounds.class).iterator().next();
-        waypoint2.setX(bound2.getX());
-        waypoint2.setY(bound2.getY()+bound2.getHeight()/2);
-
-        edge.getWaypoints().add(waypoint1);
-        edge.getWaypoints().add(waypoint2);
-
-        edge.setId(sequenceflow.getId() + "_di");
-        edge.setBpmnElement(modelInstance.getModelElementById(sequenceflow.getId()));
-//        System.out.println(modelInstance.getModelElementById(sequenceflow.getAttributeValue("sourceRef")));
-//        edge.setTargetElement(modelInstance.getModelElementById(sequenceflow.getAttributeValue("sourceRef")));
-//        edge.setSourceElement(modelInstance.getModelElementById(sequenceflow.getAttributeValue("targetRef")));
-
-        return edge;
-    }
 }

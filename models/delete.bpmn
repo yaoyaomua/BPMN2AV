@@ -56,7 +56,7 @@
           
     </parallelGateway>
         
-    <sequenceFlow id="Flowqrj9oow" sourceRef="myParallelGateway_09x8i4x" targetRef="Activity_0k81wn7"/>
+    <sequenceFlow id="Flowqrj9oow" sourceRef="myParallelGateway_09x8i4x" targetRef="Activity_0bpvenp"/>
         
     <parallelGateway gatewayDirection="Unspecified" id="myParallelGateway_prpp66f">
             
@@ -71,6 +71,7 @@
             
       <incoming>Flow_hw96szs</incoming>
             
+      
       <outgoing>Flow_9q1bnjd</outgoing>
           
     </parallelGateway>
@@ -135,7 +136,8 @@
       <outgoing>Flow_4fvojeq</outgoing>
             
       <outgoing>Flow_ptrf3ei</outgoing>
-          
+            
+    
     </parallelGateway>
         
     <sequenceFlow id="Flow_dv191zu" sourceRef="StartEvent_nhcm2rr" targetRef="StartGateway_aps97bk"/>
@@ -178,7 +180,7 @@
         
     <exclusiveGateway gatewayDirection="Unspecified" id="Gateway_0srvpcg">
             
-      <incoming>Flow_1441mcb</incoming>
+      <incoming>Flow_1l4z54i</incoming>
             
       <outgoing>Flow_05d3pki</outgoing>
             
@@ -187,16 +189,6 @@
     </exclusiveGateway>
         
     <sequenceFlow id="Flow_05d3pki" sourceRef="Gateway_0srvpcg" targetRef="myParallelGateway_mpfy3aq"/>
-        
-    <sequenceFlow id="Flow_1441mcb" sourceRef="Activity_0k81wn7" targetRef="Gateway_0srvpcg"/>
-        
-    <task completionQuantity="1" id="Activity_0k81wn7" isForCompensation="false" name="subprocess" startQuantity="1">
-            
-      <incoming>Flowqrj9oow</incoming>
-            
-      <outgoing>Flow_1441mcb</outgoing>
-          
-    </task>
         
     <sequenceFlow id="Flow_ptrf3ei" sourceRef="StartGateway_aps97bk" targetRef="Activity_0hy8wtw"/>
         
@@ -243,7 +235,42 @@
     <sequenceFlow id="Flow_1jw9y0b" sourceRef="Activity_0vlzllp" targetRef="Activity_0umd7k3"/>
         
     <sequenceFlow id="Flow_1i2llty" sourceRef="Activity_0umd7k3" targetRef="ExclusiveEndGateway_5ljxc60"/>
-      
+        
+    <subProcess completionQuantity="1" id="Activity_0bpvenp" isForCompensation="false" name="sub-process" startQuantity="1" triggeredByEvent="false">
+            
+      <incoming>Flowqrj9oow</incoming>
+            
+      <outgoing>Flow_1l4z54i</outgoing>
+            
+      <startEvent id="Event_1spi9go" isInterrupting="true" name="sub-start" parallelMultiple="false">
+                
+        <outgoing>Flow_0fmeb0m</outgoing>
+              
+      </startEvent>
+            
+      <task completionQuantity="1" id="Activity_1q6jwtc" isForCompensation="false" name="sub" startQuantity="1">
+                
+        <incoming>Flow_0fmeb0m</incoming>
+                
+        <outgoing>Flow_197plnt</outgoing>
+              
+      </task>
+            
+      <sequenceFlow id="Flow_0fmeb0m" sourceRef="Event_1spi9go" targetRef="Activity_1q6jwtc"/>
+            
+      <endEvent id="Event_07009im" name="sub-end">
+                
+        <incoming>Flow_197plnt</incoming>
+              
+      </endEvent>
+            
+      <sequenceFlow id="Flow_197plnt" sourceRef="Activity_1q6jwtc" targetRef="Event_07009im"/>
+          
+    </subProcess>
+        
+    <sequenceFlow id="Flow_1l4z54i" sourceRef="Activity_0bpvenp" targetRef="Gateway_0srvpcg"/>
+        
+  
   </process>
     
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -388,14 +415,6 @@
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape bpmnElement="Activity_0k81wn7" id="Activity_0k81wn7_di">
-                
-        <dc:Bounds height="80" width="100" x="990" y="650"/>
-                
-        <bpmndi:BPMNLabel/>
-              
-      </bpmndi:BPMNShape>
-            
       <bpmndi:BPMNShape bpmnElement="Activity_0hy8wtw" id="Activity_0hy8wtw_di">
                 
         <dc:Bounds height="80" width="100" x="470" y="80"/>
@@ -428,11 +447,69 @@
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNEdge bpmnElement="Flowqrj9oow" id="Flowqrj9oow_di" sourceElement="myParallelGateway_09x8i4x_di" targetElement="Activity_0k81wn7_di">
+      <bpmndi:BPMNShape bpmnElement="Activity_0bpvenp" id="Activity_0bpvenp_di" isExpanded="true">
                 
-        <di:waypoint x="1033" y="523"/>
+        <dc:Bounds height="200" width="350" x="650" y="610"/>
                 
-        <di:waypoint x="1020" y="650"/>
+        <bpmndi:BPMNLabel/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Event_1spi9go" id="Event_1spi9go_di">
+                
+        <dc:Bounds height="36" width="36" x="690" y="692"/>
+                
+        <bpmndi:BPMNLabel>
+                    
+          <dc:Bounds height="14" width="44" x="686" y="735"/>
+                  
+        </bpmndi:BPMNLabel>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Activity_1q6jwtc" id="Activity_1q6jwtc_di">
+                
+        <dc:Bounds height="80" width="100" x="780" y="670"/>
+                
+        <bpmndi:BPMNLabel/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="Event_07009im" id="Event_07009im_di">
+                
+        <dc:Bounds height="36" width="36" x="942" y="692"/>
+                
+        <bpmndi:BPMNLabel>
+                    
+          <dc:Bounds height="14" width="40" x="940" y="735"/>
+                  
+        </bpmndi:BPMNLabel>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="Flow_0fmeb0m" id="Flow_0fmeb0m_di">
+                
+        <di:waypoint x="726" y="710"/>
+                
+        <di:waypoint x="780" y="710"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="Flow_197plnt" id="Flow_197plnt_di">
+                
+        <di:waypoint x="880" y="710"/>
+                
+        <di:waypoint x="942" y="710"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="Flowqrj9oow" id="Flowqrj9oow_di" sourceElement="myParallelGateway_09x8i4x_di" targetElement="Activity_0bpvenp_di">
+                
+        <di:waypoint x="1035" y="525"/>
+                
+        <di:waypoint x="1035" y="620"/>
+                
+        <di:waypoint x="1000" y="620"/>
               
       </bpmndi:BPMNEdge>
             
@@ -591,14 +668,6 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_1441mcb" id="Flow_1441mcb_di">
-                
-        <di:waypoint x="1090" y="680"/>
-                
-        <di:waypoint x="1205" y="680"/>
-              
-      </bpmndi:BPMNEdge>
-            
       <bpmndi:BPMNEdge bpmnElement="Flow_ptrf3ei" id="Flow_ptrf3ei_di">
                 
         <di:waypoint x="330" y="475"/>
@@ -666,7 +735,16 @@
         <di:waypoint x="1910" y="525"/>
               
       </bpmndi:BPMNEdge>
-          
+            
+      <bpmndi:BPMNEdge bpmnElement="Flow_1l4z54i" id="Flow_1l4z54i_di">
+                
+        <di:waypoint x="1000" y="680"/>
+                
+        <di:waypoint x="1205" y="680"/>
+              
+      </bpmndi:BPMNEdge>
+            
+    
     </bpmndi:BPMNPlane>
       
   </bpmndi:BPMNDiagram>

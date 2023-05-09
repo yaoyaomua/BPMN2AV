@@ -1,11 +1,17 @@
 package Step4_Well_Structure;
 
+import Step2_Flow_Transform.AddIncomingOrOutcoming;
+import Step2_Flow_Transform.CreateBPMNEdge;
+import Step2_Flow_Transform.GetBounds;
 import Step3_Delete_Element.Generate7ID;
+import Step3_Delete_Element.GenerateID;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
+import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
+import org.camunda.bpm.model.bpmn.instance.dc.Bounds;
 import org.camunda.bpm.model.bpmn.instance.di.Waypoint;
 
 import java.util.ArrayList;
@@ -22,12 +28,13 @@ public class Delete121Gateway {
     public static void delete(BpmnModelInstance modelInstance){
         List<String> toDeleteGateway = new ArrayList<>();
         BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
+        Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
 
         //all types of gateway can be get by Gateway's types.
         //so we do not need to get different gateway by the sub classes name.
         //get to delete gateway list
         for (Gateway gateway : modelInstance.getModelElementsByType(Gateway.class)){
-            if ((gateway.getIncoming() == null || gateway.getIncoming().size() == 1) && (gateway.getOutgoing() == null || gateway.getOutgoing().size() == 1)){
+            if (gateway.getIncoming().size() == 1 && gateway.getOutgoing().size() == 1){
                 toDeleteGateway.add(gateway.getId());
             }
         }
@@ -38,11 +45,7 @@ public class Delete121Gateway {
                 //initial new flow
                 SequenceFlow newFlow = modelInstance.newInstance(SequenceFlow.class);
                 //set id for new flow
-                String newFlowID;
-                do {
-                    newFlowID = Generate7ID.generate();
-                }while ( modelInstance.getModelElementById("Flow_" + newFlowID) != null);
-                newFlow.setId("Flow_" + newFlowID);
+                newFlow.setId(GenerateID.getID("Flow_",modelInstance));
                 //set flow's incoming activity
                 //get gateways incoming flow
                 SequenceFlow incomingFlow = gateway.getIncoming().iterator().next();
@@ -52,87 +55,41 @@ public class Delete121Gateway {
                 SequenceFlow outgoingFlow = gateway.getOutgoing().iterator().next();
                 //set target for new flow
                 newFlow.setTarget(outgoingFlow.getTarget());
-
                 //add sequence flow into model instance
-                modelInstance.getModelElementsByType(Process.class).iterator().next().addChildElement(newFlow);
-
-                String src = incomingFlow.getSource().getId();
-                String tgt = outgoingFlow.getTarget().getId();
-                System.out.println(src);
-                System.out.println(tgt);
-
+                incomingFlow.getParentElement().addChildElement(newFlow);
+//                plane.addChildElement(newFlow);
                 //update incoming and outgoing
-                newFlow.getTarget().getIncoming().add(newFlow);
-                newFlow.getSource().getOutgoing().add(newFlow);
-                //add outgoing
-//                if(modelInstance.getModelElementById(src) instanceof StartEvent){
-//                    StartEvent srcAc = modelInstance.getModelElementById(src);
-//                    srcAc.getOutgoing().add(newFlow);
-//                }else if (modelInstance.getModelElementById(src) instanceof Gateway){
-//                    Gateway srcAc = modelInstance.getModelElementById(src);
-//                    srcAc.getOutgoing().add(newFlow);
-//                }else {
-//                    Task srcAc = modelInstance.getModelElementById(src);
-//                    srcAc.getOutgoing().add(newFlow);
-//                }
-//
-//                //add incoming
-//                if ( modelInstance.getModelElementById(tgt) instanceof EndEvent){
-//                    EndEvent tgtAc = modelInstance.getModelElementById(tgt);
-//                    tgtAc.getIncoming().add(newFlow);
-//                }else if (modelInstance.getModelElementById(tgt) instanceof  Gateway){
-//                    Gateway tgtAc = modelInstance.getModelElementById(tgt);
-//                    tgtAc.getIncoming().add(newFlow);
-//                }else {
-//                    Task tgtAc = modelInstance.getModelElementById(tgt);
-//                    tgtAc.getIncoming().add(newFlow);
-//                }
+                AddIncomingOrOutcoming.AddIncomingToElement(modelInstance,newFlow.getTarget().getId(),newFlow);
+                AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance,newFlow.getSource().getId(),newFlow);
 
+                //find bounds
+                Bounds bounds1 = GetBounds.get(modelInstance,newFlow.getSource().getId());
+                Bounds bounds2 = GetBounds.get(modelInstance,newFlow.getTarget().getId());
 
+                BpmnEdge edge = CreateBPMNEdge.create(modelInstance,newFlow,
+                        bounds1.getX() + bounds1.getWidth()/2, bounds1.getY() + bounds1.getHeight()/2,
+                        bounds2.getX() + bounds2.getWidth()/2, bounds2.getY() + bounds2.getHeight()/2);
 
-                //initial new flow graph
-                BpmnEdge edge = modelInstance.newInstance(BpmnEdge.class);
-                edge.setId(newFlowID + "_di");
-                edge.setBpmnElement(modelInstance.getModelElementById(newFlow.getId()));
-
-                //get source waypoint
-                Waypoint waypoint1 = modelInstance.newInstance(Waypoint.class);
-                Waypoint sourcePoint = modelInstance.getModelElementById(incomingFlow.getId()+"_di").getChildElementsByType(Waypoint.class).iterator().next();
-                waypoint1.setX(sourcePoint.getX());
-                waypoint1.setY(sourcePoint.getY());
-                edge.getWaypoints().add(waypoint1);
-
-                //get target waypoint
-                Waypoint waypoint2 = modelInstance.newInstance(Waypoint.class);
-                Collection<Waypoint> targetPoints = modelInstance.getModelElementById(outgoingFlow.getId()+"_di").getChildElementsByType(Waypoint.class);
-                Iterator<Waypoint> iterator = targetPoints.iterator();
-                Waypoint targetPoint = iterator.next();;
-                if (iterator.hasNext()){
-                    targetPoint = iterator.next();
-                }
-//                System.out.println(targetPoint.getX());
-//                System.out.println(targetPoint.getY());
-                waypoint2.setX(targetPoint.getX());
-                waypoint2.setY(targetPoint.getY());
-//                System.out.println(waypoint2.getX());
-//                System.out.println(waypoint2.getY());
-                edge.getWaypoints().add(waypoint2);
-                //set id for edge
-                edge.setId(newFlowID + "_di");
-                edge.setBpmnElement(modelInstance.getModelElementById(newFlow.getId()));
                 plane.addChildElement(edge);
 
                 //delete flow and edge
                 incomingFlow.getParentElement().removeChildElement(incomingFlow);
                 outgoingFlow.getParentElement().removeChildElement(outgoingFlow);
-//                modelInstance.getModelElementById(id).getParentElement().removeChildElement(modelInstance.getModelElementById(id));
-                //delete flow in graph
-                modelInstance.getModelElementById(incomingFlow.getId()+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(incomingFlow.getId()+"_di"));
-                modelInstance.getModelElementById(outgoingFlow.getId()+"_di").getParentElement().removeChildElement(modelInstance.getModelElementById(outgoingFlow.getId()+"_di"));
 
 
             }
             gateway.getParentElement().removeChildElement(gateway);
+        }
+
+        for (BpmnEdge edge: modelInstance.getModelElementsByType(BpmnEdge.class)){
+            if (edge.getBpmnElement() == null) {
+                edge.getParentElement().removeChildElement(edge);
+            }
+        }
+        for (BpmnShape shape : modelInstance.getModelElementsByType(BpmnShape.class)){
+            if (shape.getBpmnElement() == null){
+                shape.getParentElement().removeChildElement(shape);
+            }
         }
     }
 }

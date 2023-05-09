@@ -7,20 +7,11 @@ import org.jdom.Element;
 public class AddIncomingOrOutcoming {
     public static void AddIncomingToElement(BpmnModelInstance modelInstance,String elementId,SequenceFlow newOutgoingFlow)
     {
-        if (modelInstance.getModelElementById(elementId) instanceof StartEvent){
-            StartEvent ac = modelInstance.getModelElementById(elementId);
-            ac.getIncoming().add(newOutgoingFlow);
-        }else if (modelInstance.getModelElementById(elementId) instanceof EndEvent){
-            EndEvent ac = modelInstance.getModelElementById(elementId);
+        if (modelInstance.getModelElementById(elementId) instanceof Event){
+            Event ac = modelInstance.getModelElementById(elementId);
             ac.getIncoming().add(newOutgoingFlow);
         }else if (modelInstance.getModelElementById(elementId) instanceof Gateway){
             Gateway ac = modelInstance.getModelElementById(elementId);
-            ac.getIncoming().add(newOutgoingFlow);
-        }else if (modelInstance.getModelElementById(elementId) instanceof IntermediateThrowEvent){
-            IntermediateThrowEvent ac = modelInstance.getModelElementById(elementId);
-            ac.getIncoming().add(newOutgoingFlow);
-        }else if (modelInstance.getModelElementById(elementId) instanceof IntermediateCatchEvent){
-            IntermediateCatchEvent ac = modelInstance.getModelElementById(elementId);
             ac.getIncoming().add(newOutgoingFlow);
         }else if (modelInstance.getModelElementById(elementId) instanceof Task){
             Task ac = modelInstance.getModelElementById(elementId);
