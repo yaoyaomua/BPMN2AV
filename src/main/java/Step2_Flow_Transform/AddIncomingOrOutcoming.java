@@ -19,7 +19,11 @@ public class AddIncomingOrOutcoming {
         }else if (modelInstance.getModelElementById(elementId) instanceof SubProcess){
             SubProcess ac = modelInstance.getModelElementById(elementId);
             ac.getIncoming().add(newOutgoingFlow);
+        }else if (modelInstance.getModelElementById(elementId) instanceof BoundaryEvent){
+            BoundaryEvent ac = modelInstance.getModelElementById(elementId);
+            ac.getIncoming().add(newOutgoingFlow);
         }else {
+            System.out.println(modelInstance.getModelElementById(elementId).getElementType());
             System.out.println("Warning : can not add incoming!!!!!!");
         }
 //        String elementType=modelInstance.getModelElementById(elementId).getElementType().getTypeName();
@@ -81,7 +85,11 @@ public class AddIncomingOrOutcoming {
         }else if (modelInstance.getModelElementById(elementId) instanceof SubProcess){
             SubProcess ac = modelInstance.getModelElementById(elementId);
             ac.getOutgoing().add(newIncmoingFlow);
+        }else if (modelInstance.getModelElementById(elementId) instanceof BoundaryEvent){
+            BoundaryEvent ac = modelInstance.getModelElementById(elementId);
+            ac.getOutgoing().add(newIncmoingFlow);
         }else {
+            System.out.println(modelInstance.getModelElementById(elementId).getElementType().getTypeName());
             System.out.println("Warning : can not add outgoing!!!!!!");
         }
 //        String elementType=modelInstance.getModelElementById(elementId).getElementType().getTypeName();

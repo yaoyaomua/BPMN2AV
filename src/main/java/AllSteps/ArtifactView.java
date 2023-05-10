@@ -92,5 +92,7 @@ public class ArtifactView {
         System.out.println("*************************");
         System.out.println("delete 121 gateway start:");
         Delete121Gateway.delete(modelInstance);
+
+
     }
 }
