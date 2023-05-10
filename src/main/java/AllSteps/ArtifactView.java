@@ -6,13 +6,16 @@ import Step1_Delete_Pool.MergeProcess;
 import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
 import Step3_Delete_Element.*;
+import Step4_Well_Structure.BPStruct.BPStruct;
 import Step4_Well_Structure.Delete121Gateway;
 import Step4_Well_Structure.DeleteParalleGatewaySequenceFlow;
 import Step4_Well_Structure.DeleteRepeatFlow;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.MessageFlow;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
+import org.jdom.JDOMException;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -22,7 +25,7 @@ public class ArtifactView {
     public ArtifactView() {
     }
 
-    public static void extract(BpmnModelInstance modelInstance, String artifact){
+    public static void extract(BpmnModelInstance modelInstance, String artifact) throws IOException, JDOMException {
         Collection<MessageFlow> messageflows;
 
         //step 1 delete pool and store message flows
@@ -92,6 +95,18 @@ public class ArtifactView {
         System.out.println("*************************");
         System.out.println("delete 121 gateway start:");
         Delete121Gateway.delete(modelInstance);
+
+        System.out.println("*************************");
+        System.out.println("delete no use flows start:");
+        DeleteParalleGatewaySequenceFlow.delete(modelInstance);
+//
+        System.out.println("*************************");
+        System.out.println("BPStruct:");
+        BPStruct.run(modelInstance);
+
+//        System.out.println("*************************");
+//        System.out.println("BPStruct:");
+//        BPStruct.run(modelInstance);
 
 
     }
