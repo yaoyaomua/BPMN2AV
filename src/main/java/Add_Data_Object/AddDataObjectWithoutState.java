@@ -1,8 +1,14 @@
 package Add_Data_Object;
 
+import Step2_Flow_Transform.AddIncomingOrOutcoming;
+import Step2_Flow_Transform.CreateBPMNEdge;
+import Step2_Flow_Transform.CreateBPMNShape;
+import Step2_Flow_Transform.GetBounds;
+import Step3_Delete_Element.Generate7ID;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
+import org.camunda.bpm.model.bpmn.instance.dc.Bounds;
 
 import java.util.*;
 
@@ -14,6 +20,118 @@ public class AddDataObjectWithoutState {
         //unbindingArtifact(modelInstance,artifactName);
 
         // diagram for bindingArtifact
+        for (String bindingElement : bindingElements)
+        {
+            String newID;
+            SequenceFlow sequenceFlow = null;
+            BaseElement baseElement = modelInstance.getModelElementById(bindingElement);
+            if (baseElement instanceof Task)
+            {
+               Task element = modelInstance.getModelElementById(bindingElement);
+               sequenceFlow = element.getIncoming().iterator().next();
+
+            }
+
+           // BaseElement flowElement =modelInstance.getModelElementById(bindingElement);
+            while (!(baseElement instanceof Process))
+            {
+                baseElement = (BaseElement) baseElement.getParentElement();
+            }
+            Process process = (Process) baseElement;
+            System.out.println(process.getId());
+            IntermediateCatchEvent intermediateCatchEvent = modelInstance.newInstance(IntermediateCatchEvent.class);
+            do {
+                newID = Generate7ID.generate();
+            }while(modelInstance.getModelElementById("myIntermediateCatchEvent_"+newID)!=null);
+            intermediateCatchEvent.setId("myIntermediateCatchEvent_"+newID);
+            process.addChildElement(intermediateCatchEvent);
+
+            //add an sequence flow between activity and event
+            SequenceFlow incoming = modelInstance.newInstance(SequenceFlow.class);
+            do {
+                newID = Generate7ID.generate();
+            }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
+            incoming.setId("Flow"+newID);
+            incoming.setTarget(intermediateCatchEvent);
+            incoming.setSource(sequenceFlow.getSource());
+            process.addChildElement(incoming);
+            //set outgoing of the preelement
+            AddIncomingOrOutcoming.AddOutgoingToElement(modelInstance, sequenceFlow.getSource().getId(),incoming);
+            //set outgoing of the event
+            intermediateCatchEvent.getIncoming().add(incoming);
+
+            //
+            SequenceFlow outgoing = modelInstance.newInstance(SequenceFlow.class);
+            do {
+                newID = Generate7ID.generate();
+            }while(modelInstance.getModelElementById("Flow_"+newID)!=null);
+            outgoing.setId("Flow"+newID);
+            outgoing.setTarget(sequenceFlow.getTarget());
+            outgoing.setSource(intermediateCatchEvent);
+            process.addChildElement(outgoing);
+            //set incoming of the preelement
+            AddIncomingOrOutcoming.AddIncomingToElement(modelInstance, sequenceFlow.getTarget().getId(),outgoing);
+            //set incoming of the event
+            intermediateCatchEvent.getOutgoing().add(outgoing);
+
+
+            //DataObject
+            DataObject dataObject = modelInstance.newInstance(DataObject.class);
+            do {
+                newID = Generate7ID.generate();
+            } while (modelInstance.getModelElementById("myDataObject" + newID) != null);
+            dataObject.setId("myDataObject" + newID);
+            process.addChildElement(dataObject);
+            //DataReference
+            DataObjectReference dataObjectReference = modelInstance.newInstance(DataObjectReference.class);
+            do {
+                newID = Generate7ID.generate();
+            } while (modelInstance.getModelElementById("myDataReference" + newID) != null);
+            dataObjectReference.setId("myDataReference" + newID);
+            dataObjectReference.setDataObject(dataObject);
+            dataObjectReference.setName(artifactName);
+            process.addChildElement(dataObjectReference);
+            //Output Association
+            //Property
+            Property property = modelInstance.newInstance(Property.class);
+            do {
+                newID = Generate7ID.generate();
+            } while (modelInstance.getModelElementById("myProperty" + newID) != null);
+            property.setId("myProperty" + newID);
+            property.setName("__sourceRef__"+newID);
+            intermediateCatchEvent.addChildElement(property);
+            intermediateCatchEvent.getProperties().add(property);
+
+            DataOutputAssociation outputAssociation = modelInstance.newInstance(DataOutputAssociation.class);
+            do {
+                newID = Generate7ID.generate();
+            } while (modelInstance.getModelElementById("myOutputAssociation" + newID) != null);
+            outputAssociation.setId("myOutputAssociation" + newID);
+            outputAssociation.setTarget(dataObjectReference);
+            outputAssociation.getSources().add(property);
+            intermediateCatchEvent.getDataOutputAssociations().add(outputAssociation);
+            intermediateCatchEvent.addChildElement(outputAssociation);
+
+
+            // ######## diagram ############
+            Bounds sourceBound = GetBounds.get(modelInstance,sequenceFlow.getSource().getId());
+            Bounds targetBound = GetBounds.get(modelInstance,sequenceFlow.getTarget().getId());
+            // ######## Diagram: interEvent ########
+            CreateBPMNShape.create(modelInstance,intermediateCatchEvent.getId(),sourceBound.getX()+50,sourceBound.getY(),36.0,36.0);
+            Bounds eventBound = GetBounds.get(modelInstance,intermediateCatchEvent.getId());
+            // ######## Diagram: sequenceFlow ########
+            CreateBPMNEdge.create(modelInstance, incoming, sourceBound.getX(),sourceBound.getY(),eventBound.getX(),eventBound.getY());
+            CreateBPMNEdge.create(modelInstance, outgoing, eventBound.getX(),eventBound.getY(),targetBound.getX(),targetBound.getY());
+            // ######## Diagram: DataReference ########
+            CreateBPMNShape.create(modelInstance,dataObjectReference.getId(),eventBound.getX(),eventBound.getY()-50,36.0,50.0);
+            Bounds dataReferenceBound = GetBounds.get(modelInstance,dataObjectReference.getId());
+            // ######## Diagram: Output Association ########
+            CreateBPMNEdge.create(modelInstance,outputAssociation, eventBound.getX(),eventBound.getY(),dataReferenceBound.getX(),dataReferenceBound.getY());
+            // delete sequence flow
+            modelInstance.getModelElementById(sequenceFlow.getSource().getId()).removeChildElement(sequenceFlow);
+            modelInstance.getModelElementById(sequenceFlow.getTarget().getId()).removeChildElement(sequenceFlow);
+            modelInstance.getModelElementById(sequenceFlow.getId()).getParentElement().removeChildElement(sequenceFlow);
+        }
         // diagram for unbindingArtifact
     }
     public static Collection<String> bindingArtifact(BpmnModelInstance modelInstance,String artifactName) {
@@ -96,12 +214,16 @@ public class AddDataObjectWithoutState {
             {
                 BaseElement checkSourceElement = modelInstance.getModelElementById(bindingElementId);
                 BaseElement checkTargetElement = modelInstance.getModelElementById(bindingElementId);
+                //deal with boundary event
                 if (modelInstance.getModelElementById(bindingElementId) instanceof BoundaryEvent)
                 {
                     SubProcess subActivity = modelInstance.getModelElementById(((BoundaryEvent) modelInstance.getModelElementById(bindingElementId)).getAttachedTo().getId());
                     checkTargetElement = (BaseElement) subActivity.getChildElementsByType(StartEvent.class).iterator().next();
                     checkSourceElement = (BaseElement) subActivity.getChildElementsByType(EndEvent.class).iterator().next();
                 }
+                //deal with subprocess
+                if (modelInstance.getModelElementById(bindingElementId).getParentElement().getParentElement() instanceof SubProcess)
+                {}
                 if (checkSourceElement.getId().equals(messageFlow.getSource().getId()))
                 {
                     isBefore = true;
@@ -117,15 +239,17 @@ public class AddDataObjectWithoutState {
                     BaseElement currentSourceElement = modelInstance.getModelElementById(messageFlow.getSource().getId());
                     BaseElement currentTargetElement = modelInstance.getModelElementById(messageFlow.getTarget().getId());
                     if (!isBefore) {
-                        isBefore = isElementBefore(modelInstance, currentSourceElement, checkSourceElement);
+                        Collection<String> beforeCurrentIds = new ArrayList<>();
+                        isBefore = isElementBefore(modelInstance, currentSourceElement, checkSourceElement,beforeCurrentIds);
                     }
                     if (!isAfter) {
-                        isAfter = isElementAfter(modelInstance, currentTargetElement, checkTargetElement);
+                        Collection<String> afterCurrentIds = new ArrayList<>();
+                        isAfter = isElementAfter(modelInstance, currentTargetElement, checkTargetElement,afterCurrentIds);
                         deleteBindingElement = bindingElementId;
                     }
                 }
             }
-            System.out.println(isAfter+""+isBefore);
+            System.out.println(""+isBefore+""+isAfter);
             if (isAfter == true && isBefore == true)
             {
                 System.out.println(deleteBindingElement);
@@ -177,9 +301,16 @@ public class AddDataObjectWithoutState {
         }*/
 
     }
-    public static boolean isElementBefore(BpmnModelInstance modelInstance,BaseElement currentElement,BaseElement targetElement)
+    public static boolean isElementBefore(BpmnModelInstance modelInstance,BaseElement currentElement,BaseElement targetElement,Collection<String> currentId)
     {
         Collection<SequenceFlow> sequenceFlows = new ArrayList<>();
+        // check loop
+        if (currentId.contains(currentElement.getId()))
+        {
+            return false;
+        }
+        currentId.add(currentElement.getId());
+
         if (currentElement instanceof Task)
         {
             Task task  = modelInstance.getModelElementById(currentElement.getId());
@@ -210,6 +341,11 @@ public class AddDataObjectWithoutState {
             IntermediateCatchEvent intermediateCatchEvent  = modelInstance.getModelElementById(currentElement.getId());
             sequenceFlows = intermediateCatchEvent.getIncoming();
         }
+        else if(currentElement instanceof Gateway)
+        {
+            Gateway gateway  = modelInstance.getModelElementById(currentElement.getId());
+            sequenceFlows = gateway.getIncoming();
+        }
         for (SequenceFlow sequenceFlow : sequenceFlows)
         {
             BaseElement sourceElement = modelInstance.getModelElementById(sequenceFlow.getSource().getId());
@@ -219,7 +355,7 @@ public class AddDataObjectWithoutState {
             }
             else
             {
-                boolean isBefore = isElementBefore(modelInstance,sourceElement,targetElement);
+                boolean isBefore = isElementBefore(modelInstance,sourceElement,targetElement,currentId);
                 if (isBefore)
                 {
                     return true;
@@ -229,9 +365,15 @@ public class AddDataObjectWithoutState {
         }
         return false;
     }
-    public static boolean isElementAfter(BpmnModelInstance modelInstance,BaseElement currentElement,BaseElement targetElement)
+    public static boolean isElementAfter(BpmnModelInstance modelInstance,BaseElement currentElement,BaseElement targetElement, Collection<String> currentId)
     {
         Collection<SequenceFlow> sequenceFlows = new ArrayList<>();
+        // check loop
+        if (currentId.contains(currentElement.getId()))
+        {
+            return false;
+        }
+        currentId.add(currentElement.getId());
 
         if (currentElement instanceof Task)
         {
@@ -263,6 +405,11 @@ public class AddDataObjectWithoutState {
             IntermediateCatchEvent intermediateCatchEvent  = modelInstance.getModelElementById(currentElement.getId());
             sequenceFlows = intermediateCatchEvent.getOutgoing();
         }
+        else if(currentElement instanceof Gateway)
+        {
+            Gateway gateway  = modelInstance.getModelElementById(currentElement.getId());
+            sequenceFlows = gateway.getOutgoing();
+        }
         for (SequenceFlow sequenceFlow : sequenceFlows)
         {
             BaseElement sourceElement = modelInstance.getModelElementById(sequenceFlow.getTarget().getId());
@@ -272,7 +419,7 @@ public class AddDataObjectWithoutState {
             }
             else
             {
-                boolean isAfter = isElementAfter(modelInstance,sourceElement,targetElement);
+                boolean isAfter = isElementAfter(modelInstance,sourceElement,targetElement,currentId);
                 if (isAfter)
                 {
                     return true;
@@ -299,6 +446,21 @@ public class AddDataObjectWithoutState {
     public static Collection<BaseElement> setElementsOrderWithSubProcess(BpmnModelInstance modelInstance,FlowNode currentNode,Collection<BaseElement> baseElementList) {
         Boolean haveLoop = false;
         while (!(currentNode instanceof EndEvent)) {
+            //deal with subprocess
+            if (currentNode instanceof SubProcess)
+            {
+                FlowNode startSubProcess = currentNode.getChildElementsByType(StartEvent.class).iterator().next();
+                setElementsOrderWithSubProcess(modelInstance,startSubProcess,baseElementList);
+
+            }
+            //deal with boundary event
+            for (BoundaryEvent boundaryEvent: modelInstance.getModelElementsByType(BoundaryEvent.class))
+            {
+                if(boundaryEvent.getAttachedTo().getId().equals(currentNode.getId()))
+                {
+                    setElementsOrderWithSubProcess(modelInstance,boundaryEvent,baseElementList);
+                }
+            }
 
             Collection<SequenceFlow> outgoingFlows = currentNode.getOutgoing();
             if (outgoingFlows.size() == 1 && !(currentNode instanceof Gateway)) {
@@ -346,7 +508,6 @@ public class AddDataObjectWithoutState {
             while (!((currentSequenceFlow.getTarget() instanceof Gateway)&&(currentSequenceFlow.getTarget().getOutgoing().size()==1))){
 
                 // normal activity/event
-                System.out.println(currentSequenceFlow.getTarget().getId());
                 if ((currentSequenceFlow.getTarget().getOutgoing().size() == 1)&& !(currentSequenceFlow.getTarget() instanceof Gateway)) {
                     System.out.println("Element ID: " + currentSequenceFlow.getTarget().getId() + ", Type: " + currentSequenceFlow.getTarget().getElementType().getTypeName());
                     baseElementList.add(currentSequenceFlow.getTarget());
