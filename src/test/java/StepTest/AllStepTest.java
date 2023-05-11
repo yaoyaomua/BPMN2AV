@@ -37,7 +37,7 @@ public class AllStepTest {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
             }
 
-            String artifact = "Truck";
+            String artifact = "Container";
 
             ArtifactView.extract(modelInstance,artifact);
 

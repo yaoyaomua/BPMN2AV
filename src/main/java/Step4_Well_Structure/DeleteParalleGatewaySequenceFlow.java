@@ -7,6 +7,11 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import org.camunda.bpm.model.bpmn.instance.StartEvent;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class DeleteParalleGatewaySequenceFlow {
 
 
@@ -18,9 +23,10 @@ public class DeleteParalleGatewaySequenceFlow {
             if (sequenceFlow.getSource() instanceof ParallelGateway && sequenceFlow.getTarget() instanceof ParallelGateway){
                 ParallelGateway src = modelInstance.getModelElementById(sequenceFlow.getSource().getId());
                 ParallelGateway tgt = modelInstance.getModelElementById(sequenceFlow.getTarget().getId());
+                HashSet<FlowNode> used = new HashSet<>();
                 if (src.getIncoming().size() == 1 && src.getOutgoing().size() > 1 && tgt.getIncoming().size() > 1 && tgt.getOutgoing().size() == 1){
-                    System.out.println(dfs(modelInstance,sequenceFlow,tgt,src));
-                    if (dfs(modelInstance,sequenceFlow,tgt,src)){
+                    System.out.println(dfs(modelInstance,sequenceFlow,tgt,src,used));
+                    if (dfs(modelInstance,sequenceFlow,tgt,src,used)){
 //                        sequenceFlow.getDiagramElement().removeChildElement(sequenceFlow.getDiagramElement());
                         sequenceFlow.getParentElement().removeChildElement(sequenceFlow);
                     }
@@ -37,27 +43,39 @@ public class DeleteParalleGatewaySequenceFlow {
         }
     }
 
-    private static boolean dfs(BpmnModelInstance modelInstance, SequenceFlow sequenceFlow, FlowNode start, FlowNode target){
-        System.out.println();
-        System.out.println("dfs start again");
+    private static boolean dfs(BpmnModelInstance modelInstance, SequenceFlow sequenceFlow, FlowNode start, FlowNode target, HashSet<FlowNode> used){
 
-        for (SequenceFlow flow : start.getIncoming()){
-            System.out.println("遍历flow：" + flow.getId());
-            System.out.println(start.getId());
-            if (flow.getId() == sequenceFlow.getId()) continue;
-            start = flow.getSource();
-            System.out.println("change start:" + start.getId());
-            System.out.println("target is :" + target.getId());
 
-            if (start instanceof StartEvent) continue;
-            if (start.getId().equals(target.getId())) {
-                System.out.println("already find !!!!!!!");
-
-                return true;
-            }else {
-                return dfs(modelInstance,sequenceFlow,start,target);
+        Deque<FlowNode> queue = new ArrayDeque<>();
+        queue.addLast(start);
+        used.add(start);
+        while (!queue.isEmpty()){
+            FlowNode temp = queue.getFirst();
+            for (SequenceFlow flow : temp.getIncoming()){
+                if (flow.getId().equals(sequenceFlow.getId())) continue;
+                FlowNode src = flow.getSource();
+                if (src.getId().equals(target.getId())){
+                    return true;
+                }
+                if (!used.contains(src)){
+                    queue.addLast(flow.getSource());
+                }
             }
+            queue.removeFirst();
         }
         return false;
+//        if (start.getId().equals(target.getId())) return true;
+//
+//        for (SequenceFlow flow : start.getIncoming()){
+//            System.out.println("遍历flow：" + flow.getId());
+//            if (flow.getId().equals(sequenceFlow.getId())) continue;
+//            start = flow.getSource();
+//            System.out.println("change start:" + start.getId());
+//            System.out.println("target is :" + target.getId());
+//
+//            if (start instanceof StartEvent) continue;
+//            return dfs(modelInstance,sequenceFlow,start,target);
+//        }
+//        return false;
     }
 }

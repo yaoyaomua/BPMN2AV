@@ -37,8 +37,8 @@ public class Step4Test {
         HashMap<BoundaryEvent, BpmnShape> shapes = BoundaryEventForBPStruct.store(modelInstance);
         HashMap<IntermediateThrowEvent,BoundaryEvent> events = BoundaryEventForBPStruct.pre(modelInstance);
         Process process = BPMNReader.parse(modelInstance);
-        File stepoutput= new File("models/delete.bpmn");
-        Bpmn.writeModelToFile(stepoutput, modelInstance);
+//        File stepoutput= new File("models/delete.bpmn");
+//        Bpmn.writeModelToFile(stepoutput, modelInstance);
         process.setName("process7817");
         Restructurer str = new Restructurer(process);
         if (str.perform()) {
