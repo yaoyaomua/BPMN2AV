@@ -52,15 +52,55 @@ public class AddDataObjectWithoutState {
         String type = null;
         // diagram for bindingArtifact
         type = "binding";
+
         for (String bindingElement : bindingElements)
         {
+            // current process
+            BaseElement currentElement = modelInstance.getModelElementById(bindingElement);
+            while (!(currentElement instanceof Process))
+            {
+                currentElement = (BaseElement) currentElement.getParentElement();
+            }
+            Process currentProcess = (Process) currentElement;
+            // first gateway
+            List<BaseElement> currentProcessElementList = displayElementsByDiagramOrder(modelInstance, currentProcess);
+            BaseElement firstGateway = null;
+            for (BaseElement element: currentProcessElementList)
+            {
+                if (element instanceof Gateway)
+                {
+                    firstGateway = element;
+                }
+
+            }
+
+            // choose sequenceFlow to set the intermidiateEvent
             SequenceFlow sequenceFlow = null;
             BaseElement baseElement = modelInstance.getModelElementById(bindingElement);
-            if (baseElement instanceof Task)
+            Boolean isGatewayBeforeElement = false;
+            if (firstGateway != null)
             {
-               Task element = modelInstance.getModelElementById(bindingElement);
-               sequenceFlow = element.getIncoming().iterator().next();
+                Collection<String> currentIds = new ArrayList<>();
+                isGatewayBeforeElement = isElementBefore(modelInstance,baseElement,firstGateway,currentIds);
+            }
+            if (isGatewayBeforeElement)
+            {
+                if (firstGateway instanceof Gateway) {
+                    Gateway gateway = modelInstance.getModelElementById(firstGateway.getId());
+                    sequenceFlow = gateway.getIncoming().iterator().next();
+                }
+            }
+            else {
+                if (baseElement instanceof Task) {
+                    Task element = modelInstance.getModelElementById(bindingElement);
+                    sequenceFlow = element.getIncoming().iterator().next();
 
+                }
+                else if (baseElement instanceof Event)
+                {
+                    Event element = modelInstance.getModelElementById(bindingElement);
+                    sequenceFlow = element.getIncoming().iterator().next();
+                }
             }
             DrawDiagramForDataObjectWithoutState(modelInstance,baseElement,sequenceFlow,dataObjectReference,type);
         }
@@ -68,18 +108,52 @@ public class AddDataObjectWithoutState {
         // diagram for unbindingArtifact
         type = "unbinding";
         for (String unbindingElement : unbindingElements) {
-            SequenceFlow sequenceFlow = null;
-            BaseElement baseElement = modelInstance.getModelElementById(unbindingElement);
-            if (baseElement instanceof Task)
+            // current process
+            BaseElement currentElement = modelInstance.getModelElementById(unbindingElement);
+            while (!(currentElement instanceof Process))
             {
-                Task element = modelInstance.getModelElementById(unbindingElement);
-                sequenceFlow = element.getOutgoing().iterator().next();
+                currentElement = (BaseElement) currentElement.getParentElement();
+            }
+            Process currentProcess = (Process) currentElement;
+            // first gateway
+            List<BaseElement> currentProcessElementList = displayElementsByDiagramOrder(modelInstance, currentProcess);
+            Collections.reverse(currentProcessElementList);
+
+            BaseElement lastGateway = null;
+            for (BaseElement element: currentProcessElementList)
+            {
+                if (element instanceof Gateway)
+                {
+                    lastGateway = element;
+                }
 
             }
-            else if (baseElement instanceof Event)
+
+
+            SequenceFlow sequenceFlow = null;
+            BaseElement baseElement = modelInstance.getModelElementById(unbindingElement);
+            Boolean isGatewayAfterElement = false;
+            if (lastGateway != null)
             {
-                Event element = modelInstance.getModelElementById(unbindingElement);
-                sequenceFlow = element.getOutgoing().iterator().next();
+                Collection<String> currentIds = new ArrayList<>();
+                isGatewayAfterElement = isElementBefore(modelInstance,baseElement,lastGateway,currentIds);
+            }
+            if (isGatewayAfterElement)
+            {
+                if (lastGateway instanceof Gateway) {
+                    Gateway gateway = modelInstance.getModelElementById(lastGateway.getId());
+                    sequenceFlow = gateway.getOutgoing().iterator().next();
+                }
+            }
+            else {
+                if (baseElement instanceof Task) {
+                    Task element = modelInstance.getModelElementById(unbindingElement);
+                    sequenceFlow = element.getOutgoing().iterator().next();
+
+                } else if (baseElement instanceof Event) {
+                    Event element = modelInstance.getModelElementById(unbindingElement);
+                    sequenceFlow = element.getOutgoing().iterator().next();
+                }
             }
             DrawDiagramForDataObjectWithoutState(modelInstance,baseElement,sequenceFlow,dataObjectReference,type);
 
