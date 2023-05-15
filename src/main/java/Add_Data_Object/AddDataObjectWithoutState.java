@@ -136,7 +136,7 @@ public class AddDataObjectWithoutState {
             if (lastGateway != null)
             {
                 Collection<String> currentIds = new ArrayList<>();
-                isGatewayAfterElement = isElementBefore(modelInstance,baseElement,lastGateway,currentIds);
+                isGatewayAfterElement = isElementAfter(modelInstance,baseElement,lastGateway,currentIds);
             }
             if (isGatewayAfterElement)
             {
