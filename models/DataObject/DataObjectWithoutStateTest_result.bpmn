@@ -165,7 +165,7 @@
         
     <bpmn:startEvent id="Event_1yr6xht" isInterrupting="true" name="Carrier portion started" parallelMultiple="false">
             
-      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowwumic3s</outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowakqxf3f</outgoing>
             
       <bpmn:messageEventDefinition id="MessageEventDefinition_0dpmkas"/>
           
@@ -183,7 +183,7 @@
         
     <bpmn:task completionQuantity="1" id="Activity_0tja5kh" isForCompensation="false" name="Drive to manufacturer" startQuantity="1">
             
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowzu8m93o</incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowonwo5bj</incoming>
             
       <bpmn:outgoing>Flow_1bn51yb</bpmn:outgoing>
             
@@ -419,19 +419,19 @@
     </bpmn:boundaryEvent>
         
     <bpmn:sequenceFlow id="Flow_0598e7z" sourceRef="Event_0gwang9" targetRef="Event_148aq2n"/>
-    <dataObject id="myDataObjecttxmgcly" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <dataObjectReference dataObjectRef="myDataObjecttxmgcly" id="myDataReference14zc1au" name="Truck" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <intermediateCatchEvent id="myIntermediateCatchEvent_b82sszm" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
-      <incoming>Flowwumic3s</incoming>
-      <outgoing>Flowzu8m93o</outgoing>
-      <property id="myPropertyb3a0abp" name="__sourceRef__b3a0abp"/>
-      <dataOutputAssociation id="myOutputAssociation1m5f7sm">
-        <sourceRef>myPropertyb3a0abp</sourceRef>
-        <targetRef>myDataReference14zc1au</targetRef>
+    <dataObject id="myDataObjectlugucrg" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <dataObjectReference dataObjectRef="myDataObjectlugucrg" id="myDataReference3woa360" name="Truck" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <intermediateCatchEvent id="myIntermediateCatchEvent_dda4vbf" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <incoming>Flowakqxf3f</incoming>
+      <outgoing>Flowonwo5bj</outgoing>
+      <property id="myProperty3qsiqu8" name="__sourceRef__3qsiqu8"/>
+      <dataOutputAssociation id="myOutputAssociationrhqhj24">
+        <sourceRef>myProperty3qsiqu8</sourceRef>
+        <targetRef>myDataReference3woa360</targetRef>
       </dataOutputAssociation>
     </intermediateCatchEvent>
-    <sequenceFlow id="Flowwumic3s" sourceRef="Event_1yr6xht" targetRef="myIntermediateCatchEvent_b82sszm" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <sequenceFlow id="Flowzu8m93o" sourceRef="myIntermediateCatchEvent_b82sszm" targetRef="Activity_0tja5kh" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flowakqxf3f" sourceRef="Event_1yr6xht" targetRef="myIntermediateCatchEvent_dda4vbf" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flowonwo5bj" sourceRef="myIntermediateCatchEvent_dda4vbf" targetRef="Activity_0tja5kh" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
         
     <bpmn:textAnnotation id="TextAnnotation_1deuptc" textFormat="text/plain">
             
@@ -515,7 +515,7 @@
             
       <bpmn:incoming>Flow_1j2gm8w</bpmn:incoming>
             
-      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow9awebtu</outgoing>
+      <bpmn:outgoing>Flow_1jxaic5</bpmn:outgoing>
             
       <bpmn:property id="Property_1h6p5g3" name="__targetRef_placeholder"/>
             
@@ -537,9 +537,9 @@
         
     <bpmn:task completionQuantity="1" id="Activity_0kes2i0" isForCompensation="false" name="Detach container" startQuantity="1">
             
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow1zb6u47</incoming>
+      <bpmn:incoming>Flow_1jxaic5</bpmn:incoming>
             
-      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowgj8073q</outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowagnp3wg</outgoing>
             
       <bpmn:property id="Property_0y1vsld" name="__targetRef_placeholder"/>
             
@@ -569,7 +569,7 @@
         
     <bpmn:intermediateThrowEvent id="Event_1lrqa8l" name="Container delivered">
             
-      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowyi1w5gz</incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowuqzphj6</incoming>
             
       <bpmn:outgoing>Flow_069xzyv</bpmn:outgoing>
             
@@ -605,31 +605,21 @@
         
     <bpmn:sequenceFlow id="Flow_1j2gm8w" sourceRef="Event_0zr2lxd" targetRef="Activity_09krwm6"/>
         
-    
+    <bpmn:sequenceFlow id="Flow_1jxaic5" sourceRef="Activity_09krwm6" targetRef="Activity_0kes2i0"/>
+        
     
     <bpmn:sequenceFlow id="Flow_069xzyv" sourceRef="Event_1lrqa8l" targetRef="Event_01oujqd"/>
-    <intermediateCatchEvent id="myIntermediateCatchEvent_8lb2m8p" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
-      <incoming>Flow9awebtu</incoming>
-      <outgoing>Flow1zb6u47</outgoing>
-      <property id="myPropertymcnhce1" name="__sourceRef__mcnhce1"/>
-      <dataOutputAssociation id="myOutputAssociationm6flj51">
-        <sourceRef>myPropertymcnhce1</sourceRef>
-        <targetRef>myDataReference14zc1au</targetRef>
-      </dataOutputAssociation>
-    </intermediateCatchEvent>
-    <sequenceFlow id="Flow9awebtu" sourceRef="Activity_09krwm6" targetRef="myIntermediateCatchEvent_8lb2m8p" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <sequenceFlow id="Flow1zb6u47" sourceRef="myIntermediateCatchEvent_8lb2m8p" targetRef="Activity_0kes2i0" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <intermediateThrowEvent id="myIntermediateThrowEvent_8bbvxur" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
-      <incoming>Flowgj8073q</incoming>
-      <outgoing>Flowyi1w5gz</outgoing>
-      <property id="myPropertyh1ojyp2" name="__sourceRef__h1ojyp2"/>
-      <dataInputAssociation id="myInputAssociation8nqfayy">
-        <sourceRef>myDataReference14zc1au</sourceRef>
-        <targetRef>myPropertyh1ojyp2</targetRef>
+    <intermediateThrowEvent id="myIntermediateThrowEvent_9ubnuph" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <incoming>Flowagnp3wg</incoming>
+      <outgoing>Flowuqzphj6</outgoing>
+      <property id="myPropertyy8n1wi7" name="__sourceRef__y8n1wi7"/>
+      <dataInputAssociation id="myInputAssociation6ubb1ke">
+        <sourceRef>myDataReference3woa360</sourceRef>
+        <targetRef>myPropertyy8n1wi7</targetRef>
       </dataInputAssociation>
     </intermediateThrowEvent>
-    <sequenceFlow id="Flowgj8073q" sourceRef="Activity_0kes2i0" targetRef="myIntermediateThrowEvent_8bbvxur" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
-    <sequenceFlow id="Flowyi1w5gz" sourceRef="myIntermediateThrowEvent_8bbvxur" targetRef="Event_1lrqa8l" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flowagnp3wg" sourceRef="Activity_0kes2i0" targetRef="myIntermediateThrowEvent_9ubnuph" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flowuqzphj6" sourceRef="myIntermediateThrowEvent_9ubnuph" targetRef="Event_1lrqa8l" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
         
     <bpmn:textAnnotation id="TextAnnotation_07jlu3e" textFormat="text/plain">
             
@@ -1349,7 +1339,7 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge id="Flow_1jxaic5_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_1jxaic5" id="Flow_1jxaic5_di">
                 
         <di:waypoint x="496" y="1240"/>
                 
@@ -1766,51 +1756,36 @@
         <di:waypoint x="468" y="855"/>
               
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape bpmnElement="myDataReference14zc1au" id="myDataReference14zc1au_di">
+      <bpmndi:BPMNShape bpmnElement="myDataReference3woa360" id="myDataReference3woa360_di">
         <dc:Bounds height="50.0" width="36.0" x="300.0" y="630.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="myIntermediateCatchEvent_b82sszm" id="myIntermediateCatchEvent_b82sszm_di">
+      <bpmndi:BPMNShape bpmnElement="myIntermediateCatchEvent_dda4vbf" id="myIntermediateCatchEvent_dda4vbf_di">
         <dc:Bounds height="36.0" width="36.0" x="252.0" y="702.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="Flowwumic3s" id="Flowwumic3s_di" sourceElement="Event_01fvd5t_di" targetElement="myIntermediateCatchEvent_b82sszm_di">
+      <bpmndi:BPMNEdge bpmnElement="Flowakqxf3f" id="Flowakqxf3f_di" sourceElement="Event_01fvd5t_di" targetElement="myIntermediateCatchEvent_dda4vbf_di">
         <di:waypoint x="202.0" y="702.0"/>
         <di:waypoint x="252.0" y="702.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flowzu8m93o" id="Flowzu8m93o_di" sourceElement="myIntermediateCatchEvent_b82sszm_di" targetElement="Activity_0tja5kh_di">
+      <bpmndi:BPMNEdge bpmnElement="Flowonwo5bj" id="Flowonwo5bj_di" sourceElement="myIntermediateCatchEvent_dda4vbf_di" targetElement="Activity_0tja5kh_di">
         <di:waypoint x="252.0" y="702.0"/>
         <di:waypoint x="300.0" y="680.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="myOutputAssociation1m5f7sm" id="myOutputAssociation1m5f7sm_di">
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationrhqhj24" id="myOutputAssociationrhqhj24_di">
         <di:waypoint x="252.0" y="702.0"/>
         <di:waypoint x="300.0" y="630.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape bpmnElement="myIntermediateCatchEvent_8lb2m8p" id="myIntermediateCatchEvent_8lb2m8p_di">
-        <dc:Bounds height="36.0" width="36.0" x="446.0" y="1200.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="Flow9awebtu" id="Flow9awebtu_di" sourceElement="Activity_09krwm6_di" targetElement="myIntermediateCatchEvent_8lb2m8p_di">
-        <di:waypoint x="396.0" y="1200.0"/>
-        <di:waypoint x="446.0" y="1200.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow1zb6u47" id="Flow1zb6u47_di" sourceElement="myIntermediateCatchEvent_8lb2m8p_di" targetElement="Activity_0kes2i0_di">
-        <di:waypoint x="446.0" y="1200.0"/>
-        <di:waypoint x="566.0" y="1200.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationm6flj51" id="myOutputAssociationm6flj51_di">
-        <di:waypoint x="446.0" y="1200.0"/>
-        <di:waypoint x="300.0" y="630.0"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape bpmnElement="myIntermediateThrowEvent_8bbvxur" id="myIntermediateThrowEvent_8bbvxur_di">
+      <bpmndi:BPMNShape bpmnElement="myIntermediateThrowEvent_9ubnuph" id="myIntermediateThrowEvent_9ubnuph_di">
         <dc:Bounds height="36.0" width="36.0" x="616.0" y="1200.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="Flowgj8073q" id="Flowgj8073q_di" sourceElement="Activity_0kes2i0_di" targetElement="myIntermediateThrowEvent_8bbvxur_di">
+      <bpmndi:BPMNEdge bpmnElement="Flowagnp3wg" id="Flowagnp3wg_di" sourceElement="Activity_0kes2i0_di" targetElement="myIntermediateThrowEvent_9ubnuph_di">
         <di:waypoint x="566.0" y="1200.0"/>
         <di:waypoint x="616.0" y="1200.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flowyi1w5gz" id="Flowyi1w5gz_di" sourceElement="myIntermediateThrowEvent_8bbvxur_di" targetElement="Event_0sfr71g_di">
+      <bpmndi:BPMNEdge bpmnElement="Flowuqzphj6" id="Flowuqzphj6_di" sourceElement="myIntermediateThrowEvent_9ubnuph_di" targetElement="Event_0sfr71g_di">
         <di:waypoint x="616.0" y="1200.0"/>
         <di:waypoint x="738.0" y="1222.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="myInputAssociation8nqfayy" id="myInputAssociation8nqfayy_di">
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociation6ubb1ke" id="myInputAssociation6ubb1ke_di">
         <di:waypoint x="616.0" y="1200.0"/>
         <di:waypoint x="300.0" y="630.0"/>
       </bpmndi:BPMNEdge>

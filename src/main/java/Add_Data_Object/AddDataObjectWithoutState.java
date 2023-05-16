@@ -187,16 +187,7 @@ public class AddDataObjectWithoutState {
             {
                 BaseElement checkSourceElement = modelInstance.getModelElementById(bindingElementId);
                 BaseElement checkTargetElement = modelInstance.getModelElementById(bindingElementId);
-                //deal with boundary event
-                if (modelInstance.getModelElementById(bindingElementId) instanceof BoundaryEvent)
-                {
-                    SubProcess subActivity = modelInstance.getModelElementById(((BoundaryEvent) modelInstance.getModelElementById(bindingElementId)).getAttachedTo().getId());
-                    checkTargetElement = (BaseElement) subActivity.getChildElementsByType(StartEvent.class).iterator().next();
-                    checkSourceElement = (BaseElement) subActivity.getChildElementsByType(EndEvent.class).iterator().next();
-                }
-                //deal with subprocess
-                if (modelInstance.getModelElementById(bindingElementId).getParentElement().getParentElement() instanceof SubProcess)
-                {}
+
                 if (checkSourceElement.getId().equals(messageFlow.getSource().getId()))
                 {
                     isBefore = true;
@@ -275,15 +266,13 @@ public class AddDataObjectWithoutState {
                 BaseElement checkSourceElement = modelInstance.getModelElementById(unbindingElementId);
                 BaseElement checkTargetElement = modelInstance.getModelElementById(unbindingElementId);
                 //deal with boundary event
-                if (modelInstance.getModelElementById(unbindingElementId) instanceof BoundaryEvent)
+                /*if (modelInstance.getModelElementById(unbindingElementId) instanceof BoundaryEvent)
                 {
                     SubProcess subActivity = modelInstance.getModelElementById(((BoundaryEvent) modelInstance.getModelElementById(unbindingElementId)).getAttachedTo().getId());
                     checkTargetElement = (BaseElement) subActivity.getChildElementsByType(StartEvent.class).iterator().next();
                     checkSourceElement = (BaseElement) subActivity.getChildElementsByType(EndEvent.class).iterator().next();
-                }
-                //deal with subprocess
-                if (modelInstance.getModelElementById(unbindingElementId).getParentElement().getParentElement() instanceof SubProcess)
-                {}
+                }*/
+
                 if (checkSourceElement.getId().equals(messageFlow.getSource().getId()))
                 {
                     isBefore = true;
@@ -397,9 +386,31 @@ public class AddDataObjectWithoutState {
         // check loop
         if (currentId.contains(currentElement.getId()))
         {
+            System.out.println("I am loop");
             return false;
         }
         currentId.add(currentElement.getId());
+
+        // check is the checkelement is in a subprocess
+        if (currentElement.getParentElement() instanceof SubProcess)
+        {
+            System.out.println("I am "+ currentElement.getId() +"my parent is subprocess");
+            Collection<String> newCurrentId = new ArrayList<>();
+            SubProcess subProcess = modelInstance.getModelElementById(((SubProcess) currentElement.getParentElement()).getId());
+            if (isElementBefore(modelInstance,subProcess,targetElement,newCurrentId))
+            {
+                return true;
+            }
+        }
+        if (currentElement instanceof BoundaryEvent)
+        {
+            Collection<String> newCurrentId = new ArrayList<>();
+            SubProcess subProcess = modelInstance.getModelElementById(((BoundaryEvent) currentElement).getAttachedTo().getId());
+            if (isElementBefore(modelInstance,subProcess,targetElement,newCurrentId))
+            {
+                return true;
+            }
+        }
 
         if (currentElement instanceof Task)
         {
@@ -436,6 +447,11 @@ public class AddDataObjectWithoutState {
             Gateway gateway  = modelInstance.getModelElementById(currentElement.getId());
             sequenceFlows = gateway.getIncoming();
         }
+        else if(currentElement instanceof SubProcess)
+        {
+            SubProcess subProcess  = modelInstance.getModelElementById(currentElement.getId());
+            sequenceFlows = subProcess.getIncoming();
+        }
         for (SequenceFlow sequenceFlow : sequenceFlows)
         {
             BaseElement sourceElement = modelInstance.getModelElementById(sequenceFlow.getSource().getId());
@@ -464,6 +480,26 @@ public class AddDataObjectWithoutState {
             return false;
         }
         currentId.add(currentElement.getId());
+
+        // check is the element is in a subprocess
+        if (currentElement.getParentElement() instanceof SubProcess)
+        {
+            SubProcess subProcess = modelInstance.getModelElementById(((SubProcess) currentElement.getParentElement()).getId());
+            Collection<String> newCurrentId = new ArrayList<>();
+            if (isElementAfter(modelInstance,subProcess,targetElement,newCurrentId))
+            {
+                return true;
+            }
+        }
+        if (currentElement instanceof BoundaryEvent)
+        {
+            Collection<String> newCurrentId = new ArrayList<>();
+            SubProcess subProcess = modelInstance.getModelElementById(((BoundaryEvent) currentElement).getAttachedTo().getId());
+            if (isElementAfter(modelInstance,subProcess,targetElement,newCurrentId))
+            {
+                return true;
+            }
+        }
 
         if (currentElement instanceof Task)
         {
@@ -499,6 +535,11 @@ public class AddDataObjectWithoutState {
         {
             Gateway gateway  = modelInstance.getModelElementById(currentElement.getId());
             sequenceFlows = gateway.getOutgoing();
+        }
+        else if(currentElement instanceof SubProcess)
+        {
+            SubProcess subProcess  = modelInstance.getModelElementById(currentElement.getId());
+            sequenceFlows = subProcess.getOutgoing();
         }
         for (SequenceFlow sequenceFlow : sequenceFlows)
         {
