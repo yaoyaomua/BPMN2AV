@@ -70,10 +70,11 @@ public class AddDataObjectWithoutState {
                 if (element instanceof Gateway)
                 {
                     firstGateway = element;
+                    break;
                 }
 
             }
-
+            System.out.println(firstGateway.getId());
             // choose sequenceFlow to set the intermidiateEvent
             SequenceFlow sequenceFlow = null;
             BaseElement baseElement = modelInstance.getModelElementById(bindingElement);
@@ -115,7 +116,7 @@ public class AddDataObjectWithoutState {
                 currentElement = (BaseElement) currentElement.getParentElement();
             }
             Process currentProcess = (Process) currentElement;
-            // first gateway
+            // last gateway
             List<BaseElement> currentProcessElementList = displayElementsByDiagramOrder(modelInstance, currentProcess);
             Collections.reverse(currentProcessElementList);
 
@@ -125,10 +126,11 @@ public class AddDataObjectWithoutState {
                 if (element instanceof Gateway)
                 {
                     lastGateway = element;
+                    break;
                 }
 
             }
-
+            System.out.println(lastGateway.getId());
 
             SequenceFlow sequenceFlow = null;
             BaseElement baseElement = modelInstance.getModelElementById(unbindingElement);
@@ -138,11 +140,13 @@ public class AddDataObjectWithoutState {
                 Collection<String> currentIds = new ArrayList<>();
                 isGatewayAfterElement = isElementAfter(modelInstance,baseElement,lastGateway,currentIds);
             }
+            System.out.println(isGatewayAfterElement);
             if (isGatewayAfterElement)
             {
                 if (lastGateway instanceof Gateway) {
                     Gateway gateway = modelInstance.getModelElementById(lastGateway.getId());
                     sequenceFlow = gateway.getOutgoing().iterator().next();
+                    System.out.println(sequenceFlow.getId());
                 }
             }
             else {
@@ -170,6 +174,7 @@ public class AddDataObjectWithoutState {
             baseElementList=displayElementsByDiagramOrder(modelInstance,process);
             bindElements=findElement(modelInstance,process, artifactName, bindElements,baseElement,baseElementList);
         }
+
 
         //
         Collection<MessageFlow> messageFlows = modelInstance.getModelElementsByType(MessageFlow.class);
@@ -265,13 +270,7 @@ public class AddDataObjectWithoutState {
             {
                 BaseElement checkSourceElement = modelInstance.getModelElementById(unbindingElementId);
                 BaseElement checkTargetElement = modelInstance.getModelElementById(unbindingElementId);
-                //deal with boundary event
-                /*if (modelInstance.getModelElementById(unbindingElementId) instanceof BoundaryEvent)
-                {
-                    SubProcess subActivity = modelInstance.getModelElementById(((BoundaryEvent) modelInstance.getModelElementById(unbindingElementId)).getAttachedTo().getId());
-                    checkTargetElement = (BaseElement) subActivity.getChildElementsByType(StartEvent.class).iterator().next();
-                    checkSourceElement = (BaseElement) subActivity.getChildElementsByType(EndEvent.class).iterator().next();
-                }*/
+
 
                 if (checkSourceElement.getId().equals(messageFlow.getSource().getId()))
                 {

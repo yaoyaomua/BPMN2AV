@@ -13,10 +13,10 @@ public class DataObjectTest {
     @Test
     public void preprocessJsonTest(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/DataObject/PreprocessJsonTest.bpmn"));
-            File jsonFile = new File("models/DataObject/PreprocessJson.json");
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/DataObject/testPart1.bpmn"));
+            File jsonFile = new File("models/DataObject/testPart1.json");
             AddDataObjectFromJSON.add(bpmnModelInstance,jsonFile);
-            File outputFile = new File("models/DataObject/PreprocessJsonTest_result.bpmn");
+            File outputFile = new File("models/DataObject/PreprocessTestPart1_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
             e.printStackTrace();
@@ -25,10 +25,10 @@ public class DataObjectTest {
     @Test
     public void addDataObjectTest(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/DataObject/DataObjectTest.bpmn"));
-            File jsonFile = new File("models/DataObject/DataObject.json");
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/DataObject/testPart1.bpmn"));
+            File jsonFile = new File("models/DataObject/testPart1.json");
             AddDataObjectFromJSON.add(bpmnModelInstance,jsonFile);
-            File outputFile = new File("models/DataObject/DataObjectTest_result.bpmn");
+            File outputFile = new File("models/DataObject/testPart1_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
             e.printStackTrace();
@@ -37,9 +37,9 @@ public class DataObjectTest {
     @Test
     public void addDataObjectWithoutStateTest(){
         try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/DataObject/DataObjectWithoutStateTest.bpmn"));
-            AddDataObjectWithoutState.add(bpmnModelInstance,"Truck");
-            File outputFile = new File("models/DataObject/DataObjectWithoutStateTest_result.bpmn");
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/DataObject/testPart1_result.bpmn"));
+            AddDataObjectWithoutState.add(bpmnModelInstance,"Container");
+            File outputFile = new File("models/DataObject/testPart1WithoutStateTest_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
             e.printStackTrace();
