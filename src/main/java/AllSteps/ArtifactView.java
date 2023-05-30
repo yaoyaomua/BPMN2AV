@@ -58,7 +58,7 @@ public class ArtifactView {
         //this step need to recode which start and end are we add, so that if the start or end is irrelevant, will be remained
         HashSet<String> addedEvent = RecordEvent.record(modelInstance);
 
-        //step 4 delete elements
+        //step 3 delete elements
         System.out.println("*************************************");
         System.out.println("delete irrelevant boundary events start:");
         DeleteBoundaryEvent.delete(modelInstance,artifact);

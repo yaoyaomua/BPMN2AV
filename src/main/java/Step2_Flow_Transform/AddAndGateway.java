@@ -18,7 +18,7 @@ import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 public class AddAndGateway {
     public static void add(BpmnModelInstance modelInstance)
     {
-        Process process = modelInstance.getModelElementById("mergedProcess");
+        Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
         //Create two hash map
         Map<String, Collection<SequenceFlow>> Target_map = new HashMap<>();
         Map<String, Collection<SequenceFlow>> Source_map = new HashMap<>();

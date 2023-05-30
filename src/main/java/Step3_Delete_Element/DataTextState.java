@@ -28,7 +28,6 @@ public class DataTextState {
 
     public static HashSet<String> getAssociatedDataObject(BpmnModelInstance modelInstance,String artifact){
         HashMap<String,String> textData = getText(modelInstance);
-        System.out.println(textData.toString());
         HashSet<String> datas = new HashSet<>();
         for (Task task : modelInstance.getModelElementsByType(Task.class)){
             for (DataInputAssociation dataInputAssociation : task.getDataInputAssociations()){

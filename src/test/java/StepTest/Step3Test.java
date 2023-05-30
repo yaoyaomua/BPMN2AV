@@ -34,12 +34,6 @@ public class Step3Test {
             }
 
 
-            System.out.println("***************start get text state******************");
-            String artifact = "DATA1";
-            HashMap<String,String> textState = DataTextState.getText(bpmnModelInstance);
-            System.out.println(textState.toString());
-            System.out.println("***************start delete activity******************");
-
             DeleteTask.delete(bpmnModelInstance, "DATA1");
             File outputFile = new File("models/Steps/step3_delete_Task_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
@@ -63,7 +57,6 @@ public class Step3Test {
     @Test
     public void deleteDataObjectTest(){
         BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_delete_data_object.bpmn"));
-        HashMap<String,String> textData = DataTextState.getText(bpmnModelInstance);
         HashSet<String> set = DataTextState.getAssociatedDataObject(bpmnModelInstance,"DATA1");
         System.out.println(set.toString());
         DeleteDataObject.delete(bpmnModelInstance,"DATA1");

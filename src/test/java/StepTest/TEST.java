@@ -19,12 +19,10 @@ public class TEST {
     public void test1(){
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/output.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (86).bpmn"));
 
-            BoundaryEventForBPStruct.pre(bpmnModelInstance);
 
-            File outputFile = new File("models/result.bpmn");
-            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
+
 
         }catch (Exception e) {
             e.printStackTrace();
