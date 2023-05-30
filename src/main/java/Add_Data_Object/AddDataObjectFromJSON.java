@@ -27,15 +27,15 @@ public class AddDataObjectFromJSON {
             Collection<String> targetList = new ArrayList<>();
             String artifact = jsonArray.getJSONObject(i).getString("artifact");
             String state = jsonArray.getJSONObject(i).getString("state");
-            System.out.println("##################");
-            System.out.println(artifact);
-            System.out.println(state);
+            //System.out.println("##################");
+            //System.out.println(artifact);
+            //System.out.println(state);
             if (jsonArray.getJSONObject(i).getJSONArray("sourceRef") != null) {
                 JSONArray sourceRef = jsonArray.getJSONObject(i).getJSONArray("sourceRef");
                 for (int m = 0; m < sourceRef.length(); m ++) {
                     String sourceRef_name = sourceRef.getJSONObject(m).getString("name");
                     sourceList.add(sourceRef_name);
-                    System.out.println(sourceRef_name);
+                    //System.out.println(sourceRef_name);
                 }
             }
             if (jsonArray.getJSONObject(i).getJSONArray("targetRef") != null) {
@@ -43,9 +43,66 @@ public class AddDataObjectFromJSON {
                 for (int n = 0; n < targetRef.length(); n ++) {
                     String targetRef_name = targetRef.getJSONObject(n).getString("name");
                     targetList.add(targetRef_name);
-                    System.out.println(targetRef_name);
+                    //System.out.println(targetRef_name);
                 }
             }
+
+            // check targetList
+            Collection<FlowElement> flowElements = modelInstance.getModelElementsByType(FlowElement.class);
+            Collection<String> removeElements = new ArrayList<>();
+            for (String sourceName:sourceList)
+            {
+                // source id
+                BaseElement sourceElement = null;
+                for (FlowElement element: flowElements)
+                {
+                    if (element.getName() != null)
+                    {
+                        if (element.getName().equals(sourceName))
+                        {
+                            System.out.println(element.getName());
+                            sourceElement = modelInstance.getModelElementById(element.getId());
+                            break;
+                        }
+                    }
+                }
+                for (String targetName : targetList)
+                {
+                    // target id
+                    BaseElement targetElement = null;
+                    for (FlowElement element: flowElements)
+                    {
+                        if (element.getName() != null) {
+                            if (element.getName().equals(targetName)) {
+                                System.out.println(element.getName());
+                                targetElement = modelInstance.getModelElementById(element.getId());
+                                break;
+                            }
+                        }
+                    }
+                    Collection<String> currentIds = new ArrayList<>();
+                    Boolean isBefore = false;
+                    if (sourceElement != null && targetElement != null) {
+                        isBefore = AddDataObjectWithoutState.isElementBefore(modelInstance, sourceElement, targetElement, currentIds);
+                    }
+                    if (isBefore)
+                    {
+                        //delete this target
+                        System.out.println("remove element name:" + targetName);
+                        removeElements.add(targetName);
+
+                    }
+                }
+            }
+            if (removeElements != null) {
+                targetList.removeAll(removeElements);
+            }
+            System.out.println("##name");
+            for (String name : targetList)
+            {
+                System.out.println(name);
+            }
+
             addDataObject(modelInstance,artifact,state,sourceList,targetList);
         }
     }
@@ -153,9 +210,10 @@ public class AddDataObjectFromJSON {
             Double refTaskX = refTaskShape.getBounds().getX();
             Double refTaskY = refTaskShape.getBounds().getY();
             Collection<DataOutputAssociation> outputAssociations = sourceTask.get().getDataOutputAssociations();
-            for (DataOutputAssociation outputAssociation:outputAssociations)
-            {
-                CreateBPMNEdge.create(modelInstance, outputAssociation, refTaskX, refTaskY, 100.0+count_dataObjectReference.size()*200, 40.0);
+            for (DataOutputAssociation outputAssociation:outputAssociations) {
+                if (modelInstance.getModelElementById(outputAssociation.getId()+"_di") == null) {
+                    CreateBPMNEdge.create(modelInstance, outputAssociation, refTaskX, refTaskY, 100.0 + count_dataObjectReference.size() * 200, 40.0);
+                }
             }
         }
         // input
@@ -168,7 +226,10 @@ public class AddDataObjectFromJSON {
             Collection<DataInputAssociation> inputAssociations = targetTask.get().getDataInputAssociations();
             for (DataInputAssociation inputAssociation:inputAssociations)
             {
-                CreateBPMNEdge.create(modelInstance, inputAssociation, 100.0+count_dataObjectReference.size()*200, 40.0, refTaskX, refTaskY);
+                System.out.println(inputAssociation.getId());
+                if (modelInstance.getModelElementById(inputAssociation.getId() + "_di") == null) {
+                    CreateBPMNEdge.create(modelInstance, inputAssociation, 100.0 + count_dataObjectReference.size() * 200, 40.0, refTaskX, refTaskY);
+                }
             }
         }
 

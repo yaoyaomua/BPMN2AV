@@ -2,16 +2,6 @@
   "DataObjects": [
     {
       "artifact": "Container",
-      "state": "opened",
-      "sourceRef": [],
-      "targetRef": [
-        {
-          "name": "Fill in container"
-        }
-      ]
-    },
-    {
-      "artifact": "Container",
       "state": "opened, unhooked",
       "sourceRef": [],
       "targetRef": [

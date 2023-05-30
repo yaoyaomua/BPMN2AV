@@ -23,7 +23,7 @@
         
     <bpmn:startEvent id="StartEvent_11h75gy" isInterrupting="true" name="Manufacturer portion started" parallelMultiple="false">
             
-      <bpmn:outgoing>Flow_0p4hr2a</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1pn0837</bpmn:outgoing>
             
       <bpmn:messageEventDefinition id="MessageEventDefinition_0a5pw11"/>
           
@@ -31,7 +31,7 @@
         
     <bpmn:task completionQuantity="1" id="Activity_1lsced3" isForCompensation="false" name="Fill in container" startQuantity="1">
             
-      <bpmn:incoming>Flow_1c7kqzk</bpmn:incoming>
+      <bpmn:incoming>Flow_1pn0837</bpmn:incoming>
             
       <bpmn:outgoing>Flow_1iwnuta</bpmn:outgoing>
             
@@ -55,7 +55,7 @@
         
     <bpmn:intermediateCatchEvent id="Event_08gdwy2" name="Truck fetched manufacturer" parallelMultiple="false">
             
-      <bpmn:incoming>Flow_0fjk39t</bpmn:incoming>
+      <bpmn:incoming>Flow_1iwnuta</bpmn:incoming>
             
       <bpmn:outgoing>Flow_0k1dlhg</bpmn:outgoing>
             
@@ -131,45 +131,9 @@
         
     <bpmn:sequenceFlow id="Flow_1oswijs" sourceRef="Event_07oi6dt" targetRef="Event_0ujard6"/>
         
-    <bpmn:sequenceFlow id="Flow_0p4hr2a" sourceRef="StartEvent_11h75gy" targetRef="Gateway_14nnnf4"/>
+    <bpmn:sequenceFlow id="Flow_1iwnuta" sourceRef="Activity_1lsced3" targetRef="Event_08gdwy2"/>
         
-    <bpmn:parallelGateway gatewayDirection="Unspecified" id="Gateway_14nnnf4">
-            
-      <bpmn:incoming>Flow_0p4hr2a</bpmn:incoming>
-            
-      <bpmn:outgoing>Flow_1c7kqzk</bpmn:outgoing>
-            
-      <bpmn:outgoing>Flow_10gx96z</bpmn:outgoing>
-          
-    </bpmn:parallelGateway>
-        
-    <bpmn:sequenceFlow id="Flow_1c7kqzk" sourceRef="Gateway_14nnnf4" targetRef="Activity_1lsced3"/>
-        
-    <bpmn:task completionQuantity="1" id="Activity_1mn97vg" isForCompensation="false" name="extra" startQuantity="1">
-            
-      <bpmn:incoming>Flow_10gx96z</bpmn:incoming>
-            
-      <bpmn:outgoing>Flow_0mumiby</bpmn:outgoing>
-          
-    </bpmn:task>
-        
-    <bpmn:sequenceFlow id="Flow_10gx96z" sourceRef="Gateway_14nnnf4" targetRef="Activity_1mn97vg"/>
-        
-    <bpmn:sequenceFlow id="Flow_0mumiby" sourceRef="Activity_1mn97vg" targetRef="Gateway_1t6chmr"/>
-        
-    <bpmn:parallelGateway gatewayDirection="Unspecified" id="Gateway_1t6chmr">
-            
-      <bpmn:incoming>Flow_0mumiby</bpmn:incoming>
-            
-      <bpmn:incoming>Flow_1iwnuta</bpmn:incoming>
-            
-      <bpmn:outgoing>Flow_0fjk39t</bpmn:outgoing>
-          
-    </bpmn:parallelGateway>
-        
-    <bpmn:sequenceFlow id="Flow_0fjk39t" sourceRef="Gateway_1t6chmr" targetRef="Event_08gdwy2"/>
-        
-    <bpmn:sequenceFlow id="Flow_1iwnuta" sourceRef="Activity_1lsced3" targetRef="Gateway_1t6chmr"/>
+    <bpmn:sequenceFlow id="Flow_1pn0837" sourceRef="StartEvent_11h75gy" targetRef="Activity_1lsced3"/>
         
     <bpmn:textAnnotation id="TextAnnotation_0fgc4d6" textFormat="text/plain">
             
@@ -201,7 +165,7 @@
         
     <bpmn:startEvent id="Event_1yr6xht" isInterrupting="true" name="Carrier portion started" parallelMultiple="false">
             
-      <bpmn:outgoing>Flow_1fnksh3</bpmn:outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowakqxf3f</outgoing>
             
       <bpmn:messageEventDefinition id="MessageEventDefinition_0dpmkas"/>
           
@@ -219,7 +183,7 @@
         
     <bpmn:task completionQuantity="1" id="Activity_0tja5kh" isForCompensation="false" name="Drive to manufacturer" startQuantity="1">
             
-      <bpmn:incoming>Flow_1fnksh3</bpmn:incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowonwo5bj</incoming>
             
       <bpmn:outgoing>Flow_1bn51yb</bpmn:outgoing>
             
@@ -287,8 +251,7 @@
         
     <bpmn:dataObject id="DataObject_1cmr0ib" isCollection="false"/>
         
-    <bpmn:sequenceFlow id="Flow_1fnksh3" sourceRef="Event_1yr6xht" targetRef="Activity_0tja5kh"/>
-        
+    
     <bpmn:sequenceFlow id="Flow_1bn51yb" sourceRef="Activity_0tja5kh" targetRef="Event_197lrrd"/>
         
     <bpmn:sequenceFlow id="Flow_18bsc24" sourceRef="Event_197lrrd" targetRef="Activity_0807ekw"/>
@@ -456,6 +419,19 @@
     </bpmn:boundaryEvent>
         
     <bpmn:sequenceFlow id="Flow_0598e7z" sourceRef="Event_0gwang9" targetRef="Event_148aq2n"/>
+    <dataObject id="myDataObjectlugucrg" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <dataObjectReference dataObjectRef="myDataObjectlugucrg" id="myDataReference3woa360" name="Truck" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <intermediateCatchEvent id="myIntermediateCatchEvent_dda4vbf" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <incoming>Flowakqxf3f</incoming>
+      <outgoing>Flowonwo5bj</outgoing>
+      <property id="myProperty3qsiqu8" name="__sourceRef__3qsiqu8"/>
+      <dataOutputAssociation id="myOutputAssociationrhqhj24">
+        <sourceRef>myProperty3qsiqu8</sourceRef>
+        <targetRef>myDataReference3woa360</targetRef>
+      </dataOutputAssociation>
+    </intermediateCatchEvent>
+    <sequenceFlow id="Flowakqxf3f" sourceRef="Event_1yr6xht" targetRef="myIntermediateCatchEvent_dda4vbf" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flowonwo5bj" sourceRef="myIntermediateCatchEvent_dda4vbf" targetRef="Activity_0tja5kh" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
         
     <bpmn:textAnnotation id="TextAnnotation_1deuptc" textFormat="text/plain">
             
@@ -563,7 +539,7 @@
             
       <bpmn:incoming>Flow_1jxaic5</bpmn:incoming>
             
-      <bpmn:outgoing>Flow_0rlds4g</bpmn:outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowagnp3wg</outgoing>
             
       <bpmn:property id="Property_0y1vsld" name="__targetRef_placeholder"/>
             
@@ -593,7 +569,7 @@
         
     <bpmn:intermediateThrowEvent id="Event_1lrqa8l" name="Container delivered">
             
-      <bpmn:incoming>Flow_0rlds4g</bpmn:incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowuqzphj6</incoming>
             
       <bpmn:outgoing>Flow_069xzyv</bpmn:outgoing>
             
@@ -631,9 +607,19 @@
         
     <bpmn:sequenceFlow id="Flow_1jxaic5" sourceRef="Activity_09krwm6" targetRef="Activity_0kes2i0"/>
         
-    <bpmn:sequenceFlow id="Flow_0rlds4g" sourceRef="Activity_0kes2i0" targetRef="Event_1lrqa8l"/>
-        
+    
     <bpmn:sequenceFlow id="Flow_069xzyv" sourceRef="Event_1lrqa8l" targetRef="Event_01oujqd"/>
+    <intermediateThrowEvent id="myIntermediateThrowEvent_9ubnuph" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <incoming>Flowagnp3wg</incoming>
+      <outgoing>Flowuqzphj6</outgoing>
+      <property id="myPropertyy8n1wi7" name="__sourceRef__y8n1wi7"/>
+      <dataInputAssociation id="myInputAssociation6ubb1ke">
+        <sourceRef>myDataReference3woa360</sourceRef>
+        <targetRef>myPropertyy8n1wi7</targetRef>
+      </dataInputAssociation>
+    </intermediateThrowEvent>
+    <sequenceFlow id="Flowagnp3wg" sourceRef="Activity_0kes2i0" targetRef="myIntermediateThrowEvent_9ubnuph" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flowuqzphj6" sourceRef="myIntermediateThrowEvent_9ubnuph" targetRef="Event_1lrqa8l" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
         
     <bpmn:textAnnotation id="TextAnnotation_07jlu3e" textFormat="text/plain">
             
@@ -705,57 +691,19 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_0p4hr2a" id="Flow_0p4hr2a_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_1iwnuta" id="Flow_1iwnuta_di">
                 
-        <di:waypoint x="242" y="290"/>
-                
-        <di:waypoint x="245" y="290"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_1c7kqzk" id="Flow_1c7kqzk_di">
-                
-        <di:waypoint x="295" y="290"/>
-                
-        <di:waypoint x="300" y="290"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_10gx96z" id="Flow_10gx96z_di">
-                
-        <di:waypoint x="270" y="315"/>
-                
-        <di:waypoint x="270" y="400"/>
-                
-        <di:waypoint x="300" y="400"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_0mumiby" id="Flow_0mumiby_di">
-                
-        <di:waypoint x="400" y="400"/>
-                
-        <di:waypoint x="405" y="400"/>
-              
-      </bpmndi:BPMNEdge>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_0fjk39t" id="Flow_0fjk39t_di">
-                
-        <di:waypoint x="430" y="375"/>
-                
-        <di:waypoint x="430" y="290"/>
+        <di:waypoint x="400" y="290"/>
                 
         <di:waypoint x="462" y="290"/>
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_1iwnuta" id="Flow_1iwnuta_di">
+      <bpmndi:BPMNEdge bpmnElement="Flow_1pn0837" id="Flow_1pn0837_di">
                 
-        <di:waypoint x="400" y="290"/>
+        <di:waypoint x="242" y="290"/>
                 
-        <di:waypoint x="430" y="290"/>
-                
-        <di:waypoint x="430" y="375"/>
+        <di:waypoint x="300" y="290"/>
               
       </bpmndi:BPMNEdge>
             
@@ -883,24 +831,6 @@
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape bpmnElement="Gateway_14nnnf4" id="Gateway_04tgvrr_di">
-                
-        <dc:Bounds height="50" width="50" x="245" y="265"/>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNShape bpmnElement="Activity_1mn97vg" id="Activity_1mn97vg_di">
-                
-        <dc:Bounds height="80" width="100" x="300" y="360"/>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNShape bpmnElement="Gateway_1t6chmr" id="Gateway_1vo678s_di">
-                
-        <dc:Bounds height="50" width="50" x="405" y="375"/>
-              
-      </bpmndi:BPMNShape>
-            
       <bpmndi:BPMNEdge bpmnElement="Association_01wk1x6" id="Association_01wk1x6_di">
                 
         <di:waypoint x="480" y="145"/>
@@ -975,7 +905,7 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_1fnksh3" id="Flow_1fnksh3_di">
+      <bpmndi:BPMNEdge id="Flow_1fnksh3_di">
                 
         <di:waypoint x="238" y="720"/>
                 
@@ -1401,7 +1331,7 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_0rlds4g" id="Flow_0rlds4g_di">
+      <bpmndi:BPMNEdge id="Flow_0rlds4g_di">
                 
         <di:waypoint x="666" y="1240"/>
                 
@@ -1825,6 +1755,39 @@
                 
         <di:waypoint x="468" y="855"/>
               
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="myDataReference3woa360" id="myDataReference3woa360_di">
+        <dc:Bounds height="50.0" width="36.0" x="300.0" y="630.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="myIntermediateCatchEvent_dda4vbf" id="myIntermediateCatchEvent_dda4vbf_di">
+        <dc:Bounds height="36.0" width="36.0" x="252.0" y="702.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flowakqxf3f" id="Flowakqxf3f_di" sourceElement="Event_01fvd5t_di" targetElement="myIntermediateCatchEvent_dda4vbf_di">
+        <di:waypoint x="202.0" y="702.0"/>
+        <di:waypoint x="252.0" y="702.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flowonwo5bj" id="Flowonwo5bj_di" sourceElement="myIntermediateCatchEvent_dda4vbf_di" targetElement="Activity_0tja5kh_di">
+        <di:waypoint x="252.0" y="702.0"/>
+        <di:waypoint x="300.0" y="680.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationrhqhj24" id="myOutputAssociationrhqhj24_di">
+        <di:waypoint x="252.0" y="702.0"/>
+        <di:waypoint x="300.0" y="630.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="myIntermediateThrowEvent_9ubnuph" id="myIntermediateThrowEvent_9ubnuph_di">
+        <dc:Bounds height="36.0" width="36.0" x="616.0" y="1200.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flowagnp3wg" id="Flowagnp3wg_di" sourceElement="Activity_0kes2i0_di" targetElement="myIntermediateThrowEvent_9ubnuph_di">
+        <di:waypoint x="566.0" y="1200.0"/>
+        <di:waypoint x="616.0" y="1200.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flowuqzphj6" id="Flowuqzphj6_di" sourceElement="myIntermediateThrowEvent_9ubnuph_di" targetElement="Event_0sfr71g_di">
+        <di:waypoint x="616.0" y="1200.0"/>
+        <di:waypoint x="738.0" y="1222.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociation6ubb1ke" id="myInputAssociation6ubb1ke_di">
+        <di:waypoint x="616.0" y="1200.0"/>
+        <di:waypoint x="300.0" y="630.0"/>
       </bpmndi:BPMNEdge>
           
     </bpmndi:BPMNPlane>

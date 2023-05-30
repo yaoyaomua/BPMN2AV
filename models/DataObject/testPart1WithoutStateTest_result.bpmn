@@ -1,0 +1,1199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" exporter="Camunda Modeler" exporterVersion="4.12.0" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_1dx5ls9" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
+      
+  
+  <bpmn:process id="Process_1an3hcy" isClosed="false" isExecutable="true" processType="None">
+            
+    
+    <bpmn:startEvent id="StartEvent_1" isInterrupting="true" parallelMultiple="false">
+                  
+      
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowt0t8u03</outgoing>
+                
+    
+    </bpmn:startEvent>
+            
+    
+    <bpmn:task completionQuantity="1" id="Activity_15fyfzx" isForCompensation="false" name="Load" startQuantity="1">
+                  
+      
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flowrsusfux</incoming>
+                  
+      
+      <bpmn:outgoing>Flow_1c73gme</bpmn:outgoing>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyey07of9" name="__sourceRef__ey07of9"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyfmw76hs" name="__sourceRef__fmw76hs"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertymeu56d6" name="__targetRef__meu56d6"/>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationtejjaa9">
+                
+        <sourceRef>myDataReferencehsmgcmp</sourceRef>
+                
+        <targetRef>myPropertymeu56d6</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataOutputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myOutputAssociationh8vq7gj">
+                
+        <sourceRef>myPropertyey07of9</sourceRef>
+                
+        <targetRef>myDataReferenceh31glfq</targetRef>
+              
+      </dataOutputAssociation>
+            
+      <dataOutputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myOutputAssociationzgvm9mz">
+                
+        <sourceRef>myPropertyfmw76hs</sourceRef>
+                
+        <targetRef>myDataReference6ys4rp1</targetRef>
+              
+      </dataOutputAssociation>
+                
+    
+    </bpmn:task>
+            
+    
+        
+    
+    <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="Gateway_0axo3yl">
+                  
+      
+      <bpmn:incoming>Flow_1c73gme</bpmn:incoming>
+                  
+      
+      <bpmn:incoming>Flow_1e2wbbb</bpmn:incoming>
+                  
+      
+      <bpmn:incoming>Flow_19jo2we</bpmn:incoming>
+                  
+      
+      <bpmn:outgoing>Flow_0h71i5n</bpmn:outgoing>
+                
+    
+    </bpmn:exclusiveGateway>
+            
+    
+    <bpmn:sequenceFlow id="Flow_1c73gme" sourceRef="Activity_15fyfzx" targetRef="Gateway_0axo3yl"/>
+            
+    
+    <bpmn:task completionQuantity="1" id="Activity_099yuae" isForCompensation="false" name="Drive" startQuantity="1">
+                  
+      
+      <bpmn:incoming>Flow_0h71i5n</bpmn:incoming>
+                  
+      
+      <bpmn:outgoing>Flow_0uyan88</bpmn:outgoing>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyetlzo2q" name="__sourceRef__etlzo2q"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertya62xefv" name="__targetRef__a62xefv"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertycxg3hc9" name="__targetRef__cxg3hc9"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyl7kl8ge" name="__targetRef__l7kl8ge"/>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationwxcfvw7">
+                
+        <sourceRef>myDataReferenceweywvr1</sourceRef>
+                
+        <targetRef>myPropertya62xefv</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationc1iewkg">
+                
+        <sourceRef>myDataReferencerx683on</sourceRef>
+                
+        <targetRef>myPropertycxg3hc9</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociation0adc99t">
+                
+        <sourceRef>myDataReferencelyqtse6</sourceRef>
+                
+        <targetRef>myPropertyl7kl8ge</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataOutputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myOutputAssociationvcblwv6">
+                
+        <sourceRef>myPropertyetlzo2q</sourceRef>
+                
+        <targetRef>myDataReferencec35unl4</targetRef>
+              
+      </dataOutputAssociation>
+                
+    
+    </bpmn:task>
+            
+    
+    <bpmn:exclusiveGateway gatewayDirection="Unspecified" id="Gateway_07sel7z">
+                  
+      
+      <bpmn:incoming>Flow_0uyan88</bpmn:incoming>
+                  
+      
+            
+      
+      <bpmn:outgoing>Flow_0fk39xh</bpmn:outgoing>
+                  
+      
+      <bpmn:outgoing>Flow_0erlm22</bpmn:outgoing>
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow2ehx8ac</outgoing>
+                
+    
+    </bpmn:exclusiveGateway>
+            
+    
+    <bpmn:endEvent id="Event_0wmjlsu">
+                  
+      
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow7sxgdvg</incoming>
+                
+    
+    </bpmn:endEvent>
+            
+    
+        
+    
+    <bpmn:task completionQuantity="1" id="Activity_1cxe4q6" isForCompensation="false" name="Connection" startQuantity="1">
+                  
+      
+      <bpmn:incoming>Flow_0fk39xh</bpmn:incoming>
+                  
+      
+      <bpmn:outgoing>Flow_1e2wbbb</bpmn:outgoing>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyea17zux" name="__sourceRef__ea17zux"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyghq5t23" name="__targetRef__ghq5t23"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertynp4rzoa" name="__targetRef__np4rzoa"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyh1j7glv" name="__targetRef__h1j7glv"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertykflaxn6" name="__targetRef__kflaxn6"/>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociational15lgb">
+                
+        <sourceRef>myDataReference7be7r5y</sourceRef>
+                
+        <targetRef>myPropertyghq5t23</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationys2uapy">
+                
+        <sourceRef>myDataReferenceel6ipim</sourceRef>
+                
+        <targetRef>myPropertynp4rzoa</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationgh5zb4s">
+                
+        <sourceRef>myDataReferencehypft88</sourceRef>
+                
+        <targetRef>myPropertyh1j7glv</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationsy0uvbq">
+                
+        <sourceRef>myDataReferenceankrfj0</sourceRef>
+                
+        <targetRef>myPropertykflaxn6</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataOutputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myOutputAssociationiyspyrg">
+                
+        <sourceRef>myPropertyea17zux</sourceRef>
+                
+        <targetRef>myDataReferencezxylta2</targetRef>
+              
+      </dataOutputAssociation>
+                
+    
+    </bpmn:task>
+            
+    
+    <bpmn:sequenceFlow id="Flow_0fk39xh" sourceRef="Gateway_07sel7z" targetRef="Activity_1cxe4q6"/>
+            
+    
+    <bpmn:sequenceFlow id="Flow_1e2wbbb" sourceRef="Activity_1cxe4q6" targetRef="Gateway_0axo3yl"/>
+            
+    
+    <bpmn:task completionQuantity="1" id="Activity_00yrzo5" isForCompensation="false" name="Pause" startQuantity="1">
+                  
+      
+      <bpmn:incoming>Flow_0erlm22</bpmn:incoming>
+                  
+      
+      <bpmn:outgoing>Flow_19jo2we</bpmn:outgoing>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myProperty54kman5" name="__sourceRef__54kman5"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myProperty68sf9h0" name="__sourceRef__68sf9h0"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyyca7rx9" name="__targetRef__yca7rx9"/>
+            
+      <property xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myPropertyv5s400j" name="__targetRef__v5s400j"/>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationqn3kta0">
+                
+        <sourceRef>myDataReference8dr1ulc</sourceRef>
+                
+        <targetRef>myPropertyyca7rx9</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataInputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myInputAssociationu6pm6eo">
+                
+        <sourceRef>myDataReferencev32vvgj</sourceRef>
+                
+        <targetRef>myPropertyv5s400j</targetRef>
+              
+      </dataInputAssociation>
+            
+      <dataOutputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myOutputAssociationcfcfqyl">
+                
+        <sourceRef>myProperty54kman5</sourceRef>
+                
+        <targetRef>myDataReferencef0se4rp</targetRef>
+              
+      </dataOutputAssociation>
+            
+      <dataOutputAssociation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myOutputAssociationbmobc6s">
+                
+        <sourceRef>myProperty68sf9h0</sourceRef>
+                
+        <targetRef>myDataReferenceu8epwx1</targetRef>
+              
+      </dataOutputAssociation>
+                
+    
+    </bpmn:task>
+            
+    
+    <bpmn:sequenceFlow id="Flow_0h71i5n" sourceRef="Gateway_0axo3yl" targetRef="Activity_099yuae"/>
+            
+    
+    <bpmn:sequenceFlow id="Flow_0uyan88" sourceRef="Activity_099yuae" targetRef="Gateway_07sel7z"/>
+            
+    
+    <bpmn:sequenceFlow id="Flow_0erlm22" sourceRef="Gateway_07sel7z" targetRef="Activity_00yrzo5"/>
+            
+    
+    <bpmn:sequenceFlow id="Flow_19jo2we" sourceRef="Activity_00yrzo5" targetRef="Gateway_0axo3yl"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectkm8i1kd" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectkm8i1kd" id="myDataReferencec35unl4" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectrcxmo2t" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectrcxmo2t" id="myDataReferenceh31glfq" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectcs32aai" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectcs32aai" id="myDataReferencef0se4rp" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObject7fs75ht" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObject7fs75ht" id="myDataReferencezxylta2" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectdv1iouo" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectdv1iouo" id="myDataReference6ys4rp1" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObject09zoy3r" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObject09zoy3r" id="myDataReferenceu8epwx1" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObject7cygyqe" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObject7cygyqe" id="myDataReferenceweywvr1" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObject7poyuuw" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObject7poyuuw" id="myDataReference8dr1ulc" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectrhtukma" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectrhtukma" id="myDataReferencehsmgcmp" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectz1gokz4" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectz1gokz4" id="myDataReference7be7r5y" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectlw75h03" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectlw75h03" id="myDataReferencerx683on" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObject13i6158" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObject13i6158" id="myDataReferencev32vvgj" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectve5iswe" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectve5iswe" id="myDataReferencelyqtse6" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObject38lef73" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObject38lef73" id="myDataReferenceel6ipim" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectrl692uf" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectrl692uf" id="myDataReferencehypft88" name="Container"/>
+        
+    <dataObject xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myDataObjectckcbsba" isCollection="false"/>
+        
+    <dataObjectReference xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" dataObjectRef="myDataObjectckcbsba" id="myDataReferenceankrfj0" name="Container"/>
+    <dataObject id="myDataObjectv0gy23u" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <dataObjectReference dataObjectRef="myDataObjectv0gy23u" id="myDataReferencee89xz8v" name="Container" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <intermediateCatchEvent id="myIntermediateCatchEvent_614z1dy" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <incoming>Flowt0t8u03</incoming>
+      <outgoing>Flowrsusfux</outgoing>
+      <property id="myPropertyosc53xn" name="__sourceRef__osc53xn"/>
+      <dataOutputAssociation id="myOutputAssociationj3xsqs8">
+        <sourceRef>myPropertyosc53xn</sourceRef>
+        <targetRef>myDataReferencee89xz8v</targetRef>
+      </dataOutputAssociation>
+    </intermediateCatchEvent>
+    <sequenceFlow id="Flowt0t8u03" sourceRef="StartEvent_1" targetRef="myIntermediateCatchEvent_614z1dy" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flowrsusfux" sourceRef="myIntermediateCatchEvent_614z1dy" targetRef="Activity_15fyfzx" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <intermediateThrowEvent id="myIntermediateThrowEvent_qpijq3t" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <incoming>Flow2ehx8ac</incoming>
+      <outgoing>Flow7sxgdvg</outgoing>
+      <property id="myPropertye821nww" name="__sourceRef__e821nww"/>
+      <dataInputAssociation id="myInputAssociation8h7jj7v">
+        <sourceRef>myDataReferencee89xz8v</sourceRef>
+        <targetRef>myPropertye821nww</targetRef>
+      </dataInputAssociation>
+    </intermediateThrowEvent>
+    <sequenceFlow id="Flow2ehx8ac" sourceRef="Gateway_07sel7z" targetRef="myIntermediateThrowEvent_qpijq3t" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flow7sxgdvg" sourceRef="myIntermediateThrowEvent_qpijq3t" targetRef="Event_0wmjlsu" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationbx4o6yu" textFormat="text/plain">
+            
+      <text>speed &gt; 41.0</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociation0aqvuvt" sourceRef="myDataReferencec35unl4" targetRef="myTextAnnotationbx4o6yu"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationn5jcw4c" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,country_GB : True,city_London Heathrow Airport : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationatu22fq" sourceRef="myDataReferenceh31glfq" targetRef="myTextAnnotationn5jcw4c"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationt56w5mn" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,country_GB : False</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationt3wqoy4" sourceRef="myDataReferencef0se4rp" targetRef="myTextAnnotationt56w5mn"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationigzxgqi" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,country_GB : True,city_London Heathrow Airport : False,city_Lower Kingswood : False,city_UNK : False</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationluesrx0" sourceRef="myDataReferencezxylta2" targetRef="myTextAnnotationigzxgqi"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationuo1k3ng" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,country_GB : True,city_London Heathrow Airport : False,city_Lower Kingswood : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationz2v6uub" sourceRef="myDataReference6ys4rp1" targetRef="myTextAnnotationuo1k3ng"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationl8vkf18" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,country_GB : True,city_London Heathrow Airport : False,city_Lower Kingswood : False,city_UNK : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociation7epv650" sourceRef="myDataReferenceu8epwx1" targetRef="myTextAnnotationl8vkf18"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationw5xs0ex" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,city_Coquelles : False,city_Hank : False,speed &lt;= 21.0</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationu7k1hpx" sourceRef="myDataReferenceweywvr1" targetRef="myTextAnnotationw5xs0ex"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationa2m3stz" textFormat="text/plain">
+            
+      <text>speed &gt; 41.0,city_London Heathrow Airport : False,city_Hank : False,speed &lt;= 88.0</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociation4spmm44" sourceRef="myDataReference8dr1ulc" targetRef="myTextAnnotationa2m3stz"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotation637u0xk" textFormat="text/plain">
+            
+      <text>speed &gt; 41.0,city_London Heathrow Airport : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociation4s9qfav" sourceRef="myDataReferencehsmgcmp" targetRef="myTextAnnotation637u0xk"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationzcbplyp" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,city_Coquelles : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociation76djyxy" sourceRef="myDataReference7be7r5y" targetRef="myTextAnnotationzcbplyp"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationrkuhzw4" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,city_Coquelles : False,city_Hank : False,speed &gt; 21.0,speed &gt; 26.0</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationgubfkta" sourceRef="myDataReferencerx683on" targetRef="myTextAnnotationrkuhzw4"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotation0h1l4rx" textFormat="text/plain">
+            
+      <text>speed &gt; 41.0,city_London Heathrow Airport : False,city_Hank : False,speed &gt; 88.0,country_UNK : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationa28envt" sourceRef="myDataReferencev32vvgj" targetRef="myTextAnnotation0h1l4rx"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotation3bkhl2u" textFormat="text/plain">
+            
+      <text>speed &gt; 41.0,city_London Heathrow Airport : False,city_Hank : False,speed &gt; 88.0,country_UNK : False</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationi2o2xfb" sourceRef="myDataReferencelyqtse6" targetRef="myTextAnnotation3bkhl2u"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationj8klf4g" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,city_Coquelles : False,city_Hank : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociation7bu5mtn" sourceRef="myDataReferenceel6ipim" targetRef="myTextAnnotationj8klf4g"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationo8u16sh" textFormat="text/plain">
+            
+      <text>speed &lt;= 41.0,city_Coquelles : False,city_Hank : False,speed &gt; 21.0,speed &lt;= 26.0</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociationgo9p0jz" sourceRef="myDataReferencehypft88" targetRef="myTextAnnotationo8u16sh"/>
+        
+    <textAnnotation xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="myTextAnnotationwz2vj5y" textFormat="text/plain">
+            
+      <text>speed &gt; 41.0,city_London Heathrow Airport : False,city_Hank : True</text>
+          
+    </textAnnotation>
+        
+    <association xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" associationDirection="None" id="myAssociation8fumcab" sourceRef="myDataReferenceankrfj0" targetRef="myTextAnnotationwz2vj5y"/>
+          
+  
+  </bpmn:process>
+      
+  
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+            
+    
+    <bpmndi:BPMNPlane bpmnElement="Process_1an3hcy" id="BPMNPlane_1">
+                  
+      
+      <bpmndi:BPMNEdge id="Flow_04o6cmo_di">
+                        
+        
+        <di:waypoint x="215" y="237"/>
+                        
+        
+        <di:waypoint x="270" y="237"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_1c73gme" id="Flow_1c73gme_di">
+                        
+        
+        <di:waypoint x="370" y="237"/>
+                        
+        
+        <di:waypoint x="425" y="237"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge id="Flow_1uw5tlw_di">
+                        
+        
+        <di:waypoint x="855" y="237"/>
+                        
+        
+        <di:waypoint x="972" y="237"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_0fk39xh" id="Flow_0fk39xh_di">
+                        
+        
+        <di:waypoint x="830" y="212"/>
+                        
+        
+        <di:waypoint x="830" y="120"/>
+                        
+        
+        <di:waypoint x="630" y="120"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_1e2wbbb" id="Flow_1e2wbbb_di">
+                        
+        
+        <di:waypoint x="530" y="120"/>
+                        
+        
+        <di:waypoint x="450" y="120"/>
+                        
+        
+        <di:waypoint x="450" y="212"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_0h71i5n" id="Flow_0h71i5n_di">
+                        
+        
+        <di:waypoint x="475" y="237"/>
+                        
+        
+        <di:waypoint x="550" y="237"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_0uyan88" id="Flow_0uyan88_di">
+                        
+        
+        <di:waypoint x="650" y="237"/>
+                        
+        
+        <di:waypoint x="805" y="237"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_0erlm22" id="Flow_0erlm22_di">
+                        
+        
+        <di:waypoint x="830" y="262"/>
+                        
+        
+        <di:waypoint x="830" y="370"/>
+                        
+        
+        <di:waypoint x="650" y="370"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_19jo2we" id="Flow_19jo2we_di">
+                        
+        
+        <di:waypoint x="550" y="370"/>
+                        
+        
+        <di:waypoint x="450" y="370"/>
+                        
+        
+        <di:waypoint x="450" y="262"/>
+                      
+      
+      </bpmndi:BPMNEdge>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="StartEvent_1" id="_BPMNShape_StartEvent_2">
+                        
+        
+        <dc:Bounds height="36" width="36" x="179" y="219"/>
+                      
+      
+      </bpmndi:BPMNShape>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="Activity_15fyfzx" id="Activity_15fyfzx_di">
+                        
+        
+        <dc:Bounds height="80" width="100" x="270" y="197"/>
+                      
+      
+      </bpmndi:BPMNShape>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="Gateway_0axo3yl" id="Gateway_0axo3yl_di" isMarkerVisible="true">
+                        
+        
+        <dc:Bounds height="50" width="50" x="425" y="212"/>
+                      
+      
+      </bpmndi:BPMNShape>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="Activity_1cxe4q6" id="Activity_1cxe4q6_di">
+                        
+        
+        <dc:Bounds height="80" width="100" x="530" y="80"/>
+                      
+      
+      </bpmndi:BPMNShape>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="Event_0wmjlsu" id="Event_0wmjlsu_di">
+                        
+        
+        <dc:Bounds height="36" width="36" x="972" y="219"/>
+                      
+      
+      </bpmndi:BPMNShape>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="Gateway_07sel7z" id="Gateway_07sel7z_di" isMarkerVisible="true">
+                        
+        
+        <dc:Bounds height="50" width="50" x="805" y="212"/>
+                      
+      
+      </bpmndi:BPMNShape>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="Activity_00yrzo5" id="Activity_00yrzo5_di">
+                        
+        
+        <dc:Bounds height="80" width="100" x="550" y="330"/>
+                      
+      
+      </bpmndi:BPMNShape>
+                  
+      
+      <bpmndi:BPMNShape bpmnElement="Activity_099yuae" id="Activity_099yuae_di">
+                        
+        
+        <dc:Bounds height="80" width="100" x="550" y="197"/>
+                      
+      
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencec35unl4" id="myDataReferencec35unl4_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="300.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationbx4o6yu" id="myTextAnnotationbx4o6yu_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="300.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociation0aqvuvt" id="myAssociation0aqvuvt_di" sourceElement="myDataReferencec35unl4_di" targetElement="myTextAnnotationbx4o6yu_di">
+                
+        <di:waypoint x="300.0" y="40.0"/>
+                
+        <di:waypoint x="300.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationvcblwv6" id="myOutputAssociationvcblwv6_di">
+                
+        <di:waypoint x="550.0" y="197.0"/>
+                
+        <di:waypoint x="300.0" y="40.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferenceh31glfq" id="myDataReferenceh31glfq_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="500.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationn5jcw4c" id="myTextAnnotationn5jcw4c_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="500.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationatu22fq" id="myAssociationatu22fq_di" sourceElement="myDataReferenceh31glfq_di" targetElement="myTextAnnotationn5jcw4c_di">
+                
+        <di:waypoint x="500.0" y="40.0"/>
+                
+        <di:waypoint x="500.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationh8vq7gj" id="myOutputAssociationh8vq7gj_di">
+                
+        <di:waypoint x="270.0" y="197.0"/>
+                
+        <di:waypoint x="500.0" y="40.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencef0se4rp" id="myDataReferencef0se4rp_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="700.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationt56w5mn" id="myTextAnnotationt56w5mn_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="700.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationt3wqoy4" id="myAssociationt3wqoy4_di" sourceElement="myDataReferencef0se4rp_di" targetElement="myTextAnnotationt56w5mn_di">
+                
+        <di:waypoint x="700.0" y="40.0"/>
+                
+        <di:waypoint x="700.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationcfcfqyl" id="myOutputAssociationcfcfqyl_di">
+                
+        <di:waypoint x="550.0" y="330.0"/>
+                
+        <di:waypoint x="700.0" y="40.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencezxylta2" id="myDataReferencezxylta2_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="900.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationigzxgqi" id="myTextAnnotationigzxgqi_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="900.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationluesrx0" id="myAssociationluesrx0_di" sourceElement="myDataReferencezxylta2_di" targetElement="myTextAnnotationigzxgqi_di">
+                
+        <di:waypoint x="900.0" y="40.0"/>
+                
+        <di:waypoint x="900.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationiyspyrg" id="myOutputAssociationiyspyrg_di">
+                
+        <di:waypoint x="530.0" y="80.0"/>
+                
+        <di:waypoint x="900.0" y="40.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReference6ys4rp1" id="myDataReference6ys4rp1_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="1100.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationuo1k3ng" id="myTextAnnotationuo1k3ng_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="1100.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationz2v6uub" id="myAssociationz2v6uub_di" sourceElement="myDataReference6ys4rp1_di" targetElement="myTextAnnotationuo1k3ng_di">
+                
+        <di:waypoint x="1100.0" y="40.0"/>
+                
+        <di:waypoint x="1100.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationzgvm9mz" id="myOutputAssociationzgvm9mz_di">
+                
+        <di:waypoint x="270.0" y="197.0"/>
+                
+        <di:waypoint x="1100.0" y="40.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferenceu8epwx1" id="myDataReferenceu8epwx1_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="1300.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationl8vkf18" id="myTextAnnotationl8vkf18_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="1300.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociation7epv650" id="myAssociation7epv650_di" sourceElement="myDataReferenceu8epwx1_di" targetElement="myTextAnnotationl8vkf18_di">
+                
+        <di:waypoint x="1300.0" y="40.0"/>
+                
+        <di:waypoint x="1300.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationbmobc6s" id="myOutputAssociationbmobc6s_di">
+                
+        <di:waypoint x="550.0" y="330.0"/>
+                
+        <di:waypoint x="1300.0" y="40.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferenceweywvr1" id="myDataReferenceweywvr1_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="1500.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationw5xs0ex" id="myTextAnnotationw5xs0ex_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="1500.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationu7k1hpx" id="myAssociationu7k1hpx_di" sourceElement="myDataReferenceweywvr1_di" targetElement="myTextAnnotationw5xs0ex_di">
+                
+        <di:waypoint x="1500.0" y="40.0"/>
+                
+        <di:waypoint x="1500.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationwxcfvw7" id="myInputAssociationwxcfvw7_di">
+                
+        <di:waypoint x="1500.0" y="40.0"/>
+                
+        <di:waypoint x="550.0" y="197.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReference8dr1ulc" id="myDataReference8dr1ulc_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="1700.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationa2m3stz" id="myTextAnnotationa2m3stz_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="1700.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociation4spmm44" id="myAssociation4spmm44_di" sourceElement="myDataReference8dr1ulc_di" targetElement="myTextAnnotationa2m3stz_di">
+                
+        <di:waypoint x="1700.0" y="40.0"/>
+                
+        <di:waypoint x="1700.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationqn3kta0" id="myInputAssociationqn3kta0_di">
+                
+        <di:waypoint x="1700.0" y="40.0"/>
+                
+        <di:waypoint x="550.0" y="330.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencehsmgcmp" id="myDataReferencehsmgcmp_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="1900.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotation637u0xk" id="myTextAnnotation637u0xk_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="1900.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociation4s9qfav" id="myAssociation4s9qfav_di" sourceElement="myDataReferencehsmgcmp_di" targetElement="myTextAnnotation637u0xk_di">
+                
+        <di:waypoint x="1900.0" y="40.0"/>
+                
+        <di:waypoint x="1900.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationtejjaa9" id="myInputAssociationtejjaa9_di">
+                
+        <di:waypoint x="1900.0" y="40.0"/>
+                
+        <di:waypoint x="270.0" y="197.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReference7be7r5y" id="myDataReference7be7r5y_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="2100.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationzcbplyp" id="myTextAnnotationzcbplyp_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="2100.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociation76djyxy" id="myAssociation76djyxy_di" sourceElement="myDataReference7be7r5y_di" targetElement="myTextAnnotationzcbplyp_di">
+                
+        <di:waypoint x="2100.0" y="40.0"/>
+                
+        <di:waypoint x="2100.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociational15lgb" id="myInputAssociational15lgb_di">
+                
+        <di:waypoint x="2100.0" y="40.0"/>
+                
+        <di:waypoint x="530.0" y="80.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencerx683on" id="myDataReferencerx683on_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="2300.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationrkuhzw4" id="myTextAnnotationrkuhzw4_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="2300.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationgubfkta" id="myAssociationgubfkta_di" sourceElement="myDataReferencerx683on_di" targetElement="myTextAnnotationrkuhzw4_di">
+                
+        <di:waypoint x="2300.0" y="40.0"/>
+                
+        <di:waypoint x="2300.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationc1iewkg" id="myInputAssociationc1iewkg_di">
+                
+        <di:waypoint x="2300.0" y="40.0"/>
+                
+        <di:waypoint x="550.0" y="197.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencev32vvgj" id="myDataReferencev32vvgj_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="2500.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotation0h1l4rx" id="myTextAnnotation0h1l4rx_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="2500.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationa28envt" id="myAssociationa28envt_di" sourceElement="myDataReferencev32vvgj_di" targetElement="myTextAnnotation0h1l4rx_di">
+                
+        <di:waypoint x="2500.0" y="40.0"/>
+                
+        <di:waypoint x="2500.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationu6pm6eo" id="myInputAssociationu6pm6eo_di">
+                
+        <di:waypoint x="2500.0" y="40.0"/>
+                
+        <di:waypoint x="550.0" y="330.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencelyqtse6" id="myDataReferencelyqtse6_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="2700.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotation3bkhl2u" id="myTextAnnotation3bkhl2u_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="2700.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationi2o2xfb" id="myAssociationi2o2xfb_di" sourceElement="myDataReferencelyqtse6_di" targetElement="myTextAnnotation3bkhl2u_di">
+                
+        <di:waypoint x="2700.0" y="40.0"/>
+                
+        <di:waypoint x="2700.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociation0adc99t" id="myInputAssociation0adc99t_di">
+                
+        <di:waypoint x="2700.0" y="40.0"/>
+                
+        <di:waypoint x="550.0" y="197.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferenceel6ipim" id="myDataReferenceel6ipim_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="2900.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationj8klf4g" id="myTextAnnotationj8klf4g_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="2900.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociation7bu5mtn" id="myAssociation7bu5mtn_di" sourceElement="myDataReferenceel6ipim_di" targetElement="myTextAnnotationj8klf4g_di">
+                
+        <di:waypoint x="2900.0" y="40.0"/>
+                
+        <di:waypoint x="2900.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationys2uapy" id="myInputAssociationys2uapy_di">
+                
+        <di:waypoint x="2900.0" y="40.0"/>
+                
+        <di:waypoint x="530.0" y="80.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferencehypft88" id="myDataReferencehypft88_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="3100.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationo8u16sh" id="myTextAnnotationo8u16sh_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="3100.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociationgo9p0jz" id="myAssociationgo9p0jz_di" sourceElement="myDataReferencehypft88_di" targetElement="myTextAnnotationo8u16sh_di">
+                
+        <di:waypoint x="3100.0" y="40.0"/>
+                
+        <di:waypoint x="3100.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationgh5zb4s" id="myInputAssociationgh5zb4s_di">
+                
+        <di:waypoint x="3100.0" y="40.0"/>
+                
+        <di:waypoint x="530.0" y="80.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNShape bpmnElement="myDataReferenceankrfj0" id="myDataReferenceankrfj0_di">
+                
+        <dc:Bounds height="50.0" width="36.0" x="3300.0" y="40.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNShape bpmnElement="myTextAnnotationwz2vj5y" id="myTextAnnotationwz2vj5y_di">
+                
+        <dc:Bounds height="30.0" width="100.0" x="3300.0" y="0.0"/>
+              
+      </bpmndi:BPMNShape>
+            
+      <bpmndi:BPMNEdge bpmnElement="myAssociation8fumcab" id="myAssociation8fumcab_di" sourceElement="myDataReferenceankrfj0_di" targetElement="myTextAnnotationwz2vj5y_di">
+                
+        <di:waypoint x="3300.0" y="40.0"/>
+                
+        <di:waypoint x="3300.0" y="0.0"/>
+              
+      </bpmndi:BPMNEdge>
+            
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociationsy0uvbq" id="myInputAssociationsy0uvbq_di">
+                
+        <di:waypoint x="3300.0" y="40.0"/>
+                
+        <di:waypoint x="530.0" y="80.0"/>
+              
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="myDataReferencee89xz8v" id="myDataReferencee89xz8v_di">
+        <dc:Bounds height="50.0" width="36.0" x="270.0" y="147.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="myIntermediateCatchEvent_614z1dy" id="myIntermediateCatchEvent_614z1dy_di">
+        <dc:Bounds height="36.0" width="36.0" x="229.0" y="219.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flowt0t8u03" id="Flowt0t8u03_di" sourceElement="_BPMNShape_StartEvent_2" targetElement="myIntermediateCatchEvent_614z1dy_di">
+        <di:waypoint x="179.0" y="219.0"/>
+        <di:waypoint x="229.0" y="219.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flowrsusfux" id="Flowrsusfux_di" sourceElement="myIntermediateCatchEvent_614z1dy_di" targetElement="Activity_15fyfzx_di">
+        <di:waypoint x="229.0" y="219.0"/>
+        <di:waypoint x="270.0" y="197.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="myOutputAssociationj3xsqs8" id="myOutputAssociationj3xsqs8_di">
+        <di:waypoint x="229.0" y="219.0"/>
+        <di:waypoint x="270.0" y="147.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="myIntermediateThrowEvent_qpijq3t" id="myIntermediateThrowEvent_qpijq3t_di">
+        <dc:Bounds height="36.0" width="36.0" x="855.0" y="212.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flow2ehx8ac" id="Flow2ehx8ac_di" sourceElement="Gateway_07sel7z_di" targetElement="myIntermediateThrowEvent_qpijq3t_di">
+        <di:waypoint x="805.0" y="212.0"/>
+        <di:waypoint x="855.0" y="212.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow7sxgdvg" id="Flow7sxgdvg_di" sourceElement="myIntermediateThrowEvent_qpijq3t_di" targetElement="Event_0wmjlsu_di">
+        <di:waypoint x="855.0" y="212.0"/>
+        <di:waypoint x="972.0" y="219.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="myInputAssociation8h7jj7v" id="myInputAssociation8h7jj7v_di">
+        <di:waypoint x="855.0" y="212.0"/>
+        <di:waypoint x="270.0" y="147.0"/>
+      </bpmndi:BPMNEdge>
+                
+    
+    </bpmndi:BPMNPlane>
+          
+  
+  </bpmndi:BPMNDiagram>
+    
+
+</bpmn:definitions>
