@@ -125,6 +125,8 @@ public class DeleteEvent {
                 return;
             }
 
+            System.out.println("event delete: " + event.getName());
+
             SequenceFlow sourceFlow = event.getIncoming().iterator().next();
             SequenceFlow targetFlow = event.getOutgoing().iterator().next();
             //add new flow for deleting the event
@@ -141,6 +143,7 @@ public class DeleteEvent {
             }else {
                 System.out.println("No Target!!");
             }
+            newFlow.setName(CombineSequenceFlowCondition.combine(sourceFlow,targetFlow));
 
             event.getParentElement().addChildElement(newFlow);
             AddIncomingOrOutcoming.AddIncomingToElement(modelInstance,newFlow.getTarget().getId(),newFlow);

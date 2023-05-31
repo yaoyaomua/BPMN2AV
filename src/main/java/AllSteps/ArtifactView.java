@@ -80,7 +80,6 @@ public class ArtifactView {
 
         System.out.println("*************************");
         System.out.println("delete empty sub process start:");
-        //delete one incoming and one outgoing flow
         DeleteEmptySubprocess.delete(modelInstance);
 
 
@@ -103,10 +102,6 @@ public class ArtifactView {
         System.out.println("*************************");
         System.out.println("BPStruct:");
         BPStruct.run(modelInstance);
-
-//        System.out.println("*************************");
-//        System.out.println("BPStruct:");
-//        BPStruct.run(modelInstance);
 
 
     }

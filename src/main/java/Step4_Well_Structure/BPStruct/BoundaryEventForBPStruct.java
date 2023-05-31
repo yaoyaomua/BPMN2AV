@@ -27,20 +27,23 @@ public class BoundaryEventForBPStruct {
     public static HashMap<BoundaryEvent, BpmnShape> store(BpmnModelInstance modelInstance){
         HashMap<BoundaryEvent, BpmnShape> shapes = new HashMap<>();
         for (BoundaryEvent event : modelInstance.getModelElementsByType(BoundaryEvent.class)){
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println("boundary event data object: " + event.getDataOutputAssociations().size());
             shapes.put(event, event.getDiagramElement());
         }
         return shapes;
     }
 
-    public static HashMap<IntermediateThrowEvent,BoundaryEvent> pre(BpmnModelInstance modelInstance){
-        HashMap<IntermediateThrowEvent,BoundaryEvent> events = new HashMap<>();
+    public static HashMap<IntermediateCatchEvent,BoundaryEvent> pre(BpmnModelInstance modelInstance){
+        HashMap<IntermediateCatchEvent,BoundaryEvent> events = new HashMap<>();
         BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
         Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
 
         if (modelInstance.getModelElementsByType(BoundaryEvent.class).size() == 0) return events;
 
         for (BoundaryEvent boundaryEvent : modelInstance.getModelElementsByType(BoundaryEvent.class)){
-            IntermediateThrowEvent event = modelInstance.newInstance(IntermediateThrowEvent.class);
+            IntermediateCatchEvent event = modelInstance.newInstance(IntermediateCatchEvent.class);
 
             //creat event
             event.setId(GenerateID.getID("BoundaryEvent_",modelInstance));
@@ -137,6 +140,13 @@ public class BoundaryEventForBPStruct {
             oldFlow2.getParentElement().removeChildElement(oldFlow2);
             events.put(event,boundaryEvent);
 
+            //handle corresponding data objects'
+            System.out.println("boundary event:" + boundaryEvent.getDataOutputAssociations().size());
+            for (DataOutputAssociation dataOutputAssociation: boundaryEvent.getDataOutputAssociations()){
+                System.out.println("record boundary event data object");
+                event.getDataOutputAssociations().add(dataOutputAssociation);
+            }
+
             boundaryEvent.getParentElement().removeChildElement(boundaryEvent);
         }
 
@@ -155,11 +165,11 @@ public class BoundaryEventForBPStruct {
         return events;
     }
 
-    public static void after(BpmnModelInstance modelInstance, HashMap<IntermediateThrowEvent,BoundaryEvent> events, HashMap<BoundaryEvent, BpmnShape> shapes){
+    public static void after(BpmnModelInstance modelInstance, HashMap<IntermediateCatchEvent,BoundaryEvent> events, HashMap<BoundaryEvent, BpmnShape> shapes){
         Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
         BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
 
-        for (IntermediateThrowEvent event : modelInstance.getModelElementsByType(IntermediateThrowEvent.class)){
+        for (IntermediateCatchEvent event : modelInstance.getModelElementsByType(IntermediateCatchEvent.class)){
             if (!events.containsKey(event)) continue;
             BoundaryEvent boundaryEvent = events.get(event);
             process.addChildElement(boundaryEvent);
@@ -192,6 +202,10 @@ public class BoundaryEventForBPStruct {
 
             oldFlow1.getParentElement().removeChildElement(oldFlow1);
             oldFlow2.getParentElement().removeChildElement(oldFlow2);
+            for (DataOutputAssociation dataOutputAssociation: event.getDataOutputAssociations()){
+                System.out.println("add boundary event data object");
+                boundaryEvent.getDataOutputAssociations().add(dataOutputAssociation);
+            }
             event.getParentElement().removeChildElement(event);
 
         }

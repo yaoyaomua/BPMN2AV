@@ -83,11 +83,13 @@ public class DeleteTask {
             List<String> sources = new ArrayList<>();
             List<String> targets = new ArrayList<>();
             List<String> toDeleteFlow = new ArrayList<>();
+            HashMap<String,SequenceFlow> flows = new HashMap<>();
 
             //add source task id into sources list
             for (SequenceFlow incoming : todelete.getTask().getIncoming()){
 //                    System.out.println("sources id:" + incoming.getSource().getId());
                     sources.add(incoming.getSource().getId());
+                    flows.put(incoming.getSource().getId(),incoming);
                     toDeleteFlow.add(incoming.getId());
             }
 
@@ -95,6 +97,7 @@ public class DeleteTask {
             for (SequenceFlow outgoing : todelete.getTask().getOutgoing()){
 //                    System.out.println("targets id:" + outgoing.getTarget().getId());
                     targets.add(outgoing.getTarget().getId());
+                    flows.put(outgoing.getTarget().getId(),outgoing);
                     toDeleteFlow.add(outgoing.getId());
             }
 
@@ -111,6 +114,8 @@ public class DeleteTask {
                     //set source ref and target ref of this flow
                     src2tgt.setTarget(modelInstance.getModelElementById(tgt));
                     src2tgt.setSource(modelInstance.getModelElementById(src));
+                    src2tgt.setName(CombineSequenceFlowCondition.combine(flows.get(src),flows.get(tgt)));
+
 
                     //change this part is because we could add the new flow the same process of the remove one
                     todelete.getTask().getParentElement().addChildElement(src2tgt);

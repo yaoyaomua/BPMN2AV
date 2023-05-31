@@ -20,7 +20,7 @@ public class BPStruct {
     public static void run(BpmnModelInstance modelInstance) throws IOException, JDOMException {
         System.out.println("start store boundary event information");
         HashMap<BoundaryEvent, BpmnShape> shapes = BoundaryEventForBPStruct.store(modelInstance);
-        HashMap<IntermediateThrowEvent,BoundaryEvent> events = BoundaryEventForBPStruct.pre(modelInstance);
+        HashMap<IntermediateCatchEvent,BoundaryEvent> events = BoundaryEventForBPStruct.pre(modelInstance);
         Process process = BPMNReader.parse(modelInstance);
         process.setName("process7817");
         Restructurer str = new Restructurer(process);

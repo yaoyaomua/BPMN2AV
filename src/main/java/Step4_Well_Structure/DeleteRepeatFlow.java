@@ -21,7 +21,6 @@ public class DeleteRepeatFlow {
         }
         for (Map.Entry<String, Collection<String>> entry : map.entrySet()) {
             Collection<String> value = entry.getValue();
-            // if value exist, the key need to be delete
             if (seenValues.contains(value)) {
                 keysToRemove.add(entry.getKey());
             }

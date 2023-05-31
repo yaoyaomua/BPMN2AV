@@ -11,6 +11,7 @@ import ee.ut.bpstruct2.util.BPMN2Reader;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.BoundaryEvent;
+import org.camunda.bpm.model.bpmn.instance.IntermediateCatchEvent;
 import org.camunda.bpm.model.bpmn.instance.IntermediateThrowEvent;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 import org.jdom.Document;
@@ -35,7 +36,7 @@ public class Step4Test {
         File file = new File("models/output.bpmn");
         BpmnModelInstance modelInstance = Bpmn.readModelFromFile(file);
         HashMap<BoundaryEvent, BpmnShape> shapes = BoundaryEventForBPStruct.store(modelInstance);
-        HashMap<IntermediateThrowEvent,BoundaryEvent> events = BoundaryEventForBPStruct.pre(modelInstance);
+        HashMap<IntermediateCatchEvent,BoundaryEvent> events = BoundaryEventForBPStruct.pre(modelInstance);
         Process process = BPMNReader.parse(modelInstance);
 //        File stepoutput= new File("models/delete.bpmn");
 //        Bpmn.writeModelToFile(stepoutput, modelInstance);
