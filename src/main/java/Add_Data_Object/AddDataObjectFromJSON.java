@@ -27,6 +27,7 @@ public class AddDataObjectFromJSON {
             Collection<String> targetList = new ArrayList<>();
             String artifact = jsonArray.getJSONObject(i).getString("artifact");
             String state = jsonArray.getJSONObject(i).getString("state");
+            String label = jsonArray.getJSONObject(i).getString("label");
             //System.out.println("##################");
             //System.out.println(artifact);
             //System.out.println(state);
@@ -103,10 +104,10 @@ public class AddDataObjectFromJSON {
                 System.out.println(name);
             }
 
-            addDataObject(modelInstance,artifact,state,sourceList,targetList);
+            addDataObject(modelInstance,artifact,state,sourceList,targetList,label);
         }
     }
-    public static void addDataObject(BpmnModelInstance modelInstance, String artifact, String state, Collection<String> sourceList, Collection<String> targetList) {
+    public static void addDataObject(BpmnModelInstance modelInstance, String artifact, String state, Collection<String> sourceList, Collection<String> targetList,String label) {
         Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
         String newID;
         //DataObject
@@ -115,6 +116,7 @@ public class AddDataObjectFromJSON {
             newID = Generate7ID.generate();
         } while (modelInstance.getModelElementById("myDataObject" + newID) != null);
         dataObject.setId("myDataObject" + newID);
+        dataObject.setName(artifact);
         process.addChildElement(dataObject);
         //TextAnnotation
         TextAnnotation textAnnotation = modelInstance.newInstance(TextAnnotation.class);
@@ -126,14 +128,25 @@ public class AddDataObjectFromJSON {
         text.setTextContent(state);
         textAnnotation.setText(text);
         process.addChildElement(textAnnotation);
+        //data state
+        DataState dataState = modelInstance.newInstance(DataState.class);
+        dataState.setId(label);
+        dataState.setName(label);
+        //System.out.println(dataState.getId());
+
         //DataReference
         DataObjectReference dataObjectReference = modelInstance.newInstance(DataObjectReference.class);
+        //dataObjectReference.addChildElement(dataState);
         do {
             newID = Generate7ID.generate();
         } while (modelInstance.getModelElementById("myDataReference" + newID) != null);
         dataObjectReference.setId("myDataReference" + newID);
         dataObjectReference.setDataObject(dataObject);
         dataObjectReference.setName(artifact);
+        dataObjectReference.setDataState(dataState);
+        //dataObjectReference.addChildElement(dataState);
+
+
         process.addChildElement(dataObjectReference);
         //Association
         Association association = modelInstance.newInstance(Association.class);
