@@ -64,18 +64,5 @@ public class DeleteParalleGatewaySequenceFlow {
             queue.removeFirst();
         }
         return false;
-//        if (start.getId().equals(target.getId())) return true;
-//
-//        for (SequenceFlow flow : start.getIncoming()){
-//            System.out.println("遍历flow：" + flow.getId());
-//            if (flow.getId().equals(sequenceFlow.getId())) continue;
-//            start = flow.getSource();
-//            System.out.println("change start:" + start.getId());
-//            System.out.println("target is :" + target.getId());
-//
-//            if (start instanceof StartEvent) continue;
-//            return dfs(modelInstance,sequenceFlow,start,target);
-//        }
-//        return false;
     }
 }

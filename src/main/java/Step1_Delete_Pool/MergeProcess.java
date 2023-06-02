@@ -9,6 +9,10 @@ import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
 public class MergeProcess {
 
     public static void merge(BpmnModelInstance modelInstance) {
+        if (modelInstance.getModelElementsByType(Process.class).size() == 1){
+            modelInstance.getModelElementsByType(Process.class).iterator().next().setName("Single Process");
+            return;
+        }
         // Create a new process element to hold the merged elements
         Process mergedProcess = modelInstance.newInstance(Process.class);
         mergedProcess.setId("mergedProcess");

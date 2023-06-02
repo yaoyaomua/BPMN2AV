@@ -25,8 +25,8 @@ public class AddSequenceFlow {
             i++;
             MessageFlow messageflow = iterator_messageflows.next();
             // 对 messageflow对象进行操作
-            System.out.println("message flow sourceRef: " + messageflow.getSource().getId());
-            System.out.println("message flow targetRef: " + messageflow.getTarget().getId());
+//            System.out.println("message flow sourceRef: " + messageflow.getSource().getId());
+//            System.out.println("message flow targetRef: " + messageflow.getTarget().getId());
             // whether the message flow starts from or ends event inside a subprocess
             if ((messageflow.getTarget().getElementType().getTypeName().equals("intermediateThrowEvent")) || (messageflow.getTarget().getElementType().getTypeName().equals("intermediateThrowEvent")))
             {
@@ -54,7 +54,7 @@ public class AddSequenceFlow {
             }
             if(messageflow.getSource().getElementType().getTypeName().equals("endEvent") && !(messageflow.getSource().getParentElement().getElementType().getTypeName().equals("subProcess")))
             {
-                System.out.println("This is end event!");
+//                System.out.println("This is end event!");
                 EndEvent acpre = modelInstance.getModelElementById(messageflow.getSource().getId());
                 IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
                 ac.setName("End"+i);
@@ -74,6 +74,7 @@ public class AddSequenceFlow {
             // Create a new sequence flow element
             SequenceFlow sequenceFlow = modelInstance.newInstance(SequenceFlow.class);
             sequenceFlow.setId(messageflow.getId());
+
             if (!messageflow.getSource().getElementType().getTypeName().equals("endEvent")) {
                 sequenceFlow.setSource(modelInstance.getModelElementById(messageflow.getSource().getId()));
             }

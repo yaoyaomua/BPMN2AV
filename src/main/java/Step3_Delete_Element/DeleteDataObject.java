@@ -16,11 +16,8 @@ public class DeleteDataObject {
     }
 
     public static void delete(BpmnModelInstance modelInstance, String artifact){
-
         HashSet<String> datas = DataTextState.getAssociatedDataObject(modelInstance,artifact);
-
-        HashMap<String,String> textData = DataTextState.getText(modelInstance);
-
+//        HashMap<String,String> textData = DataTextState.getText(modelInstance);
         List<String> toDelete = new ArrayList<>();
 
         for (DataObjectReference dataObjectReference : modelInstance.getModelElementsByType(DataObjectReference.class)){
@@ -57,8 +54,10 @@ public class DeleteDataObject {
             dataObjectReference.getParentElement().removeChildElement(dataObjectReference);
             dataObject.getParentElement().removeChildElement(dataObject);
             dataShape.getParentElement().removeChildElement(dataShape);
-            if (textData.get(dataObjectRefID) != null){
-                Association association = modelInstance.getModelElementById(textData.get(dataObjectRefID));
+        }
+
+        for (Association association: modelInstance.getModelElementsByType(Association.class)){
+            if (association.getSource() == null){
                 TextAnnotation textAnnotation = modelInstance.getModelElementById(association.getTarget().getId());
                 DiagramElement textDiagram = textAnnotation.getDiagramElement();
                 DiagramElement assoDiagram = association.getDiagramElement();
