@@ -1,246 +1,356 @@
 {
     "DataObjects": [
         {
-            "state": "speed > 41.0",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Drive"
-                }
-            ],
-            "targetRef": [],
-            "label": "state0"
-        },
-        {
-            "state": "speed <= 41.0,city_London Heathrow Airport : True",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Load"
-                }
-            ],
-            "targetRef": [],
-            "label": "state1"
-        },
-        {
-            "state": "speed <= 21.0,city_London Heathrow Airport : False,country_GB : False,city_Hank : False",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Pause"
-                }
-            ],
-            "targetRef": [],
-            "label": "state2"
-        },
-        {
-            "state": "speed <= 41.0,city_London Heathrow Airport : False,country_GB : True,city_Lower Kingswood : False,city_UNK : False,city_Church Hougham : False",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Connection"
-                }
-            ],
-            "targetRef": [],
-            "label": "state3"
-        },
-        {
-            "state": "speed <= 41.0,country_GB : True,city_Lower Kingswood : True",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Load"
-                }
-            ],
-            "targetRef": [],
-            "label": "state4"
-        },
-        {
-            "state": "speed <= 41.0,speed > 26.0,city_London Heathrow Airport : False,country_GB : False,city_Hank : False",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Pause"
-                }
-            ],
-            "targetRef": [],
-            "label": "state5"
-        },
-        {
-            "state": "speed <= 23.0,country_GB : True,city_UNK : True",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Pause"
-                }
-            ],
-            "targetRef": [],
-            "label": "state6"
-        },
-        {
-            "state": "speed <= 41.0,country_GB : True,city_Church Hougham : True",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Pause"
-                }
-            ],
-            "targetRef": [],
-            "label": "state7"
-        },
-        {
-            "state": "speed <= 41.0,country_GB : False,city_Hank : True",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Connection"
-                }
-            ],
-            "targetRef": [],
-            "label": "state8"
-        },
-        {
-            "state": "speed <= 26.0,speed > 21.0,city_London Heathrow Airport : False,country_GB : False,city_Hank : False",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Drive"
-                }
-            ],
-            "targetRef": [],
-            "label": "state9"
-        },
-        {
-            "state": "speed <= 41.0,country_GB : True,city_UNK : True,speed > 23.0",
-            "artifact": "Container",
-            "sourceRef": [
-                {
-                    "name": "Connection"
-                }
-            ],
-            "targetRef": [],
-            "label": "state10"
-        },
-        {
-            "state": "speed <= 21.0,country_FR : False,city_Hank : False",
+            "state": "speed <= 37.0,country_UNK : True",
+            "label": "state0",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Drive"
+                    "name": "Take break in EU"
                 }
             ],
-            "sourceRef": [],
-            "label": "state11"
+            "sourceRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ]
         },
         {
-            "state": "speed > 41.0,city_London Heathrow Airport : False,city_Hank : False,city_Slough : False,speed <= 88.0",
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : False,city_Luchthaven Schiphol : False,country_GB : True,city_Peene : False,city_Newington : False",
+            "label": "state1",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Pause"
+                    "name": "Take break in UK"
                 }
             ],
-            "sourceRef": [],
-            "label": "state12"
+            "sourceRef": [
+                {
+                    "name": "Travel in UK"
+                }
+            ]
         },
         {
-            "state": "speed > 41.0,city_London Heathrow Airport : True",
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : True,speed <= 5.0",
+            "label": "state2",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Load"
+                    "name": "Attach container"
                 }
             ],
-            "sourceRef": [],
-            "label": "state13"
+            "sourceRef": []
         },
         {
-            "state": "speed <= 41.0,country_FR : True",
+            "state": "speed > 37.0,city_London Heathrow Airport : True",
+            "label": "state3",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Connection"
+                    "name": "Travel in UK"
                 }
             ],
-            "sourceRef": [],
-            "label": "state14"
+            "sourceRef": [
+                {
+                    "name": "Attach container"
+                }
+            ]
         },
         {
-            "state": "speed <= 41.0,country_FR : False,city_Hank : False,speed > 26.0",
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : False,city_Luchthaven Schiphol : True",
+            "label": "state4",
+            "artifact": "Container",
+            "targetRef": [],
+            "sourceRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : True",
+            "label": "state5",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Drive"
+                    "name": "Travel in UK"
                 }
             ],
-            "sourceRef": [],
-            "label": "state15"
+            "sourceRef": [
+                {
+                    "name": "Take break in UK"
+                }
+            ]
         },
         {
-            "state": "speed > 41.0,city_London Heathrow Airport : False,city_Hank : False,city_Slough : False,speed > 88.0,country_GB : False",
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed > 62.0,speed > 85.0,speed > 88.0",
+            "label": "state6",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Pause"
+                    "name": "Travel in EU"
                 }
             ],
-            "sourceRef": [],
-            "label": "state16"
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
         },
         {
-            "state": "speed > 88.0,city_London Heathrow Airport : False,city_Hank : False,city_Slough : False,country_GB : True",
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : False,city_Luchthaven Schiphol : False,country_GB : False,country_FR : True",
+            "label": "state7",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Drive"
+                    "name": "Take Channel tunnel"
                 }
             ],
-            "sourceRef": [],
-            "label": "state17"
+            "sourceRef": [
+                {
+                    "name": "Take break in UK"
+                }
+            ]
         },
         {
-            "state": "speed <= 41.0,country_FR : False,city_Hank : True",
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : False,city_Luchthaven Schiphol : False,country_GB : True,city_Peene : True",
+            "label": "state8",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Connection"
+                    "name": "Take Channel tunnel"
                 }
             ],
-            "sourceRef": [],
-            "label": "state18"
+            "sourceRef": [
+                {
+                    "name": "Travel in UK"
+                }
+            ]
         },
         {
-            "state": "speed <= 26.0,country_FR : False,city_Hank : False,speed > 21.0",
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : False",
+            "label": "state9",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Connection"
+                    "name": "Travel in EU"
                 }
             ],
-            "sourceRef": [],
-            "label": "state19"
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
         },
         {
-            "state": "speed > 41.0,city_Hank : True",
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : False,city_Luchthaven Schiphol : False,country_GB : False,country_FR : False",
+            "label": "state10",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Connection"
+                    "name": "Take break in EU"
                 }
             ],
-            "sourceRef": [],
-            "label": "state20"
+            "sourceRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ]
         },
         {
-            "state": "speed > 41.0,city_Slough : True",
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed > 62.0,speed <= 85.0,speed > 73.0,speed <= 81.0,speed > 77.0",
+            "label": "state11",
             "artifact": "Container",
             "targetRef": [
                 {
-                    "name": "Load"
+                    "name": "Travel in EU"
                 }
             ],
-            "sourceRef": [],
-            "label": "state21"
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed <= 62.0,speed <= 54.0,speed > 46.0",
+            "label": "state12",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed <= 62.0,speed > 54.0",
+            "label": "state13",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take Channel tunnel"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed > 62.0,speed <= 85.0,speed > 73.0,speed > 81.0",
+            "label": "state14",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
+        },
+        {
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : False,city_Luchthaven Schiphol : False,country_GB : True,city_Peene : False,city_Newington : True",
+            "label": "state15",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Take Channel tunnel"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Travel in UK"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed > 62.0,speed > 85.0,speed <= 88.0",
+            "label": "state16",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take Channel tunnel"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : True",
+            "label": "state17",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take Channel tunnel"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed <= 62.0,speed <= 54.0,speed <= 46.0,speed > 43.0",
+            "label": "state18",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take Channel tunnel"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed <= 62.0,speed <= 54.0,speed <= 46.0,speed <= 43.0",
+            "label": "state19",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed > 62.0,speed <= 85.0,speed <= 73.0,speed <= 69.0",
+            "label": "state20",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed > 62.0,speed <= 85.0,speed <= 73.0,speed > 69.0",
+            "label": "state21",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take break in UK"
+                }
+            ]
+        },
+        {
+            "state": "speed <= 37.0,country_UNK : False,city_London Heathrow Airport : True,speed > 5.0",
+            "label": "state22",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in UK"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Attach container"
+                }
+            ]
+        },
+        {
+            "state": "speed > 37.0,city_London Heathrow Airport : False,country_GB : False,country_FR : False,city_UNK : True,speed > 62.0,speed <= 85.0,speed > 73.0,speed <= 81.0,speed <= 77.0",
+            "label": "state23",
+            "artifact": "Container",
+            "targetRef": [
+                {
+                    "name": "Travel in EU"
+                }
+            ],
+            "sourceRef": [
+                {
+                    "name": "Take break in EU"
+                }
+            ]
         }
     ]
 }
