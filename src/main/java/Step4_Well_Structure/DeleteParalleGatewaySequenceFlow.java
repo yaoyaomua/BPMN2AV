@@ -18,7 +18,8 @@ public class DeleteParalleGatewaySequenceFlow {
     public DeleteParalleGatewaySequenceFlow() {
     }
 
-    public static void delete(BpmnModelInstance modelInstance){
+    public static boolean delete(BpmnModelInstance modelInstance){
+        boolean res = false;
         for (SequenceFlow sequenceFlow : modelInstance.getModelElementsByType(SequenceFlow.class)){
             if (sequenceFlow.getSource() instanceof ParallelGateway && sequenceFlow.getTarget() instanceof ParallelGateway){
                 ParallelGateway src = modelInstance.getModelElementById(sequenceFlow.getSource().getId());
@@ -27,6 +28,7 @@ public class DeleteParalleGatewaySequenceFlow {
                 if (src.getIncoming().size() == 1 && src.getOutgoing().size() > 1 && tgt.getIncoming().size() > 1 && tgt.getOutgoing().size() == 1){
                     System.out.println(dfs(modelInstance,sequenceFlow,tgt,src,used));
                     if (dfs(modelInstance,sequenceFlow,tgt,src,used)){
+                        res = true;
 //                        sequenceFlow.getDiagramElement().removeChildElement(sequenceFlow.getDiagramElement());
                         sequenceFlow.getParentElement().removeChildElement(sequenceFlow);
                     }
@@ -41,6 +43,7 @@ public class DeleteParalleGatewaySequenceFlow {
                 edge.getParentElement().removeChildElement(edge);
             }
         }
+        return res;
     }
 
     private static boolean dfs(BpmnModelInstance modelInstance, SequenceFlow sequenceFlow, FlowNode start, FlowNode target, HashSet<FlowNode> used){

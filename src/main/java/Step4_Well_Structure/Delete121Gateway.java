@@ -25,7 +25,7 @@ public class Delete121Gateway {
     public Delete121Gateway() {
     }
 
-    public static void delete(BpmnModelInstance modelInstance){
+    public static boolean delete(BpmnModelInstance modelInstance){
         List<String> toDeleteGateway = new ArrayList<>();
         BpmnPlane plane = modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next();
         Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
@@ -38,6 +38,7 @@ public class Delete121Gateway {
                 toDeleteGateway.add(gateway.getId());
             }
         }
+        if (toDeleteGateway.size() == 0) return false;
         //delete gateway one by one
         for (String gatewayID : toDeleteGateway){
             Gateway gateway = modelInstance.getModelElementById(gatewayID);
@@ -91,5 +92,6 @@ public class Delete121Gateway {
                 shape.getParentElement().removeChildElement(shape);
             }
         }
+        return true;
     }
 }

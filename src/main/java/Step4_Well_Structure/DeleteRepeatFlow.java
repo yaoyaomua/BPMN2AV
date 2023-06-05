@@ -6,7 +6,7 @@ import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 import java.util.*;
 
 public class DeleteRepeatFlow {
-    public static void delete(BpmnModelInstance modelInstance) {
+    public static boolean delete(BpmnModelInstance modelInstance) {
         List<String> allSequenceFlow = new ArrayList<>();
         Map<String, Collection<String>> map = new HashMap<String, Collection<String>>();
         Set<Collection<String>> seenValues = new HashSet<Collection<String>>();
@@ -28,10 +28,11 @@ public class DeleteRepeatFlow {
                 seenValues.add(value);
             }
         }
+        if (keysToRemove.size() == 0) return false;
         for (String removeFlow : keysToRemove) {
             SequenceFlow removeSequenceFlow = modelInstance.getModelElementById(removeFlow);
             modelInstance.getModelElementById(removeFlow).getParentElement().removeChildElement(removeSequenceFlow);
         }
-
+        return true;
     }
 }

@@ -2,6 +2,7 @@ package AllSteps;
 
 import Step1_Delete_Pool.AddExclusiveGatewayForEndEvent;
 import Step1_Delete_Pool.DeletePool;
+import Step1_Delete_Pool.MergeLane;
 import Step1_Delete_Pool.MergeProcess;
 import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
@@ -10,6 +11,7 @@ import Step4_Well_Structure.BPStruct.BPStruct;
 import Step4_Well_Structure.Delete121Gateway;
 import Step4_Well_Structure.DeleteParalleGatewaySequenceFlow;
 import Step4_Well_Structure.DeleteRepeatFlow;
+import Step4_Well_Structure.FlowManage;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.MessageFlow;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
@@ -31,6 +33,7 @@ public class ArtifactView {
         //step 1 delete pool and store message flows
         System.out.println("************************************");
         System.out.println("delete pool start:");
+        MergeLane.merge(modelInstance);
         //Handle multiple end event situation, prepare for add super start and super end event
         AddExclusiveGatewayForEndEvent.add(modelInstance);
         //delete pool function return a collection, contains all the message flows
@@ -82,23 +85,23 @@ public class ArtifactView {
         System.out.println("delete empty sub process start:");
         DeleteEmptySubprocess.delete(modelInstance);
 
-
         System.out.println("*************************");
-        System.out.println("delete repeated flow start:");
-        DeleteRepeatFlow.delete(modelInstance);
+        System.out.println("manage flows start:");
+        FlowManage.manage(modelInstance);
 
-        System.out.println("*************************");
-        System.out.println("delete no use flows start:");
-        DeleteParalleGatewaySequenceFlow.delete(modelInstance);
+
+//        System.out.println("*************************");
+//        System.out.println("delete no use flows start:");
+//        DeleteParalleGatewaySequenceFlow.delete(modelInstance);
 //
-        System.out.println("*************************");
-        System.out.println("delete 121 gateway start:");
-        Delete121Gateway.delete(modelInstance);
-
-        System.out.println("*************************");
-        System.out.println("delete no use flows start:");
-        DeleteParalleGatewaySequenceFlow.delete(modelInstance);
+//        System.out.println("*************************");
+//        System.out.println("delete 121 gateway start:");
+//        Delete121Gateway.delete(modelInstance);
 //
+//        System.out.println("*************************");
+//        System.out.println("delete repeated flow start:");
+//        DeleteRepeatFlow.delete(modelInstance);
+
         System.out.println("*************************");
         System.out.println("BPStruct:");
         BPStruct.run(modelInstance);

@@ -8,6 +8,7 @@ import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
 import Step3_Delete_Element.*;
 import Step4_Well_Structure.*;
+import Step4_Well_Structure.BPStruct.BPStruct;
 import de.hpi.bpt.process.Process;
 import ee.ut.bpstruct2.Restructurer;
 import ee.ut.bpstruct2.util.BPMN2Reader;
@@ -31,19 +32,23 @@ public class AllStepTest {
     public void stepsTest(){
         try {
             //Read bpmn file
-            String filePath = "models/book.bpmn";
+            String filePath = "models/P1.bpmn";
             BpmnModelInstance modelInstance;
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
             }
 
-            String artifact = "Truck";
+            String artifact = "Order";
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/book2.bpmn");
+            File step3output= new File("models/P1Ar1.bpmn");
             Bpmn.writeModelToFile(step3output, modelInstance);
+
+//            BPStruct.run(modelInstance);
+//            File step1output= new File("models/P1Ar2.bpmn");
+//            Bpmn.writeModelToFile(step1output, modelInstance);
 
 
         } catch (Exception e) {

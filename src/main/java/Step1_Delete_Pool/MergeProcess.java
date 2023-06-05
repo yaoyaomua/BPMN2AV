@@ -11,6 +11,7 @@ public class MergeProcess {
     public static void merge(BpmnModelInstance modelInstance) {
         if (modelInstance.getModelElementsByType(Process.class).size() == 1){
             modelInstance.getModelElementsByType(Process.class).iterator().next().setName("Single Process");
+            modelInstance.getModelElementsByType(BpmnPlane.class).iterator().next().setBpmnElement(modelInstance.getModelElementsByType(Process.class).iterator().next());
             return;
         }
         // Create a new process element to hold the merged elements

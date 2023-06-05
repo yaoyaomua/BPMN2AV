@@ -90,11 +90,11 @@ public class BPMNReader {
         //add sequence flow
         for (SequenceFlow sequenceFlow : modelInstance.getModelElementsByType(SequenceFlow.class)){
             if (sequenceFlow.getParentElement() instanceof SubProcess) continue;
-            System.out.println(sequenceFlow.getId());
-            System.out.println(sequenceFlow.getSource().getId());
-            System.out.println(sequenceFlow.getTarget().getId());
-            System.out.println(sequenceFlow.getSource().getName());
-            System.out.println(sequenceFlow.getTarget().getName());
+//            System.out.println(sequenceFlow.getId());
+//            System.out.println(sequenceFlow.getSource().getId());
+//            System.out.println(sequenceFlow.getTarget().getId());
+//            System.out.println(sequenceFlow.getSource().getName());
+//            System.out.println(sequenceFlow.getTarget().getName());
             Node src = (Node) nodes.get(sequenceFlow.getSource().getId());
             Node tgt = (Node) nodes.get(sequenceFlow.getTarget().getId());
 
