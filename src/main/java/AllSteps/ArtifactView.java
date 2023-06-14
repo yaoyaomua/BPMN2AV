@@ -89,19 +89,6 @@ public class ArtifactView {
         System.out.println("manage flows start:");
         FlowManage.manage(modelInstance);
 
-
-//        System.out.println("*************************");
-//        System.out.println("delete no use flows start:");
-//        DeleteParalleGatewaySequenceFlow.delete(modelInstance);
-//
-//        System.out.println("*************************");
-//        System.out.println("delete 121 gateway start:");
-//        Delete121Gateway.delete(modelInstance);
-//
-//        System.out.println("*************************");
-//        System.out.println("delete repeated flow start:");
-//        DeleteRepeatFlow.delete(modelInstance);
-
         System.out.println("*************************");
         System.out.println("BPStruct:");
         BPStruct.run(modelInstance);

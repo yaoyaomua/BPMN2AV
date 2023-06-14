@@ -25,9 +25,6 @@ public class AddSequenceFlow {
             i++;
             MessageFlow messageflow = iterator_messageflows.next();
             // 对 messageflow对象进行操作
-//            System.out.println("message flow sourceRef: " + messageflow.getSource().getId());
-//            System.out.println("message flow targetRef: " + messageflow.getTarget().getId());
-            // whether the message flow starts from or ends event inside a subprocess
             if ((messageflow.getTarget().getElementType().getTypeName().equals("intermediateThrowEvent")) || (messageflow.getTarget().getElementType().getTypeName().equals("intermediateThrowEvent")))
             {
 
@@ -54,7 +51,6 @@ public class AddSequenceFlow {
             }
             if(messageflow.getSource().getElementType().getTypeName().equals("endEvent") && !(messageflow.getSource().getParentElement().getElementType().getTypeName().equals("subProcess")))
             {
-//                System.out.println("This is end event!");
                 EndEvent acpre = modelInstance.getModelElementById(messageflow.getSource().getId());
                 IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
                 ac.setName("End"+i);
@@ -100,17 +96,6 @@ public class AddSequenceFlow {
             BpmnEdge bpmnEdge = modelInstance.getModelElementById(messageflow.getId()+"_di");
             BaseElement bpmnElement = modelInstance.getModelElementById(messageflow.getId());
             bpmnEdge.setBpmnElement(bpmnElement);
-            /*
-            BaseElement sourceElement = modelInstance.getModelElementById(sequenceFlow.getSource().getId());
-            BpmnShape sourceElementShape = modelInstance.getModelElementById(sourceElement.getDiagramElement().getId());
-            Double sourceX = sourceElementShape.getBounds().getX();
-            Double sourceY = sourceElementShape.getBounds().getY();
-            BaseElement targetElement = modelInstance.getModelElementById(sequenceFlow.getTarget().getId());
-            BpmnShape targetElementShape = modelInstance.getModelElementById(targetElement.getDiagramElement().getId());
-            Double targetX = targetElementShape.getBounds().getX();
-            Double targetY = targetElementShape.getBounds().getY();
-            CreateBPMNEdge.create(modelInstance,sequenceFlow,sourceX,sourceY,targetX,targetY);
-*/
 
         }
 

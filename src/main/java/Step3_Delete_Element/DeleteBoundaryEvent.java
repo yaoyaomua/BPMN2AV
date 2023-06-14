@@ -15,9 +15,6 @@ import java.util.*;
 
 public class DeleteBoundaryEvent {
         public static void delete (BpmnModelInstance modelInstance, String artifact){
-            HashMap<String,String> element2graph = BPMNElement2Graph.map(modelInstance);
-            System.out.println(element2graph.toString());
-
             List<NoAssociationTask> tasksToDelete = new ArrayList<>();
             //mark irrelevant elements by check the Associations of the task
             for(Task task: modelInstance.getModelElementsByType(Task.class)){
@@ -31,7 +28,7 @@ public class DeleteBoundaryEvent {
                         String dataName = dataObjectReference.getName();
                         //check the data is the artifact or not?
                         if (dataName.equals(artifact)){
-                            System.out.println(dataName.equals(artifact));
+//                            System.out.println(dataName.equals(artifact));
                             isIrr = false;
                         }
                     }
@@ -43,7 +40,7 @@ public class DeleteBoundaryEvent {
                     String dataName = dataObjectReference.getName();
                     //check the data is the artifact or not?
                     if (dataName.equals(artifact)){
-                        System.out.println(dataName.equals(artifact));
+//                        System.out.println(dataName.equals(artifact));
                         isIrr = false;
                     }
                 }
@@ -52,8 +49,8 @@ public class DeleteBoundaryEvent {
                     NoAssociationTask nut = new NoAssociationTask(task.getId(),task);
                     tasksToDelete.add(nut);
                 }
-                System.out.println("activity name: " + task.getName());
-                System.out.println("activity need delete? : " + isIrr);
+//                System.out.println("activity name: " + task.getName());
+//                System.out.println("activity need delete? : " + isIrr);
 
             }
 
@@ -68,7 +65,7 @@ public class DeleteBoundaryEvent {
                 Collection<DataOutputAssociation> boundaryEventOutputdatas = boundaryEvent.getDataOutputAssociations();
                 if (boundaryEventOutputdatas.size()==0)
                 {
-                    System.out.println("this boudary event do not have output data assosiation");
+//                    System.out.println("this boudary event do not have output data assosiation");
                     isDeleteEvent = true;
                 }
                 else
@@ -127,7 +124,7 @@ public class DeleteBoundaryEvent {
                 // replace event
                 if (isDeleteEvent) {
                     for (NoAssociationTask taskToDelete : tasksToDelete) {
-                        System.out.println(boundaryEvent.getAttachedTo());
+//                        System.out.println(boundaryEvent.getAttachedTo());
                         if (boundaryEvent.getAttachedTo() == modelInstance.getModelElementById(taskToDelete.getId())) {
                             Task task = modelInstance.getModelElementById(taskToDelete.getId());
                             //  blocking event
@@ -214,7 +211,7 @@ public class DeleteBoundaryEvent {
                                 //delete element: task, boundary event , association ,data reference ,data association
                                 Collection<DataOutputAssociation> boundaryEventOutputs = boundaryEvent.getDataOutputAssociations();
                                 if (boundaryEventOutputs.size()>0) {
-                                    System.out.println("size > 0");
+//                                    System.out.println("size > 0");
                                     for (DataOutputAssociation boundaryEventOutput : boundaryEventOutputs) {
                                         DataObjectReference dataObjectReference = modelInstance.getModelElementById(boundaryEventOutput.getTarget().getId());
                                         Collection<Association> associations = modelInstance.getModelElementsByType(Association.class);
@@ -325,7 +322,7 @@ public class DeleteBoundaryEvent {
                                 //delete element: task, boundary event , association ,data reference ,data association
                                 Collection<DataOutputAssociation> boundaryEventOutputs = boundaryEvent.getDataOutputAssociations();
                                 if (boundaryEventOutputs.size()>0) {
-                                    System.out.println("size > 0");
+//                                    System.out.println("size > 0");
                                     for (DataOutputAssociation boundaryEventOutput : boundaryEventOutputs) {
                                         DataObjectReference dataObjectReference = modelInstance.getModelElementById(boundaryEventOutput.getTarget().getId());
                                         Collection<Association> associations = modelInstance.getModelElementsByType(Association.class);

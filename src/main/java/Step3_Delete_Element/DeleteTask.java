@@ -76,7 +76,7 @@ public class DeleteTask {
         }
 
         System.out.println("number of taske to delete:" + tasksToDelete.size());
-        System.out.println();
+//        System.out.println();
 
         for (NoAssociationTask todelete : tasksToDelete){
             //create two list to store the source tasks and target tasks

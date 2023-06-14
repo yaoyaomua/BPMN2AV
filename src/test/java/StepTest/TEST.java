@@ -40,4 +40,17 @@ public class TEST {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void test2(){
+        try {
+//            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (93).bpmn"));
+            DeleteBoundaryEvent.delete(bpmnModelInstance,"C");
+            File step3output= new File("models/book.bpmn");
+            Bpmn.writeModelToFile(step3output, bpmnModelInstance);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
