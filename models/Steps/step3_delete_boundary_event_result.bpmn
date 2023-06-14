@@ -9,26 +9,18 @@
           
     </bpmn:startEvent>
         
-    <bpmn:task completionQuantity="1" id="Activity_00dp543" isForCompensation="false" startQuantity="1">
-            
-      <bpmn:incoming>Flow_14t61zx</bpmn:incoming>
-            
-      <bpmn:outgoing>Flow_1vw4blc</bpmn:outgoing>
-          
-    </bpmn:task>
-        
-    <bpmn:sequenceFlow id="Flow_14t61zx" sourceRef="Event_1mxulqz" targetRef="Activity_00dp543"/>
+    
+    <bpmn:sequenceFlow id="Flow_14t61zx" sourceRef="Event_1mxulqz" targetRef="myExclusiveGateway_lshyg1z"/>
         
     <bpmn:task completionQuantity="1" id="Activity_1oaedu3" isForCompensation="false" startQuantity="1">
             
-      <bpmn:incoming>Flow_1vw4blc</bpmn:incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_85g9uf2</incoming>
             
       <bpmn:outgoing>Flow_0mlxmtc</bpmn:outgoing>
           
     </bpmn:task>
         
-    <bpmn:sequenceFlow id="Flow_1vw4blc" sourceRef="Activity_00dp543" targetRef="Activity_1oaedu3"/>
-        
+    
     <bpmn:endEvent id="Event_09zku2w">
             
       <bpmn:incoming>Flow_0mlxmtc</bpmn:incoming>
@@ -97,35 +89,23 @@
             
       <bpmn:incoming>Flow_0nre2r1</bpmn:incoming>
             
-      <bpmn:incoming>Flow_1r9k8rc</bpmn:incoming>
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_lf5jxec</incoming>
             
       <bpmn:outgoing>Flow_1aiatlo</bpmn:outgoing>
           
     </bpmn:parallelGateway>
         
-    <bpmn:boundaryEvent attachedToRef="Activity_00dp543" cancelActivity="true" id="Event_02i7ehf" parallelMultiple="false">
-            
-      <bpmn:outgoing>Flow_1r9k8rc</bpmn:outgoing>
-            
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_138c7fa">
-                
-        <bpmn:targetRef>DataObjectReference_0yrk1oc</bpmn:targetRef>
-              
-      </bpmn:dataOutputAssociation>
-            
-      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_06ttaio">
-                
-        <bpmn:condition xsi:type="bpmn:tFormalExpression"/>
-              
-      </bpmn:conditionalEventDefinition>
-          
-    </bpmn:boundaryEvent>
-        
-    <bpmn:sequenceFlow id="Flow_1r9k8rc" sourceRef="Event_02i7ehf" targetRef="Gateway_034rvav"/>
-        
-    <bpmn:dataObjectReference dataObjectRef="DataObject_1fduaon" id="DataObjectReference_0yrk1oc" name="DATA2"/>
-        
+    
+    
+    
     <bpmn:dataObject id="DataObject_1fduaon" isCollection="false"/>
+    <exclusiveGateway id="myExclusiveGateway_lshyg1z" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+      <incoming>Flow_14t61zx</incoming>
+      <outgoing>Flow_lf5jxec</outgoing>
+      <outgoing>Flow_85g9uf2</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_lf5jxec" sourceRef="myExclusiveGateway_lshyg1z" targetRef="Gateway_034rvav" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flow_85g9uf2" sourceRef="myExclusiveGateway_lshyg1z" targetRef="Activity_1oaedu3" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
       
   </bpmn:process>
     
@@ -133,18 +113,7 @@
         
     <bpmndi:BPMNPlane bpmnElement="Process_1p8qz54" id="BPMNPlane_1">
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_1r9k8rc" id="Flow_1r9k8rc_di">
-                
-        <di:waypoint x="310" y="178"/>
-                
-        <di:waypoint x="310" y="202"/>
-                
-        <di:waypoint x="300" y="202"/>
-                
-        <di:waypoint x="300" y="225"/>
-              
-      </bpmndi:BPMNEdge>
-            
+      
       <bpmndi:BPMNEdge bpmnElement="Flow_00wdo44" id="Flow_00wdo44_di">
                 
         <di:waypoint x="660" y="250"/>
@@ -185,14 +154,7 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="Flow_1vw4blc" id="Flow_1vw4blc_di">
-                
-        <di:waypoint x="370" y="120"/>
-                
-        <di:waypoint x="430" y="120"/>
-              
-      </bpmndi:BPMNEdge>
-            
+      
       <bpmndi:BPMNEdge bpmnElement="Flow_14t61zx" id="Flow_14t61zx_di">
                 
         <di:waypoint x="218" y="120"/>
@@ -207,12 +169,7 @@
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape bpmnElement="Activity_00dp543" id="Activity_00dp543_di">
-                
-        <dc:Bounds height="80" width="100" x="270" y="80"/>
-              
-      </bpmndi:BPMNShape>
-            
+      
       <bpmndi:BPMNShape bpmnElement="Activity_1oaedu3" id="Activity_1oaedu3_di">
                 
         <dc:Bounds height="80" width="100" x="430" y="80"/>
@@ -267,24 +224,8 @@
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape bpmnElement="DataObjectReference_0yrk1oc" id="DataObjectReference_0yrk1oc_di">
-                
-        <dc:Bounds height="50" width="36" x="152" y="165"/>
-                
-        <bpmndi:BPMNLabel>
-                    
-          <dc:Bounds height="14" width="34" x="153" y="222"/>
-                  
-        </bpmndi:BPMNLabel>
-              
-      </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNShape bpmnElement="Event_02i7ehf" id="Event_19q51jf_di">
-                
-        <dc:Bounds height="36" width="36" x="292" y="142"/>
-              
-      </bpmndi:BPMNShape>
-            
+      
+      
       <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_0kmmqmk" id="DataOutputAssociation_0kmmqmk_di">
                 
         <di:waypoint x="469" y="290"/>
@@ -301,12 +242,16 @@
               
       </bpmndi:BPMNEdge>
             
-      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_138c7fa" id="DataOutputAssociation_138c7fa_di">
-                
-        <di:waypoint x="292" y="163"/>
-                
-        <di:waypoint x="188" y="182"/>
-              
+      <bpmndi:BPMNShape bpmnElement="myExclusiveGateway_lshyg1z" id="myExclusiveGateway_lshyg1z_di">
+        <dc:Bounds height="50.0" width="50.0" x="270.0" y="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flow_lf5jxec" id="Flow_lf5jxec_di" sourceElement="myExclusiveGateway_lshyg1z_di" targetElement="Gateway_13vsk73_di">
+        <di:waypoint x="270.0" y="105.0"/>
+        <di:waypoint x="275.0" y="225.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_85g9uf2" id="Flow_85g9uf2_di" sourceElement="myExclusiveGateway_lshyg1z_di" targetElement="Activity_1oaedu3_di">
+        <di:waypoint x="270.0" y="105.0"/>
+        <di:waypoint x="430.0" y="80.0"/>
       </bpmndi:BPMNEdge>
           
     </bpmndi:BPMNPlane>

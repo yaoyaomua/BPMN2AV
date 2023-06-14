@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.util.Collection;
 
 public class Step2Test {
+
     @Test
     public void addTest(){
         try {
@@ -39,6 +40,36 @@ public class Step2Test {
             //DeleteRepeatFlow.delete(modelInstance);
             // Store bpmn file
             File outputFile = new File("models/subprocesstestStep2Result.bpmn");
+            Bpmn.writeModelToFile(outputFile, modelInstance);
+            // Delete empty lines
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void replaceSequenceFlow(){
+        try {
+            //Read bpmn file
+            String filePath = "models/Steps/step1_replace_messageflow.bpmn";
+//            String filePath = "models/subprocesstest.bpmn";
+            BpmnModelInstance modelInstance;
+            try (InputStream inputStream = new FileInputStream(new File(filePath))) {
+                modelInstance = Bpmn.readModelFromStream(inputStream);
+            }
+            Collection<MessageFlow> messageflows;
+            messageflows = DeletePool.delete(modelInstance);
+            // Delete all process tags and keep only the first one
+            MergeProcess.merge(modelInstance);
+            // Covert Message Flow to Sequence Flow
+            AddSequenceFlow.add(modelInstance,messageflows);
+            // Add And-GateWay
+            // AddAndGateway.add(modelInstance);
+            // Delete empty subprocess
+            //DeleteEmptySubprocess.delete(modelInstance);
+            // Delete Repeat Flow
+            //DeleteRepeatFlow.delete(modelInstance);
+            // Store bpmn file
+            File outputFile = new File("models/Steps/step1_replace_messageflow_result.bpmn");
             Bpmn.writeModelToFile(outputFile, modelInstance);
             // Delete empty lines
         } catch (Exception e) {

@@ -61,7 +61,9 @@
       </bpmn:conditionalEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_1r9k8rc" sourceRef="Event_02i7ehf" targetRef="Gateway_034rvav" />
-    <bpmn:dataObjectReference id="DataObjectReference_0yrk1oc" name="DATA2" dataObjectRef="DataObject_1fduaon" />
+    <bpmn:dataObjectReference id="DataObjectReference_0yrk1oc" name="DATA2" dataObjectRef="DataObject_1fduaon">
+    	<bpmn:dataState id="stateg6csn2u" name="[closed, hooked]"/>
+    </bpmn:dataObjectReference>
     <bpmn:dataObject id="DataObject_1fduaon" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">

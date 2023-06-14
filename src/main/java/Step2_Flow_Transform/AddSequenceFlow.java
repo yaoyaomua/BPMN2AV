@@ -34,43 +34,58 @@ public class AddSequenceFlow {
             }
             //whether include start event or end event
             //set the width and height of the new activity
-            if((messageflow.getTarget().getElementType().getTypeName().equals("startEvent") && !(messageflow.getTarget().getParentElement().getElementType().getTypeName().equals("subProcess"))))
+            if((messageflow.getTarget().getElementType().getTypeName().equals("startEvent") ))
             {
-                StartEvent acpre = modelInstance.getModelElementById(messageflow.getTarget().getId());
-                IntermediateCatchEvent ac = modelInstance.newInstance(IntermediateCatchEvent.class);
-                ac.setName("Start"+i);
-                ac.setId(acpre.getId());
-                for (EventDefinition eventDefinition : acpre.getEventDefinitions()){
-                    ac.getEventDefinitions().add(eventDefinition);
+                if(!(messageflow.getTarget().getParentElement().getElementType().getTypeName().equals("subProcess"))) {
+                    StartEvent acpre = modelInstance.getModelElementById(messageflow.getTarget().getId());
+                    IntermediateCatchEvent ac = modelInstance.newInstance(IntermediateCatchEvent.class);
+                    ac.setName("Start" + i);
+                    ac.setId(acpre.getId());
+                    for (EventDefinition eventDefinition : acpre.getEventDefinitions()) {
+                        ac.getEventDefinitions().add(eventDefinition);
+                    }
+                    for (DataOutputAssociation dataOutputAssociation : acpre.getDataOutputAssociations()) {
+                        ac.getDataOutputAssociations().add(dataOutputAssociation);
+                    }
+                    for (Property property : acpre.getProperties()) {
+                        ac.getProperties().add(property);
+                    }
+                    acpre.replaceWithElement(ac);
+                    messageflow.setTarget(ac);
                 }
-                for (DataOutputAssociation dataOutputAssociation : acpre.getDataOutputAssociations()){
-                    ac.getDataOutputAssociations().add(dataOutputAssociation);
+                //Subprocess
+                else
+                {
+                    messageflow.setTarget((SubProcess)messageflow.getTarget().getParentElement());
                 }
-                for (Property property : acpre.getProperties()){
-                    ac.getProperties().add(property);
-                }
-                acpre.replaceWithElement(ac);
-                messageflow.setTarget(ac);
             }
-            if(messageflow.getSource().getElementType().getTypeName().equals("endEvent") && !(messageflow.getSource().getParentElement().getElementType().getTypeName().equals("subProcess")))
+            if(messageflow.getSource().getElementType().getTypeName().equals("endEvent"))
             {
-//                System.out.println("This is end event!");
-                EndEvent acpre = modelInstance.getModelElementById(messageflow.getSource().getId());
-                IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
-                ac.setName("End"+i);
-                ac.setId(acpre.getId());
-                for (EventDefinition eventDefinition : acpre.getEventDefinitions()){
-                    ac.getEventDefinitions().add(eventDefinition);
+                if (!(messageflow.getSource().getParentElement().getElementType().getTypeName().equals("subProcess"))) {
+                    EndEvent acpre = modelInstance.getModelElementById(messageflow.getSource().getId());
+                    IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
+                    ac.setName("End" + i);
+                    ac.setId(acpre.getId());
+                    for (EventDefinition eventDefinition : acpre.getEventDefinitions()) {
+                        ac.getEventDefinitions().add(eventDefinition);
+                    }
+                    for (DataInputAssociation dataInputAssociation : acpre.getDataInputAssociations()) {
+                        ac.getDataInputAssociations().add(dataInputAssociation);
+                    }
+                    for (Property property : acpre.getProperties()) {
+                        ac.getProperties().add(property);
+                    }
+                    acpre.replaceWithElement(ac);
+                    messageflow.setSource(ac);
                 }
-                for (DataInputAssociation dataInputAssociation: acpre.getDataInputAssociations()){
-                    ac.getDataInputAssociations().add(dataInputAssociation);
+                //Subprocess
+                else
+                {
+                    messageflow.setSource((SubProcess)messageflow.getSource().getParentElement());
                 }
-                for (Property property : acpre.getProperties()){
-                    ac.getProperties().add(property);
-                }
-                acpre.replaceWithElement(ac);
-                messageflow.setSource(ac);
             }
+
+
             // Create a new sequence flow element
             SequenceFlow sequenceFlow = modelInstance.newInstance(SequenceFlow.class);
             sequenceFlow.setId(messageflow.getId());
