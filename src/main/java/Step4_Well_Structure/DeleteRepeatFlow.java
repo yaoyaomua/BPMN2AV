@@ -1,6 +1,7 @@
 package Step4_Well_Structure;
 
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.impl.instance.Outgoing;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 
 import java.util.*;
