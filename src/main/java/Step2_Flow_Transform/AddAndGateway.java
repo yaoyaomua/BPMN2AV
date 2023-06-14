@@ -46,11 +46,11 @@ public class AddAndGateway {
         }
         //iterate Target Map and Source Map
         //Target Map: activity income sequence flow
-        System.out.println("Target Map");
+//        System.out.println("Target Map");
         for (Map.Entry<String, Collection<SequenceFlow>> entry : Target_map.entrySet()) {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
-            System.out.println(key + " : " + value.size());
+//            System.out.println(key + " : " + value.size());
         }
 
         //Target_map:Add gateway and sequenceflow
@@ -179,11 +179,11 @@ public class AddAndGateway {
             }
 
         }
-        System.out.println("Source Map");
+//        System.out.println("Source Map");
         for (Map.Entry<String, Collection<SequenceFlow>> entry : Source_map.entrySet()) {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
-            System.out.println(key + " : " + value.size());
+//            System.out.println(key + " : " + value.size());
         }
 
         //Source_map:Add gateway and sequenceflow

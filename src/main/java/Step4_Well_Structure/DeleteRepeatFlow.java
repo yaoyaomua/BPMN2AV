@@ -15,7 +15,7 @@ public class DeleteRepeatFlow {
         for (SequenceFlow sequenceFlow: modelInstance.getModelElementsByType(SequenceFlow.class)){
             Collection<String> ref = new ArrayList<>();
             allSequenceFlow.add(sequenceFlow.getId());
-            System.out.println(sequenceFlow.getId());
+//            System.out.println(sequenceFlow.getId());
             ref.add(sequenceFlow.getSource().getId());
             ref.add(sequenceFlow.getTarget().getId());
             map.put(sequenceFlow.getId(), ref);
