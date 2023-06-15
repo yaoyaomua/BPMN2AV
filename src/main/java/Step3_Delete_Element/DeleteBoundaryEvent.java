@@ -73,9 +73,10 @@ public class DeleteBoundaryEvent {
                     for (DataOutputAssociation boundaryEventOutputdata : boundaryEventOutputdatas)
                     {
                         DataObjectReference dataObjectReference = modelInstance.getModelElementById(boundaryEventOutputdata.getTarget().getId());
-                        Collection<Association> associations = modelInstance.getModelElementsByType(Association.class);
-                        Collection<String> textAnnotations = new ArrayList<>();
-                        for (Association association:associations)
+                        //Collection<Association> associations = modelInstance.getModelElementsByType(Association.class);
+                        //Collection<String> textAnnotations = new ArrayList<>();
+                        String dataState = "";
+                        /*for (Association association:associations)
                         {
                             // the text annotation of this dataobject reference
                             if (association.getSource().getId().equals(dataObjectReference.getId()))
@@ -85,24 +86,32 @@ public class DeleteBoundaryEvent {
                                     textAnnotations.add(textAnnotation.getText().toString());
                                 }
                             }
+                        }*/
+                        if (dataObjectReference.getDataState() != null)
+                        {
+                            dataState = dataObjectReference.getDataState().getName().toString();
                         }
                         // same artifact
                         if (dataObjectReference.getName().equals(artifact)){
                             System.out.println(dataObjectReference.getName());
                             // input data object with state
-                                for (String textAnnotation : textAnnotations) {
+                                /*for (String textAnnotation : textAnnotations) {
                                     if (!textAnnotation.equals("")) {
                                         //modelInstance.getModelElementById(task.getDiagramElement().getId()).getParentElement().removeChildElement(modelInstance.getModelElementById(task.getDiagramElement().getId()));
                                         //task.getParentElement().removeChildElement(task);
                                         isDeleteEvent = false;
                                     }
-                                }
+                                }*/
+                            if (!dataState.equals(""))
+                            {
+                                isDeleteEvent = false;
+                            }
                         }
                         //different artifact
                         else
                         {
                             // input data object without state
-                            if (textAnnotations.size() == 0)
+                            /*if (textAnnotations.size() == 0)
                             {
                                 isDeleteEvent = false;
                             }
@@ -112,7 +121,16 @@ public class DeleteBoundaryEvent {
                                         isDeleteEvent = false;
                                     }
                                 }
+                            }*/
+                            if (dataState.equals(""))
+                            {
+                                isDeleteEvent = false;
                             }
+                            /*else {
+                                    if (dataState.equals("")) {
+                                        isDeleteEvent = false;
+                                    }
+                            }*/
                         }
                         if (!isDeleteEvent)
                         {
