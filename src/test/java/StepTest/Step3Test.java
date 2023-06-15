@@ -91,17 +91,7 @@ public class Step3Test {
         }
     }
 
-    @Test
-    public void deleteEmptySubProcess(){
-        try {
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/Steps/step3_empty_subprocess.bpmn"));
-            DeleteEmptySubprocess.delete(bpmnModelInstance);
-            File outputFile = new File("models/Steps/step3_empty_subprocess_result.bpmn");
-            Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     @Test
     public void AddSubEndStart(){

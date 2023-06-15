@@ -67,7 +67,7 @@ public class JSON2BPMN {
 
         int count = 0;
         for (de.hpi.bpt.process.Gateway gateway : process.getGateways()){
-            System.out.println("gateway id: " + gateway.getId());
+//            System.out.println("gateway id: " + gateway.getId());
             Gateway g;
             String type;
             if (gateway.isAND()){
@@ -106,10 +106,10 @@ public class JSON2BPMN {
             String context = flow.getLabel();
             String Id = flow.getId();
 
-            System.out.println("flow id:" + Id);
-            System.out.println(srcName);
-            System.out.println(tgtName);
-            System.out.println();
+//            System.out.println("flow id:" + Id);
+//            System.out.println(srcName);
+//            System.out.println(tgtName);
+//            System.out.println();
 
 
             SequenceFlow sequenceFlow = modelInstance.newInstance(SequenceFlow.class);
@@ -132,9 +132,9 @@ public class JSON2BPMN {
                 tgtId = gatewayId.get(tgtId);
             }
 
-            System.out.println(srcId);
-            System.out.println(tgtId);
-            System.out.println();
+//            System.out.println(srcId);
+//            System.out.println(tgtId);
+//            System.out.println();
 
             sequenceFlow.setSource(modelInstance.getModelElementById(srcId));
             sequenceFlow.setTarget(modelInstance.getModelElementById(tgtId));

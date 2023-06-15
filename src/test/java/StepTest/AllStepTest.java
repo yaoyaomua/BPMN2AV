@@ -43,12 +43,8 @@ public class AllStepTest {
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/pool.bpmn");
+            File step3output= new File("models/output6.bpmn");
             Bpmn.writeModelToFile(step3output, modelInstance);
-
-//            BPStruct.run(modelInstance);
-//            File step1output= new File("models/P1Ar2.bpmn");
-//            Bpmn.writeModelToFile(step1output, modelInstance);
 
 
         } catch (Exception e) {

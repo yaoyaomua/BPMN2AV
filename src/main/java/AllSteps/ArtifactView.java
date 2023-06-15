@@ -83,7 +83,7 @@ public class ArtifactView {
 
         System.out.println("*************************");
         System.out.println("delete empty sub process start:");
-        DeleteEmptySubprocess.delete(modelInstance);
+        DeleteEmptySubprocess.delete(modelInstance,addedEvent);
 
         System.out.println("*************************");
         System.out.println("manage flows start:");

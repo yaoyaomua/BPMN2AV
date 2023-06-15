@@ -27,9 +27,9 @@ public class BoundaryEventForBPStruct {
     public static HashMap<BoundaryEvent, BpmnShape> store(BpmnModelInstance modelInstance){
         HashMap<BoundaryEvent, BpmnShape> shapes = new HashMap<>();
         for (BoundaryEvent event : modelInstance.getModelElementsByType(BoundaryEvent.class)){
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            System.out.println("boundary event data object: " + event.getDataOutputAssociations().size());
+//            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//            System.out.println("boundary event data object: " + event.getDataOutputAssociations().size());
             shapes.put(event, event.getDiagramElement());
         }
         return shapes;

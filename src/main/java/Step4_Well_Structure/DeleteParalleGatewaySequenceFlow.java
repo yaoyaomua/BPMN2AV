@@ -26,7 +26,7 @@ public class DeleteParalleGatewaySequenceFlow {
                 ParallelGateway tgt = modelInstance.getModelElementById(sequenceFlow.getTarget().getId());
                 HashSet<FlowNode> used = new HashSet<>();
                 if (src.getIncoming().size() == 1 && src.getOutgoing().size() > 1 && tgt.getIncoming().size() > 1 && tgt.getOutgoing().size() == 1){
-                    System.out.println(dfs(modelInstance,sequenceFlow,tgt,src,used));
+//                    System.out.println(dfs(modelInstance,sequenceFlow,tgt,src,used));
                     if (dfs(modelInstance,sequenceFlow,tgt,src,used)){
                         res = true;
 //                        sequenceFlow.getDiagramElement().removeChildElement(sequenceFlow.getDiagramElement());

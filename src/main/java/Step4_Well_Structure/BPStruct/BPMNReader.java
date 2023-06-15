@@ -100,8 +100,8 @@ public class BPMNReader {
 
 
             if(src == null || tgt == null) {
-                System.out.println(src);
-                System.out.println(tgt);
+//                System.out.println(src);
+//                System.out.println(tgt);
                 throw new RuntimeException("Malformed graph");
             }
 
@@ -111,8 +111,8 @@ public class BPMNReader {
                 label = sequenceFlow.getName();
             }
             flow.setLabel(label);
-            System.out.println("add flow success!");
-            System.out.println();
+//            System.out.println("add flow success!");
+//            System.out.println();
         }
     }
 }
