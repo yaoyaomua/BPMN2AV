@@ -24,7 +24,12 @@ public class DeleteDataObject {
             if (!datas.contains(dataObjectReference.getId())){
                 toDelete.add(dataObjectReference.getId());
             }
+            if (dataObjectReference.getName().equals(artifact) && dataObjectReference.getDataState() == null && !toDelete.contains(dataObjectReference.getId())){
+                toDelete.add(dataObjectReference.getId());
+            }
         }
+
+
         //update association in activity and event
         for(DataOutputAssociation dataOutputAssociation : modelInstance.getModelElementsByType(DataOutputAssociation.class)){
             if (toDelete.contains(dataOutputAssociation.getTarget().getId())){

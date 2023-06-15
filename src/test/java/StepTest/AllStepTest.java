@@ -32,18 +32,20 @@ public class AllStepTest {
     public void stepsTest(){
         try {
             //Read bpmn file
-            String filePath = "models/View/book/book.bpmn";
+            String filePath = "models/View/diagram1/diagram1_state.bpmn";
             BpmnModelInstance modelInstance;
+
+
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
             }
 
-            String artifact = "Truck";
+            String artifact = "Purchase Order";
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/output6.bpmn");
+            File step3output= new File("models/View/diagram1/diagram1_Order.bpmn");
             Bpmn.writeModelToFile(step3output, modelInstance);
 
 

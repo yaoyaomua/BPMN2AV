@@ -30,43 +30,54 @@ public class DeleteEvent {
             if (event.getDataOutputAssociations().isEmpty()){
                 StartEventToDelete.add(event.getId());
             }else{
+                boolean irr = false;
                 for (DataOutputAssociation dataOutputAssociation: event.getDataOutputAssociations()){
                     String dataId = dataOutputAssociation.getTarget().getId();
                     DataObjectReference data = modelInstance.getModelElementById(dataId);
-
-//                    if (dataState.get(dataId) == null){
                     if (data.getDataState() == null){
-                        if (data.getName().equals(artifact)){
-                            StartEventToDelete.add(event.getId());
+                        if (!data.getName().equals(artifact)){
+                            irr = true;
+//                            StartEventToDelete.add(event.getId());
                         }
                     }else {
-                        if (!data.getName().equals(artifact)){
-                            StartEventToDelete.add(event.getId());
+                        if (data.getName().equals(artifact)){
+//                            StartEventToDelete.add(event.getId());
+                            irr = true;
                         }
                     }
                 }
+                if (!irr){
+                    StartEventToDelete.add(event.getId());
+                }
             }
         }
+
         for (EndEvent event : modelInstance.getModelElementsByType(EndEvent.class)){
             if (addedEvent.contains(event.getId())) continue;
             if (event.getDataInputAssociations().isEmpty()){
                 EndEventToDelete.add(event.getId());
             }else {
+                boolean irr = false;
                 for (DataInputAssociation dataInputAssociation : event.getDataInputAssociations()){
                     for (ItemAwareElement element : dataInputAssociation.getSources()){
                         String dataId = element.getId();
                         DataObjectReference data = modelInstance.getModelElementById(dataId);
 //                        if (dataState.get(dataId) == null){
                         if (data.getDataState() == null){
-                            if (data.getName().equals(artifact)){
-                                EndEventToDelete.add(event.getId());
+                            if (!data.getName().equals(artifact)){
+                                irr = true;
+//                                EndEventToDelete.add(event.getId());
                             }
                         }else {
-                            if (!data.getName().equals(artifact)){
-                                EndEventToDelete.add(event.getId());
+                            if (data.getName().equals(artifact)){
+                                irr = true;
+//                                EndEventToDelete.add(event.getId());
                             }
                         }
                     }
+                }
+                if (!irr){
+                    EndEventToDelete.add(event.getId());
                 }
             }
         }
@@ -76,21 +87,27 @@ public class DeleteEvent {
             if(event.getDataInputAssociations().isEmpty()){
                 MidEventToDelete.add(event.getId());
             }else {
+                boolean irr = false;
                 for (DataInputAssociation dataInputAssociation : event.getDataInputAssociations()){
                     for (ItemAwareElement element : dataInputAssociation.getSources()){
                         String dataId = element.getId();
                         DataObjectReference data = modelInstance.getModelElementById(dataId);
 //                        if (dataState.get(dataId) == null){
                         if (data.getDataState() == null){
-                            if (data.getName().equals(artifact)){
-                                MidEventToDelete.add(event.getId());
+                            if (!data.getName().equals(artifact)){
+                                irr = true;
+//                                MidEventToDelete.add(event.getId());
                             }
                         }else {
-                            if (!data.getName().equals(artifact)){
-                                MidEventToDelete.add(event.getId());
+                            if (data.getName().equals(artifact)){
+                                irr = true;
+//                                MidEventToDelete.add(event.getId());
                             }
                         }
                     }
+                }
+                if (!irr){
+                    MidEventToDelete.add(event.getId());
                 }
             }
         }
@@ -101,19 +118,25 @@ public class DeleteEvent {
             if(event.getDataOutputAssociations().isEmpty()) {
                 MidEventToDelete.add(event.getId());
             }else{
+                boolean irr = false;
                 for (DataOutputAssociation dataOutputAssociation: event.getDataOutputAssociations()){
                     String dataId = dataOutputAssociation.getTarget().getId();
                     DataObjectReference data = modelInstance.getModelElementById(dataId);
                     if (data.getDataState() == null){
 //                    if (dataState.get(dataId) == null){
-                        if (data.getName().equals(artifact)){
-                            MidEventToDelete.add(event.getId());
+                        if (!data.getName().equals(artifact)){
+                            irr = true;
+//                            MidEventToDelete.add(event.getId());
                         }
                     }else {
-                        if (!data.getName().equals(artifact)){
-                            MidEventToDelete.add(event.getId());
+                        if (data.getName().equals(artifact)){
+                            irr = true;
+//                            MidEventToDelete.add(event.getId());
                         }
                     }
+                }
+                if (!irr){
+                    MidEventToDelete.add(event.getId());
                 }
             }
         }
@@ -168,7 +191,7 @@ public class DeleteEvent {
 
 //      delete start event: transform first
         for (String id : StartEventToDelete){
-            System.out.println(id);
+//            System.out.println(id);
             Event event = modelInstance.getModelElementById(id);
             for (SequenceFlow sequenceFlow : event.getOutgoing()){
 //                sequenceFlow.getDiagramElement().getParentElement().removeChildElement(sequenceFlow.getDiagramElement());
@@ -180,7 +203,7 @@ public class DeleteEvent {
 
 //        System.out.println("*********delete end event*******");
         for (String id : EndEventToDelete){
-            System.out.println(id);
+//            System.out.println(id);
             Event event = modelInstance.getModelElementById(id);
             for (SequenceFlow sequenceFlow : event.getIncoming()){
                 sequenceFlow.getParentElement().removeChildElement(sequenceFlow);
@@ -208,4 +231,7 @@ public class DeleteEvent {
 //        System.out.println(modelInstance.getModelElementsByType(SequenceFlow.class).toString());
 
     }
+
 }
+
+
