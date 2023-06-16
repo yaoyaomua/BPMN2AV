@@ -64,7 +64,9 @@ public class ArtifactView {
         //step 3 delete elements
         System.out.println("*************************************");
         System.out.println("delete irrelevant boundary events start:");
+
         DeleteBoundaryEvent.delete(modelInstance,artifact,addedEvent);
+
 
         System.out.println("*************************************");
         System.out.println("delete Task start:");

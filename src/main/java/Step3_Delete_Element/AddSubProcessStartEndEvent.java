@@ -19,13 +19,19 @@ public class AddSubProcessStartEndEvent {
     public static HashSet<String> add(BpmnModelInstance modelInstance){
         HashSet<String> added = new HashSet<>();
         for (SubProcess subProcess : modelInstance.getModelElementsByType(SubProcess.class)){
+
             if (subProcess.getChildElementsByType(Gateway.class).size() == 0 && subProcess.getChildElementsByType(Task.class).size() == 0
             && subProcess.getChildElementsByType(Event.class).size() == 0
             && subProcess.getChildElementsByType(SubProcess.class).size() == 0){
                 continue;
             }
-            for (String s : addForSub(modelInstance,subProcess)){
-                added.add(s);
+
+            HashSet<String> addHashSet = addForSub(modelInstance,subProcess);
+            if (addHashSet != null) {
+                for (String s : addHashSet) {
+                    added.add(s);
+                }
+
             }
 
         }

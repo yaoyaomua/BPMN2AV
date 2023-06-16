@@ -41,11 +41,13 @@ public class TEST {
     public void test2(){
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
+
             BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram2/diagram2.bpmn"));
             for (InclusiveGateway gateway : bpmnModelInstance.getModelElementsByType(InclusiveGateway.class)){
                 System.out.println(gateway instanceof InclusiveGateway);
                 System.out.println(gateway.getId());
             }
+
         }catch (Exception e) {
             e.printStackTrace();
         }
