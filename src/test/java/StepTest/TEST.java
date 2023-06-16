@@ -1,9 +1,6 @@
 package StepTest;
 
-import Step1_Delete_Pool.AddExclusiveGatewayForEndEvent;
 import Step3_Delete_Element.*;
-import Step4_Well_Structure.BPStruct.BoundaryEventForBPStruct;
-import Step4_Well_Structure.DeleteParalleGatewaySequenceFlow;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
@@ -11,7 +8,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class TEST {
 
@@ -19,7 +15,7 @@ public class TEST {
     public void test1(){
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram1/diagram1.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram3/diagram3.bpmn"));
             HashMap<String,String> datas = DataTextState.getText(bpmnModelInstance);
             for (DataObjectReference dataObjectReference: bpmnModelInstance.getModelElementsByType(DataObjectReference.class)){
                 Association association = bpmnModelInstance.getModelElementById(datas.get(dataObjectReference.getId()));
@@ -32,7 +28,7 @@ public class TEST {
                 dataState.setName(state);
                 dataObjectReference.setDataState(dataState);
             }
-            File step3output= new File("models/View/diagram1/diagram1_state.bpmn");
+            File step3output= new File("models/View/diagram3/diagram3.bpmn");
             Bpmn.writeModelToFile(step3output, bpmnModelInstance);
 
 
@@ -45,10 +41,11 @@ public class TEST {
     public void test2(){
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (93).bpmn"));
-            DeleteBoundaryEvent.delete(bpmnModelInstance,"C");
-            File step3output= new File("models/book.bpmn");
-            Bpmn.writeModelToFile(step3output, bpmnModelInstance);
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram2/diagram2.bpmn"));
+            for (InclusiveGateway gateway : bpmnModelInstance.getModelElementsByType(InclusiveGateway.class)){
+                System.out.println(gateway instanceof InclusiveGateway);
+                System.out.println(gateway.getId());
+            }
         }catch (Exception e) {
             e.printStackTrace();
         }

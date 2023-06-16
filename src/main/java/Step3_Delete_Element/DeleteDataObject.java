@@ -23,8 +23,9 @@ public class DeleteDataObject {
         for (DataObjectReference dataObjectReference : modelInstance.getModelElementsByType(DataObjectReference.class)){
             if (!datas.contains(dataObjectReference.getId())){
                 toDelete.add(dataObjectReference.getId());
+                continue;
             }
-            if (dataObjectReference.getName().equals(artifact) && dataObjectReference.getDataState() == null && !toDelete.contains(dataObjectReference.getId())){
+            if (dataObjectReference.getName().equals(artifact) && dataObjectReference.getDataState() == null){
                 toDelete.add(dataObjectReference.getId());
             }
         }

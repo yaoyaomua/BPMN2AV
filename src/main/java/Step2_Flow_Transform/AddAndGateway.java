@@ -58,8 +58,7 @@ public class AddAndGateway {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
             //Check if the activiy have more than one incoming sequence flow
-            if(value.size()>1&&(!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("parallelGateway"))&&
-                    (!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("exclusiveGateway")))
+            if(value.size()>1&&(!(modelInstance.getModelElementById(key) instanceof Gateway)))
             {
                 List<SequenceFlow> newSequenceFlow = new ArrayList<SequenceFlow>();
                 //add an empty parallel gateway
@@ -192,8 +191,7 @@ public class AddAndGateway {
             String key = entry.getKey();
             Collection<SequenceFlow> value = entry.getValue();
             //Check if the activiy have more than one outcoming sequence flow
-            if(value.size()>1&&(!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("parallelGateway"))&&
-                    (!modelInstance.getModelElementById(key).getElementType().getTypeName().equals("exclusiveGateway")))
+            if(value.size()>1&&(!(modelInstance.getModelElementById(key) instanceof Gateway)))
             {
                 List<SequenceFlow> newSequenceFlow2 = new ArrayList<SequenceFlow>();
                 //add an empty parallel gateway
