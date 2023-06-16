@@ -96,6 +96,7 @@ public class AddDataObjectFromJSON {
                 }
             }
             if (removeElements != null) {
+                System.out.println("Incorrect process in json file");
                 targetList.removeAll(removeElements);
             }
             System.out.println("##name");

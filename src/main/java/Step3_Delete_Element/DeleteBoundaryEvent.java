@@ -12,9 +12,10 @@ import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DeleteBoundaryEvent {
-        public static void delete (BpmnModelInstance modelInstance, String artifact){
+        public static void delete (BpmnModelInstance modelInstance, String artifact, HashSet<String> addedEvent){
             List<NoAssociationTask> tasksToDelete = new ArrayList<>();
             //mark irrelevant elements by check the Associations of the task
             for(Task task: modelInstance.getModelElementsByType(Task.class)){
@@ -28,7 +29,6 @@ public class DeleteBoundaryEvent {
                         String dataName = dataObjectReference.getName();
                         //check the data is the artifact or not?
                         if (dataName.equals(artifact)){
-//                            System.out.println(dataName.equals(artifact));
                             isIrr = false;
                         }
                     }
@@ -40,7 +40,6 @@ public class DeleteBoundaryEvent {
                     String dataName = dataObjectReference.getName();
                     //check the data is the artifact or not?
                     if (dataName.equals(artifact)){
-//                        System.out.println(dataName.equals(artifact));
                         isIrr = false;
                     }
                 }
@@ -49,10 +48,27 @@ public class DeleteBoundaryEvent {
                     NoAssociationTask nut = new NoAssociationTask(task.getId(),task);
                     tasksToDelete.add(nut);
                 }
-//                System.out.println("activity name: " + task.getName());
-//                System.out.println("activity need delete? : " + isIrr);
-
             }
+
+            //get a collection for emptysubProcess
+            /*Collection<SubProcess> emptySubProcesses = modelInstance.getModelElementsByType(SubProcess.class).stream().filter(subProcess -> subProcess.getFlowElements().isEmpty()).collect(Collectors.toList());
+
+            for (SubProcess subProcess: modelInstance.getModelElementsByType(SubProcess.class)){
+                if (emptySubProcesses.contains(subProcess)) continue;
+                if (!subProcess.getChildElementsByType(Task.class).isEmpty()) continue;
+
+                boolean irr = true;
+                for (Event event : subProcess.getChildElementsByType(Event.class)){
+                    if (addedEvent.contains(event.getId())){
+                        irr = false;
+                    }
+                }
+                if (irr){
+                    emptySubProcesses.add(subProcess);
+                }
+            }*/
+
+
 
             //
             Process process = modelInstance.getModelElementsByType(Process.class).iterator().next();
@@ -65,7 +81,6 @@ public class DeleteBoundaryEvent {
                 Collection<DataOutputAssociation> boundaryEventOutputdatas = boundaryEvent.getDataOutputAssociations();
                 if (boundaryEventOutputdatas.size()==0)
                 {
-//                    System.out.println("this boudary event do not have output data assosiation");
                     isDeleteEvent = true;
                 }
                 else
@@ -145,6 +160,7 @@ public class DeleteBoundaryEvent {
 //                        System.out.println(boundaryEvent.getAttachedTo());
                         if (boundaryEvent.getAttachedTo() == modelInstance.getModelElementById(taskToDelete.getId())) {
                             Task task = modelInstance.getModelElementById(taskToDelete.getId());
+
                             //  blocking event
                             if (boundaryEvent.cancelActivity()) {
                                 List<SequenceFlow> newSequenceFlow = new ArrayList<SequenceFlow>();
@@ -369,6 +385,12 @@ public class DeleteBoundaryEvent {
                         }
 
                     }
+
+
+
+
+
+
                 }
             }
 
