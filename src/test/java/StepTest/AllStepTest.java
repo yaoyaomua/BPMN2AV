@@ -32,7 +32,7 @@ public class AllStepTest {
     public void stepsTest(){
         try {
             //Read bpmn file
-            String filePath = "models/View/diagram4/diagram4.bpmn";
+            String filePath = "models/View/diagram6/diagram6.bpmn";
             BpmnModelInstance modelInstance;
 
 
@@ -40,12 +40,12 @@ public class AllStepTest {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
             }
 
-            String artifact = "invoice";
+            String artifact = "Room List";
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/View/diagram4/diagram4_invoice.bpmn");
+            File step3output= new File("models/View/diagram6/diagram6_List.bpmn");
             Bpmn.writeModelToFile(step3output, modelInstance);
 
 
