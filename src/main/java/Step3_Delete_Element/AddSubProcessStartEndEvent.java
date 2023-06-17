@@ -26,6 +26,12 @@ public class AddSubProcessStartEndEvent {
                 continue;
             }
 
+            if (subProcess.getChildElementsByType(StartEvent.class).size() == 1 && subProcess.getChildElementsByType(EndEvent.class).size() == 1){
+                added.add(subProcess.getChildElementsByType(StartEvent.class).iterator().next().getId());
+                added.add(subProcess.getChildElementsByType(EndEvent.class).iterator().next().getId());
+                continue;
+            }
+
             HashSet<String> addHashSet = addForSub(modelInstance,subProcess);
             if (addHashSet != null) {
                 for (String s : addHashSet) {
