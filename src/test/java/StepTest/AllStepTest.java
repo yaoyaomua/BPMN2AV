@@ -44,13 +44,13 @@ public class AllStepTest {
             }
 
 
-            String artifact = "Data policies";
+            String artifact = "open mode setting";
 
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/View/diagram11/diagram11_Datapolicies.bpmn");
+            File step3output= new File("models/View/diagram11/diagram11_openModeSetting.bpmn");
 
 
 

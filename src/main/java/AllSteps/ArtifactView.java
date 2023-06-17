@@ -88,11 +88,11 @@ public class ArtifactView {
         System.out.println("*************************");
         System.out.println("manage flows start:");
         FlowManage.manage(modelInstance);
-/*
+
         System.out.println("*************************");
         System.out.println("BPStruct:");
         BPStruct.run(modelInstance);
 
-*/
+
     }
 }
