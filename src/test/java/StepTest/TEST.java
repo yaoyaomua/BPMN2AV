@@ -16,6 +16,7 @@ public class TEST {
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
 
+
             BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram9/diagram9.bpmn"));
 
 
@@ -34,6 +35,7 @@ public class TEST {
             }
 
             File step3output= new File("models/View/diagram9/diagram9.bpmn");
+
             Bpmn.writeModelToFile(step3output, bpmnModelInstance);
 
 

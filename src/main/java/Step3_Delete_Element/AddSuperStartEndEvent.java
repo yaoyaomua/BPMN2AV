@@ -68,9 +68,10 @@ public class AddSuperStartEndEvent {
         System.out.println(startEvent.toString());
 
 
-//        if (NoInputEvent.size() == 0 && NoInputActivity.size() == 0 && NoInputGateway.size() == 0 && NoInputSub.size() == 0 && startEvent.size() == 1){
-//            return null;
-//        }
+        if (NoInputEvent.size() == 0 && NoInputActivity.size() == 0 && NoInputGateway.size() == 0 && NoInputSub.size() == 0 && startEvent.size() == 1){
+            return startEvent.get(0);
+        }
+
         //creat new start event and set the attribute for it
         StartEvent processStart = modelInstance.newInstance(StartEvent.class);
         processStart.setId(GenerateID.getID("StartEvent_",modelInstance));
@@ -346,6 +347,11 @@ public class AddSuperStartEndEvent {
         System.out.println(NoOutputActivity.toString());
         System.out.println(NoOutputGateway.toString());
         System.out.println(endEvent.toString());
+
+        if (NoOutputEvent.size() == 0 && NoOutputActivity.size() == 0 && NoOutputGateway.size() == 0 && NoOutputSub.size() == 0 && endEvent.size() == 1){
+            return endEvent.get(0);
+        }
+
 
         //creat new end event and set the attribute for it
         EndEvent processEnd = modelInstance.newInstance(EndEvent.class);

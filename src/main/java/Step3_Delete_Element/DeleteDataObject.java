@@ -26,6 +26,7 @@ public class DeleteDataObject {
                 continue;
             }
             if (dataObjectReference.getName().equals(artifact) && dataObjectReference.getDataState() == null){
+                System.out.println(dataObjectReference.getName());
                 toDelete.add(dataObjectReference.getId());
             }
         }
@@ -80,4 +81,5 @@ public class DeleteDataObject {
             }
         }
     }
+
 }
