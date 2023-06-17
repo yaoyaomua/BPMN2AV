@@ -33,7 +33,7 @@ public class AllStepTest {
         try {
             //Read bpmn file
 
-            String filePath = "models/View/diagram11/diagram11.bpmn";
+            String filePath = "models/View/diagram13/diagram13.bpmn";
 
 
             BpmnModelInstance modelInstance;
@@ -44,13 +44,13 @@ public class AllStepTest {
             }
 
 
-            String artifact = "open mode setting";
+            String artifact = "B";
 
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/View/diagram11/diagram11_openModeSetting.bpmn");
+            File step3output= new File("models/View/diagram13/diagram13_B.bpmn");
 
 
 
