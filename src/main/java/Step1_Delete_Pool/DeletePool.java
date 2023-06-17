@@ -1,10 +1,11 @@
 package Step1_Delete_Pool;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.Collaboration;
-import org.camunda.bpm.model.bpmn.instance.Definitions;
-import org.camunda.bpm.model.bpmn.instance.MessageFlow;
+import org.camunda.bpm.model.bpmn.instance.*;
+import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
+import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 
 public class DeletePool {
@@ -12,8 +13,57 @@ public class DeletePool {
     public DeletePool() {
     }
 
+    public static void deleteEmpty(BpmnModelInstance modelInstance){
+        //Collaboration
+        Collaboration collaboration = modelInstance.getModelElementsByType(Collaboration.class).iterator().next();
+        if(collaboration != null) {
+
+            Collection<Participant> participants = new ArrayList<>();
+            //delete empty pool
+            for (Participant participant : collaboration.getParticipants()){
+                if (participant.getProcess() == null){
+                    participants.add(participant);
+                }
+            }
+
+            if (participants != null){
+                for (MessageFlow messageFlow : collaboration.getMessageFlows()){
+                    if (participants.contains(messageFlow.getTarget()) || participants.contains(messageFlow.getSource())){
+                        collaboration.removeChildElement(messageFlow);
+                    }
+                }
+
+                for (Participant participant : participants){
+                    collaboration.removeChildElement(participant);
+                }
+            }
+
+
+            for (Association association : modelInstance.getModelElementsByType(Association.class)){
+                if (association.getSource() == null){
+                    association.getParentElement().removeChildElement(association);
+                }
+            }
+
+            for (BpmnShape bpmnShape : modelInstance.getModelElementsByType(BpmnShape.class)){
+                if (bpmnShape.getBpmnElement() == null){
+                    bpmnShape.getParentElement().removeChildElement(bpmnShape);
+                }
+            }
+
+            for (BpmnEdge bpmnEdge : modelInstance.getModelElementsByType(BpmnEdge.class)){
+                if (bpmnEdge.getBpmnElement() == null){
+                    bpmnEdge.getParentElement().removeChildElement(bpmnEdge);
+                }
+            }
+        }
+
+
+    }
+
     //Delete Pool
     public static Collection<MessageFlow> delete(BpmnModelInstance modelInstance){
+
         //Definitions
         Definitions definitions = modelInstance.getDefinitions();
         //Collaboration
@@ -33,6 +83,24 @@ public class DeletePool {
             // delete pool
             if (collaborationToDelete != null) {
                 collaborationToDelete.getParentElement().removeChildElement(collaborationToDelete);
+            }
+
+            for (Association association : modelInstance.getModelElementsByType(Association.class)){
+                if (association.getSource() == null){
+                    association.getParentElement().removeChildElement(association);
+                }
+            }
+
+            for (BpmnShape bpmnShape : modelInstance.getModelElementsByType(BpmnShape.class)){
+                if (bpmnShape.getBpmnElement() == null){
+                    bpmnShape.getParentElement().removeChildElement(bpmnShape);
+                }
+            }
+
+            for (BpmnEdge bpmnEdge : modelInstance.getModelElementsByType(BpmnEdge.class)){
+                if (bpmnEdge.getBpmnElement() == null){
+                    bpmnEdge.getParentElement().removeChildElement(bpmnEdge);
+                }
             }
             return messageflows;
         }
