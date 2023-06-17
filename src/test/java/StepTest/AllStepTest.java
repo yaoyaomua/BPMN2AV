@@ -40,12 +40,12 @@ public class AllStepTest {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
             }
 
-            String artifact = "Needed materials";
+            String artifact = "Purchase order";
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/View/diagram8/diagram8_Materials.bpmn");
+            File step3output= new File("models/View/diagram8/diagram8_Order.bpmn");
             Bpmn.writeModelToFile(step3output, modelInstance);
 
 
