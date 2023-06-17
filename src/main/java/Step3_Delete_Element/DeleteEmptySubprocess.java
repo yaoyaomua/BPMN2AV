@@ -35,22 +35,25 @@ public class DeleteEmptySubprocess {
         }
 
         //remove empty subprocess
+        System.out.println("Delete sub process");
         if (emptySubProcesses.size()!=0) {
             System.out.println(emptySubProcesses.size());
             emptySubProcesses.forEach(emptySubProcess -> {
-                System.out.println(emptySubProcess.getIncoming());
+                System.out.println(emptySubProcess.getId());
                 SequenceFlow incomingFlow = emptySubProcess.getIncoming().iterator().next();
                 SequenceFlow outgoingFlow = emptySubProcess.getOutgoing().iterator().next();
                 //reconnect sequence flow
-                incomingFlow.getSource().getOutgoing().remove(incomingFlow);
-                incomingFlow.getSource().getOutgoing().add(outgoingFlow);
+                //incomingFlow.getSource().getOutgoing().remove(incomingFlow);
+                //incomingFlow.getSource().getOutgoing().add(outgoingFlow);
                 outgoingFlow.getTarget().getIncoming().remove(outgoingFlow);
                 outgoingFlow.getTarget().getIncoming().add(incomingFlow);
+                incomingFlow.setTarget(outgoingFlow.getTarget());
+                //outgoingFlow.setSource(incomingFlow.getSource());
+                //incomingFlow.getParentElement().removeChildElement(incomingFlow);
 
-                outgoingFlow.setSource(incomingFlow.getSource());
-                incomingFlow.getParentElement().removeChildElement(incomingFlow);
-
-
+                //delete incoming outgoing
+                outgoingFlow.getParentElement().removeChildElement(outgoingFlow);
+                //delete subprocess
                 emptySubProcess.getParentElement().removeChildElement(emptySubProcess);
             });
         }

@@ -44,13 +44,13 @@ public class AllStepTest {
             }
 
 
-            String artifact = "QAS-CAD VACIS";
+            String artifact = "RSQ";
 
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/View/diagram9/diagram9_QAS-CAD-VACIS.bpmn");
+            File step3output= new File("models/View/diagram9/diagram9_RSQ.bpmn");
 
 
 
