@@ -35,6 +35,7 @@ public class ArtifactView {
         System.out.println("delete pool start:");
         MergeLane.merge(modelInstance);
         DeletePool.deleteEmpty(modelInstance);
+
         //Handle multiple end event situation, prepare for add super start and super end event
         AddExclusiveGatewayForEndEvent.add(modelInstance);
         //delete pool function return a collection, contains all the message flows
