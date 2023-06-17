@@ -1,10 +1,7 @@
 package Step2_Flow_Transform;
 
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.Event;
-import org.camunda.bpm.model.bpmn.instance.Gateway;
-import org.camunda.bpm.model.bpmn.instance.SubProcess;
-import org.camunda.bpm.model.bpmn.instance.Task;
+import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 import org.camunda.bpm.model.bpmn.instance.dc.Bounds;
 
@@ -23,7 +20,9 @@ public class GetBounds {
             Gateway ac = modelInstance.getModelElementById(elementId);
             return ac.getDiagramElement().getBounds();
         } else if (modelInstance.getModelElementById(elementId) instanceof SubProcess) {
-            BpmnShape ac = modelInstance.getModelElementById(elementId+"_di");
+            //BpmnShape ac = modelInstance.getModelElementById(elementId+"_di");
+            SubProcess subProcess = modelInstance.getModelElementById(elementId);
+            BpmnShape ac = modelInstance.getModelElementById(subProcess.getDiagramElement().getId());
             return ac.getBounds();
         } else {
             BpmnShape ac = modelInstance.getModelElementById(elementId+"_di");

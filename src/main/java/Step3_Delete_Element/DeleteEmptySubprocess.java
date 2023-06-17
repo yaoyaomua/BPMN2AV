@@ -36,7 +36,9 @@ public class DeleteEmptySubprocess {
 
         //remove empty subprocess
         if (emptySubProcesses.size()!=0) {
+            System.out.println(emptySubProcesses.size());
             emptySubProcesses.forEach(emptySubProcess -> {
+                System.out.println(emptySubProcess.getIncoming());
                 SequenceFlow incomingFlow = emptySubProcess.getIncoming().iterator().next();
                 SequenceFlow outgoingFlow = emptySubProcess.getOutgoing().iterator().next();
                 //reconnect sequence flow
