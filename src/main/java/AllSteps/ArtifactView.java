@@ -48,7 +48,7 @@ public class ArtifactView {
         //step 2 transform message flow to sequence flow
         System.out.println("*************************************");
         System.out.println("transform message flow start: ");
-        // Covert Message Flow to Sequence Flow
+       // Covert Message Flow to Sequence Flow
         AddSequenceFlow.add(modelInstance,messageflows);
         // Add And-GateWay
         System.out.println("*************************************");
@@ -91,8 +91,8 @@ public class ArtifactView {
 /*
         System.out.println("*************************");
         System.out.println("BPStruct:");
-        BPStruct.run(modelInstance);*/
+        BPStruct.run(modelInstance);
 
-
+*/
     }
 }
