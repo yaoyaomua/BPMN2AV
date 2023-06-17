@@ -15,7 +15,9 @@ public class TEST {
     public void test1(){
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram6/diagram6.bpmn"));
+
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram5/diagram5.bpmn"));
+
             HashMap<String,String> datas = DataTextState.getText(bpmnModelInstance);
             for (DataObjectReference dataObjectReference: bpmnModelInstance.getModelElementsByType(DataObjectReference.class)){
                 Association association = bpmnModelInstance.getModelElementById(datas.get(dataObjectReference.getId()));
@@ -28,7 +30,8 @@ public class TEST {
                 dataState.setName(state);
                 dataObjectReference.setDataState(dataState);
             }
-            File step3output= new File("models/View/diagram6/diagram6.bpmn");
+
+            File step3output= new File("models/View/diagram5/diagram5.bpmn");
             Bpmn.writeModelToFile(step3output, bpmnModelInstance);
 
 
