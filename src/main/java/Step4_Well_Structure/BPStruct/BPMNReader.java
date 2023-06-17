@@ -1,19 +1,14 @@
 package Step4_Well_Structure.BPStruct;
 
-import de.hpi.bpt.process.*;
+import de.hpi.bpt.process.ControlFlow;
 import de.hpi.bpt.process.Gateway;
+import de.hpi.bpt.process.GatewayType;
 import de.hpi.bpt.process.Process;
+import de.hpi.bpt.process.Node;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
-
-import org.camunda.bpm.model.bpmn.instance.Task;
-import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
-import org.jdom.input.SAXBuilder;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 

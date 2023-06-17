@@ -63,25 +63,25 @@ public class ArtifactView {
         HashSet<String> addedEvent = RecordEvent.record(modelInstance);
 
         //step 3 delete elements
-        System.out.println("*************************************");
-        System.out.println("delete irrelevant boundary events start:");
-
-        DeleteBoundaryEvent.delete(modelInstance,artifact,addedEvent);
-
-
-        System.out.println("*************************************");
-        System.out.println("delete Task start:");
-        DeleteTask.delete(modelInstance,artifact);
-
-
-        System.out.println("*************************************");
-        System.out.println("delete event start:");
-        DeleteEvent.delete(modelInstance,artifact, addedEvent);
-
-
-        System.out.println("*************************");
-        System.out.println("delete data object start:");
-        DeleteDataObject.delete(modelInstance,artifact);
+//        System.out.println("*************************************");
+//        System.out.println("delete irrelevant boundary events start:");
+//
+//        DeleteBoundaryEvent.delete(modelInstance,artifact,addedEvent);
+//
+//
+//        System.out.println("*************************************");
+//        System.out.println("delete Task start:");
+//        DeleteTask.delete(modelInstance,artifact);
+//
+//
+//        System.out.println("*************************************");
+//        System.out.println("delete event start:");
+//        DeleteEvent.delete(modelInstance,artifact, addedEvent);
+//
+//
+//        System.out.println("*************************");
+//        System.out.println("delete data object start:");
+//        DeleteDataObject.delete(modelInstance,artifact);
 //
 //
 //        System.out.println("*************************");
@@ -95,7 +95,7 @@ public class ArtifactView {
 //        System.out.println("*************************");
 //        System.out.println("manage flows start:");
 //        FlowManage.manage(modelInstance);
-//
+
 //        System.out.println("*************************");
 //        System.out.println("BPStruct:");
 //        BPStruct.run(modelInstance);

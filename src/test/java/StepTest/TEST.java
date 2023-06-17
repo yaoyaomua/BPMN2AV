@@ -15,7 +15,7 @@ public class TEST {
     public void test1(){
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram10/diagram10.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram18/diagram18.bpmn"));
             HashMap<String,String> datas = DataTextState.getText(bpmnModelInstance);
             for (DataObjectReference dataObjectReference: bpmnModelInstance.getModelElementsByType(DataObjectReference.class)){
                 Association association = bpmnModelInstance.getModelElementById(datas.get(dataObjectReference.getId()));
@@ -28,7 +28,7 @@ public class TEST {
                 dataState.setName(state);
                 dataObjectReference.setDataState(dataState);
             }
-            File step3output= new File("models/View/diagram10/diagram10.bpmn");
+            File step3output= new File("models/View/diagram18/diagram18.bpmn");
             Bpmn.writeModelToFile(step3output, bpmnModelInstance);
 
 
@@ -42,7 +42,7 @@ public class TEST {
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
 
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram2/diagram2.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram16/diagram16.bpmn"));
             for (InclusiveGateway gateway : bpmnModelInstance.getModelElementsByType(InclusiveGateway.class)){
                 System.out.println(gateway instanceof InclusiveGateway);
                 System.out.println(gateway.getId());
@@ -51,5 +51,10 @@ public class TEST {
         }catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test3(){
+
     }
 }

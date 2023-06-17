@@ -87,6 +87,10 @@ public class BoundaryEventForBPStruct {
             gateway2event.setId(GenerateID.getID("Flow_",modelInstance));
             event2end.setId(GenerateID.getID("Flow_",modelInstance));
 
+            //set name here
+//            gateway2normal.setName("Normal");
+            gateway2event.setName("Boundary Event");
+
             //update gateway incoming outgoing
             gateway.getIncoming().add(attached2gateway);
             gateway.getOutgoing().add(gateway2event);
@@ -203,7 +207,7 @@ public class BoundaryEventForBPStruct {
             oldFlow1.getParentElement().removeChildElement(oldFlow1);
             oldFlow2.getParentElement().removeChildElement(oldFlow2);
             for (DataOutputAssociation dataOutputAssociation: event.getDataOutputAssociations()){
-                System.out.println("add boundary event data object");
+//                System.out.println("add boundary event data object");
                 boundaryEvent.getDataOutputAssociations().add(dataOutputAssociation);
             }
             event.getParentElement().removeChildElement(event);

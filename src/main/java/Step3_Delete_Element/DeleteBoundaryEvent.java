@@ -50,23 +50,6 @@ public class DeleteBoundaryEvent {
                 }
             }
 
-            //get a collection for emptysubProcess
-            /*Collection<SubProcess> emptySubProcesses = modelInstance.getModelElementsByType(SubProcess.class).stream().filter(subProcess -> subProcess.getFlowElements().isEmpty()).collect(Collectors.toList());
-
-            for (SubProcess subProcess: modelInstance.getModelElementsByType(SubProcess.class)){
-                if (emptySubProcesses.contains(subProcess)) continue;
-                if (!subProcess.getChildElementsByType(Task.class).isEmpty()) continue;
-
-                boolean irr = true;
-                for (Event event : subProcess.getChildElementsByType(Event.class)){
-                    if (addedEvent.contains(event.getId())){
-                        irr = false;
-                    }
-                }
-                if (irr){
-                    emptySubProcesses.add(subProcess);
-                }
-            }*/
 
 
 
@@ -173,6 +156,7 @@ public class DeleteBoundaryEvent {
                                     newID = Generate7ID.generate();
                                 } while (modelInstance.getModelElementById("myExclusiveGateway_" + newID) != null);
                                 exclusiveGateway.setId("myExclusiveGateway_" + newID);
+                                exclusiveGateway.setName(boundaryEvent.getName() + "?" );
                                 process.addChildElement(exclusiveGateway);
 
                                 //add an sequence flow between activity and exclusive gateway(gateway incoming)
@@ -191,6 +175,7 @@ public class DeleteBoundaryEvent {
                                         newID = Generate7ID.generate();
                                     } while (modelInstance.getModelElementById("Flow_" + newID) != null);
                                     newOutgoingFlow.setId("Flow_" + newID);
+                                    newOutgoingFlow.setName(outgoingFlow.getTarget().getName());
                                     //parallelGatewayId++;
                                     newOutgoingFlow.setSource(exclusiveGateway);
                                     newOutgoingFlow.setTarget(outgoingFlow.getTarget());

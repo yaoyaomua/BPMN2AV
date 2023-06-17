@@ -32,7 +32,11 @@ public class AddExclusiveGatewayForEndEvent {
                 //creat end event and its shape
                 EndEvent processEnd = modelInstance.newInstance(EndEvent.class);
                 processEnd.setId(GenerateID.getID("EndEvent_", modelInstance));
-                processEnd.setName("ProcessEnd");
+                if (process.getName() != null){
+                    processEnd.setName(process.getName() + " end");
+                }else {
+                    processEnd.setName("ProcessEnd");
+                }
                 process.addChildElement(processEnd);
                 double endX = 900;
                 double endY = 10;
