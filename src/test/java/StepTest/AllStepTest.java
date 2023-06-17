@@ -35,7 +35,6 @@ public class AllStepTest {
 
             String filePath = "models/View/diagram15/diagram15.bpmn";
 
-
             BpmnModelInstance modelInstance;
 
 
@@ -44,14 +43,15 @@ public class AllStepTest {
             }
 
 
+
             String artifact = "RFC";
 
 
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/View/diagram15/diagram15_RFC.bpmn");
 
+            File step3output= new File("models/View/diagram15/diagram15_RFC.bpmn");
 
 
             Bpmn.writeModelToFile(step3output, modelInstance);

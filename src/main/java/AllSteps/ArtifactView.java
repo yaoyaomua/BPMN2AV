@@ -49,7 +49,7 @@ public class ArtifactView {
         //step 2 transform message flow to sequence flow
         System.out.println("*************************************");
         System.out.println("transform message flow start: ");
-       // Covert Message Flow to Sequence Flow
+        // Covert Message Flow to Sequence Flow
         AddSequenceFlow.add(modelInstance,messageflows);
         // Add And-GateWay
         System.out.println("*************************************");
@@ -64,35 +64,42 @@ public class ArtifactView {
         HashSet<String> addedEvent = RecordEvent.record(modelInstance);
 
         //step 3 delete elements
-        System.out.println("*************************************");
-        System.out.println("delete irrelevant boundary events start:");
+//        System.out.println("*************************************");
+//        System.out.println("delete irrelevant boundary events start:");
+//
+//        DeleteBoundaryEvent.delete(modelInstance,artifact,addedEvent);
+//
+//
+//        System.out.println("*************************************");
+//        System.out.println("delete Task start:");
+//        DeleteTask.delete(modelInstance,artifact);
+//
+//
+//        System.out.println("*************************************");
+//        System.out.println("delete event start:");
+//        DeleteEvent.delete(modelInstance,artifact, addedEvent);
+//
+//
+//        System.out.println("*************************");
+//        System.out.println("delete data object start:");
+//        DeleteDataObject.delete(modelInstance,artifact);
+//
+//
+//        System.out.println("*************************");
+//        System.out.println("delete empty sub process start:");
+//        DeleteEmptySubprocess.delete(modelInstance,addedEvent);
+//
+//        System.out.println("*************************");
+//        System.out.println("delete data object start:");
+//        DeleteDataObject.delete(modelInstance,artifact);
+//
+//        System.out.println("*************************");
+//        System.out.println("manage flows start:");
+//        FlowManage.manage(modelInstance);
 
-        DeleteBoundaryEvent.delete(modelInstance,artifact,addedEvent);
-
-
-        System.out.println("*************************************");
-        System.out.println("delete Task start:");
-        DeleteTask.delete(modelInstance,artifact);
-
-
-        System.out.println("*************************************");
-        System.out.println("delete event start:");
-        DeleteEvent.delete(modelInstance,artifact, addedEvent);
-
-       System.out.println("*************************");
-        System.out.println("delete empty sub process start:");
-        DeleteEmptySubprocess.delete(modelInstance,addedEvent);
-        System.out.println("*************************");
-        System.out.println("delete data object start:");
-        DeleteDataObject.delete(modelInstance,artifact);
-
-        System.out.println("*************************");
-        System.out.println("manage flows start:");
-        FlowManage.manage(modelInstance);
-
-        System.out.println("*************************");
-        System.out.println("BPStruct:");
-        BPStruct.run(modelInstance);
+//        System.out.println("*************************");
+//        System.out.println("BPStruct:");
+//        BPStruct.run(modelInstance);
 
 
     }

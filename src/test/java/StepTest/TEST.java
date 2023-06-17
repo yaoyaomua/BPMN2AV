@@ -36,6 +36,7 @@ public class TEST {
 
             File step3output= new File("models/View/diagram15/diagram15.bpmn");
 
+
             Bpmn.writeModelToFile(step3output, bpmnModelInstance);
 
 
@@ -49,7 +50,7 @@ public class TEST {
         try {
 //            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/diagram (82).bpmn"));
 
-            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram2/diagram2.bpmn"));
+            BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/View/diagram16/diagram16.bpmn"));
             for (InclusiveGateway gateway : bpmnModelInstance.getModelElementsByType(InclusiveGateway.class)){
                 System.out.println(gateway instanceof InclusiveGateway);
                 System.out.println(gateway.getId());
@@ -58,5 +59,10 @@ public class TEST {
         }catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test3(){
+
     }
 }

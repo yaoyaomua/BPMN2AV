@@ -22,6 +22,7 @@ public class BPStruct {
         HashMap<BoundaryEvent, BpmnShape> shapes = BoundaryEventForBPStruct.store(modelInstance);
         HashMap<IntermediateCatchEvent,BoundaryEvent> events = BoundaryEventForBPStruct.pre(modelInstance);
         Process process = BPMNReader.parse(modelInstance);
+        System.out.println(process.getGateways().toString());
         process.setName("process7817");
         Restructurer str = new Restructurer(process);
         System.out.println("start structure bpmn");
