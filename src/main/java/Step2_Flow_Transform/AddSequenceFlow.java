@@ -120,6 +120,19 @@ public class AddSequenceFlow {
             BpmnEdge bpmnEdge = modelInstance.getModelElementById(messageflow.getId()+"_di");
             BaseElement bpmnElement = modelInstance.getModelElementById(messageflow.getId());
             bpmnEdge.setBpmnElement(bpmnElement);
+            /*BaseElement preElement = modelInstance.getModelElementById(sequenceFlow.getSource().getId());
+            BpmnShape preElementShape = modelInstance.getModelElementById(preElement.getDiagramElement().getId());
+            Double preElementX = preElementShape.getBounds().getX();
+            Double preElementY = preElementShape.getBounds().getY();
+
+            BaseElement afterElement = modelInstance.getModelElementById(sequenceFlow.getTarget().getId());
+            BpmnShape afterElementShape = modelInstance.getModelElementById(afterElement.getDiagramElement().getId());
+            Double afterElementX = afterElementShape.getBounds().getX();
+            Double afterElementY = afterElementShape.getBounds().getY();
+
+            CreateBPMNEdge.create(modelInstance, sequenceFlow, preElementX, preElementY,afterElementX, afterElementY);
+
+            messageflow.getParentElement().removeChildElement(messageflow);*/
 
         }
 

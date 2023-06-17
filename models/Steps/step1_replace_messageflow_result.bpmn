@@ -71,12 +71,7 @@
         
     <bpmndi:BPMNPlane bpmnElement="mergedProcess" id="BPMNPlane_1">
             
-      <bpmndi:BPMNShape id="Participant_03ewdni_di" isHorizontal="true">
-                
-        <dc:Bounds height="250" width="600" x="129" y="60"/>
-              
-      </bpmndi:BPMNShape>
-            
+      
       <bpmndi:BPMNEdge bpmnElement="Flow_1wk4wnu" id="Flow_1wk4wnu_di">
                 
         <di:waypoint x="215" y="177"/>
@@ -111,12 +106,7 @@
               
       </bpmndi:BPMNShape>
             
-      <bpmndi:BPMNShape id="Participant_0ppqrpc_di" isHorizontal="true">
-                
-        <dc:Bounds height="250" width="600" x="129" y="350"/>
-              
-      </bpmndi:BPMNShape>
-            
+      
       <bpmndi:BPMNEdge bpmnElement="Flow_1vdpcas" id="Flow_1vdpcas_di">
                 
         <di:waypoint x="208" y="480"/>
@@ -184,19 +174,12 @@
         <dc:Bounds height="36" width="36" x="532" y="452"/>
               
       </bpmndi:BPMNShape>
-            
-      <bpmndi:BPMNEdge bpmnElement="Flow_0h8nl87" id="Flow_0h8nl87_di">
-                
-        <di:waypoint x="450" y="195"/>
-                
-        <di:waypoint x="450" y="324"/>
-                
-        <di:waypoint x="298" y="324"/>
-                
-        <di:waypoint x="298" y="452"/>
-              
+      <bpmndi:BPMNEdge bpmnElement="Flow_0h8nl87" id="Flow_0h8nl87_di" sourceElement="Event_06i0dop_di" targetElement="Activity_1bijpz5_di">
+        <di:waypoint x="432.0" y="159.0"/>
+        <di:waypoint x="240.0" y="370.0"/>
       </bpmndi:BPMNEdge>
-          
+            
+    
     </bpmndi:BPMNPlane>
       
   </bpmndi:BPMNDiagram>
