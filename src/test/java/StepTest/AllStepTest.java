@@ -43,14 +43,14 @@ public class AllStepTest {
             }
 
 
-            String artifact = "Reviews";
+            String artifact = "Paper Review";
 
 
             ArtifactView.extract(modelInstance,artifact);
 
 
 
-            File step3output= new File("models/View/diagram5/diagram5_Reviews.bpmn");
+            File step3output= new File("models/View/diagram5/diagram5_PaperReview.bpmn");
 
             Bpmn.writeModelToFile(step3output, modelInstance);
 
