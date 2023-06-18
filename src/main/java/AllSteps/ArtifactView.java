@@ -9,6 +9,7 @@ import Step4_Well_Structure.Delete121Gateway;
 import Step4_Well_Structure.DeleteParalleGatewaySequenceFlow;
 import Step4_Well_Structure.DeleteRepeatFlow;
 import Step4_Well_Structure.FlowManage;
+import Step4_Well_Structure.CheckIfBPStructRequired;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.LoopCharacteristics;
 import org.camunda.bpm.model.bpmn.instance.MessageFlow;
@@ -30,7 +31,7 @@ public class ArtifactView {
     public static void extract(BpmnModelInstance modelInstance, String artifact) throws IOException, JDOMException {
         Collection<MessageFlow> messageflows;
 //        HashMap<SubProcess, LoopCharacteristics> sub = SubProcessSaveLoop.save(modelInstance);
-
+        BpmnModelInstance initialModelInstance = modelInstance;
         //step 1 delete pool and store message flows
         System.out.println("************************************");
         System.out.println("delete pool start:");
@@ -99,8 +100,14 @@ public class ArtifactView {
         FlowManage.manage(modelInstance);
 
         System.out.println("*************************");
+        System.out.println("Check if the BPStruct is required:");
+        Boolean isRuquired = CheckIfBPStructRequired.check(modelInstance,initialModelInstance);
+
+        System.out.println("*************************");
         System.out.println("BPStruct:");
-        BPStruct.run(modelInstance);
+        if (isRuquired) {
+            BPStruct.run(modelInstance);
+        }
 
 //        SubProcessSaveLoop.read(modelInstance,sub);
     }

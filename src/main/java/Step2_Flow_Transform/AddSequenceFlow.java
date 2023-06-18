@@ -94,9 +94,9 @@ public class AddSequenceFlow {
             // Create a new sequence flow element
             SequenceFlow sequenceFlow = modelInstance.newInstance(SequenceFlow.class);
             sequenceFlow.setId(messageflow.getId());
-            System.out.println(messageflow.getName());
+            //System.out.println(messageflow.getName());
             sequenceFlow.setName(messageflow.getName());
-            System.out.println(sequenceFlow.getName());
+            //System.out.println(sequenceFlow.getName());
 
             if (!messageflow.getSource().getElementType().getTypeName().equals("endEvent")) {
                 sequenceFlow.setSource(modelInstance.getModelElementById(messageflow.getSource().getId()));

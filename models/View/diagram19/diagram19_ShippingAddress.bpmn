@@ -1,0 +1,1793 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" exporter="Camunda Modeler" exporterVersion="4.12.0" expressionLanguage="http://www.w3.org/1999/XPath" id="Definitions_1swxyys" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0" targetNamespace="http://bpmn.io/schema/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema">
+        
+  
+  
+      
+  
+  
+  <bpmn:process id="Process_18c8b38" isClosed="false" isExecutable="false" name="Single Process" processType="None">
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:startEvent id="Event_0m3qclc" isInterrupting="true" name="Purchase order received" parallelMultiple="false">
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_flidxkd</outgoing>
+                        
+      
+      
+                  
+      
+      
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0wzld8q">
+                                
+        
+        
+        <bpmn:targetRef>DataObjectReference_0of2coj</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataOutputAssociation>
+                        
+      
+      
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1t3klof">
+                                
+        
+        
+        <bpmn:targetRef>DataObjectReference_1w4dyqy</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataOutputAssociation>
+                        
+      
+      
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0ov03fd">
+                                
+        
+        
+        <bpmn:targetRef>DataObjectReference_13l7zcy</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataOutputAssociation>
+                        
+      
+      
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_059j1vr">
+                                
+        
+        
+        <bpmn:targetRef>DataObjectReference_15r3hw7</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataOutputAssociation>
+                        
+      
+      
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1g345z5">
+                                
+        
+        
+        <bpmn:targetRef>DataObjectReference_02rkse6</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataOutputAssociation>
+                        
+      
+      
+                  
+      
+      
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0cg9rxp">
+                                
+        
+        
+        <bpmn:targetRef>DataObjectReference_1sag120</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataOutputAssociation>
+                        
+      
+      
+      <bpmn:messageEventDefinition id="MessageEventDefinition_051ckum"/>
+                      
+    
+    
+    </bpmn:startEvent>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_0k26pnf" id="DataObjectReference_0of2coj" name="Purchase order">
+                  
+      
+      <dataState xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="stateydvbh9j" name="state0"/>
+                
+    
+    </bpmn:dataObjectReference>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_0k26pnf" isCollection="false"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:task completionQuantity="1" id="Activity_1gblf28" isForCompensation="false" name="Get shipping address" startQuantity="1">
+                        
+      
+      
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_flidxkd</incoming>
+                        
+      
+      
+      <bpmn:outgoing>Flow_0l8serf</bpmn:outgoing>
+                        
+      
+      
+      <bpmn:property id="Property_0vlr2ws" name="__targetRef_placeholder"/>
+                        
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_1fxvvft">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_080qs15</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_0vlr2ws</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                        
+      
+      
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1xmc1bp">
+                                
+        
+        
+        <bpmn:targetRef>DataObjectReference_12ad6f2</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataOutputAssociation>
+                      
+    
+    
+    </bpmn:task>
+                
+    
+    
+    <bpmn:task completionQuantity="1" id="Activity_0hysc4e" isForCompensation="false" name="Ship product" startQuantity="1">
+                        
+      
+      
+      <bpmn:incoming>Flow_0l8serf</bpmn:incoming>
+                        
+      
+      
+      <outgoing xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_xk7fhd9</outgoing>
+                        
+      
+      
+      <bpmn:property id="Property_19r7xp6" name="__targetRef_placeholder"/>
+                        
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_0z8reew">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_1l8gq56</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_19r7xp6</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                        
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_19nkhn4">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_12ad6f2</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_19r7xp6</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                      
+    
+    
+    </bpmn:task>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:endEvent id="Event_1vlufrx">
+      <incoming xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_xk7fhd9</incoming>
+                        
+      
+      
+                  
+      
+      
+      <bpmn:property id="Property_0hoyr4c" name="__targetRef_placeholder"/>
+                        
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_0l9ehgx">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_1w4dyqy</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_0hoyr4c</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                        
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_0yzi2xg">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_13l7zcy</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_0hoyr4c</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                        
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_1n6zcyt">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_15r3hw7</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_0hoyr4c</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                        
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_0sq57fy">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_02rkse6</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_0hoyr4c</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                        
+      
+      
+                  
+      
+      
+      <bpmn:dataInputAssociation id="DataInputAssociation_1msjndi">
+                                
+        
+        
+        <bpmn:sourceRef>DataObjectReference_1sag120</bpmn:sourceRef>
+                                
+        
+        
+        <bpmn:targetRef>Property_0hoyr4c</bpmn:targetRef>
+                              
+      
+      
+      </bpmn:dataInputAssociation>
+                      
+    
+    
+    </bpmn:endEvent>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_0wen7tq" id="DataObjectReference_1l8gq56" name="Product">
+                  
+      
+      <dataState xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="state4xz3w6j" name="state4"/>
+                
+    
+    </bpmn:dataObjectReference>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_0wen7tq" isCollection="false"/>
+                
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_1y2f74t" id="DataObjectReference_12ad6f2" name="Shipping address">
+                  
+      
+      <dataState xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="state48ay2ra" name="state5"/>
+                
+    
+    </bpmn:dataObjectReference>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_1y2f74t" isCollection="false"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_0wpg7t4" id="DataObjectReference_080qs15" name="Purchase order">
+                  
+      
+      <dataState xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" id="statedkgic8b" name="Confirmed"/>
+                
+    
+    </bpmn:dataObjectReference>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_0wpg7t4" isCollection="false"/>
+                
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_0a1gpdb" id="DataObjectReference_1w4dyqy" name="DB"/>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_0a1gpdb" isCollection="false"/>
+                
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_07ifg2v" id="DataObjectReference_13l7zcy" name="Purchase order"/>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_07ifg2v" isCollection="false"/>
+                
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_06ho0tl" id="DataObjectReference_15r3hw7" name="Product"/>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_06ho0tl" isCollection="false"/>
+                
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_170fujd" id="DataObjectReference_02rkse6" name="Raw materials"/>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_170fujd" isCollection="false"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:dataObjectReference dataObjectRef="DataObject_1f4005b" id="DataObjectReference_1sag120" name="Invoice"/>
+                
+    
+    
+    <bpmn:dataObject id="DataObject_1f4005b" isCollection="false"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:sequenceFlow id="Flow_0l8serf" name="" sourceRef="Activity_1gblf28" targetRef="Activity_0hysc4e"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <sequenceFlow id="Flow_flidxkd" name="" sourceRef="Event_0m3qclc" targetRef="Activity_1gblf28" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+    <sequenceFlow id="Flow_xk7fhd9" name="" sourceRef="Activity_0hysc4e" targetRef="Event_1vlufrx" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:textAnnotation id="TextAnnotation_0xkue8x" textFormat="text/plain">
+                        
+      
+      
+      <bpmn:text>state0</bpmn:text>
+                      
+    
+    
+    </bpmn:textAnnotation>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:textAnnotation id="TextAnnotation_18tjuis" textFormat="text/plain">
+                        
+      
+      
+      <bpmn:text>Confirmed</bpmn:text>
+                      
+    
+    
+    </bpmn:textAnnotation>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:textAnnotation id="TextAnnotation_1m2r2cd" textFormat="text/plain">
+                        
+      
+      
+      <bpmn:text>state4</bpmn:text>
+                      
+    
+    
+    </bpmn:textAnnotation>
+                
+    
+    
+    <bpmn:textAnnotation id="TextAnnotation_0ca0ct1" textFormat="text/plain">
+                        
+      
+      
+      <bpmn:text>state5</bpmn:text>
+                      
+    
+    
+    </bpmn:textAnnotation>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:association associationDirection="None" id="Association_03vn60n" sourceRef="DataObjectReference_0of2coj" targetRef="TextAnnotation_0xkue8x"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:association associationDirection="None" id="Association_07g7kcp" sourceRef="DataObjectReference_080qs15" targetRef="TextAnnotation_18tjuis"/>
+                
+    
+    
+            
+    
+    
+            
+    
+    
+            
+    
+    
+    <bpmn:association associationDirection="None" id="Association_04tjkrr" sourceRef="DataObjectReference_1l8gq56" targetRef="TextAnnotation_1m2r2cd"/>
+                
+    
+    
+    <bpmn:association associationDirection="None" id="Association_1uzrwnd" sourceRef="DataObjectReference_12ad6f2" targetRef="TextAnnotation_0ca0ct1"/>
+                
+    
+    
+            
+    
+    
+          
+  
+  
+  </bpmn:process>
+        
+  
+  
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+                
+    
+    
+    <bpmndi:BPMNPlane bpmnElement="Process_18c8b38" id="BPMNPlane_1">
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_0xkue8x" id="TextAnnotation_0xkue8x_di">
+                                
+        
+        
+        <dc:Bounds height="29.983108108108112" width="99.96928746928748" x="410" y="555"/>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_18tjuis" id="TextAnnotation_18tjuis_di">
+                                
+        
+        
+        <dc:Bounds height="29.997723132969035" width="99.98292349726775" x="1560" y="1040"/>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_1m2r2cd" id="TextAnnotation_1m2r2cd_di">
+                                
+        
+        
+        <dc:Bounds height="29.983108108108112" width="99.96928746928748" x="1420" y="810"/>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+      <bpmndi:BPMNShape bpmnElement="TextAnnotation_0ca0ct1" id="TextAnnotation_0ca0ct1_di">
+                                
+        
+        
+        <dc:Bounds height="29.983108108108112" width="99.96928746928748" x="1610" y="560"/>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="Flow_0l8serf" id="Flow_0l8serf_di">
+                                
+        
+        
+        <di:waypoint x="1570" y="710"/>
+                                
+        
+        
+        <di:waypoint x="1620" y="710"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bpmnElement="Event_0m3qclc" id="Event_1d48739_di">
+                                
+        
+        
+        <dc:Bounds height="36" width="36" x="242" y="402"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="27" width="76" x="156" y="406"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#ffcdd2" bioc:stroke="#e53935" bpmnElement="DataObjectReference_0of2coj" color:background-color="#ffcdd2" color:border-color="#e53935" id="DataObjectReference_0of2coj_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="362" y="545"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="76" x="276" y="563"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bpmnElement="Activity_1gblf28" id="Activity_1gblf28_di">
+                                
+        
+        
+        <dc:Bounds height="80" width="100" x="1470" y="670"/>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+      <bpmndi:BPMNShape bpmnElement="Activity_0hysc4e" id="Activity_0hysc4e_di">
+                                
+        
+        
+        <dc:Bounds height="80" width="100" x="1620" y="670"/>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bpmnElement="Event_1vlufrx" id="Event_1vlufrx_di">
+                                
+        
+        
+        <dc:Bounds height="36" width="36" x="2212" y="892"/>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#bbdefb" bioc:stroke="#1e88e5" bpmnElement="DataObjectReference_1l8gq56" color:background-color="#bbdefb" color:border-color="#1e88e5" id="DataObjectReference_1l8gq56_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="1372" y="745"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="38" x="1371" y="802"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#e1bee7" bioc:stroke="#8e24aa" bpmnElement="DataObjectReference_12ad6f2" color:background-color="#e1bee7" color:border-color="#8e24aa" id="DataObjectReference_12ad6f2_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="1572" y="595"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="86" x="1547" y="652"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#ffcdd2" bioc:stroke="#e53935" bpmnElement="DataObjectReference_080qs15" color:background-color="#ffcdd2" color:border-color="#e53935" id="DataObjectReference_080qs15_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="1492" y="985"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="76" x="1472" y="1042"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#c8e6c9" bioc:stroke="#43a047" bpmnElement="DataObjectReference_1w4dyqy" color:background-color="#c8e6c9" color:border-color="#43a047" id="DataObjectReference_1w4dyqy_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="192" y="265"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="16" x="202" y="241"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#ffcdd2" bioc:stroke="#e53935" bpmnElement="DataObjectReference_13l7zcy" color:background-color="#ffcdd2" color:border-color="#e53935" id="DataObjectReference_13l7zcy_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="202" y="545"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="76" x="182" y="602"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#bbdefb" bioc:stroke="#1e88e5" bpmnElement="DataObjectReference_15r3hw7" color:background-color="#bbdefb" color:border-color="#1e88e5" id="DataObjectReference_15r3hw7_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="372" y="755"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="38" x="371" y="731"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+      <bpmndi:BPMNShape bioc:fill="#ffe0b2" bioc:stroke="#fb8c00" bpmnElement="DataObjectReference_02rkse6" color:background-color="#ffe0b2" color:border-color="#fb8c00" id="DataObjectReference_02rkse6_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="222" y="785"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="70" x="205" y="842"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNShape bpmnElement="DataObjectReference_1sag120" id="DataObjectReference_1sag120_di">
+                                
+        
+        
+        <dc:Bounds height="50" width="36" x="1752" y="625"/>
+                                
+        
+        
+        <bpmndi:BPMNLabel>
+                                        
+          
+          
+          <dc:Bounds height="14" width="35" x="1753" y="682"/>
+                                      
+        
+        
+        </bpmndi:BPMNLabel>
+                              
+      
+      
+      </bpmndi:BPMNShape>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="Association_03vn60n" id="Association_03vn60n_di">
+                                
+        
+        
+        <di:waypoint x="398" y="570"/>
+                                
+        
+        
+        <di:waypoint x="410" y="570"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="Association_07g7kcp" id="Association_07g7kcp_di">
+                                
+        
+        
+        <di:waypoint x="1528" y="1018"/>
+                                
+        
+        
+        <di:waypoint x="1577" y="1040"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="Association_04tjkrr" id="Association_04tjkrr_di">
+                                
+        
+        
+        <di:waypoint x="1408" y="782"/>
+                                
+        
+        
+        <di:waypoint x="1448" y="810"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="Association_1uzrwnd" id="Association_1uzrwnd_di">
+                                
+        
+        
+        <di:waypoint x="1608" y="608"/>
+                                
+        
+        
+        <di:waypoint x="1637" y="590"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_0wzld8q" id="DataOutputAssociation_0wzld8q_di">
+                                
+        
+        
+        <di:waypoint x="260" y="438"/>
+                                
+        
+        
+        <di:waypoint x="260" y="575"/>
+                                
+        
+        
+        <di:waypoint x="362" y="575"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_1t3klof" id="DataOutputAssociation_1t3klof_di">
+                                
+        
+        
+        <di:waypoint x="242" y="420"/>
+                                
+        
+        
+        <di:waypoint x="210" y="420"/>
+                                
+        
+        
+        <di:waypoint x="212" y="315"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_0ov03fd" id="DataOutputAssociation_0ov03fd_di">
+                                
+        
+        
+        <di:waypoint x="242" y="420"/>
+                                
+        
+        
+        <di:waypoint x="222" y="420"/>
+                                
+        
+        
+        <di:waypoint x="222" y="545"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_059j1vr" id="DataOutputAssociation_059j1vr_di">
+                                
+        
+        
+        <di:waypoint x="260" y="438"/>
+                                
+        
+        
+        <di:waypoint x="260" y="780"/>
+                                
+        
+        
+        <di:waypoint x="372" y="780"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_1g345z5" id="DataOutputAssociation_1g345z5_di">
+                                
+        
+        
+        <di:waypoint x="247" y="433"/>
+                                
+        
+        
+        <di:waypoint x="240" y="440"/>
+                                
+        
+        
+        <di:waypoint x="238" y="785"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_0cg9rxp" id="DataOutputAssociation_0cg9rxp_di">
+                                
+        
+        
+        <di:waypoint x="278" y="420"/>
+                                
+        
+        
+        <di:waypoint x="1772" y="420"/>
+                                
+        
+        
+        <di:waypoint x="1772" y="625"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_1fxvvft" id="DataInputAssociation_1fxvvft_di">
+                                
+        
+        
+        <di:waypoint x="1500" y="985"/>
+                                
+        
+        
+        <di:waypoint x="1500" y="750"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataOutputAssociation_1xmc1bp" id="DataOutputAssociation_1xmc1bp_di">
+                                
+        
+        
+        <di:waypoint x="1520" y="670"/>
+                                
+        
+        
+        <di:waypoint x="1520" y="620"/>
+                                
+        
+        
+        <di:waypoint x="1572" y="620"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_0z8reew" id="DataInputAssociation_0z8reew_di">
+                                
+        
+        
+        <di:waypoint x="1408" y="770"/>
+                                
+        
+        
+        <di:waypoint x="1670" y="770"/>
+                                
+        
+        
+        <di:waypoint x="1670" y="750"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_19nkhn4" id="DataInputAssociation_19nkhn4_di">
+                                
+        
+        
+        <di:waypoint x="1608" y="620"/>
+                                
+        
+        
+        <di:waypoint x="1670" y="620"/>
+                                
+        
+        
+        <di:waypoint x="1670" y="670"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_0l9ehgx" id="DataInputAssociation_0l9ehgx_di">
+                                
+        
+        
+        <di:waypoint x="228" y="290"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="290"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="892"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_0yzi2xg" id="DataInputAssociation_0yzi2xg_di">
+                                
+        
+        
+        <di:waypoint x="220" y="595"/>
+                                
+        
+        
+        <di:waypoint x="210" y="1070"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="1070"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="928"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_1n6zcyt" id="DataInputAssociation_1n6zcyt_di">
+                                
+        
+        
+        <di:waypoint x="390" y="805"/>
+                                
+        
+        
+        <di:waypoint x="390" y="1010"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="1040"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="928"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_0sq57fy" id="DataInputAssociation_0sq57fy_di">
+                                
+        
+        
+        <di:waypoint x="258" y="810"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="810"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="892"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+                        
+      
+      
+                  
+      
+      
+      <bpmndi:BPMNEdge bpmnElement="DataInputAssociation_1msjndi" id="DataInputAssociation_1msjndi_di">
+                                
+        
+        
+        <di:waypoint x="1788" y="650"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="660"/>
+                                
+        
+        
+        <di:waypoint x="2230" y="892"/>
+                              
+      
+      
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_flidxkd" id="Flow_flidxkd_di" sourceElement="Event_1d48739_di" targetElement="Activity_1gblf28_di">
+        <di:waypoint x="260.0" y="420.0"/>
+        <di:waypoint x="1520.0" y="710.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_xk7fhd9" id="Flow_xk7fhd9_di" sourceElement="Activity_0hysc4e_di" targetElement="Event_1vlufrx_di">
+        <di:waypoint x="1670.0" y="710.0"/>
+        <di:waypoint x="2230.0" y="910.0"/>
+      </bpmndi:BPMNEdge>
+                      
+    
+    
+    </bpmndi:BPMNPlane>
+              
+  
+  
+  </bpmndi:BPMNDiagram>
+      
+
+
+</bpmn:definitions>
