@@ -26,7 +26,7 @@ public class DeleteEmptySubprocess {
 
             boolean irr = true;
             for (Event event : subProcess.getChildElementsByType(Event.class)){
-                if (addedEvent.contains(event.getId())){
+                if (!addedEvent.contains(event.getId())){
                     irr = false;
                 }
             }
@@ -35,26 +35,11 @@ public class DeleteEmptySubprocess {
             }
         }
 
+        System.out.println(emptySubProcesses.toString());
+
 
 
         //remove empty subprocess
-//        if (emptySubProcesses.size()!=0) {
-//            emptySubProcesses.forEach(emptySubProcess -> {
-//                SequenceFlow incomingFlow = emptySubProcess.getIncoming().iterator().next();
-//                SequenceFlow outgoingFlow = emptySubProcess.getOutgoing().iterator().next();
-//                //reconnect sequence flow
-//                incomingFlow.getSource().getOutgoing().remove(incomingFlow);
-//                incomingFlow.getSource().getOutgoing().add(outgoingFlow);
-//                outgoingFlow.getTarget().getIncoming().remove(outgoingFlow);
-//                outgoingFlow.getTarget().getIncoming().add(incomingFlow);
-//
-//                outgoingFlow.setSource(incomingFlow.getSource());
-//                incomingFlow.getParentElement().removeChildElement(incomingFlow);
-//
-//
-//                emptySubProcess.getParentElement().removeChildElement(emptySubProcess);
-//            });
-//        }
         for (SubProcess emptySubProcess: emptySubProcesses){
             System.out.println(emptySubProcess.getName());
             SequenceFlow incomingFlow = emptySubProcess.getIncoming().iterator().next();

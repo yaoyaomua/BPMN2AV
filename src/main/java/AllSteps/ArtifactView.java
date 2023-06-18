@@ -1,9 +1,6 @@
 package AllSteps;
 
-import Step1_Delete_Pool.AddExclusiveGatewayForEndEvent;
-import Step1_Delete_Pool.DeletePool;
-import Step1_Delete_Pool.MergeLane;
-import Step1_Delete_Pool.MergeProcess;
+import Step1_Delete_Pool.*;
 import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
 import Step3_Delete_Element.*;
@@ -13,12 +10,15 @@ import Step4_Well_Structure.DeleteParalleGatewaySequenceFlow;
 import Step4_Well_Structure.DeleteRepeatFlow;
 import Step4_Well_Structure.FlowManage;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
+import org.camunda.bpm.model.bpmn.instance.LoopCharacteristics;
 import org.camunda.bpm.model.bpmn.instance.MessageFlow;
+import org.camunda.bpm.model.bpmn.instance.SubProcess;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 import org.jdom.JDOMException;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class ArtifactView {
@@ -29,6 +29,7 @@ public class ArtifactView {
 
     public static void extract(BpmnModelInstance modelInstance, String artifact) throws IOException, JDOMException {
         Collection<MessageFlow> messageflows;
+//        HashMap<SubProcess, LoopCharacteristics> sub = SubProcessSaveLoop.save(modelInstance);
 
         //step 1 delete pool and store message flows
         System.out.println("************************************");
@@ -101,6 +102,6 @@ public class ArtifactView {
         System.out.println("BPStruct:");
         BPStruct.run(modelInstance);
 
-
+//        SubProcessSaveLoop.read(modelInstance,sub);
     }
 }
