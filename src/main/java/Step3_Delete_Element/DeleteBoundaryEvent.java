@@ -108,27 +108,10 @@ public class DeleteBoundaryEvent {
                         //different artifact
                         else
                         {
-                            // input data object without state
-                            /*if (textAnnotations.size() == 0)
-                            {
-                                isDeleteEvent = false;
-                            }
-                            else {
-                                for (String textAnnotation : textAnnotations) {
-                                    if (textAnnotation.equals("")) {
-                                        isDeleteEvent = false;
-                                    }
-                                }
-                            }*/
                             if (dataState.equals(""))
                             {
                                 isDeleteEvent = false;
                             }
-                            /*else {
-                                    if (dataState.equals("")) {
-                                        isDeleteEvent = false;
-                                    }
-                            }*/
                         }
                         if (!isDeleteEvent)
                         {

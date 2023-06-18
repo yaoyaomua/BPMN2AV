@@ -99,15 +99,21 @@ public class ArtifactView {
         System.out.println("manage flows start:");
         FlowManage.manage(modelInstance);
 
-        System.out.println("*************************");
-        System.out.println("Check if the BPStruct is required:");
-        Boolean isRuquired = CheckIfBPStructRequired.check(modelInstance,initialModelInstance);
+//        System.out.println("*************************");
+//        System.out.println("Check if the BPStruct is required:");
+//        Boolean isRuquired = CheckIfBPStructRequired.check(modelInstance,initialModelInstance);
+//
+//        System.out.println("*************************");
+//        System.out.println("BPStruct:");
+//        if (isRuquired) {
+//            BPStruct.run(modelInstance);
+//        }
 
         System.out.println("*************************");
         System.out.println("BPStruct:");
-        if (isRuquired) {
-            BPStruct.run(modelInstance);
-        }
+
+        BPStruct.run(modelInstance);
+
 
 //        SubProcessSaveLoop.read(modelInstance,sub);
     }

@@ -31,29 +31,53 @@ public class BPMNReader {
         Collection<SequenceFlow> flows = new ArrayList<>();
 
         //add task(all activities, events, and sub-process)
+//        for (org.camunda.bpm.model.bpmn.instance.Task BpmnTask : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.Task.class)){
+//            if (BpmnTask.getParentElement() instanceof SubProcess) continue;
+//            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnTask.getName());
+//            task.setId(BpmnTask.getId());
+//            nodes.put(task.getId(),task);
+//        }
+//        for (org.camunda.bpm.model.bpmn.instance.Event BpmnEvent : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.Event.class)){
+//            if (BpmnEvent.getParentElement() instanceof SubProcess) continue;
+//            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnEvent.getName());
+//            task.setId(BpmnEvent.getId());
+//            nodes.put(task.getId(),task);
+//        }
+//        for (org.camunda.bpm.model.bpmn.instance.SubProcess BpmnSub : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.SubProcess.class)){
+//            if (BpmnSub.getParentElement() instanceof SubProcess) continue;
+//            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnSub.getName());
+//            task.setId(BpmnSub.getId());
+//            nodes.put(task.getId(),task);
+//        }
+
         for (org.camunda.bpm.model.bpmn.instance.Task BpmnTask : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.Task.class)){
             if (BpmnTask.getParentElement() instanceof SubProcess) continue;
-            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnTask.getName());
+            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnTask.getId());
             task.setId(BpmnTask.getId());
             nodes.put(task.getId(),task);
         }
         for (org.camunda.bpm.model.bpmn.instance.Event BpmnEvent : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.Event.class)){
             if (BpmnEvent.getParentElement() instanceof SubProcess) continue;
-            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnEvent.getName());
+            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnEvent.getId());
             task.setId(BpmnEvent.getId());
             nodes.put(task.getId(),task);
         }
         for (org.camunda.bpm.model.bpmn.instance.SubProcess BpmnSub : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.SubProcess.class)){
             if (BpmnSub.getParentElement() instanceof SubProcess) continue;
-            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnSub.getName());
+            de.hpi.bpt.process.Task task = new de.hpi.bpt.process.Task(BpmnSub.getId());
             task.setId(BpmnSub.getId());
             nodes.put(task.getId(),task);
         }
 
         //add gateway
+        int count = 0;
         for (org.camunda.bpm.model.bpmn.instance.Gateway BpmnGateway : modelInstance.getModelElementsByType(org.camunda.bpm.model.bpmn.instance.Gateway.class)){
             if (BpmnGateway.getParentElement() instanceof SubProcess) continue;
             if (BpmnGateway instanceof ExclusiveGateway){
+                if (BpmnGateway.getName() == null){
+                    BpmnGateway.setName("Exclusive Gateway " + count);
+                    count++;
+                }
                 Gateway gateway = new Gateway(GatewayType.XOR, BpmnGateway.getName());
                 gateway.setId(BpmnGateway.getId());
                 nodes.put(gateway.getId(), gateway);
