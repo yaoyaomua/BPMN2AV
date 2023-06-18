@@ -64,7 +64,7 @@ public class DeleteDataObject {
         }
 
         for (Association association: modelInstance.getModelElementsByType(Association.class)){
-            if (association.getSource() == null){
+            if (association.getSource() == null || association.getTarget() == null){
                 TextAnnotation textAnnotation = modelInstance.getModelElementById(association.getTarget().getId());
                 DiagramElement textDiagram = textAnnotation.getDiagramElement();
                 DiagramElement assoDiagram = association.getDiagramElement();
@@ -80,6 +80,8 @@ public class DeleteDataObject {
                 edge.getParentElement().removeChildElement(edge);
             }
         }
+
+
     }
 
 }

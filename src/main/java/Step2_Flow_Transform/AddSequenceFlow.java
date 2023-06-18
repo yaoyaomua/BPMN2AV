@@ -36,7 +36,7 @@ public class AddSequenceFlow {
                 if(!(messageflow.getTarget().getParentElement().getElementType().getTypeName().equals("subProcess"))) {
                     StartEvent acpre = modelInstance.getModelElementById(messageflow.getTarget().getId());
                     IntermediateCatchEvent ac = modelInstance.newInstance(IntermediateCatchEvent.class);
-                    ac.setName("Start" + i);
+                    ac.setName(acpre.getName());
                     ac.setId(acpre.getId());
                     for (EventDefinition eventDefinition : acpre.getEventDefinitions()) {
                         ac.getEventDefinitions().add(eventDefinition);
@@ -62,7 +62,7 @@ public class AddSequenceFlow {
                 if (!(messageflow.getSource().getParentElement().getElementType().getTypeName().equals("subProcess"))) {
                     EndEvent acpre = modelInstance.getModelElementById(messageflow.getSource().getId());
                     IntermediateThrowEvent ac = modelInstance.newInstance(IntermediateThrowEvent.class);
-                    ac.setName("End" + i);
+                    ac.setName(acpre.getName());
                     ac.setId(acpre.getId());
                     for (EventDefinition eventDefinition : acpre.getEventDefinitions()) {
                         ac.getEventDefinitions().add(eventDefinition);
@@ -94,6 +94,9 @@ public class AddSequenceFlow {
             // Create a new sequence flow element
             SequenceFlow sequenceFlow = modelInstance.newInstance(SequenceFlow.class);
             sequenceFlow.setId(messageflow.getId());
+            System.out.println(messageflow.getName());
+            sequenceFlow.setName(messageflow.getName());
+            System.out.println(sequenceFlow.getName());
 
             if (!messageflow.getSource().getElementType().getTypeName().equals("endEvent")) {
                 sequenceFlow.setSource(modelInstance.getModelElementById(messageflow.getSource().getId()));
@@ -120,19 +123,7 @@ public class AddSequenceFlow {
             BpmnEdge bpmnEdge = modelInstance.getModelElementById(messageflow.getId()+"_di");
             BaseElement bpmnElement = modelInstance.getModelElementById(messageflow.getId());
             bpmnEdge.setBpmnElement(bpmnElement);
-            /*BaseElement preElement = modelInstance.getModelElementById(sequenceFlow.getSource().getId());
-            BpmnShape preElementShape = modelInstance.getModelElementById(preElement.getDiagramElement().getId());
-            Double preElementX = preElementShape.getBounds().getX();
-            Double preElementY = preElementShape.getBounds().getY();
 
-            BaseElement afterElement = modelInstance.getModelElementById(sequenceFlow.getTarget().getId());
-            BpmnShape afterElementShape = modelInstance.getModelElementById(afterElement.getDiagramElement().getId());
-            Double afterElementX = afterElementShape.getBounds().getX();
-            Double afterElementY = afterElementShape.getBounds().getY();
-
-            CreateBPMNEdge.create(modelInstance, sequenceFlow, preElementX, preElementY,afterElementX, afterElementY);
-
-            messageflow.getParentElement().removeChildElement(messageflow);*/
 
         }
 
