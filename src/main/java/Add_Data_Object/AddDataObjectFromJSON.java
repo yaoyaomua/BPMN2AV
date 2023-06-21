@@ -6,7 +6,6 @@ import Step3_Delete_Element.Generate7ID;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.Process;
-import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnPlane;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,11 +81,12 @@ public class AddDataObjectFromJSON {
                         }
                     }
                     Collection<String> currentIds = new ArrayList<>();
-                    Boolean isBefore = false;
+                    Boolean isBefore = true;
                     if (sourceElement != null && targetElement != null) {
-                        isBefore = AddDataObjectWithoutState.isElementBefore(modelInstance, sourceElement, targetElement, currentIds);
+                        //isBefore = AddDataObjectWithoutState.isElementBefore(modelInstance, sourceElement, targetElement, currentIds);
+                        isBefore = CheckCorrectness.checkCorrectness(sourceElement,targetElement);
                     }
-                    if (isBefore)
+                    if (!isBefore)
                     {
                         //delete this target
                         System.out.println("remove element name:" + targetName);
@@ -98,11 +98,6 @@ public class AddDataObjectFromJSON {
             if (removeElements != null) {
                 System.out.println("Incorrect process in json file");
                 targetList.removeAll(removeElements);
-            }
-            System.out.println("##name");
-            for (String name : targetList)
-            {
-                System.out.println(name);
             }
 
             addDataObject(modelInstance,artifact,state,sourceList,targetList,label);

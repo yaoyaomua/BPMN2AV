@@ -38,7 +38,7 @@ public class DataObjectTest {
     public void addDataObjectWithoutStateTest(){
         try {
             BpmnModelInstance bpmnModelInstance = Bpmn.readModelFromFile(new File("models/DataObject/testPart1_result.bpmn"));
-            AddDataObjectWithoutState.add(bpmnModelInstance,"Container");
+            AddDataObjectWithoutState.add(bpmnModelInstance,"Truck");
             File outputFile = new File("models/DataObject/testPart1WithoutStateTest_result.bpmn");
             Bpmn.writeModelToFile(outputFile, bpmnModelInstance);
         }catch (Exception e) {
