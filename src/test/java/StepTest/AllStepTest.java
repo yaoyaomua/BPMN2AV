@@ -33,7 +33,7 @@ public class AllStepTest {
         try {
             //Read bpmn file
 
-            String filePath = "models/View/diagram14/diagram14.bpmn";
+            String filePath = "models/View/diagram1/diagram14.bpmn";
 //            String filePath = "models/diagram (96).bpmn";
 
             BpmnModelInstance modelInstance;
