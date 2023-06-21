@@ -26,7 +26,7 @@ public class ArtifactView {
 
     public static void extract(BpmnModelInstance modelInstance, String artifact) throws IOException, JDOMException {
         Collection<MessageFlow> messageflows;
-        HashMap<SubProcess, LoopCharacteristics> sub = SubProcessSaveLoop.save(modelInstance);
+        //HashMap<SubProcess, LoopCharacteristics> sub = SubProcessSaveLoop.save(modelInstance);
         BpmnModelInstance initialModelInstance = modelInstance;
         //step 1 delete pool and store message flows
         System.out.println("************************************");
@@ -115,6 +115,6 @@ public class ArtifactView {
         BPStruct.run(modelInstance);
 
 
-        SubProcessSaveLoop.read(modelInstance,sub);
+        //SubProcessSaveLoop.read(modelInstance,sub);
     }
 }
