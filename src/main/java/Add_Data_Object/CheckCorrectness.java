@@ -6,7 +6,7 @@ import org.camunda.bpm.model.bpmn.instance.Gateway;
 import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
 
 public class CheckCorrectness {
-    public static boolean check(BpmnModelInstance modelInstance, BaseElement sourceElement,BaseElement targetElement)
+    public static boolean checkCorrectness(BaseElement sourceElement, BaseElement targetElement)
     {
         Boolean isCorrect = true;
         BaseElement nextElement = GetAfterElement.Get(sourceElement);
@@ -36,7 +36,7 @@ public class CheckCorrectness {
                 }
                 else
                 {
-                    isCorrect = check(modelInstance,elementAfterGateway,targetElement);
+                    isCorrect = checkCorrectness(elementAfterGateway,targetElement);
                     if (isCorrect)
                     {
                         break;

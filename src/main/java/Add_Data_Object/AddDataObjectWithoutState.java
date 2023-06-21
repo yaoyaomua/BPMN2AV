@@ -88,7 +88,35 @@ public class AddDataObjectWithoutState {
             {
                 if (firstGateway instanceof Gateway) {
                     Gateway gateway = modelInstance.getModelElementById(firstGateway.getId());
-                    sequenceFlow = gateway.getIncoming().iterator().next();
+                    // loop exist
+                    if (gateway.getIncoming().size()>1)
+                    {
+                        Collection<SequenceFlow> gatewayFlows = gateway.getIncoming();
+                        for (SequenceFlow gatewayFlow:gatewayFlows)
+                        {
+                            BaseElement element = gatewayFlow.getSource();
+                            Boolean isLoop = false;
+                            do{
+                                if (((element instanceof Gateway) && ((Gateway) element).getIncoming().size()>1) || element instanceof  EndEvent)
+                                {
+                                    sequenceFlow = gatewayFlow;
+                                    break;
+                                }
+                                // loop
+                                if ((element instanceof Gateway) && (((Gateway) element).getIncoming().size() == 1))
+                                {
+                                    isLoop = true;
+                                    break;
+                                }
+                                element = GetAfterElement.Get(element);
+                            }while ((element instanceof Gateway) || (element instanceof StartEvent));
+                        }
+                    }
+                    else
+                    {
+                        sequenceFlow = gateway.getIncoming().iterator().next();
+                    }
+                    //sequenceFlow = gateway.getIncoming().iterator().next();
                 }
             }
             else {
