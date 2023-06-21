@@ -79,6 +79,7 @@ public class DeleteTask {
 //        System.out.println();
 
         for (NoAssociationTask todelete : tasksToDelete){
+            if (modelInstance.getModelElementById(todelete.getId()) instanceof SubProcess) continue;
             //create two list to store the source tasks and target tasks
             List<String> sources = new ArrayList<>();
             List<String> targets = new ArrayList<>();
