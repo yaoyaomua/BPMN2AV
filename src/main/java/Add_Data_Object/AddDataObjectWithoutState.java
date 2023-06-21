@@ -145,8 +145,36 @@ public class AddDataObjectWithoutState {
             {
                 if (lastGateway instanceof Gateway) {
                     Gateway gateway = modelInstance.getModelElementById(lastGateway.getId());
-                    sequenceFlow = gateway.getOutgoing().iterator().next();
-                    System.out.println(sequenceFlow.getId());
+                    // loop exist
+                    if (gateway.getOutgoing().size()>1)
+                    {
+                        Collection<SequenceFlow> gatewayFlows = gateway.getOutgoing();
+                        for (SequenceFlow gatewayFlow:gatewayFlows)
+                        {
+                            BaseElement element = gatewayFlow.getTarget();
+                            Boolean isLoop = false;
+                            do{
+                                if (((element instanceof Gateway) && ((Gateway) element).getOutgoing().size()>1) || element instanceof  EndEvent)
+                                {
+                                    sequenceFlow = gatewayFlow;
+                                    break;
+                                }
+                                // loop
+                                if ((element instanceof Gateway) && (((Gateway) element).getOutgoing().size() == 1))
+                                {
+                                    isLoop = true;
+                                    break;
+                                }
+                                element = GetAfterElement.Get(element);
+                            }while ((element instanceof Gateway) || (element instanceof EndEvent));
+                        }
+                    }
+                    else
+                    {
+                        sequenceFlow = gateway.getOutgoing().iterator().next();
+                    }
+
+                    //System.out.println(sequenceFlow.getId());
                 }
             }
             else {
@@ -696,14 +724,26 @@ public class AddDataObjectWithoutState {
             baseElement = (BaseElement) baseElement.getParentElement();
         }
         Process process = (Process) baseElement;
-
         IntermediateCatchEvent intermediateCatchEvent = modelInstance.newInstance(IntermediateCatchEvent.class);
         IntermediateThrowEvent intermediateThrowEvent = modelInstance.newInstance(IntermediateThrowEvent.class);
+
+        MessageEventDefinition messageEventDefinitionForCatch = modelInstance.newInstance(MessageEventDefinition.class);
+        do {
+            newID = Generate7ID.generate();
+        } while (modelInstance.getModelElementById("messageEventDefinitionForCatch_" + newID) != null);
+        messageEventDefinitionForCatch.setId("messageEventDefinitionForCatch_" + newID);
+
+        MessageEventDefinition messageEventDefinitionForThrow = modelInstance.newInstance(MessageEventDefinition.class);
+        do {
+            newID = Generate7ID.generate();
+        } while (modelInstance.getModelElementById("messageEventDefinitionForThrow_" + newID) != null);
+        messageEventDefinitionForThrow.setId("messageEventDefinitionForThrow_" + newID);
         if(type == "binding") {
             do {
                 newID = Generate7ID.generate();
             } while (modelInstance.getModelElementById("myIntermediateCatchEvent_" + newID) != null);
             intermediateCatchEvent.setId("myIntermediateCatchEvent_" + newID);
+            intermediateCatchEvent.addChildElement(messageEventDefinitionForCatch);
             process.addChildElement(intermediateCatchEvent);
         }
         else
@@ -712,6 +752,7 @@ public class AddDataObjectWithoutState {
                 newID = Generate7ID.generate();
             } while (modelInstance.getModelElementById("myIntermediateThrowEvent_" + newID) != null);
             intermediateThrowEvent.setId("myIntermediateThrowEvent_" + newID);
+            intermediateThrowEvent.addChildElement(messageEventDefinitionForThrow);
             process.addChildElement(intermediateThrowEvent);
         }
         //add an sequence flow between activity and event

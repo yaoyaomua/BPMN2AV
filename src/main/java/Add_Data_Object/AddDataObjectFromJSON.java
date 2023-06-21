@@ -82,11 +82,12 @@ public class AddDataObjectFromJSON {
                         }
                     }
                     Collection<String> currentIds = new ArrayList<>();
-                    Boolean isBefore = false;
+                    Boolean isBefore = true;
                     if (sourceElement != null && targetElement != null) {
-                        isBefore = AddDataObjectWithoutState.isElementBefore(modelInstance, sourceElement, targetElement, currentIds);
+                        //isBefore = AddDataObjectWithoutState.isElementBefore(modelInstance, sourceElement, targetElement, currentIds);
+                        isBefore = CheckCorrectness.check(modelInstance,sourceElement,targetElement);
                     }
-                    if (isBefore)
+                    if (!isBefore)
                     {
                         //delete this target
                         System.out.println("remove element name:" + targetName);
