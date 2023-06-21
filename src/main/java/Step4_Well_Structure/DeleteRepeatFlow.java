@@ -8,6 +8,7 @@ import java.util.*;
 
 public class DeleteRepeatFlow {
     public static boolean delete(BpmnModelInstance modelInstance) {
+//        System.out.println("delete start");
         List<String> allSequenceFlow = new ArrayList<>();
         Map<String, Collection<String>> map = new HashMap<String, Collection<String>>();
         Set<Collection<String>> seenValues = new HashSet<Collection<String>>();
@@ -18,7 +19,7 @@ public class DeleteRepeatFlow {
         for (SequenceFlow sequenceFlow: modelInstance.getModelElementsByType(SequenceFlow.class)){
             Collection<String> ref = new ArrayList<>();
             allSequenceFlow.add(sequenceFlow.getId());
-
+//            System.out.println(sequenceFlow.getId());
             ref.add(sequenceFlow.getSource().getId());
             ref.add(sequenceFlow.getTarget().getId());
             ref.add(sequenceFlow.getName());
@@ -84,6 +85,8 @@ public class DeleteRepeatFlow {
             SequenceFlow removeSequenceFlow = modelInstance.getModelElementById(removeFlow);
             modelInstance.getModelElementById(removeFlow).getParentElement().removeChildElement(removeSequenceFlow);
         }
+
+
         return true;
     }
 }

@@ -8,7 +8,8 @@ public class FlowManage {
     }
 
     public static void manage(BpmnModelInstance modelInstance){
-        while (DeleteRepeatFlow.delete(modelInstance) || Delete121Gateway.delete(modelInstance) || DeleteParalleGatewaySequenceFlow.delete(modelInstance)){
+        while (DeleteRepeatFlow.delete(modelInstance) || Delete121Gateway.delete(modelInstance) || DeleteParalleGatewaySequenceFlow.delete(modelInstance) || DeleteLoop.loop(modelInstance)){
+
         }
     }
 }

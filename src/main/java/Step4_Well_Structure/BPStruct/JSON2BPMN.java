@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class JSON2BPMN {
 
@@ -29,9 +30,9 @@ public class JSON2BPMN {
 
     public static void store(BpmnModelInstance modelInstance, Process process) throws JSONException {
 //        HashMap<String, String> Name2BpmnTask = new HashMap<>();
-//        HashMap<String, String> Name2Id = new HashMap<>();
+        HashSet<String> name = new HashSet<>();
 //        HashMap<String, String> Id2Name = new HashMap<>();
-
+        HashMap<String,HashSet<de.hpi.bpt.process.Task>> dup = new HashMap<>();
 //        HashMap<String, String> bpmn2Id = new HashMap<>();
 //        HashMap<String, String> Id2Name = new HashMap<>();
 
@@ -52,9 +53,22 @@ public class JSON2BPMN {
 //        }
 //
 //        for (de.hpi.bpt.process.Task task : process.getTasks()){
+//            String BpmnId = task.getName();
+//            String BpstructId = task.getId();
+//            if (dup.containsKey(BpmnId)){
+//                //multiple same name elements
+//                dup.get(BpmnId).add(task);
+//                //copy a bpmn task
+//                if (modelInstance.getModelElementById(BpmnId) instanceof Task){
+//                    Task ac = modelInstance.newInstance(Task.class);
+//                    Task preac = modelInstance.getModelElementById(BpmnId);
+//                    ac.setId(GenerateID.getID("CopyTask_",modelInstance));
+//                    ac.setName(preac.getName());
+//                    task.setName(ac.getId());
+//                    if ()
+//                }
+//            }
 //
-//            Name2Id.put(task.getName(),task.getId());
-//            Id2Name.put(task.getId(),task.getName());
 //        }
 
         for (SequenceFlow sequenceFlow : modelInstance.getModelElementsByType(SequenceFlow.class)){
@@ -124,8 +138,10 @@ public class JSON2BPMN {
             String Id = flow.getId();
 
             System.out.println("flow id:" + Id);
-            System.out.println(BpmnSrcId);
-            System.out.println(BpmnTgtId);
+            System.out.println("bpmn id:" + BpmnSrcId);
+            System.out.println("bpstruct id:" + flow.getSource().getId());
+            System.out.println("bpmn id:" + BpmnTgtId);
+            System.out.println("bpstruct id:" + flow.getTarget().getId());
             System.out.println();
 
 

@@ -18,10 +18,6 @@
         <bpmn:targetRef>DataObjectReference_1r73j2p</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:startEvent>
-    <bpmn:task id="Activity_0x43dhf" name="Request Login">
-      <bpmn:incoming>Flow_0x1kbh0</bpmn:incoming>
-      <bpmn:outgoing>Flow_1rlknr1</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:intermediateCatchEvent id="Event_18yshml" name="Receive Permission to Login">
       <bpmn:incoming>Flow_1rlknr1</bpmn:incoming>
       <bpmn:outgoing>Flow_0vqznwi</bpmn:outgoing>
@@ -35,10 +31,6 @@
     <bpmn:task id="Activity_0pbe6ch" name="Insert Ideal Room Characteristics">
       <bpmn:incoming>Flow_1gftaq1</bpmn:incoming>
       <bpmn:outgoing>Flow_0531q6j</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Activity_1ksl520" name="Request to find the perfect room for studying">
-      <bpmn:incoming>Flow_0531q6j</bpmn:incoming>
-      <bpmn:outgoing>Flow_159byc5</bpmn:outgoing>
     </bpmn:task>
     <bpmn:intermediateCatchEvent id="Event_1wccxv3" name="Receive Room Information">
       <bpmn:incoming>Flow_159byc5</bpmn:incoming>
@@ -106,20 +98,20 @@
     <bpmn:sequenceFlow id="Flow_1xajonv" name="No" sourceRef="Gateway_000j4u0" targetRef="Gateway_1wx1bva" />
     <bpmn:sequenceFlow id="Flow_006i0fe" sourceRef="Activity_1veputi" targetRef="Event_0aejci9" />
     <bpmn:sequenceFlow id="Flow_03q00no" name="No" sourceRef="Gateway_1wx1bva" targetRef="Event_0ygfuw0" />
+    <bpmn:sendTask id="Activity_0x43dhf" name="Request Login">
+      <bpmn:incoming>Flow_0x1kbh0</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rlknr1</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="Activity_1ksl520" name="Request to find the perfect room for studying">
+      <bpmn:incoming>Flow_0531q6j</bpmn:incoming>
+      <bpmn:outgoing>Flow_159byc5</bpmn:outgoing>
+    </bpmn:sendTask>
     <bpmn:textAnnotation id="TextAnnotation_176cojl">
       <bpmn:text>[Room List]</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1fz7vgh" associationDirection="None" sourceRef="DataObjectReference_1ioab83" targetRef="TextAnnotation_176cojl" />
   </bpmn:process>
   <bpmn:process id="Process_0xyehxw" processType="None" isClosed="false" isExecutable="false">
-    <bpmn:task id="Activity_0as11km" name="Send Find Room Request with User&#39;s characteristics">
-      <bpmn:incoming>Flow_1i9unt5</bpmn:incoming>
-      <bpmn:outgoing>Flow_0cyx7jg</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Activity_1g755n5" name="Grant Access">
-      <bpmn:incoming>Flow_17wkzg7</bpmn:incoming>
-      <bpmn:outgoing>Flow_1k4x1j3</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:startEvent id="Event_0e1wi3a" name="Receive Login Request">
       <bpmn:outgoing>Flow_17wkzg7</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1201k9b" />
@@ -137,15 +129,6 @@
       </bpmn:dataOutputAssociation>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1x32mhr" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:task id="Activity_1uu30ux" name="Send Available Rooms List1">
-      <bpmn:incoming>Flow_1w8s2fp</bpmn:incoming>
-      <bpmn:outgoing>Flow_0us0psc</bpmn:outgoing>
-      <bpmn:property id="Property_07ner9a" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0bmiqnm">
-        <bpmn:sourceRef>DataObjectReference_1gg9pyb</bpmn:sourceRef>
-        <bpmn:targetRef>Property_07ner9a</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-    </bpmn:task>
     <bpmn:endEvent id="Event_0q4f6k4" name="App end">
       <bpmn:incoming>Flow_0us0psc</bpmn:incoming>
     </bpmn:endEvent>
@@ -159,21 +142,29 @@
     <bpmn:sequenceFlow id="Flow_1k4x1j3" sourceRef="Activity_1g755n5" targetRef="Event_0sayh8s" />
     <bpmn:sequenceFlow id="Flow_1w8s2fp" sourceRef="Event_0vv0v1p" targetRef="Activity_1uu30ux" />
     <bpmn:sequenceFlow id="Flow_0us0psc" sourceRef="Activity_1uu30ux" targetRef="Event_0q4f6k4" />
+    <bpmn:sendTask id="Activity_1g755n5" name="Grant Access">
+      <bpmn:incoming>Flow_17wkzg7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1k4x1j3</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="Activity_0as11km" name="Send Find Room Request with User&#39;s characteristics">
+      <bpmn:incoming>Flow_1i9unt5</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cyx7jg</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="Activity_1uu30ux" name="Send Available Rooms List1">
+      <bpmn:incoming>Flow_1w8s2fp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0us0psc</bpmn:outgoing>
+      <bpmn:property id="Property_02xvi0o" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0bmiqnm">
+        <bpmn:sourceRef>DataObjectReference_1gg9pyb</bpmn:sourceRef>
+        <bpmn:targetRef>Property_02xvi0o</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:sendTask>
     <bpmn:textAnnotation id="TextAnnotation_191laxc">
       <bpmn:text>[Available Room List]</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_10st79u" associationDirection="None" sourceRef="DataObjectReference_1gg9pyb" targetRef="TextAnnotation_191laxc" />
   </bpmn:process>
   <bpmn:process id="Process_1pi6w1g" processType="None" isClosed="false" isExecutable="false">
-    <bpmn:task id="Activity_1et12sx" name="Send Available Rooms List2">
-      <bpmn:incoming>Flow_1bnwtwb</bpmn:incoming>
-      <bpmn:outgoing>Flow_03xha6d</bpmn:outgoing>
-      <bpmn:property id="Property_0rrqyrd" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0khrlih">
-        <bpmn:sourceRef>DataObjectReference_1jqo2z6</bpmn:sourceRef>
-        <bpmn:targetRef>Property_0rrqyrd</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-    </bpmn:task>
     <bpmn:task id="Activity_0j87df3" name="Compare Request characteristics">
       <bpmn:incoming>Flow_1el96b4</bpmn:incoming>
       <bpmn:outgoing>Flow_1bnwtwb</bpmn:outgoing>
@@ -188,13 +179,6 @@
       </bpmn:dataInputAssociation>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1fni5ng">
         <bpmn:targetRef>DataObjectReference_1jqo2z6</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:task>
-    <bpmn:task id="Activity_0ike1z5" name="Get Rooms Information">
-      <bpmn:incoming>Flow_1q5li7i</bpmn:incoming>
-      <bpmn:outgoing>Flow_1el96b4</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_1gjncdh">
-        <bpmn:targetRef>DataObjectReference_1qjzwi1</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:startEvent id="Event_07tmi78" name="Receive Room Request">
@@ -223,6 +207,22 @@
     <bpmn:sequenceFlow id="Flow_03xha6d" sourceRef="Activity_1et12sx" targetRef="Event_0b2mdx9" />
     <bpmn:sequenceFlow id="Flow_1el96b4" sourceRef="Activity_0ike1z5" targetRef="Activity_0j87df3" />
     <bpmn:sequenceFlow id="Flow_1q5li7i" sourceRef="Event_07tmi78" targetRef="Activity_0ike1z5" />
+    <bpmn:subProcess id="Activity_0ike1z5" name="Get Rooms Information">
+      <bpmn:incoming>Flow_1q5li7i</bpmn:incoming>
+      <bpmn:outgoing>Flow_1el96b4</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1gjncdh">
+        <bpmn:targetRef>DataObjectReference_1qjzwi1</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:subProcess>
+    <bpmn:sendTask id="Activity_1et12sx" name="Send Available Rooms List2">
+      <bpmn:incoming>Flow_1bnwtwb</bpmn:incoming>
+      <bpmn:outgoing>Flow_03xha6d</bpmn:outgoing>
+      <bpmn:property id="Property_1frgkv3" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0khrlih">
+        <bpmn:sourceRef>DataObjectReference_1jqo2z6</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1frgkv3</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:sendTask>
     <bpmn:textAnnotation id="TextAnnotation_15mta3a">
       <bpmn:text>[User's specified Room characteristics]</bpmn:text>
     </bpmn:textAnnotation>
@@ -248,10 +248,6 @@
           <dc:Bounds x="199" y="395" width="63" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0x43dhf_di" bpmnElement="Activity_0x43dhf">
-        <dc:Bounds x="300" y="330" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1wh0uxj_di" bpmnElement="Event_18yshml">
         <dc:Bounds x="452" y="352" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -263,10 +259,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0pbe6ch_di" bpmnElement="Activity_0pbe6ch">
         <dc:Bounds x="660" y="330" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1ksl520_di" bpmnElement="Activity_1ksl520">
-        <dc:Bounds x="830" y="330" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0dw4fzy_di" bpmnElement="Event_1wccxv3">
@@ -322,6 +314,12 @@
       <bpmndi:BPMNShape id="TextAnnotation_176cojl_di" bpmnElement="TextAnnotation_176cojl">
         <dc:Bounds x="1130" y="230" width="99.99156545209178" height="29.998877109625404" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0jpqihn_di" bpmnElement="Activity_0x43dhf">
+        <dc:Bounds x="300" y="330" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nkx4lf_di" bpmnElement="Activity_1ksl520">
+        <dc:Bounds x="830" y="330" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0x1kbh0_di" bpmnElement="Flow_0x1kbh0">
         <di:waypoint x="248" y="370" />
@@ -398,14 +396,6 @@
         <dc:Bounds x="160" y="510" width="1520" height="270" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0as11km_di" bpmnElement="Activity_0as11km">
-        <dc:Bounds x="680" y="620" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1g755n5_di" bpmnElement="Activity_1g755n5">
-        <dc:Bounds x="410" y="620" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0q046fb_di" bpmnElement="Event_0e1wi3a">
         <dc:Bounds x="292" y="642" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -424,10 +414,6 @@
           <dc:Bounds x="833" y="604.5" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1uu30ux_di" bpmnElement="Activity_1uu30ux">
-        <dc:Bounds x="960" y="620" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0q4f6k4_di" bpmnElement="Event_0q4f6k4">
         <dc:Bounds x="1142" y="642" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -443,6 +429,15 @@
       <bpmndi:BPMNShape id="TextAnnotation_191laxc_di" bpmnElement="TextAnnotation_191laxc">
         <dc:Bounds x="960" y="730" width="99.99156545209178" height="40.48582995951417" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gxua8f_di" bpmnElement="Activity_1g755n5">
+        <dc:Bounds x="410" y="620" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hepojq_di" bpmnElement="Activity_0as11km">
+        <dc:Bounds x="680" y="620" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ofupn7_di" bpmnElement="Activity_1uu30ux">
+        <dc:Bounds x="960" y="620" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1i9unt5_di" bpmnElement="Flow_1i9unt5">
         <di:waypoint x="618" y="660" />
@@ -476,16 +471,8 @@
         <dc:Bounds x="160" y="800" width="1520" height="280" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1et12sx_di" bpmnElement="Activity_1et12sx">
-        <dc:Bounds x="820" y="910" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0j87df3_di" bpmnElement="Activity_0j87df3">
         <dc:Bounds x="610" y="910" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ike1z5_di" bpmnElement="Activity_0ike1z5">
-        <dc:Bounds x="420" y="910" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1n834g9_di" bpmnElement="Event_07tmi78">
@@ -529,6 +516,12 @@
       <bpmndi:BPMNShape id="TextAnnotation_0zwot6l_di" bpmnElement="TextAnnotation_0zwot6l">
         <dc:Bounds x="830" y="1020" width="99.99156545209178" height="40.48582995951416" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0a1ocdj_di" bpmnElement="Activity_1et12sx">
+        <dc:Bounds x="820" y="910" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00phyt0_di" bpmnElement="Activity_0ike1z5">
+        <dc:Bounds x="420" y="910" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1bnwtwb_di" bpmnElement="Flow_1bnwtwb">
         <di:waypoint x="710" y="950" />
@@ -646,5 +639,8 @@
         <di:waypoint x="870" y="678" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_06l8v4f">
+    <bpmndi:BPMNPlane id="BPMNPlane_13ltm9p" bpmnElement="Activity_0ike1z5" />
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

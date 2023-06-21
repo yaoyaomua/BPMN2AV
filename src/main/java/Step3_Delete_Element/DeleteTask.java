@@ -126,7 +126,7 @@ public class DeleteTask {
 
                     // Get the BPMN diagram instance
                     Bounds bounds1 = GetBounds.get(modelInstance,src2tgt.getSource().getId());
-                    System.out.println(src2tgt.getTarget().getId());
+//                    System.out.println(src2tgt.getTarget().getId());
                     Bounds bounds2 = GetBounds.get(modelInstance,src2tgt.getTarget().getId());
 
                     //create new edge for new flow

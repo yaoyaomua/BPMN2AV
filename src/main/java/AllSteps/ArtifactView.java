@@ -4,12 +4,8 @@ import Step1_Delete_Pool.*;
 import Step2_Flow_Transform.AddAndGateway;
 import Step2_Flow_Transform.AddSequenceFlow;
 import Step3_Delete_Element.*;
+import Step4_Well_Structure.*;
 import Step4_Well_Structure.BPStruct.BPStruct;
-import Step4_Well_Structure.Delete121Gateway;
-import Step4_Well_Structure.DeleteParalleGatewaySequenceFlow;
-import Step4_Well_Structure.DeleteRepeatFlow;
-import Step4_Well_Structure.FlowManage;
-import Step4_Well_Structure.CheckIfBPStructRequired;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.LoopCharacteristics;
 import org.camunda.bpm.model.bpmn.instance.MessageFlow;
@@ -98,6 +94,11 @@ public class ArtifactView {
         System.out.println("*************************");
         System.out.println("manage flows start:");
         FlowManage.manage(modelInstance);
+//        DeleteRepeatFlow.delete(modelInstance);
+//        Delete121Gateway.delete(modelInstance);
+//        DeleteParalleGatewaySequenceFlow.delete(modelInstance);
+//        DeleteLoop.loop(modelInstance);
+
 
 //        System.out.println("*************************");
 //        System.out.println("Check if the BPStruct is required:");
@@ -111,7 +112,6 @@ public class ArtifactView {
 
         System.out.println("*************************");
         System.out.println("BPStruct:");
-
         BPStruct.run(modelInstance);
 
 
