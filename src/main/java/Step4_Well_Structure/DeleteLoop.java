@@ -29,10 +29,10 @@ public class DeleteLoop {
                         String tgt = flow.getTarget().getId();
                         ExclusiveGateway gateway1 = modelInstance.getModelElementById(src);
                         ExclusiveGateway gateway2 = modelInstance.getModelElementById(tgt);
-                        if (gateway1.getIncoming().size() > 1){
+                        if (gateway1.getIncoming().size() == 2){
                             toDelete.add(flowSources.get(flow.getTarget().getId()).getId());
                         }
-                        if (gateway2.getIncoming().size() > 1){
+                        if (gateway2.getIncoming().size() == 2){
                             toDelete.add(flow.getId());
                         }
                     }

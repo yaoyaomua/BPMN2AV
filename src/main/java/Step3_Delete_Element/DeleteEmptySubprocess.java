@@ -2,15 +2,13 @@ package Step3_Delete_Element;
 
 import de.hpi.bpt.process.epc.IProcessInterface;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.camunda.bpm.model.bpmn.instance.Event;
-import org.camunda.bpm.model.bpmn.instance.SequenceFlow;
-import org.camunda.bpm.model.bpmn.instance.SubProcess;
-import org.camunda.bpm.model.bpmn.instance.Task;
+import org.camunda.bpm.model.bpmn.instance.*;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnDiagram;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnEdge;
 import org.camunda.bpm.model.bpmn.instance.bpmndi.BpmnShape;
 
 import java.util.Collection;
+import java.util.EmptyStackException;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
@@ -28,6 +26,21 @@ public class DeleteEmptySubprocess {
             for (Event event : subProcess.getChildElementsByType(Event.class)){
                 if (!addedEvent.contains(event.getId())){
                     irr = false;
+                    break;
+                }
+                if (event instanceof StartEvent){
+                    StartEvent startEvent = (StartEvent) event;
+                    if (startEvent.getDataOutputAssociations().size() != 0){
+                        irr = false;
+                        break;
+                    }
+                }
+                if (event instanceof EndEvent){
+                    EndEvent endEvent = (EndEvent) event;
+                    if (endEvent.getDataInputAssociations().size() != 0){
+                        irr = false;
+                        break;
+                    }
                 }
             }
             if (irr){
