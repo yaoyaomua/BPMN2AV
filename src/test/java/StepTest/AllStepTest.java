@@ -33,7 +33,7 @@ public class AllStepTest {
         try {
             //Read bpmn file
 
-            String filePath = "models/View/diagram9/diagram9.bpmn";
+            String filePath = "models/View/diagram14/diagram14.bpmn";
 //            String filePath = "models/diagram (96).bpmn";
 
             BpmnModelInstance modelInstance;
@@ -45,11 +45,11 @@ public class AllStepTest {
 
 
 
-            String artifact = "Order";
+            String artifact = "data3";
             ArtifactView.extract(modelInstance,artifact);
 
 
-            File step3output= new File("models/View/diagram9/diagram9_Order.bpmn");
+            File step3output= new File("models/View/diagram14/diagram14_data3.bpmn");
 
 
             Bpmn.writeModelToFile(step3output, modelInstance);
