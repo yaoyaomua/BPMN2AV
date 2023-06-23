@@ -20,9 +20,9 @@ This project provide a prototype for automatically generating artifact-oriented 
 2. Open project in IntelliJ IDEA.
 3. Import required libraries for BPStruct.
 
-### Transformation
-1. Input diagram.
-2. Change the location in AllStepTest and run.
+### Transformation Steps
+1. Input enriched BPMN diagram. It is recommended to be placed in /BPMN2ArtifactViewProcess/models
+2. Change the filePath( the path of the input BPMN diagram), artifact(the name of the artifact), step3output(the path of the result BPMN diagram) in /BPMN2ArtifactViewProcess/src/test/java/StepTest/AllStepTest.java and run.
 3. Get new diagram and check it in Camunda Modeler, Signavio or Bpmn.io.
 
 ## Related Link
