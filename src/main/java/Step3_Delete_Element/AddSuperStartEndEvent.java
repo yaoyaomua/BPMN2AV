@@ -61,11 +61,11 @@ public class AddSuperStartEndEvent {
             }
         }
 
-        System.out.println(NoInputActivity.toString());
-        System.out.println(NoInputEvent.toString());
-        System.out.println(NoInputGateway.toString());
-        System.out.println(NoInputSub.toString());
-        System.out.println(startEvent.toString());
+//        System.out.println(NoInputActivity.toString());
+//        System.out.println(NoInputEvent.toString());
+//        System.out.println(NoInputGateway.toString());
+//        System.out.println(NoInputSub.toString());
+//        System.out.println(startEvent.toString());
 
 
         if (NoInputEvent.size() == 0 && NoInputActivity.size() == 0 && NoInputGateway.size() == 0 && NoInputSub.size() == 0 && startEvent.size() == 1){

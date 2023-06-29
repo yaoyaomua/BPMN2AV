@@ -91,7 +91,7 @@ public class DeleteBoundaryEvent {
                         }
                         // same artifact
                         if (dataObjectReference.getName().equals(artifact)){
-                            System.out.println(dataObjectReference.getName());
+//                            System.out.println(dataObjectReference.getName());
                             // input data object with state
                                 /*for (String textAnnotation : textAnnotations) {
                                     if (!textAnnotation.equals("")) {

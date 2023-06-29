@@ -29,26 +29,68 @@ import java.util.Scanner;
 public class AllStepTest {
 
     @Test
-    public void stepsTest(){
+    public void DemoTest1(){
         try {
-            //Read bpmn file
-
-            String filePath = "models/View/diagram14/diagram14.bpmn";
-//            String filePath = "models/diagram (96).bpmn";
+            String filePath = "models/demo/book.bpmn";
 
             BpmnModelInstance modelInstance;
-
 
             try (InputStream inputStream = new FileInputStream(new File(filePath))) {
                 modelInstance = Bpmn.readModelFromStream(inputStream);
             }
 
-
-            String artifact = "Object:Order";
+            String artifact = "Container";
             ArtifactView.extract(modelInstance,artifact);
 
+            File step3output= new File("models/demo/book_Container.bpmn");
 
-            File step3output= new File("models/View/diagram14/diagram14_Object_Order.bpmn");
+            Bpmn.writeModelToFile(step3output, modelInstance);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void DemoTest2(){
+        try {
+            String filePath = "models/demo/book.bpmn";
+
+            BpmnModelInstance modelInstance;
+
+            try (InputStream inputStream = new FileInputStream(new File(filePath))) {
+                modelInstance = Bpmn.readModelFromStream(inputStream);
+            }
+
+            String artifact = "Truck";
+            ArtifactView.extract(modelInstance,artifact);
+
+            File step3output= new File("models/demo/book_Truck.bpmn");
+
+            Bpmn.writeModelToFile(step3output, modelInstance);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void DemoTest3(){
+        try {
+            String filePath = "models/demo/diagram19.bpmn";
+
+            BpmnModelInstance modelInstance;
+
+            try (InputStream inputStream = new FileInputStream(new File(filePath))) {
+                modelInstance = Bpmn.readModelFromStream(inputStream);
+            }
+
+            String artifact = "Purchase order";
+            ArtifactView.extract(modelInstance,artifact);
+
+            File step3output= new File("models/demo/diagram19_PurchaseOrder.bpmn");
 
             Bpmn.writeModelToFile(step3output, modelInstance);
 
