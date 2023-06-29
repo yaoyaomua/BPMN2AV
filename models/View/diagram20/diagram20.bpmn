@@ -572,6 +572,9 @@
           <dc:Bounds x="2929" y="550" width="83" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_04q8mxf_di" bpmnElement="Gateway_0gleuro">
+        <dc:Bounds x="1535" y="500" width="50" height="50" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0tng04q_di" bpmnElement="Activity_0tng04q" isExpanded="true">
         <dc:Bounds x="370" y="260" width="1070" height="510" />
         <bpmndi:BPMNLabel />
@@ -725,9 +728,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1w1vto6_di" bpmnElement="Activity_045nmnq">
         <dc:Bounds x="1640" y="650" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1o6fmlh_di" bpmnElement="Gateway_0gleuro">
-        <dc:Bounds x="1535" y="500" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_06j8lmt_di" bpmnElement="TextAnnotation_06j8lmt">
         <dc:Bounds x="260" y="260" width="99.99274099883856" height="40.65040650406504" />

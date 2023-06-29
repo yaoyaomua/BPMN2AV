@@ -136,13 +136,13 @@ public class JSON2BPMN {
 
             String context = flow.getLabel();
             String Id = flow.getId();
-
-            System.out.println("flow id:" + Id);
-            System.out.println("bpmn id:" + BpmnSrcId);
-            System.out.println("bpstruct id:" + flow.getSource().getId());
-            System.out.println("bpmn id:" + BpmnTgtId);
-            System.out.println("bpstruct id:" + flow.getTarget().getId());
-            System.out.println();
+//
+//            System.out.println("flow id:" + Id);
+//            System.out.println("bpmn id:" + BpmnSrcId);
+//            System.out.println("bpstruct id:" + flow.getSource().getId());
+//            System.out.println("bpmn id:" + BpmnTgtId);
+//            System.out.println("bpstruct id:" + flow.getTarget().getId());
+//            System.out.println();
 
 
 
